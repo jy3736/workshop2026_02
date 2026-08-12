@@ -1,0 +1,499 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>自主練習測驗</title>
+<!--QUIZ_DATA-->
+<style>
+  :root {
+    --ink: #1c2530;
+    --muted: #5b6675;
+    --line: #dde2e8;
+    --bg: #f6f7f9;
+    --card: #ffffff;
+    --accent: #2f6fed;
+    --good: #1f8a4c;
+    --good-bg: #e9f7ef;
+    --bad: #c0392b;
+    --bad-bg: #fdecea;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    font-family: -apple-system, "Segoe UI", "PingFang TC", "Microsoft JhengHei", sans-serif;
+    background: var(--bg);
+    color: var(--ink);
+    line-height: 1.5;
+  }
+  .wrap { max-width: 880px; margin: 0 auto; padding: 24px 16px 64px; }
+  h1 { font-size: 1.4rem; margin: 0 0 4px; }
+  h2 { font-size: 1.1rem; margin: 0 0 12px; }
+  .sub { color: var(--muted); font-size: 0.95rem; margin: 0 0 24px; }
+  .view { display: none; }
+  .view.active { display: block; }
+  .card {
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    padding: 20px;
+    margin-bottom: 16px;
+  }
+  label { display: block; font-weight: 600; margin-bottom: 6px; font-size: 0.92rem; }
+  input[type="text"], input[type="number"] {
+    width: 100%;
+    padding: 10px 12px;
+    border: 1px solid var(--line);
+    border-radius: 6px;
+    font-size: 1rem;
+    font-family: inherit;
+  }
+  .field { margin-bottom: 16px; }
+  .hint { color: var(--muted); font-size: 0.85rem; margin-top: 4px; }
+  .error { color: var(--bad); font-size: 0.85rem; margin-top: 4px; display: none; }
+  .error.show { display: block; }
+  button {
+    font-family: inherit;
+    font-size: 1rem;
+    cursor: pointer;
+  }
+  .btn-primary {
+    background: var(--accent);
+    color: #fff;
+    border: none;
+    border-radius: 6px;
+    padding: 12px 24px;
+    font-weight: 600;
+  }
+  .btn-primary:hover { opacity: 0.92; }
+  .btn-secondary {
+    background: #fff;
+    color: var(--ink);
+    border: 1px solid var(--line);
+    border-radius: 6px;
+    padding: 10px 18px;
+  }
+  .btn-row { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 20px; }
+  .progress {
+    position: sticky;
+    top: 0;
+    background: var(--bg);
+    padding: 10px 0;
+    z-index: 5;
+    font-size: 0.9rem;
+    color: var(--muted);
+    border-bottom: 1px solid var(--line);
+    margin-bottom: 16px;
+  }
+  .q-card { position: relative; }
+  .q-num { font-weight: 700; color: var(--accent); margin-bottom: 10px; font-size: 0.95rem; }
+  .q-img-wrap {
+    border: 1px solid var(--line);
+    border-radius: 6px;
+    overflow: hidden;
+    margin-bottom: 12px;
+    background: #fff;
+  }
+  .q-img-wrap img { display: block; width: 100%; height: auto; }
+  .choices { display: flex; gap: 8px; flex-wrap: wrap; }
+  .choice-btn {
+    border: 1px solid var(--line);
+    background: #fff;
+    color: var(--ink);
+    border-radius: 6px;
+    width: 48px;
+    height: 40px;
+    font-weight: 700;
+    font-size: 1rem;
+  }
+  .choice-btn.selected {
+    background: var(--accent);
+    color: #fff;
+    border-color: var(--accent);
+  }
+  .submit-bar {
+    position: sticky;
+    bottom: 0;
+    background: var(--bg);
+    padding: 16px 0;
+    border-top: 1px solid var(--line);
+    margin-top: 8px;
+  }
+  .score-banner {
+    text-align: center;
+    padding: 20px;
+  }
+  .score-banner .big { font-size: 2.2rem; font-weight: 800; color: var(--accent); }
+  .result-row { display: flex; gap: 14px; align-items: flex-start; }
+  .result-row .q-img-wrap { flex: 1; margin-bottom: 0; }
+  .result-meta { width: 190px; flex-shrink: 0; font-size: 0.9rem; }
+  .result-meta .badge {
+    display: inline-block;
+    padding: 3px 10px;
+    border-radius: 999px;
+    font-weight: 700;
+    font-size: 0.82rem;
+    margin-bottom: 8px;
+  }
+  .badge.correct { background: var(--good-bg); color: var(--good); }
+  .badge.incorrect { background: var(--bad-bg); color: var(--bad); }
+  .result-meta div { margin-bottom: 4px; }
+  .result-meta .label { color: var(--muted); }
+  @media (max-width: 560px) {
+    .result-row { flex-direction: column; }
+    .result-meta { width: auto; }
+  }
+  @media print {
+    .no-print { display: none !important; }
+    .progress { position: static; }
+    .submit-bar { position: static; }
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1 id="exam-title">自主練習測驗</h1>
+
+  <section id="view-setup" class="view">
+    <p class="sub" id="setup-sub"></p>
+    <div class="card">
+      <div class="field">
+        <label for="student-name">姓名 / 學號</label>
+        <input type="text" id="student-name" placeholder="請輸入姓名或學號" autocomplete="off">
+        <div class="error" id="name-error">請輸入姓名或學號</div>
+      </div>
+      <div class="field">
+        <label for="question-count">本次練習題數</label>
+        <input type="number" id="question-count" min="1">
+        <div class="hint" id="count-hint"></div>
+      </div>
+      <div class="btn-row">
+        <button class="btn-primary" id="start-btn">開始作答</button>
+      </div>
+    </div>
+  </section>
+
+  <section id="view-quiz" class="view">
+    <div class="progress" id="quiz-progress"></div>
+    <div id="quiz-questions"></div>
+    <div class="submit-bar no-print">
+      <button class="btn-primary" id="submit-btn">送出作答</button>
+    </div>
+  </section>
+
+  <section id="view-report" class="view">
+    <div class="card score-banner">
+      <div class="big" id="report-score"></div>
+      <div class="sub" id="report-meta"></div>
+    </div>
+    <div id="report-questions"></div>
+    <div class="btn-row no-print">
+      <button class="btn-primary" id="download-btn">下載成績單 (CSV)</button>
+      <button class="btn-secondary" id="print-btn">列印 / 存成 PDF</button>
+      <button class="btn-secondary" id="retake-btn">重新測驗（換一組題目）</button>
+    </div>
+  </section>
+</div>
+
+<script>
+(function () {
+  'use strict';
+
+  var DEFAULT_CONFIG = { examLabel: '自主練習測驗', keysFile: 'keys.json', repoDir: 'repo', questionCount: 20, choiceLetters: 'ABCD', filenamePattern: null };
+  var DEFAULT_PATTERN = /^(?<number>.+?)\.[^.]+$/;
+
+  function compilePattern(patternStr) {
+    if (!patternStr) return DEFAULT_PATTERN;
+    try { return new RegExp(patternStr); } catch (e) { return DEFAULT_PATTERN; }
+  }
+
+  function formatQuestionLabel(q) {
+    return q.group ? (q.group + ' - ' + q.number) : String(q.number);
+  }
+
+  function compareGroupNumber(a, b) {
+    if (a.group !== b.group) return a.group < b.group ? -1 : 1;
+    var an = parseFloat(a.number), bn = parseFloat(b.number);
+    if (!isNaN(an) && !isNaN(bn) && an !== bn) return an - bn;
+    return a.number < b.number ? -1 : a.number > b.number ? 1 : 0;
+  }
+
+  var state = {
+    config: null,
+    allQuestions: [],
+    selected: [],
+    answers: {},
+    studentName: '',
+    submittedAt: null
+  };
+
+  function $(id) { return document.getElementById(id); }
+
+  function showView(id) {
+    ['view-setup', 'view-quiz', 'view-report'].forEach(function (v) {
+      $(v).classList.toggle('active', v === id);
+    });
+    window.scrollTo(0, 0);
+  }
+
+  function shuffle(arr) {
+    for (var i = arr.length - 1; i > 0; i--) {
+      var j = Math.floor(Math.random() * (i + 1));
+      var tmp = arr[i]; arr[i] = arr[j]; arr[j] = tmp;
+    }
+    return arr;
+  }
+
+  function parseQuestions(keys, imageResolver, patternStr) {
+    var re = compilePattern(patternStr);
+    var list = [];
+    Object.keys(keys).forEach(function (filename) {
+      var m = re.exec(filename);
+      var groups = (m && m.groups) || {};
+      list.push({
+        id: filename,
+        group: groups.group || '',
+        number: groups.number || filename,
+        answer: keys[filename].split('').sort(),
+        image: imageResolver(filename)
+      });
+    });
+    list.sort(compareGroupNumber);
+    return list;
+  }
+
+  function pickQuestions(n) {
+    var byGroup = {};
+    state.allQuestions.forEach(function (q) {
+      (byGroup[q.group] = byGroup[q.group] || []).push(q);
+    });
+    var groups = Object.keys(byGroup);
+    n = Math.min(n, state.allQuestions.length);
+    var chosen = [];
+    var share = Math.ceil(n / groups.length);
+    groups.forEach(function (g, idx) {
+      var pool = shuffle(byGroup[g].slice());
+      var remaining = n - chosen.length;
+      var take = (idx === groups.length - 1) ? remaining : Math.min(share, pool.length, remaining);
+      chosen = chosen.concat(pool.slice(0, take));
+    });
+    if (chosen.length < n) {
+      var chosenIds = {};
+      chosen.forEach(function (q) { chosenIds[q.id] = true; });
+      var rest = shuffle(state.allQuestions.filter(function (q) { return !chosenIds[q.id]; }));
+      chosen = chosen.concat(rest.slice(0, n - chosen.length));
+    }
+    return shuffle(chosen);
+  }
+
+  function renderSetup() {
+    $('exam-title').textContent = state.config.examLabel;
+    $('setup-sub').textContent = '題庫共 ' + state.allQuestions.length + ' 題，作答前不會顯示答案，送出後才會公布逐題對錯與正確答案。';
+    var input = $('question-count');
+    var defaultCount = Math.min(state.config.questionCount || 20, state.allQuestions.length);
+    input.max = state.allQuestions.length;
+    input.value = defaultCount;
+    $('count-hint').textContent = '可作答範圍：1 ~ ' + state.allQuestions.length + ' 題';
+    showView('view-setup');
+  }
+
+  function startQuiz() {
+    var name = $('student-name').value.trim();
+    if (!name) {
+      $('name-error').classList.add('show');
+      $('student-name').focus();
+      return;
+    }
+    $('name-error').classList.remove('show');
+    state.studentName = name;
+
+    var count = parseInt($('question-count').value, 10);
+    if (!count || count < 1) count = 1;
+    if (count > state.allQuestions.length) count = state.allQuestions.length;
+
+    state.selected = pickQuestions(count);
+    state.answers = {};
+    state.selected.forEach(function (q) { state.answers[q.id] = []; });
+
+    renderQuiz();
+  }
+
+  function renderQuiz() {
+    var total = state.selected.length;
+    var letters = (state.config.choiceLetters || 'ABCD').split('');
+    $('quiz-progress').textContent = state.studentName + '　題數：' + total + '　（作答期間不會提示對錯）';
+    var html = state.selected.map(function (q, idx) {
+      var choices = letters.map(function (letter) {
+        return '<button type="button" class="choice-btn" data-qid="' + q.id + '" data-letter="' + letter + '">' + letter + '</button>';
+      }).join('');
+      return (
+        '<div class="card q-card">' +
+        '<div class="q-num">第 ' + (idx + 1) + ' / ' + total + ' 題　（題號：' + formatQuestionLabel(q) + '）</div>' +
+        '<div class="q-img-wrap"><img src="' + q.image + '" alt="題目 ' + (idx + 1) + '"></div>' +
+        '<div class="choices">' + choices + '</div>' +
+        '</div>'
+      );
+    }).join('');
+    $('quiz-questions').innerHTML = html;
+    showView('view-quiz');
+  }
+
+  function toggleAnswer(qid, letter) {
+    var set = state.answers[qid] || [];
+    var i = set.indexOf(letter);
+    if (i >= 0) set.splice(i, 1); else set.push(letter);
+    state.answers[qid] = set;
+  }
+
+  function setsEqual(a, b) {
+    if (a.length !== b.length) return false;
+    var sa = a.slice().sort(), sb = b.slice().sort();
+    for (var i = 0; i < sa.length; i++) if (sa[i] !== sb[i]) return false;
+    return true;
+  }
+
+  function grade() {
+    var items = state.selected.map(function (q) {
+      var studentAnswer = (state.answers[q.id] || []).slice().sort();
+      var correct = setsEqual(studentAnswer, q.answer);
+      return {
+        id: q.id, group: q.group, number: q.number, image: q.image,
+        studentAnswer: studentAnswer, answer: q.answer, correct: correct
+      };
+    });
+    var correctCount = items.filter(function (it) { return it.correct; }).length;
+    return {
+      studentName: state.studentName,
+      examLabel: state.config.examLabel,
+      timestamp: new Date().toISOString(),
+      items: items,
+      scoreCorrect: correctCount,
+      scoreTotal: items.length
+    };
+  }
+
+  function submitQuiz() {
+    var unanswered = state.selected.filter(function (q) { return (state.answers[q.id] || []).length === 0; }).length;
+    if (unanswered > 0) {
+      var ok = window.confirm('還有 ' + unanswered + ' 題未作答，未作答視為答錯，確定要送出嗎？');
+      if (!ok) return;
+    }
+    state.lastResult = grade();
+    renderReport(state.lastResult);
+  }
+
+  function renderReport(result) {
+    var pct = result.scoreTotal ? Math.round((result.scoreCorrect / result.scoreTotal) * 1000) / 10 : 0;
+    $('report-score').textContent = result.scoreCorrect + ' / ' + result.scoreTotal + '　(' + pct + '%)';
+    $('report-meta').textContent = result.studentName + '　' + result.examLabel + '　' + new Date(result.timestamp).toLocaleString();
+
+    var html = result.items.map(function (it, idx) {
+      var studentText = it.studentAnswer.length ? it.studentAnswer.join('') : '未作答';
+      return (
+        '<div class="card">' +
+        '<div class="q-num">第 ' + (idx + 1) + ' 題　（題號：' + formatQuestionLabel(it) + '）</div>' +
+        '<div class="result-row">' +
+        '<div class="q-img-wrap"><img src="' + it.image + '" alt="題目 ' + (idx + 1) + '"></div>' +
+        '<div class="result-meta">' +
+        '<span class="badge ' + (it.correct ? 'correct' : 'incorrect') + '">' + (it.correct ? '答對' : '答錯') + '</span>' +
+        '<div><span class="label">你的答案：</span>' + studentText + '</div>' +
+        '<div><span class="label">正確答案：</span>' + it.answer.join('') + '</div>' +
+        '</div></div></div>'
+      );
+    }).join('');
+    $('report-questions').innerHTML = html;
+    showView('view-report');
+  }
+
+  function toCSVValue(v) {
+    var s = String(v == null ? '' : v);
+    if (/[",\n]/.test(s)) return '"' + s.replace(/"/g, '""') + '"';
+    return s;
+  }
+
+  function buildCSV(result) {
+    var header = ['studentName', 'examLabel', 'timestamp', 'questionIndex', 'questionId', 'questionGroup', 'questionNumber', 'studentAnswer', 'correctAnswer', 'result', 'scoreCorrect', 'scoreTotal'];
+    var rows = [header.join(',')];
+    result.items.forEach(function (it, idx) {
+      rows.push([
+        result.studentName, result.examLabel, result.timestamp,
+        idx + 1, it.id, it.group, it.number,
+        it.studentAnswer.join(''), it.answer.join(''),
+        it.correct ? 'correct' : 'incorrect',
+        result.scoreCorrect, result.scoreTotal
+      ].map(toCSVValue).join(','));
+    });
+    return rows.join('\r\n');
+  }
+
+  function sanitizeFilename(s) {
+    return String(s).replace(/[\\/:*?"<>|]+/g, '_').trim() || 'unknown';
+  }
+
+  function downloadCSV() {
+    var result = state.lastResult;
+    var csv = buildCSV(result);
+    var blob = new Blob(['﻿' + csv], { type: 'text/csv;charset=utf-8;' });
+    var stamp = result.timestamp.replace(/[-:]/g, '').replace('T', '-').slice(0, 15);
+    var filename = sanitizeFilename(result.examLabel) + '_' + sanitizeFilename(result.studentName) + '_' + stamp + '.csv';
+    var a = document.createElement('a');
+    a.href = URL.createObjectURL(blob);
+    a.download = filename;
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    URL.revokeObjectURL(a.href);
+  }
+
+  function init(data) {
+    state.config = Object.assign({}, DEFAULT_CONFIG, data.config || {});
+    state.allQuestions = parseQuestions(data.keys, data.imageResolver, state.config.filenamePattern);
+    renderSetup();
+  }
+
+  function boot() {
+    if (window.QUIZ_DATA) {
+      var bundled = window.QUIZ_DATA;
+      init({
+        config: bundled.config,
+        keys: bundled.keys,
+        imageResolver: function (filename) { return bundled.images[filename]; }
+      });
+      return;
+    }
+    fetch('./config.json').then(function (r) { return r.json(); }).catch(function () { return {}; }).then(function (config) {
+      var assessments = config.assessments || [];
+      var wanted = new URLSearchParams(window.location.search).get('exam');
+      var assessment = (wanted && assessments.filter(function (a) { return a.examLabel === wanted; })[0])
+        || assessments[0] || DEFAULT_CONFIG;
+      var keysFile = assessment.keysFile || DEFAULT_CONFIG.keysFile;
+      var assetsDir = assessment.assetsDir || '.';
+      var repoDir = assessment.repoDir || DEFAULT_CONFIG.repoDir;
+      fetch(assetsDir + '/' + keysFile).then(function (r) { return r.json(); }).then(function (keys) {
+        init({
+          config: assessment,
+          keys: keys,
+          imageResolver: function (filename) { return assetsDir + '/' + repoDir + '/' + filename; }
+        });
+      });
+    });
+  }
+
+  $('start-btn').addEventListener('click', startQuiz);
+  $('student-name').addEventListener('keydown', function (e) { if (e.key === 'Enter') startQuiz(); });
+  $('submit-btn').addEventListener('click', submitQuiz);
+  $('download-btn').addEventListener('click', downloadCSV);
+  $('print-btn').addEventListener('click', function () { window.print(); });
+  $('retake-btn').addEventListener('click', renderSetup);
+  $('quiz-questions').addEventListener('click', function (e) {
+    var btn = e.target.closest('.choice-btn');
+    if (!btn) return;
+    btn.classList.toggle('selected');
+    toggleAnswer(btn.getAttribute('data-qid'), btn.getAttribute('data-letter'));
+  });
+
+  boot();
+})();
+</script>
+</body>
+</html>

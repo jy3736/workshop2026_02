@@ -1,0 +1,244 @@
+- generic [ref=e1]:
+  - button "開啟選單 / Open menu" [ref=e192] [cursor=pointer]: ☰
+  - complementary [ref=e2]:
+    - generic [ref=e3]: "Windows 11: ChatGPT Work and Codex Setup Guide"
+    - generic [ref=e4]:
+      - button "中文" [active] [ref=e195] [cursor=pointer]
+      - button "☀️ Light" [ref=e6] [cursor=pointer]
+    - link "返回上一層 / Back to parent" [ref=e7] [cursor=pointer]:
+      - /url: ../index.html
+      - text: Back to parent
+    - navigation [ref=e8]:
+      - button "What changed" [ref=e196] [cursor=pointer]
+      - button "Install on Windows 11" [ref=e197] [cursor=pointer]
+      - button "Compare Chat, Work, and Codex" [ref=e198] [cursor=pointer]
+      - 'button "Work deep dive: common use cases" [ref=e199] [cursor=pointer]'
+      - button "Choose where work runs" [ref=e200] [cursor=pointer]
+      - button "Configure Codex safely" [ref=e201] [cursor=pointer]
+      - 'button "Codex deep dive: vibe coding a web app" [ref=e202] [cursor=pointer]'
+      - button "Stay in the loop" [ref=e203] [cursor=pointer]
+      - button "Before you begin" [ref=e204] [cursor=pointer]
+      - button "References" [ref=e205] [cursor=pointer]
+  - main [ref=e19]:
+    - generic [ref=e206]:
+      - 'heading "Windows 11: ChatGPT Work and Codex Setup Guide" [level=1] [ref=e207]'
+      - paragraph [ref=e208]: This guide is for Windows 11 only. Install the ChatGPT desktop app first, then choose Chat, ChatGPT Work, or Codex for the task. Use the conservative Codex configuration only when you need to work in a course project. This edition adds a deep dive into Work's most common use cases and a walkthrough for building a web app project with Codex through vibe coding.
+      - heading "What changed" [level=2] [ref=e209]
+      - generic [ref=e210]:
+        - strong [ref=e211]: "New update:"
+        - text: "the former Codex app is integrated into the ChatGPT desktop app. Chat, ChatGPT Work, and Codex are separate work views in the same desktop app. Work is not a separately installed app. Labels and button locations can change, but choosing the right view, limiting scope, and reviewing work remain the same. Since July 2026, a local project can include multiple attached folders (a multi-folder project): ChatGPT can read and change files in every attached folder, and only the primary folder is used for Git operations and automatic AGENTS.md, skills, and config.toml discovery."
+      - paragraph [ref=e212]: "Recent releases also bring the following changes, worth noting before class:"
+      - list [ref=e213]:
+        - listitem [ref=e214]:
+          - strong [ref=e215]: "Desktop app update (July 30, 2026, v26.727):"
+          - text: the built-in browser gained an address bar for revisiting history or searching Google, Chrome extension integration for mentioning open tabs and selected page text, multi-repo diff review across every repository in a multi-folder project, plus a new Activity view (which chats need your attention) and a larger image viewer.
+        - listitem [ref=e216]:
+          - strong [ref=e217]: "Voice input:"
+          - text: the desktop app added ChatGPT Voice, so you can speak instructions or steer tasks in Chat, Work, and Codex. Check microphone permissions and room noise before demoing this in class.
+        - listitem [ref=e218]:
+          - strong [ref=e219]: "New \"Approve for me\" (auto-review) mode:"
+          - text: Settings → General → Permissions can enable this mode. It keeps the same workspace boundary as Ask for approval, but sends boundary-crossing requests to automatic review instead of asking you. This guide still recommends keeping
+          - strong [ref=e220]: Ask for approval
+          - text: for course work rather than enabling auto-review for convenience — see "Configure Codex safely" below.
+        - listitem [ref=e221]:
+          - strong [ref=e222]: "Model change:"
+          - text: starting August 31, 2026, Codex retires GPT-5.4 and GPT-5.4 mini for users signed in with a ChatGPT account. Replace gpt-5.4 with gpt-5.6-terra and gpt-5.4-mini with gpt-5.6-luna in any config or command that still names the old models.
+        - listitem [ref=e223]:
+          - strong [ref=e224]: "Codex Sites (preview):"
+          - text: launched June 2026. Describe an internal tool (a dashboard, tracker, or knowledge base) with
+          - code [ref=e225]: "@Sites"
+          - text: ", and Codex builds, tests, and deploys it to an OpenAI-hosted URL shared inside your workspace, with no project folder needed. It is currently limited to ChatGPT Business (on by default) and Enterprise (admin-controlled); Free, Plus, Go, and Pro are not yet supported, and there is no public URL, custom domain, or code/data export — it is workspace-internal only. Most course accounts are Free or Plus, so check your plan first. For a web app project you want to fully own, inspect, and deploy anywhere, use the local Codex workflow in the deep dive below instead."
+      - heading "Install on Windows 11" [level=2] [ref=e226]
+      - list [ref=e227]:
+        - listitem [ref=e228]:
+          - text: Install or update the Windows ChatGPT desktop app from the
+          - link "official ChatGPT download page" [ref=e229] [cursor=pointer]:
+            - /url: https://chatgpt.com/download
+          - text: .
+        - listitem [ref=e230]: Open the app and sign in with your ChatGPT account. Available features can differ by plan, organization settings, and rollout.
+        - listitem [ref=e231]:
+          - text: For research, analysis, documents, decks, or other multi-step deliverables, select
+          - strong [ref=e232]: ChatGPT
+          - text: ", then switch the new chat to"
+          - strong [ref=e233]: Work
+          - text: .
+        - listitem [ref=e234]:
+          - text: For a project folder, code, commands, or diff review, select
+          - strong [ref=e235]: Codex
+          - text: from the ChatGPT dropdown.
+      - heading "Compare Chat, Work, and Codex" [level=2] [ref=e236]
+      - 'figure "Match the task to the surface: quick Q&A goes to Chat, multi-step work to Work, project code to Codex." [ref=e237]':
+        - img "Quick Q&A goes to Chat, multi-step work goes to ChatGPT Work, project code goes to Codex" [ref=e238]
+      - table [ref=e241]:
+        - rowgroup [ref=e242]:
+          - row [ref=e243]:
+            - columnheader "Surface" [ref=e244]
+            - columnheader "Ideal task" [ref=e245]
+            - columnheader "Local project" [ref=e246]
+            - columnheader "Tools and review" [ref=e247]
+            - columnheader "Expected outcome" [ref=e248]
+        - rowgroup [ref=e249]:
+          - row [ref=e250]:
+            - cell "Chat" [ref=e251]
+            - cell "Quick answers, explanations, ideas, or a short draft." [ref=e252]
+            - cell "Usually not needed." [ref=e253]
+            - cell "Conversation and quick confirmation." [ref=e254]
+            - cell "An immediate answer or draft." [ref=e255]
+          - row [ref=e256]:
+            - cell "ChatGPT Work" [ref=e257]
+            - cell "Multi-step research, analysis, documents, decks, or a reviewable deliverable." [ref=e258]
+            - cell "Select Work locally when the task needs files or apps on this computer." [ref=e259]
+            - cell "Can use files, plugins, and approved tools; you can follow progress and steer." [ref=e260]
+            - cell "A reusable, reviewable deliverable." [ref=e261]
+          - row [ref=e262]:
+            - cell "Codex" [ref=e263]
+            - cell "A project folder, code, commands, verification, and repeatable development." [ref=e264]
+            - cell "First select the one intended course project." [ref=e265]
+            - cell "Use permissions and approvals; review important diffs first." [ref=e266]
+            - cell "Verified files, code, and project changes." [ref=e267]
+      - paragraph [ref=e268]: On a phone, swipe the comparison table sideways to keep every column readable.
+      - 'heading "Work deep dive: common use cases" [level=2] [ref=e269]'
+      - paragraph [ref=e270]: ChatGPT Work is strongest at turning scattered notes, files, or research into a reviewable, reusable deliverable. Here are the use cases that come up most often, especially in a course setting.
+      - figure "Work turns notes and files into one of four common deliverables, finalized only after human review." [ref=e271]:
+        - img "Notes and files go into Work, which produces a deck, spreadsheet, scheduled task, or document" [ref=e272]
+      - heading "1. Turn notes or research into a presentation" [level=3] [ref=e274]
+      - paragraph [ref=e275]: Hand Work your lecture notes, meeting minutes, or research notes and ask it to summarize the key points for a specific audience, add supporting evidence, flag anything that needs your confirmation, and return a draft for review rather than a final version.
+      - generic [ref=e276]: "Example prompt: \"Using the three attached lecture note files, draft a final-project deck under 10 slides for senior students, focused on system architecture and the demo. Mark anything missing data as 'needs input,' and show me the draft before finalizing.\""
+      - heading "2. Turn research into a comparison spreadsheet" [level=3] [ref=e277]
+      - paragraph [ref=e278]: "When choosing between several options (tools, vendors, algorithms, cloud plans), ask Work to build a spreadsheet: list the key evaluation criteria, score each option, flag risks or missing information, and add a summary tab with a recommendation."
+      - generic [ref=e279]: "Example prompt: \"Compare these three cloud platforms' student-plan pricing, quotas, and ease of use in a spreadsheet, and give me a recommendation with reasoning on the summary tab.\""
+      - heading "3. Schedule recurring monitoring or roll-up tasks" [level=3] [ref=e280]
+      - paragraph [ref=e281]: When something needs to repeat, be monitored, or refreshed over time (a weekly project status roll-up, tracking changes to a data source), use a scheduled task so the work keeps running in Cloud mode, independent of whether this computer is on.
+      - generic [ref=e282]: "Example prompt: \"Every Monday morning, pull last week's progress updates from the shared folder for each team and produce a one-page status report, flagging teams that are behind.\""
+      - heading "4. Produce a reviewable document or report" [level=3] [ref=e283]
+      - paragraph [ref=e284]: For deliverables with a fixed structure, such as a final report, a teaching-observation record, or a grant application, ask Work to draft the full document to a given outline, source list, and length limit, and to cite sources at key passages so you can check them.
+      - heading "5. Chain a repeatable workflow across tools" [level=3] [ref=e285]
+      - paragraph [ref=e286]: If you repeat the same multi-tool task by hand (collecting form responses, cross-checking grades, sending notifications), ask Work to chain the steps using approved plugins or file access, and to pause for your approval at key steps.
+      - heading "Tips for better prompts" [level=3] [ref=e287]
+      - paragraph [ref=e288]: "To get closer to what you want, be explicit about: the outcome and format you need, the sources or plugins to use (mention them with @), scope limits (\"only these three files,\" \"top five only\"), what \"good\" looks like, and when Work should stop for your review or approval. The more complex the task, the more specific the prompt should be — not shorter."
+      - heading "Choose where work runs" [level=2] [ref=e289]
+      - 'figure "One question decides it: does the task need this computer right now — Work locally, or Cloud?" [ref=e290]':
+        - 'img "Need this PC now: yes goes to Work locally, no goes to Cloud"'
+      - paragraph [ref=e292]:
+        - strong [ref=e293]: Work locally
+        - text: is for tasks that need files or apps on this computer, such as a course folder, browser, or local tool.
+        - strong [ref=e294]: Cloud
+        - text: "is for work that should continue after the computer is unavailable or be continued from the web or a phone. Ask first: does this task truly need files or apps on this computer?"
+      - heading "Configure Codex safely" [level=2] [ref=e295]
+      - 'figure "Each tier below widens the boundary: Ask for approval is safest; avoid Full access by default." [ref=e296]':
+        - 'img "Three approval tiers: Ask for approval is safest, Approve for me auto-reviews, Full access should be avoided by default"'
+      - list [ref=e298]:
+        - listitem [ref=e299]: Before starting Codex, confirm that only the intended course workspace or project folder is selected.
+        - listitem [ref=e300]: If the project has multiple attached folders (a multi-folder project), check every attached folder, not only the primary one; Codex can read and change files in every attached folder.
+        - listitem [ref=e301]:
+          - text: Start with
+          - strong [ref=e302]: Ask for approval
+          - text: . It can work inside the current workspace and pauses when it needs to cross that boundary.
+        - listitem [ref=e303]:
+          - text: Settings also offers
+          - strong [ref=e304]: Approve for me
+          - text: (auto-review). It keeps the same workspace boundary, but sends boundary-crossing requests to automatic review instead of asking you to judge them. Do not enable it by default for course work — that judgment call is exactly what needs a human.
+        - listitem [ref=e305]:
+          - text: Do not enable
+          - strong [ref=e306]: Full access
+          - text: by default. Use it only when you understand the risk and trust the project.
+        - listitem [ref=e307]: Treat network access, browser use, plugins, MCP, and external tools as capabilities that need a reason; understand the purpose before approving them.
+        - listitem [ref=e308]: Keep student names, IDs, grades, accounts, keys, and administrative data in a narrow boundary or de-identify them first.
+        - listitem [ref=e309]: Read every approval request; then review diffs, output files, and the real result.
+      - 'heading "Codex deep dive: build a web app project with vibe coding" [level=2] [ref=e310]'
+      - paragraph [ref=e311]: "\"Vibe coding\" means describing the outcome you want in natural language and letting Codex generate, run, and fix the code, while you focus on stating requirements clearly, reading its plan, and reviewing and approving at key steps instead of writing every line yourself. Here is a suggested flow for building a web app from scratch in a local course project with Codex."
+      - 'figure "The vibe-coding loop: describe, plan, code, test — commit or deploy only after it passes." [ref=e312]':
+        - 'img "Vibe-coding loop: describe, review plan, write code, run tests, commit or deploy once it passes"'
+      - 'heading "Before you start: prepare a clean project folder" [level=3] [ref=e314]'
+      - list [ref=e315]:
+        - listitem [ref=e316]:
+          - text: Create a new, empty folder (for example
+          - code [ref=e317]: my-course-webapp
+          - text: ) that holds only what this project needs; do not select your Desktop, Documents, or another shared course folder above it.
+        - listitem [ref=e318]: In the ChatGPT desktop app, choose Codex and add this folder as the project. If you later split frontend, backend, or tests into separate folders, add each one to the multi-folder project and confirm every attached folder stays within scope.
+        - listitem [ref=e319]:
+          - text: Keep
+          - strong [ref=e320]: Ask for approval
+          - text: on. Building a site or app creates many files, installs packages, and runs commands — exactly the stage that needs the most human review, so do not switch to Approve for me or Full access here.
+      - heading "Describe the web app in one clear prompt" [level=3] [ref=e321]
+      - paragraph [ref=e322]: "State the outcome, not the implementation: the target users, the main features, any technology preference, and where data should live. Ask Codex to propose a plan or file layout first, and review it before it starts building."
+      - generic [ref=e323]: "Example prompt: \"Build an assignment-submission tracker for my class: React frontend, Node.js and Express backend, and store data in a local JSON file for now — no database needed. Tell me how you plan to structure the files first, and wait for my confirmation before writing code.\""
+      - heading "A suggested back-and-forth loop" [level=3] [ref=e324]
+      - list [ref=e325]:
+        - listitem [ref=e326]:
+          - strong [ref=e327]: "Review the plan before approving:"
+          - text: when Codex proposes a file structure or steps, check whether it is reasonable and free of unnecessary external services or packages.
+        - listitem [ref=e328]:
+          - strong [ref=e329]: "Approve installs and file creation one step at a time:"
+          - text: commands like
+          - code [ref=e330]: npm install
+          - text: and new config files (such as
+          - code [ref=e331]: .env
+          - text: ) are boundary-crossing or risky actions — understand the purpose before approving.
+        - listitem [ref=e332]:
+          - strong [ref=e333]: "Ask Codex to start the dev server and open it in a browser:"
+          - text: for example, "start the dev server and tell me which URL to open," then look at the running app with your own eyes instead of trusting the text summary alone.
+        - listitem [ref=e334]:
+          - strong [ref=e335]: "Iterate in natural language:"
+          - text: "\"add a button to mark a task done,\" \"show a success message after the form submits\" — add one or two features at a time so each diff stays reviewable."
+        - listitem [ref=e336]:
+          - strong [ref=e337]: "Read every diff:"
+          - text: especially files touching credentials, API keys, outbound network calls, or database connection strings. Ask Codex to explain anything unclear before approving it.
+        - listitem [ref=e338]:
+          - strong [ref=e339]: "Test it yourself:"
+          - text: try different inputs, deliberately malformed input, and a page refresh to confirm data persists — confirm it actually works instead of trusting "looks done."
+        - listitem [ref=e340]:
+          - strong [ref=e341]: "Version and deploy only after it works:"
+          - text: commit a stable version with git before deploying, and remove or protect test credentials and keys before anything goes to a public URL.
+      - 'heading "An alternative: Codex Sites (plan-restricted)" [level=3] [ref=e342]'
+      - paragraph [ref=e343]:
+        - text: If your account is on ChatGPT Business or Enterprise, Codex also offers
+        - code [ref=e344]: "@Sites"
+        - text: ": describe an internal tool (a small dashboard, tracker, or knowledge base) in plain language, and Codex builds, tests, and deploys it to an OpenAI-hosted URL shared inside your workspace — no project folder or deploy pipeline needed. It currently has no public URL, no custom domain, and no code or data export; it is workspace-internal only, and Free, Plus, Go, and Pro accounts were not supported at launch. Most course accounts won't have access. If your goal is a web app project you can host on your own domain, deploy to Vercel or another platform, or add to a portfolio, use the local Codex flow above instead — it keeps you in full control of the source code and deployment."
+      - heading "Common pitfalls" [level=3] [ref=e345]
+      - list [ref=e346]:
+        - listitem [ref=e347]: Asking for too many features at once, producing a diff too large to read — take smaller steps instead.
+        - listitem [ref=e348]: Reflexively approving any "install a package" or "run a command" request — check the package source and purpose first.
+        - listitem [ref=e349]:
+          - text: Hardcoding test credentials or API keys into the code — ask Codex to use environment variables instead, and confirm files like
+          - code [ref=e350]: .env
+          - text: are excluded from version control.
+        - listitem [ref=e351]: Trusting Codex's text summary alone — always open the browser and try the app yourself.
+      - heading "Stay in the loop" [level=2] [ref=e352]
+      - 'figure "The four-step loop for staying engaged: start, watch and steer, approve, review — then repeat." [ref=e353]':
+        - img "Start, watch and steer, approve, review — a four-step loop back to start"
+      - paragraph [ref=e355]: Neither Work nor Codex means handing off a task and walking away. Follow progress, answer questions, change direction, and make decisions before important actions. When the work is complete, still check whether it meets the goal, uses the right sources, stores files in the expected place, and needs a human revision.
+      - heading "Before you begin" [level=2] [ref=e356]
+      - list [ref=e357]:
+        - listitem [ref=e358]: The Windows 11 ChatGPT desktop app is installed or updated, and I am signed in to the right account.
+        - listitem [ref=e359]:
+          - text: I selected Chat, Work, or Codex for the task; choose
+          - strong [ref=e360]: Work locally
+          - text: when it needs local files or apps.
+        - listitem [ref=e361]: For Codex, I selected only the intended course workspace, and confirmed every attached folder (including secondary folders) is within the intended scope.
+        - listitem [ref=e362]: I am using Ask for approval and have not enabled Full access by default.
+        - listitem [ref=e363]: I will inspect approval requests, diffs, and the final output.
+      - heading "References" [level=2] [ref=e364]
+      - list [ref=e365]:
+        - listitem [ref=e366]:
+          - 'link "OpenAI: Get started with ChatGPT Work" [ref=e367] [cursor=pointer]':
+            - /url: https://learn.chatgpt.com/docs/get-started-with-work
+        - listitem [ref=e368]:
+          - 'link "OpenAI: ChatGPT desktop app" [ref=e369] [cursor=pointer]':
+            - /url: https://learn.chatgpt.com/docs/app
+        - listitem [ref=e370]:
+          - 'link "OpenAI: ChatGPT desktop app settings" [ref=e371] [cursor=pointer]':
+            - /url: https://learn.chatgpt.com/docs/reference/settings
+        - listitem [ref=e372]:
+          - 'link "OpenAI: Permissions" [ref=e373] [cursor=pointer]':
+            - /url: https://learn.chatgpt.com/docs/permission-modes
+        - listitem [ref=e374]:
+          - 'link "OpenAI: Projects and chats" [ref=e375] [cursor=pointer]':
+            - /url: https://learn.chatgpt.com/docs/projects
+        - listitem [ref=e376]:
+          - 'link "OpenAI: ChatGPT & Codex changelog" [ref=e377] [cursor=pointer]':
+            - /url: https://learn.chatgpt.com/docs/changelog
+        - listitem [ref=e378]:
+          - 'link "OpenAI: Codex for every role, tool, and workflow (Codex Sites)" [ref=e379] [cursor=pointer]':
+            - /url: https://openai.com/index/codex-for-every-role-tool-workflow/
+    - generic [ref=e191]: 智慧雨林產業創生人才育成計畫 (南臺科技大學 電子系 楊榮林 教授)

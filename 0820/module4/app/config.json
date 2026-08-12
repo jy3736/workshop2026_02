@@ -1,0 +1,13 @@
+{
+  "assessments": [
+    {
+      "examLabel": "Formative_Assessment_115_MathA",
+      "assetsDir": "../repo/math-115a",
+      "keysFile": "115keys.json",
+      "repoDir": ".",
+      "questionCount": 20,
+      "choiceLetters": "ABCD",
+      "filenamePattern": "^115數學AQ(?<number>\\d+)\\.png$"
+    }
+  ]
+}

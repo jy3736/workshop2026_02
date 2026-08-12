@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>成績單彙整工具</title>
+<style>
+  :root {
+    --ink: #1c2530;
+    --muted: #5b6675;
+    --line: #dde2e8;
+    --bg: #f6f7f9;
+    --card: #ffffff;
+    --accent: #2f6fed;
+    --good: #1f8a4c;
+    --good-bg: #e9f7ef;
+    --bad: #c0392b;
+    --bad-bg: #fdecea;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    font-family: -apple-system, "Segoe UI", "PingFang TC", "Microsoft JhengHei", sans-serif;
+    background: var(--bg);
+    color: var(--ink);
+    line-height: 1.5;
+  }
+  .wrap { max-width: 960px; margin: 0 auto; padding: 24px 16px 64px; }
+  h1 { font-size: 1.4rem; margin: 0 0 4px; }
+  h2 { font-size: 1.1rem; margin: 24px 0 12px; }
+  .sub { color: var(--muted); font-size: 0.95rem; margin: 0 0 20px; }
+  .card { background: var(--card); border: 1px solid var(--line); border-radius: 10px; padding: 20px; margin-bottom: 16px; }
+  .dropzone {
+    border: 2px dashed var(--line);
+    border-radius: 10px;
+    padding: 32px;
+    text-align: center;
+    color: var(--muted);
+    cursor: pointer;
+  }
+  .dropzone.drag { border-color: var(--accent); color: var(--accent); background: #eef4ff; }
+  .dropzone input { display: none; }
+  button { font-family: inherit; font-size: 0.95rem; cursor: pointer; }
+  .btn-primary { background: var(--accent); color: #fff; border: none; border-radius: 6px; padding: 10px 20px; font-weight: 600; }
+  .btn-secondary { background: #fff; color: var(--ink); border: 1px solid var(--line); border-radius: 6px; padding: 8px 16px; }
+  .btn-row { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 16px; }
+  table { width: 100%; border-collapse: collapse; font-size: 0.9rem; }
+  th, td { text-align: left; padding: 8px 10px; border-bottom: 1px solid var(--line); }
+  th { color: var(--muted); font-weight: 600; }
+  .pct-good { color: var(--good); font-weight: 700; }
+  .pct-bad { color: var(--bad); font-weight: 700; }
+  .file-list { font-size: 0.85rem; color: var(--muted); margin-top: 10px; }
+  .empty { color: var(--muted); font-style: italic; }
+  @media print {
+    .no-print { display: none !important; }
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1>成績單彙整工具</h1>
+  <p class="sub">將學生從練習測驗頁面下載的 CSV 成績單拖曳或選取到下方，即可在本機瀏覽器彙整全班成績，不會上傳到任何伺服器。</p>
+
+  <div class="card no-print">
+    <div class="dropzone" id="dropzone">
+      拖曳 CSV 檔案到這裡，或點擊選取檔案
+      <input type="file" id="file-input" accept=".csv" multiple>
+    </div>
+    <div class="file-list" id="file-list"></div>
+  </div>
+
+  <div id="results"></div>
+
+  <div class="btn-row no-print" id="export-row" style="display:none;">
+    <button class="btn-primary" id="export-btn">匯出合併 CSV</button>
+    <button class="btn-secondary" id="print-btn">列印 / 存成 PDF</button>
+    <button class="btn-secondary" id="clear-btn">清除全部</button>
+  </div>
+</div>
+
+<script>
+(function () {
+  'use strict';
+
+  var loadedRows = [];
+  var loadedFiles = [];
+  var FILENAME_RE = /^(\d+)專業([12])Q(\d+)\.png$/;
+
+  function $(id) { return document.getElementById(id); }
+
+  function parseCSV(text) {
+    text = text.replace(/^﻿/, '');
+    var rows = [], row = [], field = '', inQuotes = false;
+    for (var i = 0; i < text.length; i++) {
+      var c = text[i];
+      if (inQuotes) {
+        if (c === '"') {
+          if (text[i + 1] === '"') { field += '"'; i++; }
+          else inQuotes = false;
+        } else field += c;
+      } else {
+        if (c === '"') inQuotes = true;
+        else if (c === ',') { row.push(field); field = ''; }
+        else if (c === '\n' || c === '\r') {
+          if (c === '\r' && text[i + 1] === '\n') i++;
+          row.push(field); field = '';
+          if (row.length > 1 || row[0] !== '') rows.push(row);
+          row = [];
+        } else field += c;
+      }
+    }
+    if (field.length || row.length) { row.push(field); rows.push(row); }
+    return rows;
+  }
+
+  function rowsToObjects(rows) {
+    if (!rows.length) return [];
+    var header = rows[0];
+    return rows.slice(1).map(function (r) {
+      var obj = {};
+      header.forEach(function (h, i) { obj[h] = r[i] !== undefined ? r[i] : ''; });
+      return obj;
+    });
+  }
+
+  function handleFiles(fileList) {
+    var files = Array.prototype.slice.call(fileList).filter(function (f) { return /\.csv$/i.test(f.name); });
+    if (!files.length) return;
+    var pending = files.length;
+    files.forEach(function (file) {
+      var reader = new FileReader();
+      reader.onload = function () {
+        var rows = parseCSV(String(reader.result));
+        var objs = rowsToObjects(rows);
+        loadedRows = loadedRows.concat(objs);
+        loadedFiles.push(file.name);
+        pending--;
+        if (pending === 0) {
+          renderFileList();
+          renderResults();
+        }
+      };
+      reader.readAsText(file);
+    });
+  }
+
+  function renderFileList() {
+    $('file-list').textContent = '已載入 ' + loadedFiles.length + ' 個檔案，共 ' + loadedRows.length + ' 筆作答紀錄。';
+  }
+
+  function aggregate(rows) {
+    var byExam = {};
+    rows.forEach(function (r) {
+      var exam = r.examLabel || '(未標示考試名稱)';
+      if (!byExam[exam]) byExam[exam] = { students: {}, questions: {} };
+      var g = byExam[exam];
+
+      var studentKey = r.studentName + '@' + r.timestamp;
+      if (!g.students[studentKey]) {
+        g.students[studentKey] = {
+          name: r.studentName, timestamp: r.timestamp,
+          correct: parseInt(r.scoreCorrect, 10) || 0,
+          total: parseInt(r.scoreTotal, 10) || 0
+        };
+      }
+
+      var qid = r.questionId;
+      if (!g.questions[qid]) g.questions[qid] = { id: qid, group: r.questionGroup || '', number: r.questionNumber || qid, appeared: 0, correct: 0 };
+      g.questions[qid].appeared++;
+      if (r.result === 'correct') g.questions[qid].correct++;
+    });
+    return byExam;
+  }
+
+  function pctClass(pct) { return pct >= 60 ? 'pct-good' : 'pct-bad'; }
+
+  function formatQuestionLabel(q) {
+    return q.group ? (q.group + ' - ' + q.number) : String(q.number);
+  }
+
+  function compareGroupNumber(a, b) {
+    if (a.group !== b.group) return a.group < b.group ? -1 : 1;
+    var an = parseFloat(a.number), bn = parseFloat(b.number);
+    if (!isNaN(an) && !isNaN(bn) && an !== bn) return an - bn;
+    return a.number < b.number ? -1 : a.number > b.number ? 1 : 0;
+  }
+
+  function renderResults() {
+    var byExam = aggregate(loadedRows);
+    var examNames = Object.keys(byExam).sort();
+    if (!examNames.length) {
+      $('results').innerHTML = '<p class="empty">尚未載入任何成績單。</p>';
+      $('export-row').style.display = 'none';
+      return;
+    }
+
+    var html = examNames.map(function (exam) {
+      var g = byExam[exam];
+      var students = Object.keys(g.students).map(function (k) { return g.students[k]; })
+        .sort(function (a, b) { return a.name.localeCompare(b.name, 'zh-Hant'); });
+      var questions = Object.keys(g.questions).map(function (k) { return g.questions[k]; }).sort(compareGroupNumber);
+
+      var studentRows = students.map(function (s) {
+        var pct = s.total ? Math.round((s.correct / s.total) * 1000) / 10 : 0;
+        return '<tr><td>' + escapeHTML(s.name) + '</td><td>' + new Date(s.timestamp).toLocaleString() + '</td>' +
+          '<td>' + s.correct + ' / ' + s.total + '</td><td class="' + pctClass(pct) + '">' + pct + '%</td></tr>';
+      }).join('');
+
+      var questionRows = questions.map(function (q) {
+        var pct = q.appeared ? Math.round((q.correct / q.appeared) * 1000) / 10 : 0;
+        return '<tr><td>' + escapeHTML(formatQuestionLabel(q)) + '</td><td>' + q.appeared + '</td><td>' + q.correct + '</td>' +
+          '<td class="' + pctClass(pct) + '">' + pct + '%</td></tr>';
+      }).join('');
+
+      return (
+        '<div class="card">' +
+        '<h2>' + escapeHTML(exam) + '</h2>' +
+        '<h3>學生成績（' + students.length + ' 人）</h3>' +
+        '<table><thead><tr><th>姓名</th><th>作答時間</th><th>答對／總題數</th><th>正確率</th></tr></thead>' +
+        '<tbody>' + studentRows + '</tbody></table>' +
+        '<h3 style="margin-top:20px;">逐題答對率（' + questions.length + ' 題出現過）</h3>' +
+        '<table><thead><tr><th>原始題號</th><th>出現次數</th><th>答對次數</th><th>答對率</th></tr></thead>' +
+        '<tbody>' + questionRows + '</tbody></table>' +
+        '</div>'
+      );
+    }).join('');
+
+    $('results').innerHTML = html;
+    $('export-row').style.display = 'flex';
+  }
+
+  function escapeHTML(s) {
+    return String(s).replace(/[&<>"']/g, function (c) {
+      return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c];
+    });
+  }
+
+  function toCSVValue(v) {
+    var s = String(v == null ? '' : v);
+    if (/[",\n]/.test(s)) return '"' + s.replace(/"/g, '""') + '"';
+    return s;
+  }
+
+  function exportMergedCSV() {
+    if (!loadedRows.length) return;
+    var header = ['studentName', 'examLabel', 'timestamp', 'questionIndex', 'questionId', 'questionGroup', 'questionNumber', 'studentAnswer', 'correctAnswer', 'result', 'scoreCorrect', 'scoreTotal'];
+    var lines = [header.join(',')];
+    loadedRows.forEach(function (r) {
+      lines.push(header.map(function (h) { return toCSVValue(r[h]); }).join(','));
+    });
+    var blob = new Blob(['﻿' + lines.join('\r\n')], { type: 'text/csv;charset=utf-8;' });
+    var a = document.createElement('a');
+    a.href = URL.createObjectURL(blob);
+    a.download = '彙整成績單_' + new Date().toISOString().slice(0, 10) + '.csv';
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    URL.revokeObjectURL(a.href);
+  }
+
+  function clearAll() {
+    loadedRows = [];
+    loadedFiles = [];
+    $('file-input').value = '';
+    renderFileList();
+    renderResults();
+  }
+
+  var dropzone = $('dropzone');
+  var fileInput = $('file-input');
+  dropzone.addEventListener('click', function () { fileInput.click(); });
+  fileInput.addEventListener('change', function (e) { handleFiles(e.target.files); });
+  ['dragenter', 'dragover'].forEach(function (evt) {
+    dropzone.addEventListener(evt, function (e) { e.preventDefault(); dropzone.classList.add('drag'); });
+  });
+  ['dragleave', 'drop'].forEach(function (evt) {
+    dropzone.addEventListener(evt, function (e) { e.preventDefault(); dropzone.classList.remove('drag'); });
+  });
+  dropzone.addEventListener('drop', function (e) { handleFiles(e.dataTransfer.files); });
+
+  $('export-btn').addEventListener('click', exportMergedCSV);
+  $('print-btn').addEventListener('click', function () { window.print(); });
+  $('clear-btn').addEventListener('click', clearAll);
+
+  renderResults();
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,239 @@
+- generic [ref=e1]:
+  - button "開啟選單 / Open menu" [active] [ref=e192] [cursor=pointer]: ☰
+  - complementary [ref=e2]:
+    - generic [ref=e3]: Windows 11：ChatGPT Work 與 Codex 設定指南
+    - generic [ref=e4]:
+      - button "English" [ref=e5] [cursor=pointer]
+      - button "☀️ Light" [ref=e6] [cursor=pointer]
+    - link "返回上一層 / Back to parent" [ref=e7] [cursor=pointer]:
+      - /url: ../index.html
+      - text: 返回上一層
+    - navigation [ref=e8]:
+      - button "更新說明" [ref=e9] [cursor=pointer]
+      - button "Windows 11 安裝" [ref=e10] [cursor=pointer]
+      - button "Chat、Work 與 Codex 比較" [ref=e11] [cursor=pointer]
+      - button "Work 深入：常見使用情境" [ref=e12] [cursor=pointer]
+      - button "選擇執行位置" [ref=e13] [cursor=pointer]
+      - button "安全設定 Codex" [ref=e14] [cursor=pointer]
+      - button "Codex 深入：vibe coding 建立 Web App" [ref=e15] [cursor=pointer]
+      - button "保持參與與審查" [ref=e16] [cursor=pointer]
+      - button "課前檢查" [ref=e17] [cursor=pointer]
+      - button "參考來源" [ref=e18] [cursor=pointer]
+  - main [ref=e19]:
+    - generic [ref=e20]:
+      - heading "Windows 11：ChatGPT Work 與 Codex 設定指南" [level=1] [ref=e21]
+      - paragraph [ref=e22]: 本指南只針對 Windows 11。先完成 ChatGPT 桌面版安裝，再依任務選擇 Chat、ChatGPT Work 或 Codex；若要處理課程 project，最後才以保守方式設定 Codex 的工作範圍與核准模式。本版另外深入介紹 Work 最常見的使用情境，以及如何用 Codex 以「vibe coding」的方式打造一個 Web App project。
+      - heading "更新說明" [level=2] [ref=e23]
+      - generic [ref=e24]:
+        - strong [ref=e25]: 新版重點：
+        - text: 原本獨立的 Codex app 已整合到 ChatGPT 桌面版。Chat、ChatGPT Work 與 Codex 是同一個桌面 app 中不同的工作介面；Work 不是另外安裝的 app。介面名稱或按鈕位置可能更新，但「選對工作介面、限制範圍、人工審查」的原則不變。2026 年 7 月起，本機 project 可加入多個資料夾（multi-folder project）：Codex 能讀取並修改每一個已加入的資料夾，只有主要資料夾（primary folder）用於 Git 操作，以及 AGENTS.md、skills、config.toml 的自動偵測。
+      - paragraph [ref=e26]: 近期版本也帶來以下變化，建議上課前先留意：
+      - list [ref=e27]:
+        - listitem [ref=e28]:
+          - strong [ref=e29]: 桌面 app 更新（2026 年 7 月 30 日，v26.727）：
+          - text: 內建瀏覽器新增網址列，可直接找回瀏覽紀錄或以 Google 搜尋；Chrome 擴充功能可提及目前分頁與畫面上選取的文字；程式碼審查支援 multi-repo（一次看到 multi-folder project 中每個 repo 各自的變更行數）；另外新增 Activity（顯示哪些對話最近需要你留意）與放大版圖片檢視器。
+        - listitem [ref=e30]:
+          - strong [ref=e31]: 語音輸入：
+          - text: 桌面 app 新增 ChatGPT Voice，可在 Chat、Work、Codex 中用語音下達或調整指令；課堂示範前建議先確認麥克風權限與環境是否安靜。
+        - listitem [ref=e32]:
+          - strong [ref=e33]: 新增「Approve for me」（自動核准）模式：
+          - text: 在 Settings → General 的 Permissions 可以另外開啟這個模式，它維持與「先要求核准」相同的工作區邊界，但把原本要你人工判斷的跨界請求改成自動審查。課程情境仍建議維持
+          - strong [ref=e34]: 先要求核准
+          - text: ，不要為了省事而開啟自動核准，詳見下方「安全設定 Codex」。
+        - listitem [ref=e35]:
+          - strong [ref=e36]: 模型更新：
+          - text: 2026 年 8 月 31 日起，Codex 將不再提供 GPT-5.4／GPT-5.4 mini 給以 ChatGPT 帳號登入的使用者；設定檔或指令中若還指定 gpt-5.4，需改成 gpt-5.6-terra，gpt-5.4-mini 則改成 gpt-5.6-luna。
+        - listitem [ref=e37]:
+          - strong [ref=e38]: Codex Sites（預覽）：
+          - text: 2026 年 6 月上線，透過
+          - code [ref=e39]: "@Sites"
+          - text: 用一段文字描述內部工具（例如儀表板、追蹤表、知識庫），Codex 會建置、測試並部署到 OpenAI 代管的網址，直接在工作區內分享，不需要自己準備專案資料夾。目前僅開放 ChatGPT Business（預設開啟）與 Enterprise（管理員開關），Free／Plus／Go／Pro 尚未開放；也沒有公開網址、自訂網域，也不能匯出程式碼或資料，僅供工作區內部使用。多數課程帳號屬於 Free 或 Plus，建議先確認方案是否支援；若要打造可完整掌控、能部署到任何地方的 Web App project，請改用下方「深入 Codex」介紹的本機工作流程。
+      - heading "Windows 11：安裝與開啟 ChatGPT Work" [level=2] [ref=e40]
+      - list [ref=e41]:
+        - listitem [ref=e42]:
+          - text: 從
+          - link "ChatGPT 官方下載頁" [ref=e43] [cursor=pointer]:
+            - /url: https://chatgpt.com/download
+          - text: 安裝或更新 Windows 版 ChatGPT 桌面 app。
+        - listitem [ref=e44]: 開啟 app，使用你的 ChatGPT 帳號登入；可用功能會因方案、組織設定與推出狀態而不同。
+        - listitem [ref=e45]:
+          - text: 要做研究、分析、文件、簡報或其他多步驟成果時，先選
+          - strong [ref=e46]: ChatGPT
+          - text: ，再在新對話上方切換到
+          - strong [ref=e47]: Work
+          - text: 。
+        - listitem [ref=e48]:
+          - text: 要處理專案資料夾、程式碼、指令或 diff 審查時，從 ChatGPT 下拉選單選
+          - strong [ref=e49]: Codex
+          - text: 。
+      - heading "Chat、Work 與 Codex 比較" [level=2] [ref=e50]
+      - figure "依任務類型選對工作介面：快速問答用 Chat，多步驟任務用 Work，專案程式碼用 Codex。" [ref=e51]:
+        - img "快速問答走 Chat、多步驟任務走 ChatGPT Work、專案程式碼走 Codex" [ref=e52]
+      - table [ref=e55]:
+        - rowgroup [ref=e56]:
+          - row [ref=e57]:
+            - columnheader "介面" [ref=e58]
+            - columnheader "最適合的任務" [ref=e59]
+            - columnheader "本機 project" [ref=e60]
+            - columnheader "工具與審查" [ref=e61]
+            - columnheader "預期成果" [ref=e62]
+        - rowgroup [ref=e63]:
+          - row [ref=e64]:
+            - cell "Chat" [ref=e65]
+            - cell "快速問答、解釋、構想或短文草稿。" [ref=e66]
+            - cell "通常不需要。" [ref=e67]
+            - cell "以對話與快速確認為主。" [ref=e68]
+            - cell "立即可閱讀的回答或草稿。" [ref=e69]
+          - row [ref=e70]:
+            - cell "ChatGPT Work" [ref=e71]
+            - cell "需要多個步驟的研究、分析、文件、簡報或可審查成果。" [ref=e72]
+            - cell "需要這台電腦的檔案或 app 時選 Work locally。" [ref=e73]
+            - cell "可使用檔案、plugin 與已核准工具；你可看進度與調整方向。" [ref=e74]
+            - cell "可重用、可審查的交付成果。" [ref=e75]
+          - row [ref=e76]:
+            - cell "Codex" [ref=e77]
+            - cell "專案資料夾、程式碼、指令、驗證與可重複開發流程。" [ref=e78]
+            - cell "先選對唯一的課程 project。" [ref=e79]
+            - cell "使用權限與核准模式；重要改動先看 diff。" [ref=e80]
+            - cell "經驗證的檔案、程式碼與專案變更。" [ref=e81]
+      - paragraph [ref=e82]: 手機上可左右滑動比較表，保留每一欄的完整內容。
+      - heading "Work 深入：常見使用情境" [level=2] [ref=e83]
+      - paragraph [ref=e84]: ChatGPT Work 的強項，是把零散的筆記、檔案或研究資料，轉成一份可以直接審查、重複使用的成果。以下是幾種最常見、也最適合課程情境的用法。
+      - figure "Work 把筆記與檔案轉成四種常見成果，人工審查後才定稿。" [ref=e85]:
+        - img "筆記與檔案交給 Work，產出簡報、試算表、排程任務或文件" [ref=e194]
+      - heading "1. 把筆記或研究整理成簡報" [level=3] [ref=e87]
+      - paragraph [ref=e88]: 把上課講義、會議紀錄或研究筆記交給 Work，請它針對特定對象整理出重點、補上佐證資料，並標出需要你人工確認的地方，最後回傳草稿讓你審查，而不是直接定稿。
+      - generic [ref=e89]: 範例提示：「用附件的三份上課筆記，幫大四學生整理一份 10 頁以內的期末專題簡報草稿，聚焦在系統架構與成果展示，資料不足的地方標記『待補充』，完成後先給我看再定稿。」
+      - heading "2. 把資料整理成比較用的試算表" [level=3] [ref=e90]
+      - paragraph [ref=e91]: 當你要在多個選項（工具、廠商、演算法、雲端方案）之間做決定時，請 Work 把來源資料整理成一份試算表：列出關鍵評估項目、幫每個選項評分、標出風險或缺漏資訊，並在最後加一頁摘要與建議。
+      - generic [ref=e92]: 範例提示：「比較這三個雲端運算平台在學生方案下的價格、額度與好上手程度，做成試算表，並在摘要頁給我一個建議，附上理由。」
+      - heading "3. 排程重複性的監控或彙整任務" [level=3] [ref=e93]
+      - paragraph [ref=e94]: 需要 Work 定期重複、監控或更新某件事時（例如每週彙整專題進度、追蹤某個網站或資料來源的變化），可以使用排程任務，讓工作在 Cloud 模式下持續執行，不受限於這台電腦是否開機。
+      - generic [ref=e95]: 範例提示：「每週一早上幫我從指定的共用資料夾彙整上週各組的進度更新，整理成一頁狀態報告，並標出落後進度的組別。」
+      - heading "4. 產出可直接審查的文件或報告" [level=3] [ref=e96]
+      - paragraph [ref=e97]: 對於期末報告、教學觀察紀錄或計畫申請書這類需要固定格式的文件，可以請 Work 依照指定架構、來源與字數限制產出完整草稿，並在關鍵段落標明引用來源，方便你核對。
+      - heading "5. 串接多個工具的重複工作流程" [level=3] [ref=e98]
+      - paragraph [ref=e99]: 如果同一件事你每次都要手動跨好幾個工具（例如彙整表單意見、比對成績、輸出通知），可以請 Work 用已核准的 plugin 或檔案存取權限，把整個流程串起來，並在關鍵步驟停下來讓你核准。
+      - heading "下指令的小技巧" [level=3] [ref=e100]
+      - paragraph [ref=e101]: 要讓 Work 的成果更接近你要的樣子，提示中盡量說清楚：想要的成果與格式、要用的來源或 plugin（可用 @ 提及）、範圍限制（例如「只用這三份文件」「只列前五名」）、你認定的「好」是什麼樣子，以及什麼時候要停下來讓你審查或核准。任務越複雜，指令就該越具體，而不是越簡短。
+      - heading "選擇執行位置" [level=2] [ref=e102]
+      - figure "先問一句：這個任務現在需要這台電腦嗎？決定要 Work locally 還是 Cloud。" [ref=e103]:
+        - img "需要本機就選 Work locally，不需要或要延續就選 Cloud"
+      - paragraph [ref=e105]:
+        - strong [ref=e106]: Work locally
+        - text: 適合必須使用這台電腦上的檔案或 app 的任務，例如課程資料夾、瀏覽器或本機工具。
+        - strong [ref=e107]: Cloud
+        - text: 適合希望工作在電腦關閉後仍能繼續，或想在網頁與手機接續查看的任務。選擇前先問：這個任務是否真的需要這台電腦上的檔案或 app？
+      - heading "安全設定 Codex" [level=2] [ref=e108]
+      - figure "核准範圍越往下越寬：先要求核准最安全，Full access 不建議預設開啟。" [ref=e109]:
+        - img "核准範圍分三層：先要求核准最安全，Approve for me 自動核准，Full access 避免預設開啟"
+      - list [ref=e111]:
+        - listitem [ref=e112]: 在 Codex 開始前，確認只選到這次課程要使用的 workspace 或 project 資料夾。
+        - listitem [ref=e113]: 如果這個 project 已加入多個資料夾（multi-folder project），要逐一確認每個已加入的資料夾都在課程範圍內；Codex 可以讀取與修改每一個已加入的資料夾，不是只有主要資料夾（primary folder）。
+        - listitem [ref=e114]:
+          - text: 先選
+          - strong [ref=e115]: 先要求核准
+          - text: （Ask for approval）。它可在目前工作區內工作，想跨出範圍時會暫停讓你判斷。
+        - listitem [ref=e116]:
+          - text: Settings 中另外有
+          - strong [ref=e117]: Approve for me
+          - text: （自動核准）可以開啟，它維持相同的工作區邊界，但把原本要你判斷的跨界請求改成自動審查。課程情境不建議預設開啟，因為這正是最需要人工判斷的時刻。
+        - listitem [ref=e118]:
+          - text: 不要預設開啟
+          - strong [ref=e119]: 完整存取權
+          - text: （Full access）。它只在你了解風險且信任該 project 時才有必要。
+        - listitem [ref=e120]: 把網路、瀏覽器、plugin、MCP 與外部工具視為需要理由的能力；看懂用途再核准。
+        - listitem [ref=e121]: 學生姓名、學號、成績、帳號、金鑰與行政資料先限制範圍，或先做去識別化。
+        - listitem [ref=e122]: 看到核准要求時先讀內容；完成後檢查 diff、輸出檔案與實際結果。
+      - heading "深入 Codex：以 vibe coding 建立 Web App 專案" [level=2] [ref=e123]
+      - paragraph [ref=e124]: 「Vibe coding」是指用自然語言描述你想要的成果，讓 Codex 產生、執行並修正程式碼，你則專注在說清楚需求、看懂它的計畫，並在關鍵步驟審查與核准，而不是逐行手寫程式碼。以下是在本機課程 project 中，用 Codex 從零打造一個 Web App 的建議流程。
+      - figure "vibe coding 的來回循環：描述、看計畫、寫程式碼、測試，測試通過才 commit 或部署。" [ref=e125]:
+        - img "vibe coding 循環：描述、看計畫、寫程式碼、執行測試，測試通過才 commit 或部署"
+      - heading "開始之前：先準備一個乾淨的專案資料夾" [level=3] [ref=e127]
+      - list [ref=e128]:
+        - listitem [ref=e129]:
+          - text: 建立一個新的空白資料夾（例如
+          - code [ref=e130]: my-course-webapp
+          - text: ），只放這個 project 需要的內容；不要選到桌面、Documents 或其他課程共用的上層資料夾。
+        - listitem [ref=e131]: 在 ChatGPT 桌面 app 選 Codex，把這個資料夾加入 project；之後若要拆前後端或加測試資料夾，再用 multi-folder project 逐一加入，並確認每個加入的資料夾都在允許範圍內。
+        - listitem [ref=e132]:
+          - text: 維持
+          - strong [ref=e133]: 先要求核准
+          - text: 模式。建立網站或 app 的過程會大量新增檔案、安裝套件、執行指令，這正是最需要人工審查的階段，不要在這個階段切到 Approve for me 或 Full access。
+      - heading "用一句話描述你要的 Web App" [level=3] [ref=e134]
+      - paragraph [ref=e135]: 把想要的成果講清楚，而不是講技術細節：目標使用者、主要功能、想用的技術（如果有偏好）、資料要存在哪裡。讓 Codex 先提出計畫或檔案結構，你看過再讓它動手。
+      - generic [ref=e136]: 範例提示：「幫我建立一個給班上同學用的作業繳交追蹤網站：前端用 React，後端用 Node.js 加 Express，資料先存在本機的 JSON 檔案就好，不用資料庫。先告訴我你打算怎麼拆檔案，我確認後再開始寫。」
+      - heading "建議的來回流程" [level=3] [ref=e137]
+      - list [ref=e138]:
+        - listitem [ref=e139]:
+          - strong [ref=e140]: 看計畫再核准：
+          - text: Codex 提出檔案結構或步驟時，先確認是否合理、有沒有多餘的外部服務或非必要的套件。
+        - listitem [ref=e141]:
+          - strong [ref=e142]: 逐步核准安裝與建立檔案：
+          - text: 像
+          - code [ref=e143]: npm install
+          - text: 這類指令、新增設定檔（例如 .env）都屬於跨出工作區或有風險的動作，看懂用途再核准。
+        - listitem [ref=e144]:
+          - strong [ref=e145]: 請 Codex 啟動開發伺服器並在瀏覽器打開：
+          - text: 例如「啟動 dev server 並告訴我要開哪個網址」，用你自己的眼睛看畫面，而不是只看 Codex 的文字說明。
+        - listitem [ref=e146]:
+          - strong [ref=e147]: 用自然語言迭代功能：
+          - text: 「加一個可以標記已完成的按鈕」「表單送出後要有成功提示」，一次只加一兩個功能，方便你逐次審查 diff。
+        - listitem [ref=e148]:
+          - strong [ref=e149]: 每次改動都看 diff：
+          - text: 尤其是牽涉到帳號密碼、API 金鑰、外部網路請求或資料庫連線字串的檔案，看不懂的地方先讓 Codex 解釋，不要直接核准。
+        - listitem [ref=e150]:
+          - strong [ref=e151]: 自己動手測試：
+          - text: 換不同輸入、刻意輸入錯誤格式、重新整理頁面看資料是否還在，確認結果符合預期，而不是相信「看起來完成了」。
+        - listitem [ref=e152]:
+          - strong [ref=e153]: 完成後才進行版本控制或部署：
+          - text: 先用 git 記錄一個穩定版本，再考慮是否要部署；部署到任何公開網址前，先移除或保護測試用的假帳密與金鑰。
+      - heading "另一個選項：Codex Sites（僅限特定方案）" [level=3] [ref=e154]
+      - paragraph [ref=e155]:
+        - text: 如果你的帳號屬於 ChatGPT Business 或 Enterprise，Codex 另外提供
+        - code [ref=e156]: "@Sites"
+        - text: 功能：直接用一段文字描述一個內部工具（例如小型儀表板、追蹤表、知識庫），Codex 會建置、測試並部署到 OpenAI 代管的網址，在工作區內分享，不需要自己準備專案資料夾或部署流程。但它目前不提供公開網址、自訂網域，也不能匯出程式碼或資料，僅供工作區內部使用；Free、Plus、Go、Pro 帳號在推出時尚未支援。多數課程帳號用不到這個功能；如果你的期末目標是一個可以掛在自己網域、部署到 Vercel 或其他平台、甚至放進作品集的 Web App project，仍建議採用上面本機 Codex 的流程，讓你保有完整的原始碼與部署控制權。
+      - heading "常見地雷" [level=3] [ref=e157]
+      - list [ref=e158]:
+        - listitem [ref=e159]: 一次要求太多功能，導致 diff 太大看不懂——分成小步驟，一步一步來。
+        - listitem [ref=e160]: 看到「安裝套件」「執行指令」的核准請求就反射性按同意——先看套件來源與用途是否合理。
+        - listitem [ref=e161]: 把測試用的帳號密碼、API 金鑰直接寫進程式碼——請 Codex 改用環境變數，並確認 .env 之類的檔案不會被加入版本控制。
+        - listitem [ref=e162]: 只憑 Codex 的文字回報就認定完成——務必自己打開瀏覽器操作一次。
+      - heading "保持參與與審查" [level=2] [ref=e163]
+      - figure "保持參與的四步循環：開始、觀察並調整、核准動作、審查結果，再重新開始。" [ref=e164]:
+        - img "開始、觀察並調整、核准動作、審查結果，四步循環後回到開始"
+      - paragraph [ref=e166]: 不論使用 Work 或 Codex，都不要把任務交出去後就不再理會。你可以看進度、回答補充問題、改變方向，並在重要動作前做判斷。完成後仍要檢查結果是否符合目標、引用或資料是否正確、檔案是否放在預期位置，以及是否還需要人工修改。
+      - heading "課前檢查" [level=2] [ref=e167]
+      - list [ref=e168]:
+        - listitem [ref=e169]: Windows 11 的 ChatGPT 桌面 app 已安裝或更新，且我已登入正確帳號。
+        - listitem [ref=e170]:
+          - text: 我已選對 Chat、Work 或 Codex；需要本機檔案或 app 時，Work 選
+          - strong [ref=e171]: Work locally
+          - text: 。
+        - listitem [ref=e172]: 使用 Codex 時，我已選對唯一的課程 workspace，並確認每一個已加入的資料夾（包含次要資料夾）都在允許範圍內。
+        - listitem [ref=e173]: 我已使用先要求核准，沒有預設開啟完整存取權。
+        - listitem [ref=e174]: 我會檢查核准要求、diff 與最後輸出結果。
+      - heading "參考來源" [level=2] [ref=e175]
+      - list [ref=e176]:
+        - listitem [ref=e177]:
+          - link "OpenAI：開始使用 ChatGPT Work" [ref=e178] [cursor=pointer]:
+            - /url: https://learn.chatgpt.com/docs/get-started-with-work
+        - listitem [ref=e179]:
+          - link "OpenAI：ChatGPT 桌面版應用程式" [ref=e180] [cursor=pointer]:
+            - /url: https://learn.chatgpt.com/docs/app
+        - listitem [ref=e181]:
+          - link "OpenAI：ChatGPT 桌面版設定" [ref=e182] [cursor=pointer]:
+            - /url: https://learn.chatgpt.com/docs/reference/settings
+        - listitem [ref=e183]:
+          - link "OpenAI：權限設定" [ref=e184] [cursor=pointer]:
+            - /url: https://learn.chatgpt.com/docs/permission-modes
+        - listitem [ref=e185]:
+          - link "OpenAI：Projects 與對話" [ref=e186] [cursor=pointer]:
+            - /url: https://learn.chatgpt.com/docs/projects
+        - listitem [ref=e187]:
+          - link "OpenAI：ChatGPT 與 Codex 更新紀錄" [ref=e188] [cursor=pointer]:
+            - /url: https://learn.chatgpt.com/docs/changelog
+        - listitem [ref=e189]:
+          - link "OpenAI：Codex for every role, tool, and workflow（Codex Sites）" [ref=e190] [cursor=pointer]:
+            - /url: https://openai.com/index/codex-for-every-role-tool-workflow/
+    - generic [ref=e191]: 智慧雨林產業創生人才育成計畫 (南臺科技大學 電子系 楊榮林 教授)

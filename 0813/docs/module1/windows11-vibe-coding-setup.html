@@ -1,0 +1,684 @@
+<!DOCTYPE html>
+<html lang="zh-Hant" data-theme="dark" data-lang="zh">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Windows 11 Vibe Coding 與 AI Agent 環境建置</title>
+<style>:root{color-scheme:dark;--bg:#f4f1ea;--fg:#1f2328;--muted:#687180;--card:#ebe7df;--border:#d6d0c5;--accent:#2563eb;--th-bg:#ded8cc;--shadow:0 1px 3px rgba(44,38,28,.09);--sidebar-w:284px;--content-max:1040px;--content-pad-x:44px;--content-pad-y:42px;--measure:76ch}[data-theme="dark"]{--bg:#101217;--fg:#e7eaf0;--muted:#a5aebd;--card:#181c24;--border:#2a3140;--accent:#7bb2ff;--th-bg:#202632;--shadow:0 1px 3px rgba(0,0,0,.42)}html{scroll-behavior:smooth}*{box-sizing:border-box}body{min-width:0;margin:0;background:var(--bg);color:var(--fg);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang TC","Microsoft JhengHei",Roboto,Helvetica,Arial,sans-serif;font-size:16px;line-height:1.76;letter-spacing:0;transition:background .25s,color .25s}.wrap{width:min(var(--content-max),calc(100vw - var(--sidebar-w) - (var(--content-pad-x) * 2)));margin-left:calc(var(--sidebar-w) + max(var(--content-pad-x),(100vw - var(--sidebar-w) - var(--content-max)) / 2));padding:var(--content-pad-y) var(--content-pad-x) 88px}.sidebar{position:fixed;top:0;left:0;width:var(--sidebar-w);height:100vh;overflow-y:auto;background:var(--card);border-right:1px solid var(--border);display:flex;flex-direction:column;gap:10px;padding:18px 14px;z-index:30}.brand{font-weight:700;font-size:1rem;line-height:1.35;padding:0 6px}.toprow{display:flex;flex-wrap:wrap;align-items:center;gap:8px}.navmode{display:flex;align-items:flex-start;gap:8px;margin:0 6px;color:var(--muted);font-size:13px;font-weight:650;line-height:1.35}.navmode input{width:16px;height:16px;margin:1px 0 0;accent-color:var(--accent)}.nav{display:flex;flex-direction:column;gap:4px;margin-top:6px}.navbtn,.navhome{cursor:pointer;border:1px solid transparent;background:transparent;color:var(--muted);border-radius:7px;padding:7px 10px;font-size:14px;font-weight:650;text-align:left;width:100%;white-space:normal;text-decoration:none}.navbtn:hover,.navbtn.active,.navhome:hover{color:var(--accent);border-color:var(--border);background:var(--bg)}.navhome{display:block;border-color:var(--border);background:var(--bg);color:var(--fg)}.btn{cursor:pointer;border:1px solid var(--border);background:var(--bg);color:var(--fg);border-radius:8px;padding:6px 12px;font-size:13px;font-weight:650}.btn:hover{border-color:var(--accent)}.menu-toggle{display:none;position:fixed;top:12px;left:12px;z-index:40;cursor:pointer;border:1px solid var(--border);background:var(--card);color:var(--fg);border-radius:8px;padding:6px 12px;font-size:18px;line-height:1}.backdrop{display:none;position:fixed;inset:0;background:rgba(0,0,0,.42);z-index:20}h1{max-width:var(--measure);font-size:2.15rem;line-height:1.28;margin:.2em 0 .35em}h2{font-size:1.48rem;margin-top:1.85em;padding-bottom:.25em;border-bottom:2px solid var(--border);scroll-margin-top:24px}h3{font-size:1.18rem;margin-top:1.55em;color:var(--accent)}h4{font-size:1.04rem;margin-top:1.25em;margin-bottom:.35em;color:var(--fg)}ul,ol{padding-left:1.3em}li{margin:.35em 0}p,li,blockquote{max-width:var(--measure);overflow-wrap:break-word}.table-wrap{width:100%;overflow-x:auto;-webkit-overflow-scrolling:touch}table{width:100%;border-collapse:collapse;margin:1em 0;font-size:.94rem;box-shadow:var(--shadow);border-radius:8px;overflow:hidden}th,td{text-align:left;padding:10px 14px;border:1px solid var(--border);vertical-align:top}th{background:var(--th-bg);font-weight:750}td:first-child,th:first-child{white-space:nowrap}tbody tr:nth-child(even) td{background:var(--card)}figure{max-width:100%;margin:1.1em 0 1.35em;padding:10px;background:var(--card);border:1px solid var(--border);border-radius:8px;box-shadow:var(--shadow)}figure img{display:block;width:100%;height:auto;border-radius:6px}blockquote{margin:1.1em 0;padding:12px 16px;border-left:4px solid var(--accent);background:var(--card);color:var(--fg)}pre{font-family:inherit;overflow:auto;white-space:pre-wrap;word-break:break-word;overflow-wrap:anywhere;padding:12px 14px;background:var(--card);border:1px solid var(--border);border-radius:8px}code{font-family:"SFMono-Regular",Consolas,"Liberation Mono",monospace;font-size:.92em;color:var(--fg);background:var(--card);border:1px solid var(--border);border-radius:6px;padding:.08em .35em}pre code{border:0;padding:0;background:transparent}.nav code{border:0;background:transparent;color:inherit;padding:0}.code-sample{max-width:var(--measure);margin:1em 0 1.2em}.code-sample-toolbar{display:flex;gap:8px;margin:0 0 8px}.copy-btn{cursor:pointer;border:1px solid var(--border);background:var(--bg);color:var(--fg);border-radius:6px;padding:5px 10px;font-size:12px;font-weight:650;display:flex;align-items:center;gap:5px;margin-left:auto}.copy-btn:hover{border-color:var(--accent)}.copy-btn.copied{border-color:var(--accent);color:var(--accent)}.code-sample pre{margin:0}.site-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:12px;margin:1.2em 0}.site-card{display:flex;flex-direction:column;gap:6px;min-height:142px;padding:14px 16px;border:1px solid var(--border);border-radius:8px;background:var(--card);box-shadow:var(--shadow);text-decoration:none;color:var(--fg)}.site-card:hover{border-color:var(--accent)}.site-card strong{font-size:1.03rem;color:var(--fg)}.site-card span{color:var(--muted)}.download-list{display:grid;gap:8px;max-width:var(--measure);padding-left:0;list-style:none}.download-list a{display:block;padding:10px 12px;border:1px solid var(--border);border-radius:8px;background:var(--card);text-decoration:none}.download-list small{display:block;color:var(--muted)}table{max-width:100%}pre{max-width:var(--measure)}a{color:var(--accent);overflow-wrap:anywhere}[data-lang="zh"] .en,[data-lang="en"] .zh{display:none}footer{margin-top:3em;color:var(--muted);font-size:.85rem;border-top:1px solid var(--border);padding-top:1em}@media (min-width:1440px){:root{--sidebar-w:304px;--content-max:1080px;--content-pad-x:54px;--content-pad-y:48px}}@media (max-width:1100px){:root{--sidebar-w:230px;--content-max:840px;--content-pad-x:28px;--content-pad-y:32px}.sidebar{padding:16px 10px}.brand{font-size:.95rem}.navbtn,.navhome{font-size:13px;padding:7px 8px}}@media (max-width:860px){:root{--sidebar-w:min(82vw,320px);--content-pad-x:18px;--content-pad-y:0px;--measure:100%}.sidebar{transform:translateX(-100%);transition:transform .25s}.sidebar.open{transform:none}.wrap{width:100%;margin-left:0;padding:72px var(--content-pad-x) 80px}.menu-toggle{display:block}.backdrop.show{display:block}h1{font-size:1.75rem}h2{font-size:1.26rem}h3{font-size:1.08rem}p,li,blockquote{max-width:100%}.site-grid{grid-template-columns:1fr}}@media (max-width:520px){:root{--sidebar-w:min(88vw,300px);--content-pad-x:14px}.wrap{padding-top:68px}.menu-toggle{top:10px;left:10px;padding:7px 11px}.sidebar{padding:14px 10px}.toprow{gap:6px}.btn{padding:6px 10px;font-size:12px}.navmode{font-size:12px}.navbtn,.navhome{font-size:13px}h1{font-size:1.55rem}h2{font-size:1.18rem}th,td{padding:8px 10px}}</style>
+</head>
+<style>@media (max-width:520px){.table-wrap table{min-width:760px}}</style>
+<body>
+<button class="menu-toggle" id="menuToggle" onclick="toggleMenu()" type="button">☰</button>
+<aside class="sidebar" id="sidebar">
+  <div class="brand"><span class="zh">Windows 11 Vibe Coding 與 AI Agent 環境建置</span><span class="en">Windows 11 Vibe Coding and AI Agent Environment Setup</span></div>
+  <div class="toprow"><button class="btn" id="langBtn" onclick="toggleLang()" type="button">English</button><button class="btn" id="themeBtn" onclick="toggleTheme()" type="button">☀️ Light</button></div>
+  <label class="navmode"><input id="slideNavMode" onchange="buildSpy()" type="checkbox"><span><span class="zh">導覽反思投影片</span><span class="en">Navigate reflection slides</span></span></label>
+  <a class="navhome return-control" href="../../index.html" aria-label="返回上一層 / Back to parent"><span class="zh">返回上一層</span><span class="en">Back to parent</span></a>
+  <nav class="nav"><button class="navbtn" onclick="gotoSection(0)" type="button"><span class="zh">學習目標 (Learning Objectives)</span><span class="en">Learning Objectives</span></button>
+<button class="navbtn" onclick="gotoSection(1)" type="button"><span class="zh">先備條件 (Prerequisites)</span><span class="en">Prerequisites</span></button>
+<button class="navbtn" onclick="gotoSection(2)" type="button"><span class="zh">最低電腦需求 (Minimum Computer Requirements)</span><span class="en">Minimum Computer Requirements</span></button>
+<button class="navbtn" onclick="gotoSection(3)" type="button"><span class="zh">安裝的工具 (Toolchain)</span><span class="en">Toolchain</span></button>
+<button class="navbtn" onclick="gotoSection(4)" type="button"><span class="zh">安裝方式一：手動安裝</span><span class="en">Install Method 1: Manual</span></button>
+<button class="navbtn" onclick="gotoSection(5)" type="button"><span class="zh">安裝方式二：AI Agent Prompt</span><span class="en">Install Method 2: AI Agent Prompt</span></button>
+<button class="navbtn" onclick="gotoSection(6)" type="button"><span class="zh">安裝方式三：module1-setup-windows.bat</span><span class="en">Install Method 3: module1-setup-windows.bat</span></button>
+<button class="navbtn" onclick="gotoSection(7)" type="button"><span class="zh">實作流程 (Hands-on Activities)</span><span class="en">Hands-on Activities</span></button></nav>
+</aside>
+<div class="backdrop" id="backdrop" onclick="toggleMenu()"></div>
+<div class="wrap">
+  <section class="zh"><h1 id="windows-11-vibe-coding-ai-agent">Windows 11 Vibe Coding 與 AI Agent 環境建置</h1>
+<p>本模組聚焦在 Windows 11 筆電上的 Vibe Coding 與 AI Agent 工作環境建置。先安裝 ChatGPT 桌面 app，再用一鍵安裝腳本準備開發工具；最後以 Chat、ChatGPT Work 與 Codex 的正確工作介面完成幾個小型驗證任務。</p>
+<h2 id="learning-objectives">學習目標 (Learning Objectives)</h2>
+<p>完成本模組後，教師應能：</p>
+<ul>
+<li>在自己的 Windows 11 筆電上獨立啟動可運作的 Vibe Coding 與 AI Agent 工作環境。</li>
+<li>使用 ChatGPT 桌面 app 的 Chat、ChatGPT Work 與 Codex 工作介面，依任務選擇適合的入口。</li>
+<li>使用 VS Code 作為主要開發介面，搭配 Codex CLI 與 Codex 擴充套件進行程式生成、修改與檢查。</li>
+<li>使用 uv 與 npm 管理 Python 與 Node.js 的套件及專案環境。</li>
+<li>透過 GitHub CLI (<code>gh</code>) 以瀏覽器登入 GitHub，完成專案 clone、推送與 GitHub Pages 部署。</li>
+<li>依據 checklist 自行驗證環境，並排除常見安裝問題。</li>
+</ul>
+<h2 id="prerequisites">先備條件 (Prerequisites)</h2>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>項目</th>
+<th>說明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>個人筆電</td>
+<td>Windows 11，具系統管理 (安裝軟體) 權限</td>
+</tr>
+<tr>
+<td>網路</td>
+<td>可連線下載安裝套件與存取 AI 服務</td>
+</tr>
+<tr>
+<td>ChatGPT 帳號</td>
+<td>可使用 Codex 的 ChatGPT 帳號；先登入 ChatGPT 桌面 app。實際可用功能依方案、工作區與推出狀況而異，CLI 與 VS Code 擴充套件可使用同一登入帳號。</td>
+</tr>
+<tr>
+<td>GitHub 帳號</td>
+<td>供 GitHub CLI 登入、clone 專案與部署 GitHub Pages 使用</td>
+</tr>
+<tr>
+<td>基本操作</td>
+<td>能開啟終端機 (terminal) 並輸入指令</td>
+</tr>
+</tbody>
+</table></div>
+<h2 id="minimum-computer-requirements">最低電腦需求 (Minimum Computer Requirements)</h2>
+<p>本工作坊會同時開啟 VS Code、Node.js、Python、終端機與瀏覽器登入頁面，建議筆電至少符合下列規格。標示「建議」者為較順暢的體驗門檻。</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>項目</th>
+<th>最低需求</th>
+<th>建議</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>作業系統</td>
+<td>Windows 11 (64 位元)，並已安裝 App Installer (winget)</td>
+<td>Windows 11 且更新至最新版</td>
+</tr>
+<tr>
+<td>處理器</td>
+<td>64 位元 x64 雙核心</td>
+<td>四核心以上</td>
+</tr>
+<tr>
+<td>記憶體 (RAM)</td>
+<td>8 GB</td>
+<td>16 GB</td>
+</tr>
+<tr>
+<td>可用磁碟空間</td>
+<td>10 GB</td>
+<td>20 GB 以上</td>
+</tr>
+<tr>
+<td>權限</td>
+<td>具系統管理員權限 (可安裝軟體、允許 UAC)</td>
+<td>同左</td>
+</tr>
+<tr>
+<td>網路</td>
+<td>穩定寬頻，可存取 GitHub 與 AI 服務</td>
+<td>同左</td>
+</tr>
+<tr>
+<td>瀏覽器</td>
+<td>Microsoft Edge 或 Chrome (供登入流程使用)</td>
+<td>同左</td>
+</tr>
+</tbody>
+</table></div>
+<blockquote>
+<p>8 GB 記憶體可完成所有任務，但同時開啟 VS Code、瀏覽器與多個終端機時，16 GB 會明顯較順暢。磁碟空間需求包含工具鏈、專案的 node_modules 與 Python 套件。</p>
+</blockquote>
+<h2 id="toolchain">安裝的工具 (Toolchain)</h2>
+<p>Windows 11 一鍵安裝腳本與課後指南會在筆電上安裝下列工具：</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>工具</th>
+<th>用途</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>VS Code</td>
+<td>程式碼編輯器，也是日後操作 AI Agent 的主要視窗</td>
+</tr>
+<tr>
+<td>Git</td>
+<td>版本管理工具，許多 AI 工具會用到</td>
+</tr>
+<tr>
+<td>Node.js + npm</td>
+<td>JavaScript 執行環境，用來啟動 local web server 與安裝 Codex CLI</td>
+</tr>
+<tr>
+<td>uv (Python)</td>
+<td>管理 Python 與套件，安裝／更新／移除都很簡單</td>
+</tr>
+<tr>
+<td>ChatGPT 桌面 app</td>
+<td>Windows 上的 Chat、ChatGPT Work 與 Codex 入口；可開啟專案、查看變更與使用整合終端機。</td>
+</tr>
+<tr>
+<td>Codex CLI（終端機工作流程）</td>
+<td>OpenAI 的 AI Agent 命令列工具；適合需要直接在終端機操作專案的課程練習。先以可使用 Codex 的 ChatGPT 帳號登入，實際功能依帳號與工作區而異。</td>
+</tr>
+<tr>
+<td>GitHub CLI (gh)</td>
+<td>用瀏覽器登入 GitHub，clone 專案、推送與部署 GitHub Pages</td>
+</tr>
+<tr>
+<td>VS Code 擴充套件</td>
+<td>Python、Jupyter、GitLens、ESLint，以及 Codex 編程代理 (openai.chatgpt)</td>
+</tr>
+</tbody>
+</table></div>
+<h2 id="install-method-manual">安裝方式一：手動下載與安裝必要工具</h2>
+<p>若一鍵安裝失敗，或教師的筆電受學校 IT 權限限制，可改用手動安裝。建議仍優先使用 <code>winget</code> 指令；若 <code>winget</code> 不可用，再從官方下載頁面安裝。</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>工具</th>
+<th>官方下載／說明</th>
+<th>建議指令或手動操作</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>App Installer / winget</td>
+<td><a href="https://learn.microsoft.com/windows/msix/app-installer/install-update-app-installer" target="_blank" rel="noopener noreferrer">https://learn.microsoft.com/windows/msix/app-installer/install-update-app-installer</a></td>
+<td>Windows 11 通常已內建。若<code>winget --version</code> 無法執行，請從 Microsoft Store 安裝或更新 App Installer。</td>
+</tr>
+<tr>
+<td>ChatGPT 桌面 app</td>
+<td><a href="https://get.microsoft.com/installer/download/9PLM9XGG6VKS?cid=website_cta_psi" target="_blank" rel="noopener noreferrer">OpenAI：ChatGPT desktop app for Windows</a></td>
+<td><code>winget install --id 9PLM9XGG6VKS --source msstore</code>，或從 Microsoft Store 安裝。安裝後開啟 app，使用 ChatGPT 帳號登入。</td>
+</tr>
+<tr>
+<td>VS Code</td>
+<td><a href="https://code.visualstudio.com/download" target="_blank" rel="noopener noreferrer">https://code.visualstudio.com/download</a></td>
+<td><code>winget install --id Microsoft.VisualStudioCode --source winget --exact</code></td>
+</tr>
+<tr>
+<td>Git for Windows</td>
+<td><a href="https://git-scm.com/downloads/win" target="_blank" rel="noopener noreferrer">https://git-scm.com/downloads/win</a></td>
+<td><code>winget install --id Git.Git --source winget --exact</code></td>
+</tr>
+<tr>
+<td>Node.js LTS + npm</td>
+<td><a href="https://nodejs.org/en/download" target="_blank" rel="noopener noreferrer">https://nodejs.org/en/download</a></td>
+<td><code>winget install --id OpenJS.NodeJS.LTS --source winget --exact</code></td>
+</tr>
+<tr>
+<td>uv</td>
+<td><a href="https://docs.astral.sh/uv/getting-started/installation/" target="_blank" rel="noopener noreferrer">https://docs.astral.sh/uv/getting-started/installation/</a></td>
+<td><code>winget install --id astral-sh.uv --source winget --exact</code></td>
+</tr>
+<tr>
+<td>GitHub CLI (<code>gh</code>)</td>
+<td><a href="https://cli.github.com/" target="_blank" rel="noopener noreferrer">https://cli.github.com/</a></td>
+<td><code>winget install --id GitHub.cli --source winget --exact</code></td>
+</tr>
+<tr>
+<td>Codex CLI</td>
+<td><a href="https://developers.openai.com/codex/cli" target="_blank" rel="noopener noreferrer">https://developers.openai.com/codex/cli</a></td>
+<td>安裝 Node.js 後執行<code>npm install -g "@openai/codex"</code>，再執行 <code>codex</code> 登入。</td>
+</tr>
+</tbody>
+</table></div>
+<p>VS Code 擴充套件可在 VS Code 左側 Extensions 視窗搜尋安裝，也可在終端機逐行執行：</p>
+<pre><code class="language-powershell">code --install-extension ms-python.python
+code --install-extension ms-toolsai.jupyter
+code --install-extension eamodio.gitlens
+code --install-extension dbaeumer.vscode-eslint
+code --install-extension openai.chatgpt
+</code></pre>
+<p>手動安裝後，同樣需要關閉並重新開啟終端機，再執行版本檢查：</p>
+<pre><code class="language-powershell">code --version
+git --version
+node --version
+npm --version
+uv --version
+gh --version
+codex --version
+</code></pre>
+<h2 id="install-method-ai-agent-prompt">安裝方式二：透過 AI Agent Prompt 安裝（ChatGPT Work，完整存取權）</h2>
+<p>除了執行批次檔或手動安裝，也可以直接在 ChatGPT 桌面 app 中改用自然語言，讓 AI Agent 自行檢查筆電上缺少哪些工具、依序安裝並回報結果。</p>
+<blockquote>
+<p>⚠️ 完整存取權（Full access）會讓 Agent 不經逐步核准就執行終端機指令，安裝流程結束後請切回<strong>先要求核准</strong>（Ask for approval）。</p>
+</blockquote>
+<p>建議操作：</p>
+<ul>
+<li>開啟 ChatGPT 桌面 app，選擇 ChatGPT，再切換到 <strong>Work</strong>。</li>
+<li>在工作設定中把存取層級改成<strong>完整存取權</strong>（Full access）。</li>
+<li>貼上下列 prompt 並送出，全程留意輸出內容：</li>
+</ul>
+<div class="code-sample">
+<div class="code-sample-toolbar" aria-label="AI Agent 安裝 prompt 複製">
+<button class="copy-btn" type="button" onclick="copyPromptBlock(this)"><span class="copy-icon">📋</span><span class="zh">複製</span><span class="en">Copy</span></button>
+</div>
+<pre><code class="language-text">我使用的是 Windows 11 筆電，具備系統管理員權限，已安裝 App Installer (winget)。
+請幫我檢查並安裝以下開發工具，若已安裝則略過，全部安裝完成後請執行版本檢查指令並回報結果：
+
+1. VS Code（winget id: Microsoft.VisualStudioCode）
+2. Git for Windows（winget id: Git.Git）
+3. Node.js LTS + npm（winget id: OpenJS.NodeJS.LTS）
+4. uv（winget id: astral-sh.uv）
+5. GitHub CLI（winget id: GitHub.cli）
+6. Codex CLI（先確認 Node.js 已安裝，再執行 npm install -g "@openai/codex"）
+7. 以下 VS Code 擴充套件：
+   - ms-python.python
+   - ms-toolsai.jupyter
+   - eamodio.gitlens
+   - dbaeumer.vscode-eslint
+   - openai.chatgpt
+
+安裝規則：
+- 每一項工具在安裝前先檢查是否已存在（例如執行「工具 --version」或「winget list --id ...」），已安裝就跳過，不要重複安裝。
+- 使用 winget 安裝時加上 --source winget --exact（VS Code 擴充套件改用 code --install-extension）。
+- 全部安裝完成後，開新的終端機視窗，依序執行下列指令並把結果貼給我：
+  code --version
+  git --version
+  node --version
+  npm --version
+  uv --version
+  gh --version
+  codex --version
+- 若任何一項安裝失敗，請停下來告訴我錯誤訊息，不要略過或用其他方式繞過。
+- 不要安裝清單以外的軟體，也不要修改系統設定或使用者帳戶權限。</code></pre>
+</div>
+<p>Agent 執行完成後，請比對輸出結果與上方「安裝的工具」表格，確認每個指令都能顯示版本號；若有工具檢查失敗，可回到「安裝方式一：手動下載與安裝必要工具」單獨修復。</p>
+<h2 id="install-method-batch">安裝方式三：使用 <code>module1-setup-windows.bat</code> 一鍵安裝</h2>
+<p>優先使用本模組提供的 <a href="module1-setup-windows.bat" download>module1-setup-windows.bat</a>。這個批次檔會檢查 <code>winget</code>，再依序安裝 VS Code、Git、Node.js LTS、uv、GitHub CLI、ChatGPT 桌面 app、Codex CLI 與常用 VS Code 擴充套件。腳本可重複執行；已安裝的項目會自動略過。</p>
+<p>建議操作：</p>
+<ul>
+<li>下載 <a href="module1-setup-windows.bat" download>module1-setup-windows.bat</a>，或將檔案放到容易找到的位置，例如 <code>Downloads</code>。</li>
+<li>以滑鼠雙擊執行，或在 PowerShell 執行：</li>
+</ul>
+<pre><code class="language-powershell">&amp; &quot;$HOME\Downloads\module1-setup-windows.bat&quot;
+</code></pre>
+<ul>
+<li>若使用 Command Prompt，執行：</li>
+</ul>
+<pre><code class="language-cmd">&quot;%USERPROFILE%\Downloads\module1-setup-windows.bat&quot;
+</code></pre>
+<ul>
+<li>腳本結束後，關閉並重新開啟 PowerShell 或 Command Prompt，讓 PATH 設定生效。</li>
+<li>重新執行下列檢查指令，確認主要工具都能被系統找到：</li>
+</ul>
+<pre><code class="language-powershell">code --version
+git --version
+node --version
+npm --version
+uv --version
+gh --version
+codex --version
+</code></pre>
+<p>若腳本顯示 <code>winget not found</code>，請先安裝或更新 Windows 的 App Installer，完成後再重新執行批次檔。</p>
+<h2 id="hands-on-activities">實作流程 (Hands-on Activities)</h2>
+<h3 id="1-ai-agent">1. 設定 ChatGPT、Work 與 Codex</h3>
+<ul>
+<li>開啟 ChatGPT 桌面 app 並登入。需要快速問答時選 Chat；要完成研究、文件或可審查的多步驟成果時，先選 ChatGPT，再切換到 Work；要處理課程 project、程式碼、指令與 diff 時，從產品選單選 Codex。</li>
+<li>在 Codex 先開啟這次課程唯一的 project 資料夾。傳送第一個任務前，選擇<strong>先要求核准</strong>（Ask for approval）；不要預設開啟<strong>完整存取權</strong>（Full access）。完成後檢查核准要求、diff 與輸出檔案。</li>
+<li>需要終端機工作流程時，再執行 <code>codex</code> 並以瀏覽器登入可使用 Codex 的 ChatGPT 帳號；同一帳號可同時用於 VS Code 的 Codex 擴充套件。</li>
+<li>若後續任務需要操作瀏覽器，讓 AI Agent 依任務需求自行安裝與設定對應工具即可；本模組不把瀏覽器自動化外掛列為預先安裝項目。</li>
+<li>執行 guided「Hello, AI Agent」任務 (請 Agent 建立一個 <code>hello.txt</code>)，確認 AI Agent 能接收指令、產生檔案並回報結果。</li>
+</ul>
+<h3 id="2-github-github-pages">2. 連結 GitHub 與部署 GitHub Pages</h3>
+<ul>
+<li>執行 <code>gh auth login</code>，全程以瀏覽器與一次性代碼登入，不需產生 SSH 金鑰或於終端機輸入密碼，並一次設定好 git 認證與提交身分 (user.name / user.email)。</li>
+<li>練習 <code>gh repo clone</code> 下載專案，以及用 <code>gh repo create … --push</code> 與 GitHub Pages 把靜態網站發佈成公開網址。</li>
+</ul>
+<h3 id="3-verification-tasks">3. 四項驗證任務 (Verification Tasks)</h3>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>任務</th>
+<th>內容</th>
+<th>驗證重點</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Python 驗證</td>
+<td>以 uv 建立專案並安裝 openpyxl、python-docx，讀取 Excel、整理資料並輸出新的 Excel 檔案</td>
+<td>套件與檔案處理可運作</td>
+</tr>
+<tr>
+<td>Word 驗證</td>
+<td>讀取 Word 文件內容，並產生一份修改後的 Word 檔案</td>
+<td>Office 文件處理可運作</td>
+</tr>
+<tr>
+<td>JavaScript 驗證</td>
+<td>以<code>npx http-server</code> 啟動簡單的 local web server，確認 client-side 與 server-side 程式正常執行</td>
+<td>Node.js 與 local host 可運作</td>
+</tr>
+<tr>
+<td>Codex 驗證</td>
+<td>請 Codex 建立簡單文字檔、修改範例程式或整理指定資料</td>
+<td>AI Agent 可讀寫工作區檔案並回報結果</td>
+</tr>
+</tbody>
+</table></div></section>
+  <section class="en"><h1 id="windows-11-vibe-coding-and-ai-agent-environment-setup">Windows 11 Vibe Coding and AI Agent Environment Setup</h1>
+<p>This module prepares a Vibe Coding and AI Agent environment on a Windows 11 laptop. Install the ChatGPT desktop app first, then use the setup script for the developer tools. Finally, choose Chat, ChatGPT Work, or Codex for the appropriate verification task.</p>
+<h2 id="learning-objectives">Learning Objectives</h2>
+<p>After this module, participants can:</p>
+<ul>
+<li>Set up a working Vibe Coding and AI Agent environment on a Windows 11 laptop.</li>
+<li>Choose Chat, ChatGPT Work, or Codex in the ChatGPT desktop app for the task at hand.</li>
+<li>Use VS Code with Codex CLI and the Codex extension to create, edit, and review code.</li>
+<li>Use uv and npm to manage Python and Node.js packages and project environments.</li>
+<li>Use the GitHub CLI (<code>gh</code>) to sign in to GitHub through the browser, then clone, push, and deploy to GitHub Pages.</li>
+<li>Use the checklist to verify the environment independently and troubleshoot common setup issues.</li>
+</ul>
+<h2 id="prerequisites">Prerequisites</h2>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>Item</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Personal laptop</td>
+<td>Windows 11, with administrator (software installation) permissions</td>
+</tr>
+<tr>
+<td>Network</td>
+<td>Internet access to download installers and reach AI services</td>
+</tr>
+<tr>
+<td>ChatGPT account</td>
+<td>A ChatGPT account with Codex access; available features vary by plan, workspace, and rollout status. The CLI and VS Code extension can use the same sign-in.</td>
+</tr>
+<tr>
+<td>GitHub account</td>
+<td>Used to sign in to the GitHub CLI, clone the project, and deploy GitHub Pages</td>
+</tr>
+<tr>
+<td>Basic skills</td>
+<td>Comfortable opening a terminal and typing commands</td>
+</tr>
+</tbody>
+</table></div>
+<h2 id="minimum-computer-requirements">Minimum Computer Requirements</h2>
+<p>This workshop keeps VS Code, Node.js, Python, a terminal, and browser sign-in pages open at the same time, so the laptop should meet at least the specs below. The "Recommended" column marks the threshold for a smoother experience.</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>Item</th>
+<th>Minimum</th>
+<th>Recommended</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Operating system</td>
+<td>Windows 11 (64-bit) with App Installer (winget) installed</td>
+<td>Windows 11, fully updated</td>
+</tr>
+<tr>
+<td>Processor</td>
+<td>64-bit x64 dual-core</td>
+<td>Quad-core or better</td>
+</tr>
+<tr>
+<td>Memory (RAM)</td>
+<td>8 GB</td>
+<td>16 GB</td>
+</tr>
+<tr>
+<td>Free disk space</td>
+<td>10 GB</td>
+<td>20 GB or more</td>
+</tr>
+<tr>
+<td>Permissions</td>
+<td>Administrator permissions (can install software, allow UAC prompts)</td>
+<td>Same as minimum</td>
+</tr>
+<tr>
+<td>Network</td>
+<td>Stable broadband with access to GitHub and AI services</td>
+<td>Same as minimum</td>
+</tr>
+<tr>
+<td>Browser</td>
+<td>Microsoft Edge or Chrome (for sign-in flows)</td>
+<td>Same as minimum</td>
+</tr>
+</tbody>
+</table></div>
+<blockquote>
+<p>8 GB of RAM is enough to complete every task, but 16 GB is noticeably smoother once VS Code, a browser, and several terminals are open at the same time. The disk-space estimate includes the toolchain plus each project's node_modules and Python packages.</p>
+</blockquote>
+<h2 id="toolchain">Toolchain</h2>
+<p>The Windows 11 setup script and follow-up guide prepare these tools on the laptop:</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>Tool</th>
+<th>Purpose</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>VS Code</td>
+<td>Code editor; also the main window for working with the AI agent later</td>
+</tr>
+<tr>
+<td>Git</td>
+<td>Version control tool used by many AI tools</td>
+</tr>
+<tr>
+<td>Node.js + npm</td>
+<td>JavaScript runtime, used to start a local web server and install Codex CLI</td>
+</tr>
+<tr>
+<td>uv (Python)</td>
+<td>Manages Python and packages; installing, updating, and removing them is simple</td>
+</tr>
+<tr>
+<td>ChatGPT desktop app</td>
+<td>The Windows entry point for Chat, ChatGPT Work, and Codex. It can open projects, show changes, and provide an integrated terminal.</td>
+</tr>
+<tr>
+<td>Codex CLI (terminal workflow)</td>
+<td>OpenAI's command-line agent for course exercises that work directly in a project. Sign in with a ChatGPT account that has Codex access.</td>
+</tr>
+<tr>
+<td>GitHub CLI (gh)</td>
+<td>Sign in to GitHub through the browser; clone, push, and deploy to GitHub Pages</td>
+</tr>
+<tr>
+<td>VS Code extensions</td>
+<td>Python, Jupyter, GitLens, ESLint, and the Codex coding agent (openai.chatgpt)</td>
+</tr>
+</tbody>
+</table></div>
+<h2 id="install-method-manual">Install Method 1: Manual Download and Installation</h2>
+<p>If the one-click install fails, or the laptop is restricted by school IT policy, install manually instead. Still try the <code>winget</code> command first; if <code>winget</code> isn't available, install from the official download pages.</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>Tool</th>
+<th>Official Download / Notes</th>
+<th>Recommended Command or Manual Steps</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>App Installer / winget</td>
+<td><a href="https://learn.microsoft.com/windows/msix/app-installer/install-update-app-installer" target="_blank" rel="noopener noreferrer">https://learn.microsoft.com/windows/msix/app-installer/install-update-app-installer</a></td>
+<td>Windows 11 usually includes this. If <code>winget --version</code> doesn't run, install or update App Installer from the Microsoft Store.</td>
+</tr>
+<tr>
+<td>ChatGPT desktop app</td>
+<td><a href="https://get.microsoft.com/installer/download/9PLM9XGG6VKS?cid=website_cta_psi" target="_blank" rel="noopener noreferrer">OpenAI: ChatGPT desktop app for Windows</a></td>
+<td>Run <code>winget install --id 9PLM9XGG6VKS --source msstore</code>, or install it from Microsoft Store. Then open the app and sign in.</td>
+</tr>
+<tr>
+<td>VS Code</td>
+<td><a href="https://code.visualstudio.com/download" target="_blank" rel="noopener noreferrer">https://code.visualstudio.com/download</a></td>
+<td><code>winget install --id Microsoft.VisualStudioCode --source winget --exact</code></td>
+</tr>
+<tr>
+<td>Git for Windows</td>
+<td><a href="https://git-scm.com/downloads/win" target="_blank" rel="noopener noreferrer">https://git-scm.com/downloads/win</a></td>
+<td><code>winget install --id Git.Git --source winget --exact</code></td>
+</tr>
+<tr>
+<td>Node.js LTS + npm</td>
+<td><a href="https://nodejs.org/en/download" target="_blank" rel="noopener noreferrer">https://nodejs.org/en/download</a></td>
+<td><code>winget install --id OpenJS.NodeJS.LTS --source winget --exact</code></td>
+</tr>
+<tr>
+<td>uv</td>
+<td><a href="https://docs.astral.sh/uv/getting-started/installation/" target="_blank" rel="noopener noreferrer">https://docs.astral.sh/uv/getting-started/installation/</a></td>
+<td><code>winget install --id astral-sh.uv --source winget --exact</code></td>
+</tr>
+<tr>
+<td>GitHub CLI (<code>gh</code>)</td>
+<td><a href="https://cli.github.com/" target="_blank" rel="noopener noreferrer">https://cli.github.com/</a></td>
+<td><code>winget install --id GitHub.cli --source winget --exact</code></td>
+</tr>
+<tr>
+<td>Codex CLI</td>
+<td><a href="https://developers.openai.com/codex/cli" target="_blank" rel="noopener noreferrer">https://developers.openai.com/codex/cli</a></td>
+<td>After installing Node.js, run <code>npm install -g "@openai/codex"</code>, then run <code>codex</code> to sign in.</td>
+</tr>
+</tbody>
+</table></div>
+<p>You can install the VS Code extensions by searching in the Extensions panel, or run these commands one by one in a terminal:</p>
+<pre><code class="language-powershell">code --install-extension ms-python.python
+code --install-extension ms-toolsai.jupyter
+code --install-extension eamodio.gitlens
+code --install-extension dbaeumer.vscode-eslint
+code --install-extension openai.chatgpt
+</code></pre>
+<p>After a manual install, close and reopen the terminal too, then run the version checks:</p>
+<pre><code class="language-powershell">code --version
+git --version
+node --version
+npm --version
+uv --version
+gh --version
+codex --version
+</code></pre>
+<h2 id="install-method-ai-agent-prompt">Install Method 2: Install via an AI Agent Prompt (ChatGPT Work, Full Access)</h2>
+<p>Instead of running the batch file or installing manually, you can also open the ChatGPT desktop app and use a natural-language prompt so the agent checks what is missing on the laptop, installs it, and reports back.</p>
+<blockquote>
+<p>⚠️ Full access lets the agent run terminal commands without asking for approval on each step. Switch back to <strong>Ask for approval</strong> once the install is finished.</p>
+</blockquote>
+<p>Suggested steps:</p>
+<ul>
+<li>Open the ChatGPT desktop app, choose ChatGPT, then switch to <strong>Work</strong>.</li>
+<li>In the task settings, change the access level to <strong>Full access</strong>.</li>
+<li>Paste the prompt below and send it, and watch the output the whole time:</li>
+</ul>
+<div class="code-sample">
+<div class="code-sample-toolbar" aria-label="Copy the AI agent install prompt">
+<button class="copy-btn" type="button" onclick="copyPromptBlock(this)"><span class="copy-icon">📋</span><span class="zh">複製</span><span class="en">Copy</span></button>
+</div>
+<pre><code class="language-text">I'm on a Windows 11 laptop with administrator rights, and App Installer (winget) is already installed.
+Please check and install the following developer tools, skipping anything already installed. After everything is installed, run the version-check commands and report the results back to me:
+
+1. VS Code (winget id: Microsoft.VisualStudioCode)
+2. Git for Windows (winget id: Git.Git)
+3. Node.js LTS + npm (winget id: OpenJS.NodeJS.LTS)
+4. uv (winget id: astral-sh.uv)
+5. GitHub CLI (winget id: GitHub.cli)
+6. Codex CLI (confirm Node.js is installed first, then run npm install -g "@openai/codex")
+7. These VS Code extensions:
+   - ms-python.python
+   - ms-toolsai.jupyter
+   - eamodio.gitlens
+   - dbaeumer.vscode-eslint
+   - openai.chatgpt
+
+Rules:
+- Before installing each tool, check whether it already exists (e.g. run "tool --version" or "winget list --id ..."); skip it if it's already installed, don't reinstall.
+- When using winget, add --source winget --exact (for VS Code extensions, use code --install-extension instead).
+- After everything is installed, open a new terminal window, run the following commands in order, and paste the results back to me:
+  code --version
+  git --version
+  node --version
+  npm --version
+  uv --version
+  gh --version
+  codex --version
+- If any install step fails, stop and tell me the error message; don't skip it or work around it another way.
+- Don't install anything outside this list, and don't change system settings or user account permissions.</code></pre>
+</div>
+<p>Once the agent finishes, compare its output against the Toolchain table above to confirm each command prints a version number. If a check fails, go back to "Install Method 1: Manual Download and Installation" to fix that tool individually.</p>
+<h2 id="install-method-batch">Install Method 3: One-Click Setup with module1-setup-windows.bat</h2>
+<p>Start with the supplied <a href="module1-setup-windows.bat" download>module1-setup-windows.bat</a>. It checks <code>winget</code>, then installs VS Code, Git, Node.js LTS, uv, GitHub CLI, the ChatGPT desktop app, Codex CLI, and common VS Code extensions. The script is safe to run again; installed items are skipped.</p>
+<p>Suggested steps:</p>
+<ul>
+<li>Download <a href="module1-setup-windows.bat" download>module1-setup-windows.bat</a>, or move the file somewhere easy to find, such as <code>Downloads</code>.</li>
+<li>Double-click to run it, or run it in PowerShell:</li>
+</ul>
+<pre><code class="language-powershell">&amp; &quot;$HOME\Downloads\module1-setup-windows.bat&quot;
+</code></pre>
+<ul>
+<li>If using Command Prompt, run:</li>
+</ul>
+<pre><code class="language-cmd">&quot;%USERPROFILE%\Downloads\module1-setup-windows.bat&quot;
+</code></pre>
+<ul>
+<li>After the script finishes, close and reopen PowerShell or Command Prompt so the PATH changes take effect.</li>
+<li>Run the following checks again to confirm the system can find each tool:</li>
+</ul>
+<pre><code class="language-powershell">code --version
+git --version
+node --version
+npm --version
+uv --version
+gh --version
+codex --version
+</code></pre>
+<p>If the script prints <code>winget not found</code>, install or update Windows App Installer first, then run the batch file again.</p>
+<h2 id="hands-on-activities">Hands-on Activities</h2>
+<h3 id="1-ai-agent">1. Set up ChatGPT Work and Codex</h3>
+<ul>
+<li>Open the ChatGPT desktop app and sign in. Use Chat for quick questions; select ChatGPT, then Work for a multi-step, reviewable outcome; select Codex for a course project, code, commands, and diffs.</li>
+<li>In Codex, open only the intended course project folder. Before the first task, choose <strong>Ask for approval</strong>; do not enable <strong>Full access</strong> by default. Review approval requests, diffs, and output files.</li>
+<li>For a terminal workflow, run <code>codex</code> and sign in through the browser with the same ChatGPT account. The VS Code Codex extension can use that account too.</li>
+<li>If a later task needs browser automation, let the AI agent install and configure whatever tools it needs on its own; this module doesn't pre-install any browser automation add-ons.</li>
+<li>Run the guided "Hello, AI Agent" task (ask the agent to create a <code>hello.txt</code> file) to confirm the AI agent can receive instructions, produce a file, and report back.</li>
+</ul>
+<h3 id="2-github-github-pages">2. Connect GitHub and Deploy GitHub Pages</h3>
+<ul>
+<li>Run <code>gh auth login</code> and sign in entirely through the browser with a one-time code — no SSH keys or passwords typed into the terminal — which also sets up git credentials and your commit identity (user.name / user.email) in one step.</li>
+<li>Practice cloning a project with <code>gh repo clone</code>, and use <code>gh repo create … --push</code> together with GitHub Pages to publish a static site to a public URL.</li>
+</ul>
+<h3 id="3-verification-tasks">3. Four Verification Tasks</h3>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>Task</th>
+<th>Description</th>
+<th>What It Verifies</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Python check</td>
+<td>Use uv to create a project, install openpyxl and python-docx, read an Excel file, clean up the data, and write a new Excel file</td>
+<td>Confirms package installation and file handling work</td>
+</tr>
+<tr>
+<td>Word check</td>
+<td>Read the contents of a Word document and produce a modified Word file</td>
+<td>Confirms Office document handling works</td>
+</tr>
+<tr>
+<td>JavaScript check</td>
+<td>Start a simple local web server with <code>npx http-server</code> to confirm client-side and server-side code run correctly</td>
+<td>Confirms Node.js and the local host work</td>
+</tr>
+<tr>
+<td>Codex check</td>
+<td>Ask Codex to create a simple text file, modify a sample script, or organize a specified dataset</td>
+<td>Confirms the AI agent can read and write workspace files and report results</td>
+</tr>
+</tbody>
+</table></div></section>
+  <footer>智慧雨林產業創生人才育成計畫 (南臺科技大學 電子系 楊榮林 教授)</footer>
+</div>
+<script>function currentSection(){const lang=document.documentElement.getAttribute('data-lang');return document.querySelector('section.'+lang)}function navUsesSlides(){const box=document.getElementById('slideNavMode');return !!(box&&box.checked)}function targetForHead(head){if(!navUsesSlides())return head;const prev=head.previousElementSibling;if(prev&&(prev.classList.contains('full-screen-image')||prev.querySelector('img')))return prev;return head}function navTargets(){const section=currentSection();if(!section)return[];return[...section.querySelectorAll('h2')].map(targetForHead)}function gotoSection(i){const targets=navTargets();if(targets[i])targets[i].scrollIntoView({behavior:'smooth',block:'start'});closeMenu()}function toggleMenu(){document.getElementById('sidebar').classList.toggle('open');document.getElementById('backdrop').classList.toggle('show')}function closeMenu(){document.getElementById('sidebar').classList.remove('open');document.getElementById('backdrop').classList.remove('show')}let spy;function buildSpy(){if(spy)spy.disconnect();const targets=navTargets();const btns=[...document.querySelectorAll('.nav .navbtn')];spy=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting){const idx=targets.indexOf(e.target);btns.forEach((b,i)=>b.classList.toggle('active',i===idx))}})},{rootMargin:'0px 0px -75% 0px',threshold:0});targets.forEach(t=>spy.observe(t))}document.addEventListener('DOMContentLoaded',buildSpy);function fallbackCopy(text){const ta=document.createElement('textarea');ta.value=text;ta.style.position='fixed';ta.style.opacity='0';document.body.appendChild(ta);ta.focus();ta.select();try{document.execCommand('copy')}catch(e){}document.body.removeChild(ta)}function copyPromptBlock(btn){const sample=btn.closest('.code-sample');if(!sample)return;const pre=sample.querySelector('pre');if(!pre)return;const text=pre.textContent;const done=()=>{const icon=btn.querySelector('.copy-icon');const prev=icon.textContent;icon.textContent='✓';btn.classList.add('copied');clearTimeout(btn._copyTimer);btn._copyTimer=setTimeout(()=>{icon.textContent=prev;btn.classList.remove('copied')},1500)};if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(text).then(done).catch(()=>{fallbackCopy(text);done()})}else{fallbackCopy(text);done()}}function toggleTheme(){const html=document.documentElement;const goingDark=html.getAttribute('data-theme')==='light';html.setAttribute('data-theme',goingDark?'dark':'light');document.getElementById('themeBtn').textContent=goingDark?'☀️ Light':'🌙 Dark'}function toggleLang(){const html=document.documentElement;const goingEn=html.getAttribute('data-lang')==='zh';html.setAttribute('data-lang',goingEn?'en':'zh');html.setAttribute('lang',goingEn?'en':'zh-Hant');document.getElementById('langBtn').textContent=goingEn?'中文':'English';buildSpy()}</script>
+</body>
+</html>

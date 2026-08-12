@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<html lang="zh-Hant" data-theme="dark" data-lang="zh">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI Agent 教學應用工作坊 (二)：從教材到自主練習小工具</title>
+<style>
+ :root {
+ color-scheme: dark;
+ --bg:#f7f8fb; --fg:#171a20; --muted:#596273; --card:#ffffff;
+ --border:#d9dee8; --accent:#0f766e; --accent2:#b45309; --danger:#dc2626;
+ --th-bg:#eef2f7; --shadow:0 16px 40px rgba(15,23,42,.10);
+ --sidebar-w:280px; --content-max:1120px; --content-pad-x:42px; --content-pad-y:42px;
+ --measure:76ch;
+ }
+ [data-theme="dark"] {
+ --bg:#080b12; --fg:#eef3f8; --muted:#a7b1c2; --card:#101722;
+ --border:#243244; --accent:#39d7c6; --accent2:#f5b84b; --danger:#ff6b6b;
+ --th-bg:#172130; --shadow:0 22px 60px rgba(0,0,0,.45);
+ }
+ html { scroll-behavior:smooth; }
+ * { box-sizing:border-box; }
+ body {
+ min-width:0; margin:0;
+ background:radial-gradient(circle at top right, rgba(57,215,198,.14), transparent 34%), var(--bg);
+ color:var(--fg);
+ font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang TC","Microsoft JhengHei",Roboto,Helvetica,Arial,sans-serif;
+ font-size:16px; line-height:1.75; letter-spacing:0;
+ transition:background .25s,color .25s;
+ }
+ .wrap {
+ width:min(var(--content-max), calc(100vw - var(--sidebar-w) - (var(--content-pad-x) * 2)));
+ margin-left:calc(var(--sidebar-w) + max(var(--content-pad-x), (100vw - var(--sidebar-w) - var(--content-max)) / 2));
+ padding:var(--content-pad-y) var(--content-pad-x) 88px;
+ }
+ .sidebar {
+ position:fixed; top:0; left:0; width:var(--sidebar-w); height:100vh; overflow-y:auto;
+ background:color-mix(in srgb, var(--card) 92%, transparent); border-right:1px solid var(--border);
+ display:flex; flex-direction:column; gap:10px; padding:18px 14px; z-index:30; backdrop-filter:blur(12px);
+ }
+ .brand { font-weight:800; font-size:1rem; line-height:1.35; padding:0 6px; color:var(--fg); }
+ .brand small { display:block; margin-top:5px; color:var(--muted); font-weight:600; }
+ .toprow { display:flex; flex-wrap:wrap; align-items:center; gap:8px; }
+ .nav { display:flex; flex-direction:column; gap:4px; margin-top:6px; }
+ .navbtn, .navhome {
+ cursor:pointer; border:1px solid transparent; background:transparent; color:var(--muted);
+ border-radius:8px; padding:8px 10px; font-size:14px; font-weight:700;
+ text-align:left; width:100%; white-space:normal; line-height:1.35; text-decoration:none;
+ }
+ .navbtn:hover, .navbtn.active, .navhome:hover { color:var(--accent); border-color:var(--border); background:var(--bg); }
+ .navhome { display:block; border-color:var(--border); background:var(--bg); color:var(--fg); }
+ .btn {
+ cursor:pointer; border:1px solid var(--border); background:var(--bg); color:var(--fg);
+ border-radius:8px; padding:6px 12px; font-size:13px; font-weight:700; text-decoration:none;
+ }
+ .btn:hover { border-color:var(--accent); }
+ .menu-toggle {
+ display:none; position:fixed; top:12px; left:12px; z-index:40; cursor:pointer;
+ border:1px solid var(--border); background:var(--card); color:var(--fg);
+ border-radius:8px; padding:6px 12px; font-size:18px; line-height:1;
+ }
+ .backdrop { display:none; position:fixed; inset:0; background:rgba(0,0,0,.52); z-index:20; }
+ h1 { max-width:var(--measure); font-size:2.3rem; line-height:1.22; margin:.2em 0 .35em; letter-spacing:0; }
+ h2 { font-size:1.42rem; margin:2em 0 .7em; padding-bottom:.25em; border-bottom:1px solid var(--border); scroll-margin-top:24px; }
+ h3 { font-size:1.1rem; margin-top:1.4em; color:var(--accent); }
+ p, li, blockquote { max-width:var(--measure); overflow-wrap:break-word; }
+ ul, ol { padding-left:1.3em; }
+ li { margin:.35em 0; }
+ a { color:var(--accent); overflow-wrap:anywhere; }
+ code { font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace; font-size:.92em; padding:.1em .35em; border-radius:6px; background:var(--th-bg); color:var(--fg); }
+ .table-wrap { width:100%; overflow-x:auto; -webkit-overflow-scrolling:touch; }
+ table { width:100%; border-collapse:collapse; margin:1em 0; font-size:.95rem; box-shadow:var(--shadow); border-radius:8px; overflow:hidden; }
+ th, td { text-align:left; padding:10px 14px; border:1px solid var(--border); vertical-align:top; }
+ th { background:var(--th-bg); font-weight:700; }
+ td:first-child, th:first-child { white-space:nowrap; }
+ tbody tr:nth-child(even) td { background:color-mix(in srgb, var(--card) 82%, var(--th-bg)); }
+ blockquote {
+ max-width:var(--measure); margin:1.1em 0; padding:12px 16px; border-left:4px solid var(--accent2);
+ background:color-mix(in srgb, var(--card) 94%, var(--accent) 6%); color:var(--fg);
+ border-radius:0 8px 8px 0;
+ }
+ .site-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(240px,1fr)); gap:12px; margin:1.2em 0; }
+ .site-card {
+ display:flex; flex-direction:column; gap:6px; padding:14px 16px; border:1px solid var(--border);
+ border-radius:8px; background:var(--card); box-shadow:var(--shadow); text-decoration:none; color:var(--fg);
+ min-height:110px;
+ }
+ .site-card:hover { border-color:var(--accent); }
+ .site-card strong { font-size:1.03rem; color:var(--fg); }
+ .site-card span { color:var(--muted); }
+ table { max-width:100%; }
+ [data-lang="zh"] .en, [data-lang="en"] .zh { display:none; }
+ footer { margin-top:3em; color:var(--muted); font-size:.85rem; border-top:1px solid var(--border); padding-top:1em; }
+ @media (min-width:1440px) {
+ :root { --sidebar-w:300px; --content-max:1160px; --content-pad-x:54px; --content-pad-y:48px; }
+ }
+ @media (max-width:1100px) {
+ :root { --sidebar-w:230px; --content-max:820px; --content-pad-x:26px; --content-pad-y:32px; }
+ .sidebar { padding:16px 10px; }
+ .brand { font-size:.95rem; }
+ .navbtn, .navhome { font-size:13px; padding:7px 8px; }
+ table { display:block; overflow-x:auto; -webkit-overflow-scrolling:touch; }
+ }
+ @media (max-width:860px) {
+ :root { --sidebar-w:min(84vw, 330px); --content-pad-x:18px; --content-pad-y:0px; --measure:100%; }
+ .sidebar { transform:translateX(-100%); transition:transform .25s; }
+ .sidebar.open { transform:none; }
+ .wrap { width:100%; margin-left:0; padding:72px var(--content-pad-x) 80px; }
+ .menu-toggle { display:block; }
+ .backdrop.show { display:block; }
+ table { display:block; overflow-x:auto; }
+ h1 { font-size:1.7rem; }
+ h2 { font-size:1.22rem; }
+ p, li, blockquote { max-width:100%; }
+ }
+ @media (max-width:520px) {
+ :root { --sidebar-w:min(90vw, 310px); --content-pad-x:14px; }
+ .wrap { padding-top:68px; }
+ .menu-toggle { top:10px; left:10px; padding:7px 11px; }
+ .sidebar { padding:14px 10px; }
+ .toprow { gap:6px; }
+ .btn { padding:6px 10px; font-size:12px; }
+ .navbtn, .navhome { font-size:13px; }
+ h1 { font-size:1.48rem; }
+ h2 { font-size:1.1rem; }
+ th, td { padding:8px 10px; }
+ }
+</style>
+</head>
+<body>
+<button class="menu-toggle" id="menuToggle" onclick="toggleMenu()" type="button">☰</button>
+<aside class="sidebar" id="sidebar">
+ <div class="brand"><span class="zh">AI Agent 教學應用工作坊 (二)</span><span class="en">AI Agent Teaching Applications Workshop (2)</span><small><span class="zh">從教材到自主練習小工具</span><span class="en">From Teaching Materials to a Self-Practice Tool</span></small></div>
+ <div class="toprow"><button class="btn" id="langBtn" onclick="toggleLang()" type="button">English</button><button class="btn" id="themeBtn" onclick="toggleTheme()" type="button">☀️ Light</button></div>
+ <a class="navhome return-control" href="../index.html" aria-label="返回上一層 / Back to parent"><span class="zh">返回上一層</span><span class="en">Back to parent</span></a>
+ <nav class="nav">
+<button class="navbtn" onclick="gotoSection(0)" type="button"><span class="zh">課程資訊</span><span class="en">Course Information</span></button>
+<button class="navbtn" onclick="gotoSection(1)" type="button"><span class="zh">一、系列定位與脈絡</span><span class="en">1. Series Positioning and Context</span></button>
+<button class="navbtn" onclick="gotoSection(2)" type="button"><span class="zh">二、工作坊簡介</span><span class="en">2. Workshop Overview</span></button>
+<button class="navbtn" onclick="gotoSection(3)" type="button"><span class="zh">三、適合參與者</span><span class="en">3. Who Should Attend</span></button>
+<button class="navbtn" onclick="gotoSection(4)" type="button"><span class="zh">四、學習成果</span><span class="en">4. Learning Outcomes</span></button>
+<button class="navbtn" onclick="gotoSection(5)" type="button"><span class="zh">五、工作坊重點與最小可行功能</span><span class="en">5. Focus Points and Minimum Viable Features</span></button>
+<button class="navbtn" onclick="gotoSection(6)" type="button"><span class="zh">六、事前準備</span><span class="en">6. Preparation Checklist</span></button>
+<button class="navbtn" onclick="gotoSection(7)" type="button"><span class="zh">七、使用定位與範圍</span><span class="en">7. Scope, Positioning, and Limitations</span></button>
+<button class="navbtn" onclick="gotoSection(8)" type="button"><span class="zh">八、預期帶走的成果</span><span class="en">8. Expected Takeaways</span></button>
+<button class="navbtn" onclick="gotoSection(9)" type="button"><span class="zh">九、銜接工作坊（三）</span><span class="en">9. Bridge to Workshop (3)</span></button>
+ </nav>
+</aside>
+<div class="backdrop" id="backdrop" onclick="toggleMenu()"></div>
+<div class="wrap">
+ <section class="zh">
+<h1>AI Agent 教學應用工作坊 (二)：從教材到自主練習小工具</h1>
+<p>智慧雨林產業創生人才育成計畫｜本頁為工作坊（二）的課程講義，內容整理自籌備文件；實際場次以正式公告為準。</p>
+
+<h2 id="course-info">課程資訊</h2>
+<div class="table-wrap"><table>
+<thead><tr><th>項目</th><th>內容</th></tr></thead>
+<tbody>
+<tr><td>時間</td><td>13:00-17:30（12:30 開始報到）</td></tr>
+<tr><td>地點</td><td>南臺科技大學 J棟 J301教室</td></tr>
+<tr><td>講師</td><td>南臺科大 電子系 楊榮林 教授</td></tr>
+<tr><td>對象</td><td>想將 AI Agent 應用於教材轉化、學生自主練習或形成性回饋的大專校院教師；不需具備程式背景。</td></tr>
+</tbody>
+</table></div>
+<blockquote>本工作坊可能依報名狀況開設多個梯次，實際日期與報名連結以各梯次正式公告為準。</blockquote>
+<p>活動流程：</p>
+<div class="table-wrap"><table>
+<thead><tr><th>時間</th><th>內容</th><th>當次產出／驗收點</th></tr></thead>
+<tbody>
+<tr><td>12:30-13:00</td><td>報到</td><td>—</td></tr>
+<tr><td>13:00-13:10</td><td>開場與回顧：回顧工作坊（一）的 AI 協作任務卡，說明本場題庫、介面與評分規則。</td><td>明確的功能清單</td></tr>
+<tr><td>13:10-14:00</td><td>從教材到題組：與 AI Agent 協作，依自己的教材整理題目與答案。</td><td>選擇題題組初稿</td></tr>
+<tr><td>14:00-14:50</td><td>題組檢核調整：檢查題目、選項、答案與練習目標，修正題組。</td><td>檢核後的完整題組</td></tr>
+<tr><td>14:50-15:20</td><td>茶敘休息（下午茶）</td><td>—</td></tr>
+<tr><td>15:20-16:40</td><td>vibe coding 實作：把題組與需求交給 AI，建立靜態 HTML 自主練習小工具。</td><td>可作答的初版頁面</td></tr>
+<tr><td>16:40-17:00</td><td>測試、送出、自動批閱與逐題回饋，並加入重新作答功能。</td><td>不先顯示答案的完整流程</td></tr>
+<tr><td>17:00-17:30</td><td>同儕試用、成果交流與賦歸：以非作者角度操作並交流回饋，預告工作坊（三）的延伸方向。</td><td>一份試用回饋、工作坊（三）的準備方向</td></tr>
+</tbody>
+</table></div>
+
+<h2 id="series-context">一、系列定位與脈絡</h2>
+<p>本場是「AI Agent 教學應用工作坊」系列三場中的第二場，面向非工程背景的大學教師。系列以三場循序漸進的實作，協助教師理解 AI 已從單純的對話與提示詞工具，逐步發展為能協助處理電腦與雲端工作流程的 AI Agent；核心學習方法可遷移到不同 AI 工具：<strong>先說清楚目標、情境、限制與完成標準；再檢查成果、提出修正，並以小步迭代完成工作。</strong></p>
+<div class="table-wrap"><table>
+<thead><tr><th>階段</th><th>工作坊</th><th>核心問題</th><th>當次成果</th></tr></thead>
+<tbody>
+<tr><td>1. 學會與 AI 協作</td><td>工作坊（一）</td><td>如何把模糊教學想法變成可檢查、可完成的任務？</td><td>AI 協作任務卡、一次教材或截圖分析與修訂紀錄</td></tr>
+<tr><td>2. 做出自主練習小工具</td><td>工作坊（二）〔本場〕</td><td>如何把自己的教材轉為題組與學生可使用的練習小工具？</td><td>選擇題題組、靜態 HTML 自主練習小工具、測試紀錄</td></tr>
+<tr><td>3. 延伸為課堂形成性評量</td><td>工作坊（三）</td><td>如何用最低必要功能，在課堂中快速掌握學生的概念理解？</td><td>學生課堂作答原型、簡易教師 Dashboard、班級答題彙整與初步分析</td></tr>
+</tbody>
+</table></div>
+<p>本場承接工作坊（一）建立的 AI 協作方法，把教師的教學內容轉化為學生可在課後自主練習的題組與小工具；完成的題組格式與作答／回饋邏輯，會在工作坊（三）延伸為課堂形成性評量原型。</p>
+<blockquote><strong>為什麼底層工具是用 Claude Code 開發的，教材卻請你用 Codex 操作：</strong>這份工作坊教的是「怎麼跟 AI Agent 協作、把需求說清楚、迭代出一個靜態網頁小工具」這件事本身，不限定於任何特定產品。<code>.claude/skills/</code> 底下那幾個 custom skill（<code>download-exam-pdf</code>、<code>slice-exam-pdf</code>、<code>clean-exam-question-images</code>、<code>build-quiz-app</code>），是講師當初用 Claude Code 開發出來的；但正式工作坊現場，以及 Module 1 到 Module 4 逐步操作的部分，都是請學員改用 Codex，不是用 Claude Code。這個安排是刻意的：同一套工具、同一條學習路徑，換一個操作時用的 AI Agent（從 Claude Code 換成 Codex）也能順利做出一樣的成果，這正是「核心方法可遷移到不同 AI 工具」最直接的證據，不是一句空話。如果你想反過來驗證，也歡迎自己改用 Claude Code 走一次同一條路徑，看看是不是一樣能做出來；也不限於這兩個工具 任何具備類似能力的 AI Agent（例如 GitHub Copilot Workspace、Spark 等）理論上都應該可行，只是講師目前實際驗證過的是 Claude Code 與 Codex 這兩種。</blockquote>
+
+<h2 id="overview">二、工作坊簡介</h2>
+<p>上一場工作坊，我們練習把教學需求說清楚，並與 AI Agent 協作完成可檢查、可修正的小任務。這一場將把這個能力真正做成一個可用的教學工具：教師帶著自己正在教授的主題、教材、講義或簡報進場，與 AI Agent 協作產生一份多題式選擇題題組（例如 10、20 或 30 題），再以 vibe coding 的方式，把題組與功能需求交給 AI，製作一個可在個人電腦本機開啟的靜態 HTML 自主練習小工具。</p>
+<p>選擇題作為起點，是因為規則清楚、容易批閱，對初次嘗試的教師與學生都較友善。AI 可協助教師整理與初步產生題組，但題目是否符合學習目標、答案是否正確、題幹是否清楚、選項是否合理，仍必須由教師檢核這個過程正是在練習把教學專業轉為可以交給 AI 協助處理、但仍由人負責驗收的內容。</p>
+<p>學生開啟網站時只看得到題目與選項，作答期間不會看到答案；完成作答並按下「送出並查看結果」後，網站才根據題組中的答案自動批閱，顯示答對題數、總分與逐題對錯，並可重新作答，反覆練習。學生也能把答錯的題目帶去與 AI 對話，追問為什麼答錯、正確概念是什麼、可能誤解了哪裡，形成「教材 → 題組 → 自主作答 → 自動回饋 → AI 釐清迷思 → 再次練習」的學習循環。</p>
+<p>本場的目標不是做出一套正式考試系統，而是完成一個可實際試用的自主學習原型。教師將親手體驗：只要能把需求說清楚，AI Agent 就能協助把教學想法逐步做成工具，也能在日後持續依自己的教學需要延伸與修改。</p>
+
+<h2 id="audience">三、適合參與者</h2>
+<ul>
+<li>已參與工作坊（一），或能以「目標、情境、限制、完成標準」簡要描述自己的教學需求者。</li>
+<li>想把自己正在教授的主題、教材、講義或簡報，轉化為學生可自主練習的選擇題題組與網頁工具者。</li>
+<li>想讓學生在課後依自己的節奏反覆練習、獲得即時回饋並釐清迷思概念者。</li>
+<li>希望先完成一個小而完整、可在本機使用的教學原型，而非從複雜系統開始者。</li>
+</ul>
+
+<h2 id="outcomes">四、學習成果</h2>
+<p>完成本場後，您將能夠：</p>
+<ol>
+<li>依自己的課程主題或教材，與 AI Agent 協作產生一份多題式選擇題題組，並檢核題目、答案與選項的品質。</li>
+<li>將自我測驗需求拆成題庫資料、畫面、互動規則與驗收條件，並以 vibe coding 的方式與 AI 協作建立、修改一個單頁 HTML 自主練習小工具。</li>
+<li>設計「送出前不顯示答案，送出後才提供分數、逐題對錯與回饋」的基本學習流程。</li>
+<li>說明學生如何以批閱結果為起點，利用 AI 對話釐清答錯原因與未學會的概念。</li>
+<li>以試用與驗收清單檢查網站是否符合原先的教學需求。</li>
+</ol>
+
+<h2 id="focus-mvp">五、工作坊重點與最小可行功能</h2>
+<p>工作坊重點：</p>
+<ul>
+<li>從教材、講義或簡報，與 AI Agent 協作整理成可練習的選擇題題組，維持題庫與網頁的清楚分工。</li>
+<li>建立題目與選項畫面，記錄學生作答。</li>
+<li>以 vibe coding 方式完成送出、計分、逐題正誤與正確答案回饋。</li>
+<li>加入重新作答功能，讓學生可反覆練習。</li>
+<li>設計學生利用 AI 釐清答錯原因、補強觀念的使用情境。</li>
+<li>以同儕試用找出操作不清楚或需修正的地方。</li>
+</ul>
+<p>最小可行功能（當次驗收基準）：</p>
+<ul>
+<li>教師可依教材建立一份多題式選擇題題組。</li>
+<li>小工具可載入題目、選項與答案資料。</li>
+<li>學生作答與送出前不顯示答案、分數或逐題提示。</li>
+<li>送出後顯示答對題數、分數與逐題對錯。</li>
+<li>可重新作答，讓學生反覆練習。</li>
+<li>題組資料與網頁程式保持清楚分工，方便日後更換教材或修改題目。</li>
+</ul>
+
+<h2 id="prep">六、事前準備</h2>
+<ul>
+<li>請攜帶筆記型電腦，並確認可使用網頁瀏覽器。</li>
+<li>請準備自己正在教授的教材、講義或簡報片段，作為產生題組的素材；也可先使用講師提供的範例題庫。</li>
+<li>題目、答案與學習目標仍須由教師自行檢核；不使用學生個資、完整成績或其他機敏資料。</li>
+<li>若曾參加工作坊（一），請攜帶或整理當時完成的 AI 協作任務卡與需求草稿。</li>
+</ul>
+<p>若需要在現場前先複習工作坊（一）的環境與設定基礎，可參考：</p>
+<div class="site-grid">
+<a class="site-card" href="codex-app-settings-guide.html"><strong>ChatGPT Work 與 Codex 設定指南</strong><span>先選擇 Chat、ChatGPT Work 或 Codex；使用 Codex 時，先限制工作區並採用先要求核准。</span></a>
+<a class="site-card" href="module1/windows11-vibe-coding-setup.html"><strong>Module 1：Windows 11 環境建置</strong><span>Vibe coding 與 AI Agent 工作環境的一鍵安裝、手動安裝與驗證任務。</span></a>
+</div>
+<p>本場兩個核心階段從教材到題組、vibe coding 建置自主練習小工具也各自備有逐步操作的實作教學，可作為現場節奏之外的自學參考或會後複習：</p>
+<div class="site-grid">
+<a class="site-card" href="module2/exam-paper-pipeline-tutorial.html"><strong>Module 2：考古題下載、切題與清理實作教學</strong><span>對應「從教材到題組」階段：用工作坊講師寫好的三個 custom skill，把 PDF 考古題轉為一題一張乾淨圖片與標準答案 JSON。</span></a>
+<a class="site-card" href="module3/quiz-app-tutorial.html"><strong>Module 3：從問題集資料夾產生自主測驗網頁實作教學</strong><span>對應「vibe coding 建置」階段：用 build-quiz-app skill，把問題集資料夾變成雙擊即用的學生自測網頁與教師端成績彙整頁。</span></a>
+</div>
+
+<h2 id="scope">七、使用定位與範圍</h2>
+<p>本場產出定位為學生課後的自主練習小工具，<strong>不作為正式成績判定或高風險測驗</strong>。學生是否真實投入練習，仍取決於其學習動機；學生也可能利用 AI 取得答案。因此，本工具的價值在於提供可反覆練習、即時回饋與觀念釐清的學習機會，而不是取代教師對正式評量的設計與判斷。</p>
+<ul>
+<li>先完成小而可驗收的版本，再依使用經驗改進；不在時間有限的現場追求技術複雜度。</li>
+<li>題目、答案、學習目標對應都必須由教師檢核，不可自動採用 AI 產出。</li>
+<li>不在 AI 對話中貼入學生個資或完整成績；素材以教師自身教材、講義或簡報為主。</li>
+<li>若日後需要正式評量、跨班長期使用、個資處理、資料庫、權限或即時追蹤，應另行規劃資料治理、資安、無障礙、維運與校內程序。</li>
+</ul>
+
+<h2 id="takeaways">八、預期帶走的成果</h2>
+<ul>
+<li>一份由自身教材發展、結構清楚的選擇題題組。</li>
+<li>一個可在本機開啟的靜態 HTML 自主練習小工具。</li>
+<li>一個送出後才顯示答案、分數與逐題回饋的完整流程。</li>
+<li>一份測試與修正紀錄，可作為後續教學改版的起點。</li>
+<li>一套可延續到其他教材、單元或教學工具的 AI Agent 協作開發流程。</li>
+</ul>
+
+<h2 id="next">九、銜接工作坊（三）</h2>
+<p>工作坊（三）「從自主練習到課堂形成性評量」會延續本場的題組格式與學生作答介面，把課後自主練習帶回教室：學生在課堂中透過教師提供的網址載入指定題庫，填寫班級座號或匿名代碼等最小必要識別資料後完成作答；交卷後系統自動批閱並回傳個人結果。教師端會有一個刻意維持最低必要功能的 Dashboard，只在學生登入開始作答與交卷後顯示必要資訊，全班交卷後可查看各題答對率、錯誤率與常見錯誤分布，並可交給 AI 協助整理成簡單的學習分析。</p>
+<p>因此，本場完成的題組資料格式、送出前不顯示答案、送出後自動批閱與逐題回饋等設計，會直接沿用到下一場，請妥善保留當次產出的題庫檔案與小工具程式碼。</p>
+
+ </section>
+ <section class="en">
+<h1>AI Agent Teaching Applications Workshop (2): From Teaching Materials to a Self-Practice Tool</h1>
+<p>Smart Rainforest Industry Talent Development Program | This page is the handout for Workshop (2), compiled from planning documents; the official announcement for each cohort governs actual dates.</p>
+
+<h2 id="course-info-en">Course Information</h2>
+<div class="table-wrap"><table>
+<thead><tr><th>Item</th><th>Details</th></tr></thead>
+<tbody>
+<tr><td>Time</td><td>13:00-17:30 (check-in starts at 12:30)</td></tr>
+<tr><td>Venue</td><td>Room J301, Building J, Southern Taiwan University of Science and Technology</td></tr>
+<tr><td>Instructor</td><td>Prof. Rong-Lin Yang, Department of Electronic Engineering, STUST</td></tr>
+<tr><td>Audience</td><td>College faculty who want to apply AI Agents to turn teaching materials into student self-practice tools or formative feedback; no programming background required.</td></tr>
+</tbody>
+</table></div>
+<blockquote>This workshop may run multiple cohorts depending on registration; the actual date and registration link for each cohort follow that cohort's official announcement.</blockquote>
+<p>Agenda:</p>
+<div class="table-wrap"><table>
+<thead><tr><th>Time</th><th>Content</th><th>Session Output / Checkpoint</th></tr></thead>
+<tbody>
+<tr><td>12:30-13:00</td><td>Check-in</td><td>—</td></tr>
+<tr><td>13:00-13:10</td><td>Opening and recap: review the AI collaboration task cards from Workshop (1) and outline this session's question bank, interface, and grading rules.</td><td>A clear feature list</td></tr>
+<tr><td>13:10-14:00</td><td>From materials to a question set: collaborate with an AI Agent to draft questions and answers from your own teaching materials.</td><td>Draft multiple-choice question set</td></tr>
+<tr><td>14:00-14:50</td><td>Review and refine the question set: check questions, options, answers, and learning targets, then revise.</td><td>A reviewed, complete question set</td></tr>
+<tr><td>14:50-15:20</td><td>Tea break</td><td>—</td></tr>
+<tr><td>15:20-16:40</td><td>Vibe coding build: hand the question set and feature requirements to the AI to build a static HTML self-practice tool.</td><td>A first working, answerable page</td></tr>
+<tr><td>16:40-17:00</td><td>Test submission, auto-grading, and per-question feedback; add a retry feature.</td><td>A complete flow that withholds answers until submission</td></tr>
+<tr><td>17:00-17:30</td><td>Peer try-out, sharing, and wrap-up: try each other's tools as a non-author, exchange feedback, and preview the direction for Workshop (3).</td><td>Try-out feedback and prep notes for Workshop (3)</td></tr>
+</tbody>
+</table></div>
+
+<h2 id="series-context-en">1. Series Positioning and Context</h2>
+<p>This is the second of three workshops in the "AI Agent Teaching Applications Workshop" series, designed for university faculty without an engineering background. Across three progressive, hands-on sessions, the series helps teachers see AI moving beyond a simple chat or prompting tool into an AI Agent that can help operate computer and cloud workflows. The core method transfers across tools: <strong>state the goal, context, constraints, and completion criteria clearly; check the results; then revise in small iterations.</strong></p>
+<div class="table-wrap"><table>
+<thead><tr><th>Stage</th><th>Workshop</th><th>Core Question</th><th>Session Output</th></tr></thead>
+<tbody>
+<tr><td>1. Learn to collaborate with AI</td><td>Workshop (1)</td><td>How do you turn a vague teaching idea into a checkable, completable task?</td><td>An AI collaboration task card and a traceable material/screenshot analysis and revision record</td></tr>
+<tr><td>2. Build a self-practice tool</td><td>Workshop (2) [this session]</td><td>How do you turn your own materials into a question set and a practice tool students can use?</td><td>A multiple-choice question set, a static HTML self-practice tool, and testing notes</td></tr>
+<tr><td>3. Extend to classroom formative assessment</td><td>Workshop (3)</td><td>How do you use the minimum necessary features to quickly gauge student understanding in class?</td><td>A classroom answering prototype, a simple teacher dashboard, and a class-wide summary with preliminary analysis</td></tr>
+</tbody>
+</table></div>
+<p>This session builds on the AI collaboration method from Workshop (1), turning a teacher's teaching content into a question set and tool that students can practice with after class. The question-set format and the submit/feedback logic completed here carry forward directly into the classroom formative-assessment prototype in Workshop (3).</p>
+<blockquote><strong>Why the underlying tools were built with Claude Code, yet the materials ask you to use Codex:</strong> This workshop teaches how to collaborate with an AI Agent — stating requirements clearly and iterating your way to a static web tool — not tied to any specific product. The custom skills under <code>.claude/skills/</code> (<code>download-exam-pdf</code>, <code>slice-exam-pdf</code>, <code>clean-exam-question-images</code>, <code>build-quiz-app</code>) were originally built by the instructor using Claude Code; but the live workshop, and the step-by-step Module 1–4 materials, all ask participants to use Codex instead of Claude Code. That's a deliberate choice: the same tools and the same learning path produce the same working result even after swapping the AI Agent used to operate them, from Claude Code to Codex — direct evidence that "the core method transfers across AI tools" isn't just a slogan. If you want to verify it the other way around, you're welcome to redo the same path with Claude Code and see if you land on the same result. It isn't limited to these two tools either: any AI Agent with comparable capabilities (GitHub Copilot Workspace, Spark, etc.) should in principle work too; the instructor has just only concretely verified Claude Code and Codex so far.</blockquote>
+
+<h2 id="overview-en">2. Workshop Overview</h2>
+<p>In the previous workshop, we practiced stating teaching needs clearly and collaborating with an AI Agent on small, checkable, correctable tasks. This session turns that skill into an actual usable teaching tool: teachers bring a topic, teaching material, handout, or slide deck they are currently teaching, collaborate with an AI Agent to produce a multiple-choice question set (for example 10, 20, or 30 questions), and then use vibe coding to hand the question set and feature requirements to the AI to build a static HTML self-practice tool that runs locally on a personal computer.</p>
+<p>Multiple-choice questions are the starting point because the rules are clear and easy to grade, which is friendlier for teachers and students trying this for the first time. AI can help teachers organize and draft an initial question set, but whether the questions match the learning objectives, whether the answers are correct, whether the stems are clear, and whether the options are reasonable must still be checked by the teacher — this process is exactly where teaching expertise turns into content that AI can help process, while a human remains responsible for sign-off.</p>
+<p>When students open the site they see only the questions and options; answers are not shown while answering. After finishing and clicking "Submit and view results," the site auto-grades against the answers in the question set, showing the number correct, the total score, and right/wrong per question, and lets students retry as many times as they like. Students can also bring questions they got wrong to an AI conversation, asking why they got it wrong, what the correct concept is, and where they may have misunderstood — forming a learning loop of "materials → question set → self-practice → automatic feedback → AI clarifies misconceptions → practice again."</p>
+<p>The goal of this session is not to build a formal exam system, but to complete a self-learning prototype that can actually be tried out. Teachers will experience firsthand that, as long as they can state their requirements clearly, an AI Agent can help turn a teaching idea into a tool step by step — and that they can keep extending and modifying it later according to their own teaching needs.</p>
+
+<h2 id="audience-en">3. Who Should Attend</h2>
+<ul>
+<li>Faculty who attended Workshop (1), or who can briefly describe their teaching needs using "goal, context, constraints, completion criteria."</li>
+<li>Faculty who want to turn a topic, material, handout, or slide deck they are teaching into a multiple-choice question set and web tool students can practice with on their own.</li>
+<li>Faculty who want students to practice at their own pace after class, get immediate feedback, and clear up misconceptions.</li>
+<li>Faculty who prefer to first finish a small, complete, locally usable teaching prototype rather than starting with a complex system.</li>
+</ul>
+
+<h2 id="outcomes-en">4. Learning Outcomes</h2>
+<p>After completing this session, you will be able to:</p>
+<ol>
+<li>Collaborate with an AI Agent to produce a multiple-choice question set from your own course topic or materials, and check the quality of the questions, answers, and options.</li>
+<li>Break a self-testing requirement into question-bank data, screens, interaction rules, and acceptance criteria, and use vibe coding to build and modify a single-page HTML self-practice tool with AI.</li>
+<li>Design a basic learning flow that hides answers before submission and only provides a score, per-question results, and feedback after submission.</li>
+<li>Explain how students can use their graded results as a starting point to talk with AI to clarify why they got a question wrong and what they have not yet learned.</li>
+<li>Use a try-out and acceptance checklist to verify the site matches the original teaching requirements.</li>
+</ol>
+
+<h2 id="focus-mvp-en">5. Focus Points and Minimum Viable Features</h2>
+<p>Workshop focus points:</p>
+<ul>
+<li>Collaborate with an AI Agent to organize teaching materials, handouts, or slide decks into a practicable question set, keeping the question bank and the web page cleanly separated.</li>
+<li>Build the question and option screen, and record student answers.</li>
+<li>Use vibe coding to complete submission, scoring, per-question correctness, and correct-answer feedback.</li>
+<li>Add a retry feature so students can practice repeatedly.</li>
+<li>Design a usage scenario where students use AI to clarify wrong answers and reinforce concepts.</li>
+<li>Use peer try-outs to find unclear or broken parts of the flow.</li>
+</ul>
+<p>Minimum viable features (this session's acceptance baseline):</p>
+<ul>
+<li>The teacher can build a multiple-choice question set from their materials.</li>
+<li>The tool can load question, option, and answer data.</li>
+<li>Answers, scores, and per-question hints are hidden before and during submission.</li>
+<li>After submission, the tool shows the number correct, the score, and right/wrong per question.</li>
+<li>Students can retry to practice repeatedly.</li>
+<li>Question-set data and the web page code stay cleanly separated, making it easy to swap in different materials or edit questions later.</li>
+</ul>
+
+<h2 id="prep-en">6. Preparation Checklist</h2>
+<ul>
+<li>Bring a laptop and confirm you can use a web browser.</li>
+<li>Prepare a teaching material, handout, or slide excerpt you are currently teaching as source material for the question set; you may also start from the sample question bank the instructor provides.</li>
+<li>Questions, answers, and learning objectives must still be checked by the teacher; do not use student personal data, full grades, or other sensitive data.</li>
+<li>If you attended Workshop (1), bring or organize the AI collaboration task card and requirement draft you completed then.</li>
+</ul>
+<p>To review Workshop (1)'s environment and setup basics beforehand:</p>
+<div class="site-grid">
+<a class="site-card" href="codex-app-settings-guide.html"><strong>ChatGPT Work and Codex Setup Guide</strong><span>Choose Chat, ChatGPT Work, or Codex; for Codex, limit the workspace and use Ask for approval first.</span></a>
+<a class="site-card" href="module1/windows11-vibe-coding-setup.html"><strong>Module 1: Windows 11 Setup</strong><span>One-click setup, manual installation, and verification tasks for the AI Agent environment.</span></a>
+</div>
+<p>This session's two core phases — from materials to a question set, and the vibe coding build — also each have a step-by-step hands-on tutorial, useful as self-paced reference outside the live session's pace or for review afterward:</p>
+<div class="site-grid">
+<a class="site-card" href="module2/exam-paper-pipeline-tutorial.html"><strong>Module 2: Exam Paper Download, Slice &amp; Cleanup Tutorial</strong><span>Covers the "from materials to a question set" phase: three chained custom skills written for this workshop turn a PDF exam paper into clean per-question images and an answer-key JSON.</span></a>
+<a class="site-card" href="module3/quiz-app-tutorial.html"><strong>Module 3: Quiz App Generation Tutorial</strong><span>Covers the "vibe coding build" phase: the build-quiz-app skill turns a problem-set folder into a double-click student quiz page and a teacher CSV-aggregator page.</span></a>
+</div>
+
+<h2 id="scope-en">7. Scope, Positioning, and Limitations</h2>
+<p>This session's output is positioned as an after-class self-practice tool for students, <strong>not as formal grading or a high-stakes test</strong>. Whether students genuinely engage with practice still depends on their motivation, and students may also use AI to get the answers directly. The tool's value therefore lies in offering an opportunity for repeated practice, immediate feedback, and concept clarification — it does not replace a teacher's design and judgment for formal assessment.</p>
+<ul>
+<li>Finish a small, checkable version first, then improve it based on real usage; do not chase technical complexity within the limited session time.</li>
+<li>Questions, answers, and the mapping to learning objectives must all be checked by the teacher — AI output cannot be adopted automatically.</li>
+<li>Do not paste student personal data or full grades into AI conversations; source material should mainly be the teacher's own materials, handouts, or slides.</li>
+<li>If formal assessment, long-term cross-class use, personal-data handling, databases, permissions, or real-time tracking are needed later, plan data governance, security, accessibility, operations, and institutional procedures separately.</li>
+</ul>
+
+<h2 id="takeaways-en">8. Expected Takeaways</h2>
+<ul>
+<li>A well-structured multiple-choice question set developed from your own materials.</li>
+<li>A static HTML self-practice tool that runs locally.</li>
+<li>A complete flow that only reveals answers, scores, and per-question feedback after submission.</li>
+<li>A testing and revision log that can serve as a starting point for future iterations.</li>
+<li>An AI Agent collaboration workflow you can reuse for other materials, units, or teaching tools.</li>
+</ul>
+
+<h2 id="next-en">9. Bridge to Workshop (3)</h2>
+<p>Workshop (3), "From Self-Practice to Classroom Formative Assessment," continues this session's question-set format and student answering interface, bringing after-class self-practice back into the classroom: students load an assigned question bank via a URL the teacher provides during class, enter minimal necessary identifying information such as a class seat number or an anonymous code, and complete the answers; the system auto-grades on submission and returns individual results. Teachers get a dashboard that deliberately keeps to the minimum necessary features, surfacing information only when students log in to start and after they submit; once the whole class has submitted, teachers can view per-question accuracy, error rates, and common-mistake patterns, and hand that to AI for a simple learning analysis.</p>
+<p>The question-set data format, the "no answers before submission," and the "auto-grade and give per-question feedback after submission" design completed in this session carry forward directly into the next one — please keep the question-bank files and tool code you produce today.</p>
+
+ </section>
+ <footer>教育部智慧雨林產業創生人才育成計畫 (南臺科技大學 電子系 楊榮林 教授)</footer>
+</div>
+<script>function currentSection(){const lang=document.documentElement.getAttribute('data-lang');return document.querySelector('section.'+lang)}function navTargets(){const section=currentSection();if(!section)return[];return[...section.querySelectorAll('h2')]}function gotoSection(i){const targets=navTargets();if(targets[i])targets[i].scrollIntoView({behavior:'smooth',block:'start'});closeMenu()}function toggleMenu(){document.getElementById('sidebar').classList.toggle('open');document.getElementById('backdrop').classList.toggle('show')}function closeMenu(){document.getElementById('sidebar').classList.remove('open');document.getElementById('backdrop').classList.remove('show')}let spy;function buildSpy(){if(spy)spy.disconnect();const targets=navTargets();const btns=[...document.querySelectorAll('.nav .navbtn')];spy=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting){const idx=targets.indexOf(e.target);btns.forEach((b,i)=>b.classList.toggle('active',i===idx))}})},{rootMargin:'0px 0px -75% 0px',threshold:0});targets.forEach(t=>spy.observe(t))}document.addEventListener('DOMContentLoaded',buildSpy);function toggleTheme(){const html=document.documentElement;const goingDark=html.getAttribute('data-theme')==='light';html.setAttribute('data-theme',goingDark?'dark':'light');document.getElementById('themeBtn').textContent=goingDark?'☀️ Light':'🌙 Dark'}function toggleLang(){const html=document.documentElement;const goingEn=html.getAttribute('data-lang')==='zh';html.setAttribute('data-lang',goingEn?'en':'zh');html.setAttribute('lang',goingEn?'en':'zh-Hant');document.getElementById('langBtn').textContent=goingEn?'中文':'English';buildSpy()}</script>
+</body>
+</html>

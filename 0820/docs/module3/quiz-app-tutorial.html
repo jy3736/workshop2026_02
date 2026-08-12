@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="zh-Hant" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>從問題集資料夾產生自主測驗網頁實作教學（Module 3）</title>
+<style>:root{color-scheme:dark;--bg:#f4f1ea;--fg:#1f2328;--muted:#687180;--card:#ebe7df;--border:#d6d0c5;--accent:#2563eb;--th-bg:#ded8cc;--shadow:0 1px 3px rgba(44,38,28,.09);--sidebar-w:284px;--content-max:1040px;--content-pad-x:44px;--content-pad-y:42px;--measure:76ch}[data-theme="dark"]{--bg:#101217;--fg:#e7eaf0;--muted:#a5aebd;--card:#181c24;--border:#2a3140;--accent:#7bb2ff;--th-bg:#202632;--shadow:0 1px 3px rgba(0,0,0,.42)}html{scroll-behavior:smooth}*{box-sizing:border-box}body{min-width:0;margin:0;background:var(--bg);color:var(--fg);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang TC","Microsoft JhengHei",Roboto,Helvetica,Arial,sans-serif;font-size:16px;line-height:1.76;letter-spacing:0;transition:background .25s,color .25s}.wrap{width:min(var(--content-max),calc(100vw - var(--sidebar-w) - (var(--content-pad-x) * 2)));margin-left:calc(var(--sidebar-w) + max(var(--content-pad-x),(100vw - var(--sidebar-w) - var(--content-max)) / 2));padding:var(--content-pad-y) var(--content-pad-x) 88px}.sidebar{position:fixed;top:0;left:0;width:var(--sidebar-w);height:100vh;overflow-y:auto;background:var(--card);border-right:1px solid var(--border);display:flex;flex-direction:column;gap:10px;padding:18px 14px;z-index:30}.brand{font-weight:700;font-size:1rem;line-height:1.35;padding:0 6px}.toprow{display:flex;flex-wrap:wrap;align-items:center;gap:8px}.nav{display:flex;flex-direction:column;gap:4px;margin-top:6px}.navbtn,.navhome{cursor:pointer;border:1px solid transparent;background:transparent;color:var(--muted);border-radius:7px;padding:7px 10px;font-size:14px;font-weight:650;text-align:left;width:100%;white-space:normal;text-decoration:none}.navbtn:hover,.navbtn.active,.navhome:hover{color:var(--accent);border-color:var(--border);background:var(--bg)}.navhome{display:block;border-color:var(--border);background:var(--bg);color:var(--fg)}.btn{cursor:pointer;border:1px solid var(--border);background:var(--bg);color:var(--fg);border-radius:8px;padding:6px 12px;font-size:13px;font-weight:650}.btn:hover{border-color:var(--accent)}.menu-toggle{display:none;position:fixed;top:12px;left:12px;z-index:40;cursor:pointer;border:1px solid var(--border);background:var(--card);color:var(--fg);border-radius:8px;padding:6px 12px;font-size:18px;line-height:1}.backdrop{display:none;position:fixed;inset:0;background:rgba(0,0,0,.42);z-index:20}h1{max-width:var(--measure);font-size:2.1rem;line-height:1.28;margin:.2em 0 .35em}h2{font-size:1.44rem;margin-top:1.85em;padding-bottom:.25em;border-bottom:2px solid var(--border);scroll-margin-top:24px}h3{font-size:1.14rem;margin-top:1.5em;color:var(--accent)}h4{font-size:1.02rem;margin-top:1.2em;margin-bottom:.35em;color:var(--fg)}ul,ol{padding-left:1.3em}li{margin:.35em 0}p,li,blockquote{max-width:var(--measure);overflow-wrap:break-word}.table-wrap{width:100%;overflow-x:auto;-webkit-overflow-scrolling:touch}table{width:100%;border-collapse:collapse;margin:1em 0;font-size:.93rem;box-shadow:var(--shadow);border-radius:8px;overflow:hidden}th,td{text-align:left;padding:10px 14px;border:1px solid var(--border);vertical-align:top}th{background:var(--th-bg);font-weight:750}tbody tr:nth-child(even) td{background:var(--card)}blockquote{margin:1.1em 0;padding:12px 16px;border-left:4px solid var(--accent);background:var(--card);color:var(--fg)}pre{font-family:inherit;overflow:auto;white-space:pre-wrap;word-break:break-word;overflow-wrap:anywhere;padding:12px 14px;background:var(--card);border:1px solid var(--border);border-radius:8px}code{font-family:"SFMono-Regular",Consolas,"Liberation Mono",monospace;font-size:.92em;color:var(--fg);background:var(--card);border:1px solid var(--border);border-radius:6px;padding:.08em .35em;overflow-wrap:anywhere;word-break:break-word}pre code{border:0;padding:0;background:transparent}.nav code{border:0;background:transparent;color:inherit;padding:0}.code-sample{max-width:var(--measure);margin:1em 0 1.2em}.code-sample-toolbar{display:flex;gap:8px;margin:0 0 8px}.copy-btn{cursor:pointer;border:1px solid var(--border);background:var(--bg);color:var(--fg);border-radius:6px;padding:5px 10px;font-size:12px;font-weight:650;display:flex;align-items:center;gap:5px;margin-left:auto}.copy-btn:hover{border-color:var(--accent)}.copy-btn.copied{border-color:var(--accent);color:var(--accent)}.code-sample pre{margin:0}.step-badge{display:inline-block;font-size:.78rem;font-weight:750;color:var(--accent);border:1px solid var(--accent);border-radius:999px;padding:2px 10px;margin-bottom:.4em}table{max-width:100%}pre{max-width:var(--measure)}a{color:var(--accent);overflow-wrap:anywhere}footer{margin-top:3em;color:var(--muted);font-size:.85rem;border-top:1px solid var(--border);padding-top:1em}@media (min-width:1440px){:root{--sidebar-w:304px;--content-max:1080px;--content-pad-x:54px;--content-pad-y:48px}}@media (max-width:1100px){:root{--sidebar-w:230px;--content-max:840px;--content-pad-x:28px;--content-pad-y:32px}.sidebar{padding:16px 10px}.brand{font-size:.95rem}.navbtn,.navhome{font-size:13px;padding:7px 8px}}@media (max-width:860px){:root{--sidebar-w:min(82vw,320px);--content-pad-x:18px;--content-pad-y:0px;--measure:100%}.sidebar{transform:translateX(-100%);transition:transform .25s}.sidebar.open{transform:none}.wrap{width:100%;margin-left:0;padding:72px var(--content-pad-x) 80px}.menu-toggle{display:block}.backdrop.show{display:block}h1{font-size:1.7rem}h2{font-size:1.22rem}h3{font-size:1.05rem}p,li,blockquote{max-width:100%}}@media (max-width:520px){:root{--sidebar-w:min(88vw,300px);--content-pad-x:14px}.wrap{padding-top:68px}.menu-toggle{top:10px;left:10px;padding:7px 11px}.sidebar{padding:14px 10px}.toprow{gap:6px}.btn{padding:6px 10px;font-size:12px}.navbtn,.navhome{font-size:13px}h1{font-size:1.5rem}h2{font-size:1.15rem}th,td{padding:8px 10px}}</style>
+</head>
+<body>
+<button class="menu-toggle" id="menuToggle" onclick="toggleMenu()" type="button">☰</button>
+<aside class="sidebar" id="sidebar">
+ <div class="brand">從問題集資料夾產生自主測驗網頁實作教學</div>
+ <div class="toprow"><button class="btn" id="themeBtn" onclick="toggleTheme()" type="button">☀️ Light</button></div>
+ <a class="navhome return-control" href="../../index.html" aria-label="返回上一層">返回上一層</a>
+ <nav class="nav">
+<button class="navbtn" onclick="gotoSection(0)" type="button">學習目標</button>
+<button class="navbtn" onclick="gotoSection(1)" type="button">先備條件</button>
+<button class="navbtn" onclick="gotoSection(2)" type="button">整體設計總覽</button>
+<button class="navbtn" onclick="gotoSection(3)" type="button">步驟一：決定 app/ 放在哪</button>
+<button class="navbtn" onclick="gotoSection(4)" type="button">步驟二：分析問題集資料夾</button>
+<button class="navbtn" onclick="gotoSection(5)" type="button">步驟三：設計 config.json</button>
+<button class="navbtn" onclick="gotoSection(6)" type="button">步驟四：打造測驗網頁樣板</button>
+<button class="navbtn" onclick="gotoSection(7)" type="button">步驟五：寫打包程式</button>
+<button class="navbtn" onclick="gotoSection(8)" type="button">步驟六：驗收成果</button>
+<button class="navbtn" onclick="gotoSection(9)" type="button">步驟七：教師端成績彙整頁</button>
+<button class="navbtn" onclick="gotoSection(10)" type="button">動手做：套用在全新資料上</button>
+<button class="navbtn" onclick="gotoSection(11)" type="button">常見狀況快速對照表</button>
+<button class="navbtn" onclick="gotoSection(12)" type="button">下一步</button>
+ </nav>
+</aside>
+<div class="backdrop" id="backdrop" onclick="toggleMenu()"></div>
+<div class="wrap">
+<section>
+<h1 id="title">從問題集資料夾產生自主測驗網頁實作教學</h1>
+<p class="lead">Module 2 教學帶你把考古題 PDF 變成「一題一張乾淨圖片 ＋ 標準答案 JSON」的問題集資料夾。這份教學接著往下一步走：從零開始，跟 Codex 一起<strong>設計並打造</strong>一個小工具，把這種問題集資料夾轉成一個不用架站、雙擊就能打開的學生自我測驗網頁，外加一個老師用來彙整全班成績的頁面。</p>
+<p class="lead">工作坊講師其實已經事先寫好一個叫 <code>build-quiz-app</code> 的 custom skill，放在這個專案的 <code>.claude/skills/</code> 資料夾底下，一句話就能請 Codex 用它把這整件事做完 那是 <a href="../module4/quiz-app-quickstart-tutorial.html">Module 4</a> 教的捷徑。這份教學刻意<strong>不直接套用那個 skill</strong>，而是從只有「問題集資料夾」這個起點出發，一步一步請 Codex 幫你分析需求、設計資料結構、寫出網頁樣板跟打包程式 目的是讓你搞懂這整套工具背後在做什麼，而不是只會下一句咒語。等你做完這份教學，會發現自己造出來的東西，其實就是在重新發明 <code>build-quiz-app</code> 已經做好的那個輪子；那時候再回頭用 Module 4 的捷徑，你會很清楚每一步在幫你省掉什麼。</p>
+<p class="lead">本教學對應 <code>module3/</code> 資料夾，裡面目前<strong>只有</strong>兩組問題集資料夾（圖片 ＋ <code>keys.json</code>），沒有任何預先做好的 <code>app/</code> 引擎或成品 這是刻意維持的乾淨起點：這份教學的重點是你（跟 Codex）從這兩組資料夾出發，自己設計、生出等效的做法，沒有現成答案可以抄，過程比結果更重要。如果你的專案裡還沒有這兩組資料夾，可以下載 <a href="module3-repo.tar" download>module3-repo.tar</a>，解壓後把 <code>repo/</code> 資料夾放進 <code>module3/</code>。</p>
+
+<div class="table-wrap"><table>
+<tr><th>範例測驗</th><th>問題集資料夾（輸入，目前唯一存在的東西）</th><th>examLabel（建議命名）</th><th>雙擊即用成品（輸出目標，預期大小）</th></tr>
+<tr><td>114 學年度<br>電機與電子群資電類<br>專業科目(一)(二)，共 100 題</td><td><code>module3/repo/114/</code></td><td><code>Formative_Assessment_114</code></td><td><code>app/dist/Formative_Assessment_114_quiz.html</code><br>（預估約 15 MB）</td></tr>
+<tr><td>115 學年度<br>數學(A)<br>共同科目，共 25 題</td><td><code>module3/repo/math-115a/</code></td><td><code>Formative_Assessment_115_MathA</code></td><td><code>app/dist/Formative_Assessment_115_MathA_quiz.html</code><br>（預估約 2.6 MB）</td></tr>
+</table></div>
+<p>這兩份問題集資料夾，其實就是 Module 2 教學做出來的東西 只是換了一組資料，重跑一次「下載／切題／清理」流程而已。<code>module3/</code> 底下沒有留原始 PDF、也沒有第三組待處理的資料 「動手做」單元會告訴你怎麼自己準備一組全新資料，驗證你打造的工具是不是真的可以重複使用，不用每換一組資料就重新設計一次。</p>
+
+<h2 id="obj">學習目標</h2>
+<p>做完這份教學，你應該能夠：</p>
+<ul>
+<li>從一個「圖片 ＋ <code>keys.json</code>」的問題集資料夾出發，自己想清楚需要蒐集哪些資訊，才能生成一份能正常運作的測驗網頁 而不是套用一個現成工具幫你想好的答案。</li>
+<li>跟 Codex 一起設計一份 <code>config.json</code> 的資料結構，讓同一套工具之後可以疊加好幾份測驗，每週只要多加一筆設定、不用重新設計。</li>
+<li>跟 Codex 一起打造一個「不需要伺服器、雙擊即開」的自我測驗網頁樣板，以及一支把圖片轉成 base64、塞進樣板的打包程式，並說得出為什麼最終交付的檔案不能用 <code>fetch()</code> 讀外部檔案。</li>
+<li>看懂自己（跟 Codex）造出來的這套工具，跟講師事先寫好的 <code>build-quiz-app</code> custom skill 其實是同一件事的兩種做法 一個是自己設計、一個是直接套用現成的。</li>
+<li>自己動手準備一組全新的問題集資料，走一次「切題 → 清理 → 用自己造的工具建立測驗」全流程，驗證這套工具真的能重複使用。</li>
+</ul>
+
+<h2 id="prereq">先備條件</h2>
+<ul>
+<li>已經完成 <a href="../module2/exam-paper-pipeline-tutorial.html">Module 2：考古題下載、切題與清理實作教學</a>，手上至少有一組「<code>*.png</code> 圖片 ＋ <code>keys.json</code>」的問題集資料夾。本教學直接沿用 <code>module3/repo/114</code>、<code>module3/repo/math-115a</code> 這兩組已經做好的資料當範例，你也可以換成自己練習做出來的資料夾。</li>
+<li>已經能開啟並使用 Codex。若還沒設定好工作環境，請先參考 <a href="../module1/windows11-vibe-coding-setup.html">Module 1：Windows 11 環境建置</a>。</li>
+<li>本機已安裝 Python 3。請 Codex 寫分析跟打包用的腳本時，明確要求只用 Python 標準函式庫、不額外安裝套件 這樣的工具環境相依最少，也方便你之後檢查腳本內容時不用先搞懂一堆第三方套件在做什麼。</li>
+<li>能開啟終端機（Terminal／PowerShell），並且知道如何切換到專案根目錄（也就是能看到 <code>module3/</code>、<code>.claude/</code> 這兩個資料夾的那一層）下指令，用來執行自己請 Codex 寫出來的腳本、驗證結果。</li>
+<li>這一整套流程都是離線的、不需要網路連線（Module 2 的下載階段才需要網路）。</li>
+</ul>
+<blockquote><strong>關於 <code>build-quiz-app</code> 這個現成 skill：</strong>這個專案的 <code>.claude/skills/build-quiz-app/</code> 資料夾底下，工作坊講師已經事先寫好一個包好的版本 這是講師為這個課程準備的 custom skill，不是 Codex 原生內建的功能。一句話就能請 Codex 用它把整件事做完，那是 <a href="../module4/quiz-app-quickstart-tutorial.html">Module 4</a> 的內容。這份教學刻意不呼叫那個 skill，全程只描述「我想要一個做到 X 的工具」這種需求，讓 Codex 從問題集資料夾本身出發幫你設計、實作 目的是理解原理，不是抄捷徑。</blockquote>
+
+<h2 id="overview">整體設計總覽</h2>
+<p>先講結論，用一句話說清楚我們要跟 Codex 提出什麼要求：<strong>「我手上有一份題目跟正確答案，麻煩幫我做成一個學生可以自己打開作答、我事後可以收學生成績的網頁。」</strong>不用先弄懂任何技術名詞，就跟你平常請人幫忙做事一樣 把「我想要什麼」講清楚，剩下技術上怎麼做，交給 Codex。</p>
+<p>接下來會照下面這個順序，一步一步跟 Codex 討論、確認：</p>
+<ol>
+<li><strong>先講好東西要放在哪裡：</strong>之後做出來的這些檔案，放在跟你題目資料夾另外分開的一個資料夾，不要混在一起，以後比較不會亂。</li>
+<li><strong>請 Codex 先看一下你的題目資料夾：</strong>確認題目跟答案對得起來、總共有幾題、圖片有沒有缺，心裡有個底再往下做。</li>
+<li><strong>講清楚「一份測驗」要記住什麼：</strong>像是這份測驗叫什麼名字、題目跟答案放在哪 這樣以後想再加一份新的測驗給另一班用，才知道要告訴 Codex 什麼資訊。</li>
+<li><strong>做出學生實際看到的作答畫面：</strong>輸入姓名、選一次要寫幾題、作答、按送出看分數，還有一顆下載成績單的按鈕。</li>
+<li><strong>把題目、圖片跟畫面「包」成一個檔案：</strong>做出來的是一個單獨的網頁檔案，雙擊就能打開，不用架網站、不用連網路。</li>
+<li><strong>自己先打開來試用一次：</strong>不是「Codex 說做完了」就代表真的沒問題，一定要自己實際打開、作答一次看看。</li>
+<li><strong>做一個給你自己看全班成績的頁面：</strong>把學生各自下載下來的成績單收集起來，一次看到全班的情況。</li>
+</ol>
+<p>這整套東西只要跟 Codex 一起做過一次，以後每多一份新的題目（例如換一個班級、換一份考題），大部分只需要重複第 2 到第 5 步，不用從頭再來一次；而且同一個網頁工具之後可以陸續裝進好幾份不同的測驗，不用每份測驗都各自做一個新網頁。</p>
+
+<h2 id="step1">步驟一：決定 app/ 要放在哪</h2>
+<p class="step-badge">設計決策：輸出位置</p>
+<p>先想清楚一個問題：工具產生出來的東西（設定檔、樣板、打包程式、最終成品）該放在哪裡，才不會跟問題集資料夾攪在一起、之後也方便換資料？合理的做法是固定放在問題集資料夾的<strong>同層（sibling）</strong>，不是塞進問題集資料夾裡面。以 <code>module3/</code> 為例，問題集資料夾是 <code>module3/repo/&lt;name&gt;/</code>，工具的輸出就放在 <code>module3/app/</code>，跟 <code>module3/repo/</code> 平級 這樣以後問題集資料夾即使被整理、封存或換掉，<code>app/</code> 這個「引擎」也不會受影響。</p>
+<blockquote><strong>如果 <code>app/</code> 已經存在：</strong>代表你之前已經對同一層底下的另一組問題集資料夾設計過這套工具（例如做完這份教學的步驟一到步驟七之後，回頭對第二組資料重跑一次）。這是正常情況，不是衝突 之後每加一份新測驗，做法是在既有 <code>config.json</code> 的 <code>assessments</code> 陣列裡<strong>再加一筆</strong>，而不是整套工具重新設計一遍。<code>quiz.html</code>、打包程式、教師端頁面這三個檔案是共用引擎，改進的時候可以直接覆蓋，不會影響已經疊進去的其他測驗設定。</blockquote>
+
+<h3>先跟 Codex 討論設計，再動手</h3>
+<div class="code-sample"><div class="code-sample-toolbar"><button class="copy-btn" type="button" onclick="copyPromptBlock(this)"><span class="copy-icon">📋</span><span>複製</span></button></div><pre><code>我手上有一個問題集資料夾 module3/repo/114（一題一張圖片 + keys.json）。
+我想自己設計一個小工具，把這種問題集資料夾轉成一個雙擊就能打開的自我測驗網頁。
+先不要動手寫程式，跟我討論一下：這個工具產出的東西（設定檔、樣板、打包程式）
+應該放在哪個資料夾比較合理？為什麼？</code></pre></div>
+<p>把這一步當成跟 Codex 一起做架構設計，而不是丟一句指令就期待它自動生出整套東西 討論清楚位置規則之後，才進入下一步的分析。</p>
+
+<h2 id="step2">步驟二：分析問題集資料夾的形狀</h2>
+<p class="step-badge">交付物：一支你自己的分析腳本</p>
+<p>在動手設計 <code>config.json</code>、寫網頁樣板之前，得先知道這個問題集資料夾實際長什麼樣子 <code>keys.json</code> 在哪、有幾題、圖片放在哪個子資料夾、檔名有沒有規律。這一步的交付物是一支你（跟 Codex）自己寫出來的分析腳本，只讀取、不寫入任何檔案。</p>
+
+<h3>請 Codex 寫一支分析工具</h3>
+<div class="code-sample"><div class="code-sample-toolbar"><button class="copy-btn" type="button" onclick="copyPromptBlock(this)"><span class="copy-icon">📋</span><span>複製</span></button></div><pre><code>幫我寫一支 Python 分析工具 module3/app/analyze_folder.py，
+只用標準函式庫，輸入一個問題集資料夾路徑，掃描之後印出一份 JSON 報告，內容至少要有：
+- 找到的答案 JSON 檔名、裡面有幾題
+- 圖片放在哪個子資料夾（如果跟 keys.json 同一層就寫 "."）
+- keys.json 裡有寫但找不到對應圖片的題目（缺圖清單）
+- 從圖片檔名試著推論出規律（例如題號、科目代號），抓不出規律就別硬湊
+這支腳本不能修改任何檔案，只能讀取跟印出報告。
+寫完之後，用 module3/repo/114 實際跑一次給我看結果。</code></pre></div>
+<p>對 <code>module3/repo/114</code> 跑起來，合理的報告會長得像這樣（field 名稱你可以跟 Codex 討論調整，重點是資訊要齊全）：</p>
+<div class="code-sample"><pre><code>{
+ "folder": "module3/repo/114",
+ "keysFile": "114keys.json",
+ "questionCount": 100,
+ "answerLetters": ["A", "B", "C", "D"],
+ "multiAnswerCount": 0,
+ "multiAnswerSample": [],
+ "repoDir": ".",
+ "missingImages": [],
+ "missingImageCount": 0,
+ "extraImageFiles": ["114keys.json"],
+ "extraImageFileCount": 1,
+ "filenamePattern": "^114專業(?&lt;group&gt;[12])Q(?&lt;number&gt;\\d+)\\.png$",
+ "filenamePatternNote": "group token candidates: ['1', '2']"
+}</code></pre></div>
+
+<h3>每個欄位在講什麼、為什麼要設計成這樣</h3>
+<div class="table-wrap"><table>
+<tr><th>欄位</th><th>怎麼解讀</th></tr>
+<tr><td><code>keysFile</code> / <code>questionCount</code></td><td>找到的答案 JSON 檔名、裡面有幾題。跟你預期的題數（例如專業科目 50 題 × 2 科 = 100）對一下，不一致代表分析腳本可能找錯檔案。</td></tr>
+<tr><td><code>repoDir</code></td><td>圖片放在哪個子資料夾。<strong>如果是 <code>"."</code>，代表圖片跟 <code>keys.json</code> 直接放在同一層，沒有再包一層子資料夾</strong> <code>module3/repo/114</code>、<code>module3/repo/math-115a</code> 都是這種情況。這個欄位之所以要獨立設計出來，是因為下一步 <code>config.json</code> 需要明確記下這個值，不能靠猜。</td></tr>
+<tr><td><code>missingImages</code> / <code>missingImageCount</code></td><td><code>keys.json</code> 裡有寫、但找不到對應圖片檔的題目。這裡是 0，代表 Module 2 的清理成果沒有缺檔；如果不是 0，之後打包時這些題目該怎麼處理（跳過？報錯？），是你設計打包程式時要先決定的規則。</td></tr>
+<tr><td><code>extraImageFiles</code> / <code>extraImageFileCount</code></td><td>資料夾裡有、但 <code>keys.json</code> 沒提到的檔案。這裡列出 <code>114keys.json</code> 自己 這是正常現象：因為 <code>repoDir</code> 是 <code>"."</code>，分析腳本把整個資料夾掃過一輪，keys 檔本身當然不會出現在 keys 的內容裡，可以放心忽略，跟圖片缺漏無關。</td></tr>
+<tr><td><code>multiAnswerCount</code> / <code>multiAnswerSample</code></td><td>答案有一個字母以上的複選題數量。這裡是 0；如果不是 0，代表你設計計分邏輯時要決定「整組答案完全相同才算對」還是其他規則，值得在報告裡先提醒自己。</td></tr>
+<tr><td><code>filenamePattern</code> / <code>filenamePatternNote</code></td><td>從檔名推論出來的規則，建議用具名捕獲群組的正規表達式表示。<code>114</code> 這組因為檔名裡有「專業<strong>1</strong>」跟「專業<strong>2</strong>」兩種，可以抓出一個 <code>group</code>（分科目）加一個 <code>number</code>（題號）；<code>math-115a</code> 檔名只有題號沒有科目差異，所以只有 <code>number</code>、沒有 <code>group</code>（見下方）。<strong>如果抓不出規律，不是分析腳本的失敗</strong> 代表這組檔名沒有清楚規律，這個欄位直接留空，後面設計網頁樣板時要有「退回逐題顯示原始檔名」的備案，一樣能正常運作，只是不能按科目平均分配抽題。</td></tr>
+</table></div>
+
+<p><code>module3/repo/math-115a</code> 跑出來的報告比較單純，可以對照著看兩者的差別：</p>
+<div class="code-sample"><pre><code>{
+ "folder": "module3/repo/math-115a",
+ "keysFile": "115keys.json",
+ "questionCount": 25,
+ "answerLetters": ["A", "B", "C", "D"],
+ "repoDir": ".",
+ "missingImageCount": 0,
+ "extraImageFiles": ["115keys.json"],
+ "filenamePattern": "^115數學AQ(?&lt;number&gt;\\d+)\\.png$",
+ "filenamePatternNote": "single template — number-only pattern"
+}</code></pre></div>
+
+<h3>驗收重點</h3>
+<ul>
+<li><code>questionCount</code> 跟你預期的題數一致。</li>
+<li><code>missingImageCount</code> 是 0（如果不是，先決定要不要接受這些題目被跳過，不要直接無視）。</li>
+<li><code>answerLetters</code> 如果超出 <code>A</code>～<code>D</code>，記得下一步設計 <code>config.json</code> 時要有對應的欄位讓這些字母選項能出現在作答畫面上。</li>
+<li><code>filenamePatternNote</code> 裡如果列出 group 候選字元，肉眼確認一下這些字元真的代表有意義的分類（例如「1」「2」對應兩個不同科目），不是湊巧撞到的雜訊；如果看起來不合理，寧可不寫這個欄位。</li>
+</ul>
+
+<h2 id="step3">步驟三：設計 config.json 的資料結構</h2>
+<p class="step-badge">交付物：一份你自己設計的設定檔格式</p>
+<p>這一步要決定：怎麼用一份設定檔描述「一份測驗」，還要讓同一套工具之後能疊加好幾份測驗，不用每加一份就重新設計格式。合理的做法是設計一個 <code>assessments</code> 陣列，每一筆對應一份測驗。跟 Codex 討論之後，把 <code>module3/repo/114</code>、<code>module3/repo/math-115a</code> 兩組分析結果，各自對應成一筆設定：</p>
+<div class="code-sample"><div class="code-sample-toolbar"><button class="copy-btn" type="button" onclick="copyPromptBlock(this)"><span class="copy-icon">📋</span><span>複製</span></button></div><pre><code>根據步驟二的分析報告，幫我設計一份 module3/app/config.json 的資料結構：
+用一個 assessments 陣列，每一筆代表一份測驗，讓同一個工具之後可以疊加多份、
+不用重新設計格式。每一筆至少要能描述：測驗名稱（會變成輸出檔名的一部分）、
+問題集資料夾的相對路徑、答案 key 檔名、圖片子資料夾、
+這份測驗預設要抽幾題、可選的答案字母、檔名規律（可以省略）。
+先幫我把 114 這組資料寫成第一筆，math-115a 寫成第二筆。</code></pre></div>
+<p>合理設計出來的結果會類似：</p>
+<div class="code-sample"><pre><code>{
+ "assessments": [
+ {
+ "examLabel": "Formative_Assessment_115_MathA",
+ "assetsDir": "../repo/math-115a",
+ "keysFile": "115keys.json",
+ "repoDir": ".",
+ "questionCount": 20,
+ "choiceLetters": "ABCD",
+ "filenamePattern": "^115數學AQ(?&lt;number&gt;\\d+)\\.png$"
+ },
+ {
+ "examLabel": "Formative_Assessment_114",
+ "assetsDir": "../repo/114",
+ "keysFile": "114keys.json",
+ "repoDir": ".",
+ "questionCount": 20,
+ "choiceLetters": "ABCD",
+ "filenamePattern": "^114專業(?&lt;group&gt;[12])Q(?&lt;number&gt;\\d+)\\.png$"
+ }
+ ]
+}</code></pre></div>
+
+<h3>每個欄位怎麼設計、怎麼填</h3>
+<div class="table-wrap"><table>
+<tr><th>欄位</th><th>設計考量／怎麼填</th></tr>
+<tr><td><code>examLabel</code></td><td>這份測驗的名字，會變成輸出檔名的一部分。設計時務必確保<strong>陣列裡每一筆都不一樣</strong>，因為它同時決定輸出檔名，撞名會互相覆蓋 加新的一筆之前，先看一眼既有陣列裡已經用過哪些名字。</td></tr>
+<tr><td><code>assetsDir</code></td><td>從 <code>app/</code> 這個資料夾出發，走到問題集資料夾的相對路徑。這是唯一一個分析報告不會直接告訴你的欄位，要自己算 例如問題集資料夾是 <code>module3/repo/114</code>、<code>app/</code> 是 <code>module3/app/</code>，相對路徑就是 <code>../repo/114</code>。</td></tr>
+<tr><td><code>keysFile</code> / <code>repoDir</code> / <code>questionCount</code>（原始題數）/ <code>filenamePattern</code></td><td>直接照抄步驟二分析報告的對應欄位。<code>filenamePattern</code> 抓不出來時，設計上要允許整個欄位不寫。</td></tr>
+<tr><td><code>questionCount</code>（<code>config.json</code> 裡實際寫的值）</td><td>不是原始題數，是「每次作答預設抽幾題」，可以設計成 <code>min(20, 分析報告的 questionCount)</code> 這類上限公式，避免一次抽太多題拖慢作答。<code>114</code> 有 100 題、<code>math-115a</code> 只有 25 題，兩筆卻都寫 20，就是因為兩者都超過或等於 20。學生開始作答時仍然可以自己把題數改成 1～全部題數之間的任何數字，這裡只是預設值 這個「使用者仍可覆蓋預設值」的彈性，要在設計網頁樣板（步驟四）時一併考慮進去。</td></tr>
+<tr><td><code>choiceLetters</code></td><td>沒特殊情況固定寫 <code>"ABCD"</code>；只有分析報告的 <code>answerLetters</code> 超出 A～D 才需要換成對應字母組合。</td></tr>
+</table></div>
+<p>如果是對已經有內容的 <code>app/config.json</code> 疊加新測驗（就像 <code>module3/app/</code> 現在的狀態），記得先讀出既有內容，用陣列 <code>push</code> 的方式加一筆，不要整個檔案覆蓋掉，不然會把之前疊上去的測驗設定弄丟 這也是「設計成陣列」而不是「單一物件」的原因。</p>
+
+<h2 id="step4">步驟四：打造測驗網頁樣板（quiz.html）</h2>
+<p class="step-badge">交付物：學生作答用的網頁樣板</p>
+<p>這一步要設計、寫出學生實際會打開的那個頁面。核心設計限制是：<strong>最終交付的檔案必須能直接雙擊開啟，不能依賴任何伺服器</strong>；瀏覽器基於安全性，會擋掉 <code>file://</code> 路徑底下用 <code>fetch()</code> 讀外部檔案的行為，所以最終版本不能用 <code>fetch()</code> 讀取 <code>config.json</code> 或圖片，資料必須直接內嵌在 HTML 裡。</p>
+
+<h3>請 Codex 設計並寫出樣板</h3>
+<div class="code-sample"><div class="code-sample-toolbar"><button class="copy-btn" type="button" onclick="copyPromptBlock(this)"><span class="copy-icon">📋</span><span>複製</span></button></div><pre><code>幫我設計並寫出 module3/app/quiz.html，這是學生作答用的自我測驗網頁樣板。
+先假設測驗資料會被放進一個叫 window.QUIZ_DATA 的全域變數（之後由另一支打包程式塞進去），
+這個頁面要做到：
+1. 讓學生輸入姓名，選擇這次要抽幾題（1 到全部題數之間，預設用設定裡的題數上限）。
+2. 隨機抽題、依序顯示每題的圖片跟 (A)(B)(C)(D)... 選項（選項字母跟隨設定）。
+3. 全部作答完送出後，顯示總分跟每一題的對錯。
+4. 提供一顆按鈕，把這次作答的逐題結果下載成 CSV（檔名要帶學生姓名跟時間戳記，
+   方便老師之後合併多份成績單）。
+整個網頁本身完成後不能用 fetch() 讀任何外部檔案 ，最終要能直接雙擊
+file:// 路徑開啟就正常運作。先開發階段可以讓它改用 fetch() 讀一份假的
+config.json + 假圖片測試畫面，之後再決定要不要保留這個「原始碼／可編輯」版本。</code></pre></div>
+<p>把這一步的產物想成兩種版本並存的設計：一份是<strong>可編輯原始碼</strong>版本（<code>quiz.html</code> 本身，可能還是用 <code>fetch()</code> 讀 <code>config.json</code> 方便你邊改邊測，本機測試時需要另外開伺服器）；另一份是下一步打包出來的<strong>雙擊即用成品</strong>（<code>dist/*.html</code>，資料已經內嵌，不需要伺服器）。分清楚這兩種版本的差別，是這一步最重要的設計決定。</p>
+
+<h3>驗收重點</h3>
+<ul>
+<li>拿假資料測試時，畫面能正常跑完「輸入姓名 → 選題數 → 作答 → 送出 → 看到分數」整個流程。</li>
+<li>選項字母、題數上限這些行為都是讀設定值決定的，不是寫死在程式裡 換一組 <code>choiceLetters</code> 或 <code>questionCount</code> 應該不用改這支樣板的程式碼。</li>
+<li>下載出來的 CSV 檔名裡有學生姓名跟時間戳記，內容至少包含每題的作答、正確答案、對錯。</li>
+</ul>
+
+<h2 id="step5">步驟五：寫打包程式，產出雙擊即用檔案</h2>
+<p class="step-badge">交付物：一支你自己的打包腳本</p>
+<p>這一步要把 <code>config.json</code> 裡每一筆設定指到的圖片，逐一轉成 base64 字串，塞進步驟四的樣板裡，輸出成一個完全自包含、不需要 <code>fetch()</code>、不需要網路的 HTML 檔。</p>
+
+<h3>請 Codex 寫一支打包工具</h3>
+<div class="code-sample"><div class="code-sample-toolbar"><button class="copy-btn" type="button" onclick="copyPromptBlock(this)"><span class="copy-icon">📋</span><span>複製</span></button></div><pre><code>幫我寫一支 Python 打包工具 module3/app/build_bundle.py，只用標準函式庫，
+讀取 module3/app/config.json 裡 assessments 陣列的每一筆設定，
+把對應圖片轉成 base64，塞進 module3/app/quiz.html 樣板裡的 window.QUIZ_DATA，
+輸出成 module3/app/dist/&lt;examLabel&gt;_quiz.html。
+不加參數時預設重建全部；加 --only &lt;examLabel&gt; 時只重建指定那一筆，
+其他已經是最新的檔案不要動。
+每一筆處理完印出檔名、題數、檔案大小；如果有圖片缺檔，印出警告但不要讓整個
+打包程序中斷，最後印出「Built N/M assessments」總結。</code></pre></div>
+
+<h3>指令</h3>
+<div class="code-sample"><div class="code-sample-toolbar"><button class="copy-btn" type="button" onclick="copyPromptBlock(this)"><span class="copy-icon">📋</span><span>複製</span></button></div><pre><code>cd module3/app
+python3 build_bundle.py</code></pre></div>
+<p>只想重建剛剛新加的那一筆時（例如另外兩份都已經是最新的，重新打包全部只是浪費時間、每份都可能是好幾十 MB）：</p>
+<div class="code-sample"><div class="code-sample-toolbar"><button class="copy-btn" type="button" onclick="copyPromptBlock(this)"><span class="copy-icon">📋</span><span>複製</span></button></div><pre><code>python3 build_bundle.py --only Formative_Assessment_114</code></pre></div>
+<p><strong>產出：</strong>每一筆測驗對應 <code>module3/app/dist/&lt;examLabel&gt;_quiz.html</code> 一個檔案。終端機應該會印出類似：</p>
+<div class="code-sample"><pre><code>Wrote module3/app/dist/Formative_Assessment_115_MathA_quiz.html (25 questions, 2.6 MB)
+Wrote module3/app/dist/Formative_Assessment_114_quiz.html (100 questions, 15.1 MB)
+Built 2/2 assessments</code></pre></div>
+
+<h3>驗收重點</h3>
+<ul>
+<li>最後一行「Built N/M assessments」的 <code>N</code> 要等於 <code>M</code>。如果不相等，代表某一筆被跳過了，往上看那一筆對應的警告訊息，通常是路徑設定寫錯。</li>
+<li>如果某一筆印出圖片缺檔的警告，代表這一批圖片有缺，那幾題會被跳過、不會出現在測驗裡 回頭跟步驟二的 <code>missingImageCount</code> 對一下，數字應該一致。</li>
+<li>輸出檔案大小大約是「來源圖片總大小 × 1.37」（base64 編碼會讓檔案膨脹約 37%）；明顯小很多通常代表大部分圖片沒被塞進去。</li>
+</ul>
+
+<h2 id="step6">步驟六：驗收成果</h2>
+<p class="step-badge">不要只信任「腳本沒報錯」</p>
+<ul>
+<li>確認 <code>dist/</code> 底下每份預期的檔案都存在，檔案大小落在合理範圍（見步驟五的 1.37 倍估算）。以 <code>114</code> 為例，<code>module3/repo/114</code> 底下所有 PNG 加起來約 11 MB，11 × 1.37 ≈ 15.1 MB，跟實際輸出的大小吻合。</li>
+<li>直接<strong>雙擊</strong>（或用瀏覽器開啟本機檔案路徑）打開 <code>dist/</code> 裡的檔案，不要另外開伺服器 整個重點就是驗證「不架站也能用」。輸入姓名、選一個較小的題數、作答幾題、按送出，確認會出現分數跟逐題對錯畫面。</li>
+<li>如果暫時沒辦法用瀏覽器操作，至少打開檔案搜尋 <code>window.QUIZ_DATA</code> 有沒有出現，並抽查幾筆 <code>data:image/png;base64,</code> 開頭的內容是不是非空字串。</li>
+</ul>
+
+<h2 id="step7">步驟七：打造教師端成績彙整頁</h2>
+<p class="step-badge">交付物：老師用的彙整工具</p>
+<p>學生在測驗頁面送出作答後會下載一份 CSV。這一步要設計一個給老師用的頁面，把全班這些 CSV 檔合併起來看 一樣要能雙擊開啟、不需要架站，也不能把任何資料上傳到網路上。</p>
+<div class="code-sample"><div class="code-sample-toolbar"><button class="copy-btn" type="button" onclick="copyPromptBlock(this)"><span class="copy-icon">📋</span><span>複製</span></button></div><pre><code>幫我設計並寫出 module3/app/report-aggregator.html，是老師用來彙整全班成績的頁面：
+1. 可以把多個 CSV 檔拖曳（或點擊選取）到頁面上。
+2. 依考試名稱自動分組，列出「每位學生答對／總題數／正確率」，
+   跟「每一題的出現次數／答對次數／答對率」兩張表。
+3. 提供「匯出合併 CSV」跟「列印／存成 PDF」兩個功能。
+全部在瀏覽器裡處理，不能把任何檔案內容送到網路上；一樣要能直接雙擊
+file:// 路徑開啟就正常運作，不需要伺服器。</code></pre></div>
+<p>「每一題的答對率」這張表特別適合用來看哪幾題全班普遍答錯，回頭檢討教學重點。這個頁面設計上是通用的，複製一份就能重複用在任何一份測驗、任何一個班級，不需要為了不同考試另外設定。</p>
+
+<h3>驗收重點</h3>
+<ul>
+<li>把步驟六作答產生的 CSV 拖進頁面，確認兩張表都正確出現，數字跟自己手動核對的結果一致。</li>
+<li>試著同時載入好幾份 CSV（模擬全班交回來的成績單），確認統計結果是正確加總、不是只顯示最後一份。</li>
+</ul>
+
+<h2 id="practice">動手做：套用在一組全新資料上</h2>
+<p><code>module3/</code> 目前只有 <code>repo/114</code>、<code>repo/math-115a</code> 這兩組資料，沒有預先準備第三組。這個空白正好是驗證「自己造的工具是否真的可以重複使用」最直接的方式：找一組全新的問題集資料，看看步驟二到步驟五做出來的分析腳本、<code>config.json</code> 設計、打包程式，能不能不修改、原封不動地套用上去。如果可以，代表這套工具的設計是對的；如果每換一組資料就要改工具本身的程式碼，代表某個環節設計得不夠通用，值得回頭檢討。</p>
+
+<h3>第一步：準備一組新的問題集資料夾</h3>
+<p>資料來源不重要，挑一種你方便的方式就好：拿你自己手邊已經有的任何一份考古題 PDF；或回到 <a href="../module2/exam-paper-pipeline-tutorial.html">Module 2</a>，換一個你感興趣的學年度或科目，照「下載 → 切題 → 清理」完整流程重新走一次。做完之後，你會得到一組新的「圖片 ＋ <code>keys.json</code>」資料夾，存到 <code>module3/repo/&lt;新資料夾名稱&gt;/</code>（跟現有的 <code>114</code>、<code>math-115a</code> 平級）。如果換到的是共同科目，記得比照 Module 2 處理數學科的方式，注意題數跟檔名裡的科目代號、以及切題完檔名裡殘留的「專業」字樣要改名。</p>
+
+<h3>第二步：套用自己的分析腳本</h3>
+<div class="code-sample"><div class="code-sample-toolbar"><button class="copy-btn" type="button" onclick="copyPromptBlock(this)"><span class="copy-icon">📋</span><span>複製</span></button></div><pre><code>python3 module3/app/analyze_folder.py module3/repo/&lt;新資料夾名稱&gt;</code></pre></div>
+<p>如果這支腳本是步驟二設計得夠通用，不需要為了這組新資料改任何程式碼，就應該能印出一份格式一致的分析報告（<code>questionCount</code>、<code>repoDir</code>、<code>filenamePattern</code> 等欄位都齊全）。</p>
+
+<h3>第三步：疊加進 config.json、重新打包</h3>
+<p>可以直接拿 <code>config.json</code> 裡既有的任何一筆設定當模板改。把新的一筆加進 <code>module3/app/config.json</code> 的陣列（記得 <code>examLabel</code> 要跟既有的不一樣），然後只重建這一筆：</p>
+<div class="code-sample"><div class="code-sample-toolbar"><button class="copy-btn" type="button" onclick="copyPromptBlock(this)"><span class="copy-icon">📋</span><span>複製</span></button></div><pre><code>cd module3/app
+python3 build_bundle.py --only &lt;你設定的 examLabel&gt;</code></pre></div>
+<p>最後照步驟六驗收：檔案存在、大小合理、雙擊打開能正常作答送出。完成後 <code>module3/app/config.json</code> 應該多一筆 <code>assessments</code>，<code>module3/app/dist/</code> 也應該多一個檔案，另外已經做好的測驗完全不受影響 這正好證明「疊加新測驗不需要重新設計工具」這個目標達成了。</p>
+
+<h2 id="troubleshoot">常見狀況快速對照表</h2>
+<div class="table-wrap"><table>
+<tr><th>狀況</th><th>代表什麼</th><th>該怎麼做</th></tr>
+<tr><td>分析腳本找不到 <code>keys.json</code>，或找到不只一個 <code>.json</code> 檔</td><td>資料夾裡的 JSON 檔不只一個、或完全沒有，腳本猜不出哪個是答案 key</td><td>回頭跟 Codex 討論，讓分析腳本支援明確指定檔名的參數，再重跑</td></tr>
+<tr><td><code>repoDir</code> 分析不出來，或找不到圖片資料夾</td><td>腳本的圖片位置偵測邏輯不夠周全</td><td>確認圖片實際路徑後，讓分析腳本支援明確指定資料夾的參數，再重跑</td></tr>
+<tr><td><code>repoDir</code> 是 <code>"."</code>，但 <code>config.json</code> 裡漏寫了這個欄位</td><td>如果設計上把 <code>repoDir</code> 省略時的預設值定成 <code>"repo"</code>，跟 <code>"."</code> 不一樣，打包時會去找不存在的 <code>repo/</code> 子資料夾</td><td><code>"repoDir": "."</code> 一定要明確寫進 <code>config.json</code>，不能省略；或索性把設計改成沒有預設值、缺欄位就報錯，逼自己每次都寫清楚</td></tr>
+<tr><td><code>filenamePattern</code> 找出來了，但 group 候選字元看起來是雜訊</td><td>檔名剛好符合腳本的推論規則，但那個「差異」其實不代表任何有意義的分類</td><td>不要硬寫進 <code>config.json</code>，直接省略這個欄位，確認網頁樣板有「退回逐題顯示原始檔名」的備案</td></tr>
+<tr><td>打包程式印出「Built N/M assessments」，<code>N &lt; M</code></td><td>至少一筆 assessment 打包失敗</td><td>往上找對應的警告訊息，通常是路徑欄位寫錯</td></tr>
+<tr><td>新加的 <code>examLabel</code> 跟既有某一筆撞名</td><td><code>examLabel</code> 同時決定輸出檔名，撞名會互相覆蓋</td><td>加新的一筆之前，先看一眼 <code>config.json</code> 既有陣列用過哪些名字</td></tr>
+<tr><td>直接雙擊 <code>app/quiz.html</code>（不是 <code>dist/</code> 裡的檔案），畫面空白或作答按鈕沒反應</td><td><code>quiz.html</code> 是「可編輯原始碼」版本，如果設計上還是用 <code>fetch()</code> 讀取設定跟圖片，瀏覽器基於安全性會擋掉 <code>file://</code> 底下的 <code>fetch()</code></td><td>要測原始碼版本，在 <code>app/</code> 資料夾下開一個本機伺服器再開瀏覽器：<code>python3 -m http.server</code>；真正要交給學生的是 <code>dist/*.html</code>，不需要伺服器</td></tr>
+<tr><td>改了 <code>config.json</code> 之後，<code>dist/</code> 裡的檔案內容沒變</td><td><code>dist/*.html</code> 是打包當下的快照，不會隨 <code>config.json</code> 即時更新</td><td>改完 <code>config.json</code> 一定要重跑一次打包程式（可以只加 <code>--only</code> 那一筆）</td></tr>
+</table></div>
+
+<h2 id="next">下一步</h2>
+<p>疊加更多測驗，只要重複「Module 2 切題清理 → 套用自己的分析腳本 → 疊加設定 → 重新打包」這個循環，工具本身不需要重新設計。</p>
+<p>做到這裡，你應該會發現自己（跟 Codex）從頭設計出來的這套小工具，跟講師事先寫好的 <code>build-quiz-app</code> custom skill 想解決的其實是同一個問題，只是一個是你自己設計的、一個是現成包好的。如果之後只是想快速拿到成品、不想每次都自己維護這套工具，可以直接改用 <a href="../module4/quiz-app-quickstart-tutorial.html">Module 4：一句話產生自主測驗網頁快速教學</a> 裡教的捷徑；也可以把這份教學做出來的腳本留著，之後比較看看跟現成 skill 的設計有什麼不一樣，會更清楚每一句「一句話」背後幫你省掉了什麼。</p>
+<p>正式交給學生前，記得分清楚兩種產出：<code>dist/*.html</code> 是要交出去的成品，雙擊即用、不需要伺服器、不需要網路；<code>quiz.html</code>／<code>config.json</code>／打包程式是留著未來自己修改用的可編輯原始碼，測試這一份才需要本機伺服器。<code>report-aggregator.html</code> 另外單獨交給老師，跟學生端的 <code>dist/*.html</code> 是不同用途的檔案。</p>
+<p>如果問題集內容是有版權疑慮的考古題（例如技專校院入學測驗中心的試題），交付雙擊即用的 HTML 之前，記得再次確認自己有沒有合法散布這些內容的權利。</p>
+
+<footer>教育部智慧雨林產業創生人才育成計畫（南臺科技大學 電子系 楊榮林 教授）</footer>
+</section>
+</div>
+<script>function navTargets(){return[...document.querySelectorAll('h2')]}function gotoSection(i){const targets=navTargets();if(targets[i])targets[i].scrollIntoView({behavior:'smooth',block:'start'});closeMenu()}function toggleMenu(){document.getElementById('sidebar').classList.toggle('open');document.getElementById('backdrop').classList.toggle('show')}function closeMenu(){document.getElementById('sidebar').classList.remove('open');document.getElementById('backdrop').classList.remove('show')}let spy;function buildSpy(){if(spy)spy.disconnect();const targets=navTargets();const btns=[...document.querySelectorAll('.nav .navbtn')];spy=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting){const idx=targets.indexOf(e.target);btns.forEach((b,i)=>b.classList.toggle('active',i===idx))}})},{rootMargin:'0px 0px -75% 0px',threshold:0});targets.forEach(t=>spy.observe(t))}document.addEventListener('DOMContentLoaded',buildSpy);function fallbackCopy(text){const ta=document.createElement('textarea');ta.value=text;ta.style.position='fixed';ta.style.opacity='0';document.body.appendChild(ta);ta.focus();ta.select();try{document.execCommand('copy')}catch(e){}document.body.removeChild(ta)}function copyPromptBlock(btn){const sample=btn.closest('.code-sample');if(!sample)return;const pre=sample.querySelector('pre');if(!pre)return;const text=pre.textContent;const done=()=>{const icon=btn.querySelector('.copy-icon');const prev=icon.textContent;icon.textContent='✓';btn.classList.add('copied');clearTimeout(btn._copyTimer);btn._copyTimer=setTimeout(()=>{icon.textContent=prev;btn.classList.remove('copied')},1500)};if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(text).then(done).catch(()=>{fallbackCopy(text);done()})}else{fallbackCopy(text);done()}}function toggleTheme(){const html=document.documentElement;const goingDark=html.getAttribute('data-theme')==='light';html.setAttribute('data-theme',goingDark?'dark':'light');document.getElementById('themeBtn').textContent=goingDark?'☀️ Light':'🌙 Dark'}</script>
+</body>
+</html>

@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="zh-Hant" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>考古題下載、切題與清理實作教學（Module 2）</title>
+<style>:root{color-scheme:dark;--bg:#f4f1ea;--fg:#1f2328;--muted:#687180;--card:#ebe7df;--border:#d6d0c5;--accent:#2563eb;--th-bg:#ded8cc;--shadow:0 1px 3px rgba(44,38,28,.09);--sidebar-w:284px;--content-max:1040px;--content-pad-x:44px;--content-pad-y:42px;--measure:76ch}[data-theme="dark"]{--bg:#101217;--fg:#e7eaf0;--muted:#a5aebd;--card:#181c24;--border:#2a3140;--accent:#7bb2ff;--th-bg:#202632;--shadow:0 1px 3px rgba(0,0,0,.42)}html{scroll-behavior:smooth}*{box-sizing:border-box}body{min-width:0;margin:0;background:var(--bg);color:var(--fg);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang TC","Microsoft JhengHei",Roboto,Helvetica,Arial,sans-serif;font-size:16px;line-height:1.76;letter-spacing:0;transition:background .25s,color .25s}.wrap{width:min(var(--content-max),calc(100vw - var(--sidebar-w) - (var(--content-pad-x) * 2)));margin-left:calc(var(--sidebar-w) + max(var(--content-pad-x),(100vw - var(--sidebar-w) - var(--content-max)) / 2));padding:var(--content-pad-y) var(--content-pad-x) 88px}.sidebar{position:fixed;top:0;left:0;width:var(--sidebar-w);height:100vh;overflow-y:auto;background:var(--card);border-right:1px solid var(--border);display:flex;flex-direction:column;gap:10px;padding:18px 14px;z-index:30}.brand{font-weight:700;font-size:1rem;line-height:1.35;padding:0 6px}.toprow{display:flex;flex-wrap:wrap;align-items:center;gap:8px}.nav{display:flex;flex-direction:column;gap:4px;margin-top:6px}.navbtn,.navhome{cursor:pointer;border:1px solid transparent;background:transparent;color:var(--muted);border-radius:7px;padding:7px 10px;font-size:14px;font-weight:650;text-align:left;width:100%;white-space:normal;text-decoration:none}.navbtn:hover,.navbtn.active,.navhome:hover{color:var(--accent);border-color:var(--border);background:var(--bg)}.navhome{display:block;border-color:var(--border);background:var(--bg);color:var(--fg)}.btn{cursor:pointer;border:1px solid var(--border);background:var(--bg);color:var(--fg);border-radius:8px;padding:6px 12px;font-size:13px;font-weight:650}.btn:hover{border-color:var(--accent)}.menu-toggle{display:none;position:fixed;top:12px;left:12px;z-index:40;cursor:pointer;border:1px solid var(--border);background:var(--card);color:var(--fg);border-radius:8px;padding:6px 12px;font-size:18px;line-height:1}.backdrop{display:none;position:fixed;inset:0;background:rgba(0,0,0,.42);z-index:20}h1{max-width:var(--measure);font-size:2.1rem;line-height:1.28;margin:.2em 0 .35em}h2{font-size:1.44rem;margin-top:1.85em;padding-bottom:.25em;border-bottom:2px solid var(--border);scroll-margin-top:24px}h3{font-size:1.14rem;margin-top:1.5em;color:var(--accent)}h4{font-size:1.02rem;margin-top:1.2em;margin-bottom:.35em;color:var(--fg)}ul,ol{padding-left:1.3em}li{margin:.35em 0}p,li,blockquote{max-width:var(--measure);overflow-wrap:break-word}.table-wrap{width:100%;overflow-x:auto;-webkit-overflow-scrolling:touch}table{width:100%;border-collapse:collapse;margin:1em 0;font-size:.93rem;box-shadow:var(--shadow);border-radius:8px;overflow:hidden}th,td{text-align:left;padding:10px 14px;border:1px solid var(--border);vertical-align:top}th{background:var(--th-bg);font-weight:750}tbody tr:nth-child(even) td{background:var(--card)}blockquote{margin:1.1em 0;padding:12px 16px;border-left:4px solid var(--accent);background:var(--card);color:var(--fg)}pre{font-family:inherit;overflow:auto;white-space:pre-wrap;word-break:break-word;overflow-wrap:anywhere;padding:12px 14px;background:var(--card);border:1px solid var(--border);border-radius:8px}code{font-family:"SFMono-Regular",Consolas,"Liberation Mono",monospace;font-size:.92em;color:var(--fg);background:var(--card);border:1px solid var(--border);border-radius:6px;padding:.08em .35em}pre code{border:0;padding:0;background:transparent}.nav code{border:0;background:transparent;color:inherit;padding:0}.code-sample{max-width:var(--measure);margin:1em 0 1.2em}.code-sample-toolbar{display:flex;gap:8px;margin:0 0 8px}.copy-btn{cursor:pointer;border:1px solid var(--border);background:var(--bg);color:var(--fg);border-radius:6px;padding:5px 10px;font-size:12px;font-weight:650;display:flex;align-items:center;gap:5px;margin-left:auto}.copy-btn:hover{border-color:var(--accent)}.copy-btn.copied{border-color:var(--accent);color:var(--accent)}.code-sample pre{margin:0}table{max-width:100%}pre{max-width:var(--measure)}a{color:var(--accent);overflow-wrap:anywhere}footer{margin-top:3em;color:var(--muted);font-size:.85rem;border-top:1px solid var(--border);padding-top:1em}@media (min-width:1440px){:root{--sidebar-w:304px;--content-max:1080px;--content-pad-x:54px;--content-pad-y:48px}}@media (max-width:1100px){:root{--sidebar-w:230px;--content-max:840px;--content-pad-x:28px;--content-pad-y:32px}.sidebar{padding:16px 10px}.brand{font-size:.95rem}.navbtn,.navhome{font-size:13px;padding:7px 8px}}@media (max-width:860px){:root{--sidebar-w:min(82vw,320px);--content-pad-x:18px;--content-pad-y:0px;--measure:100%}.sidebar{transform:translateX(-100%);transition:transform .25s}.sidebar.open{transform:none}.wrap{width:100%;margin-left:0;padding:72px var(--content-pad-x) 80px}.menu-toggle{display:block}.backdrop.show{display:block}h1{font-size:1.7rem}h2{font-size:1.22rem}h3{font-size:1.05rem}p,li,blockquote{max-width:100%}}@media (max-width:520px){:root{--sidebar-w:min(88vw,300px);--content-pad-x:14px}.wrap{padding-top:68px}.menu-toggle{top:10px;left:10px;padding:7px 11px}.sidebar{padding:14px 10px}.toprow{gap:6px}.btn{padding:6px 10px;font-size:12px}.navbtn,.navhome{font-size:13px}h1{font-size:1.5rem}h2{font-size:1.15rem}th,td{padding:8px 10px}}</style>
+</head>
+<body>
+<button class="menu-toggle" id="menuToggle" onclick="toggleMenu()" type="button">☰</button>
+<aside class="sidebar" id="sidebar">
+ <div class="brand">考古題下載、切題與清理實作教學</div>
+ <div class="toprow"><button class="btn" id="themeBtn" onclick="toggleTheme()" type="button">☀️ Light</button></div>
+ <a class="navhome return-control" href="../../index.html" aria-label="返回上一層">返回上一層</a>
+ <nav class="nav">
+<button class="navbtn" onclick="gotoSection(0)" type="button">學習目標</button>
+<button class="navbtn" onclick="gotoSection(1)" type="button">先備條件</button>
+<button class="navbtn" onclick="gotoSection(2)" type="button">整體流程總覽</button>
+<button class="navbtn" onclick="gotoSection(3)" type="button">步驟一：下載 PDF</button>
+<button class="navbtn" onclick="gotoSection(4)" type="button">步驟二：切成單題圖片</button>
+<button class="navbtn" onclick="gotoSection(5)" type="button">步驟三：清理圖片</button>
+<button class="navbtn" onclick="gotoSection(6)" type="button">動手做：換一組資料練習</button>
+<button class="navbtn" onclick="gotoSection(7)" type="button">常見狀況快速對照表</button>
+<button class="navbtn" onclick="gotoSection(8)" type="button">下一步</button>
+ </nav>
+</aside>
+<div class="backdrop" id="backdrop" onclick="toggleMenu()"></div>
+<div class="wrap">
+<section>
+<h1 id="title">考古題下載、切題與清理實作教學</h1>
+<p class="lead">這份教學帶你跟著做一次「PDF 考古題 → 一題一張乾淨圖片 ＋ 標準答案 JSON」的完整流程。你不需要自己寫程式，每個步驟都只要在 Codex 對話視窗裡用自然語言下指令即可完成。</p>
+<p class="lead">本教學對應 <code>module2/</code> 資料夾，裡面已經有兩組完整跑過的範例資料，你可以隨時打開來對照「正確結果長什麼樣子」。如果想跳過下載階段直接練切題，也可以下載 <a href="module2-raw.tar" download>module2-raw.tar</a>，解壓後會得到 <code>raw/115/</code>、<code>raw/math-115b/</code> 這兩組原始 PDF。</p>
+
+<div class="table-wrap"><table>
+<tr><th>範例資料</th><th>試題來源</th><th>已下載的 PDF</th><th>已切題＋清理完成的成果</th></tr>
+<tr><td>115 學年度<br>電機與電子群資電類<br>專業科目(一)(二)，共 100 題</td><td>從零下載示範</td><td><code>module2/raw/115/</code></td><td><code>module2/repo/115/</code></td></tr>
+<tr><td>115 學年度<br>數學(B)<br>共同科目，共 25 題</td><td>PDF 已在手示範（不用下載）</td><td><code>module2/raw/math-115b/</code></td><td><code>module2/repo/math-115b/</code></td></tr>
+</table></div>
+
+<h2 id="obj">學習目標</h2>
+<p>做完這份教學，你應該能夠：</p>
+<ul>
+<li>用 Codex，把技專校院入學測驗中心（統測）的考古題 PDF，轉成一題一張的乾淨圖片，加上一份標準答案 JSON。</li>
+<li>知道下載、切題、清理這三個階段各自在做什麼、為什麼要驗收、以及每個階段各自的能力邊界在哪裡。</li>
+<li>看得懂「乾跑（dry-run）先確認、沒問題才正式執行」這個安全習慣，並知道為什麼清理階段一定要先乾跑。</li>
+<li>自己換一個學年度／科目，獨立重跑一次完整流程。</li>
+</ul>
+
+<h2 id="prereq">先備條件</h2>
+<ul>
+<li>已經能開啟並使用 Codex。若還沒設定好工作環境，請先參考 <a href="../module1/windows11-vibe-coding-setup.html">Module 1：Windows 11 環境建置</a>。</li>
+<li>下載階段（步驟一）需要網路連線，因為要連到技專校院入學測驗中心的網站。</li>
+</ul>
+<blockquote>這三個工具都是工作坊講師事先寫好的 custom skill（一份說明文件 SKILL.md，加上對應的腳本），放在這個專案的 <code>.claude/skills/</code> 資料夾底下（不是 Codex 原生內建的功能）。跟 Codex 對話時，把你要做的事講清楚，並提一句「可以參考 <code>.claude/skills/</code> 底下對應的工具」，讓 Codex 自己去讀說明、決定怎麼用；如果它沒有主動找到，也可以直接請它打開指定的 <code>SKILL.md</code> 看說明。</blockquote>
+
+<h2 id="overview">整體流程總覽</h2>
+<p>整個流程分三個階段，前一階段的輸出就是下一階段的輸入：</p>
+<div class="table-wrap"><table>
+<tr><th>階段</th><th>在做什麼</th><th>輸入</th><th>輸出</th><th>對應 skill</th></tr>
+<tr><td>① 下載</td><td>抓試題＋標準答案 PDF</td><td>學年度、群類</td><td><code>raw/&lt;year&gt;/*.pdf</code></td><td><code>download-exam-pdf</code></td></tr>
+<tr><td>② 切題</td><td>把 PDF 切成一題一張圖，配對答案</td><td>①的 PDF</td><td><code>repo/&lt;name&gt;/*.png</code> ＋ <code>keys.json</code></td><td><code>slice-exam-pdf</code></td></tr>
+<tr><td>③ 清理</td><td>裁掉多餘空白、塗掉題號</td><td>②的 png</td><td>原地覆寫、變乾淨的 png</td><td><code>clean-exam-question-images</code></td></tr>
+</table></div>
+<p>兩組範例資料剛好示範了兩種起點：115 學年度電機與電子群資電類是「從零開始」，三個階段都跑過一次；115 數學(B) 則是「PDF 已經在手上」，直接從步驟二開始 這是因為 <code>download-exam-pdf</code> 這個工具目前只認得「專業科目(一)(二)」，抓不到數學這種共同科目，這一點在步驟一會再說明。</p>
+
+<h2 id="step1">步驟一：下載試題與標準答案 PDF</h2>
+<p>這一步的產出，是接下來切題階段要用的原始 PDF。<strong>如果你手上已經有 PDF 了（例如老師自己保存的考古題），可以直接跳到步驟二。</strong></p>
+<blockquote><strong>目前的能力邊界：</strong><code>download-exam-pdf</code> 這個工具目前只認得成績單頁面上「專業科目(一)」「專業科目(二)」這兩個列標籤，抓不到「數學(A)/(B)/(C)」這類共同科目 這正是範例資料裡數學(B)直接跳過這一步、從切題開始的原因。如果你要練習的是共同科目，請自行到網站上手動下載 PDF，再從步驟二開始。</blockquote>
+
+<h3>用一句話請 Codex 做</h3>
+<div class="code-sample"><div class="code-sample-toolbar"><button class="copy-btn" type="button" onclick="copyPromptBlock(this)"><span class="copy-icon">📋</span><span>複製</span></button></div><pre><code>請到技專校院入學測驗中心的網站，幫我下載 115 學年度統測「電機與電子群資電類」的資料。
+我只需要專業科目(一)、專業科目(二)的試題，還有這兩科的標準答案。
+下載好之後存到 module2/raw/115，檔名保留系統原本的命名方式。</code></pre></div>
+
+<p><strong>產出：</strong><code>module2/raw/115/</code> 底下會出現 4 個檔案：<code>115專業一試題.pdf</code>、<code>115專業一答案.pdf</code>、<code>115專業二試題.pdf</code>、<code>115專業二答案.pdf</code>。</p>
+
+<h3>驗收重點</h3>
+<ul>
+<li>4 個檔案都出現，檔名跟科目、群類對得起來。</li>
+<li>試題 PDF 大約 12 頁（50 題的專業科目考卷），標準答案 PDF 大約 1 頁 頁數差太多要留意。</li>
+<li>請 Codex 打開下載到的 PDF，用肉眼確認群類、科目對不對，不要急著往下一步。</li>
+<li>如果答案 PDF 裡有「答案變更為…」這類更正說明，先留意一下，切題階段的答案解析會自動把多重答案（如 <code>"AD"</code>）收進去，但值得事後對照原文確認有沒有真的收進表格。</li>
+</ul>
+
+<h2 id="step2">步驟二：切成單題圖片＋答案 JSON</h2>
+<p>這一步把整份 PDF 切成一題一張的 PNG 圖片，並且對照標準答案 PDF，做出一份「圖片檔名 → 正確答案」的 JSON。</p>
+
+<h3>用一句話請 Codex 做</h3>
+<div class="code-sample"><div class="code-sample-toolbar"><button class="copy-btn" type="button" onclick="copyPromptBlock(this)"><span class="copy-icon">📋</span><span>複製</span></button></div><pre><code>請幫我把 module2/raw/115 底下 115 學年度試題 PDF，每一題切成一張圖片，
+檔名用 module2/repo/115/115專業&lt;1或2&gt;Q&lt;題號&gt;.png。
+再對照標準答案 PDF，做出 module2/repo/115/115keys.json，
+key 要跟圖片檔名完全一樣（含 .png），value 放正確答案字母。</code></pre></div>
+
+<p><strong>產出：</strong><code>module2/repo/115/115專業1Q1.png</code> ～ <code>115專業1Q50.png</code>、<code>115專業2Q1.png</code> ～ <code>115專業2Q50.png</code>，加上一份 <code>115keys.json</code>，內容像這樣：</p>
+<div class="code-sample"><pre><code>{
+ "115專業1Q1.png": "B",
+ "115專業1Q10.png": "B",
+ "115專業1Q11.png": "A",
+ ...
+}</code></pre></div>
+
+<h3>共同科目（例如數學）：題數不是 50 題，且檔名要手動改</h3>
+<p>共同科目考卷通常是 25 題，不是 50 題，記得跟 Codex 說清楚正確題數；另外 <code>slice-exam-pdf</code> 的輸出檔名固定寫死「專業」兩個字，即使科目代號換成字母也一樣，所以切完數學卷之後，檔名還是會叫 <code>115專業BQ&lt;n&gt;.png</code>，要請 Codex 另外改名成 <code>115數學BQ&lt;n&gt;.png</code>，<code>keys.json</code> 裡的 key 也要同步改。</p>
+
+<h3>用一句話請 Codex 做</h3>
+<div class="code-sample"><div class="code-sample-toolbar"><button class="copy-btn" type="button" onclick="copyPromptBlock(this)"><span class="copy-icon">📋</span><span>複製</span></button></div><pre><code>請幫我把 module2/raw/math-115b 底下的 115 學年度數學(B) 試題 PDF 切成一題一張圖片，
+這科是共同科目，只有 25 題，科目代號用 B。
+輸出檔名請直接用 115數學BQ&lt;題號&gt;.png（不要用預設帶的「專業」字樣），
+再對照標準答案 PDF 做出 keys.json，key 要跟檔名一致（含 .png），存到 module2/repo/math-115b。</code></pre></div>
+
+<h3>驗收重點</h3>
+<ul>
+<li>圖片張數符合預期題數（專業科目通常 50 題、共同科目通常 25 題），<code>keys.json</code> 的筆數要一樣多。</li>
+<li>如果考卷有「▲閱讀下文，回答第 X-Y 題」這種題組，挑題組的第一題和後面某一題各看一次，確認共用的閱讀文章有出現、沒有被截斷或重複貼兩次。</li>
+<li>挑一題有電路圖／圖表的題目，確認圖片右邊沒有被切掉。</li>
+<li>看最後一題，確認內容完整沒被切斷，如果原本有「【以下空白】」的提示，這裡應該還留著（要等清理階段才會被裁掉）。</li>
+<li>隨機抽 2、3 題的答案，跟標準答案 PDF 肉眼核對一次。</li>
+</ul>
+
+<h2 id="step3">步驟三：清理圖片</h2>
+<p>切出來的圖片下緣常常會多留一小段空白，甚至帶到下一題的一小段殘影；題號（像「50.」「11.」）也還印在題目最前面。這一步做兩件事：</p>
+<ul>
+<li><strong>Pass 1：</strong>裁掉每張圖下面多餘的空白（包含「【以下空白】」的殘留），但不動真正的內容。</li>
+<li><strong>Pass 2：</strong>把題號（如「50.」「11.」）塗白，但選項 (A)(B)(C)(D) 完全不能動。</li>
+</ul>
+<p>這兩段清理邏輯是直接寫給 Codex 讀取後即場執行的，所以這一步一定要透過 Codex 對話來做。</p>
+
+<h3>用一句話請 Codex 做</h3>
+<div class="code-sample"><div class="code-sample-toolbar"><button class="copy-btn" type="button" onclick="copyPromptBlock(this)"><span class="copy-icon">📋</span><span>複製</span></button></div><pre><code>對 module2/repo/115 資料夾裡的每張 *.png：
+1. 裁掉下面多餘的空白（含「以下空白」殘影），但不要裁到真正的內容。
+2. 清掉題號（像「50.」「11.」），但 (A)(B)(C)(D) 選項不要動。
+執行 Pass 2 之前，先「乾跑」一次，把每張圖偵測到的題號區塊印出來讓我看過，
+確認每張圖都剛好抓到 1 個題號區塊之後，才正式塗白存檔。</code></pre></div>
+
+<blockquote><strong>為什麼一定要先乾跑：</strong>Pass 2 判斷「這是不是題號」用的是像素座標的門檻值（例如題號要在 x≤220 開始），這組門檻是針對這個考卷範本量身調校的。萬一某一年、某一科的版面跟預期不同，門檻可能會抓錯 乾跑只印出偵測結果、不會真的動任何像素，讓你能在「真的塗白存檔」之前先發現異常，避免一次做壞整批圖片。</blockquote>
+
+<h3>驗收重點</h3>
+<ul>
+<li>乾跑結果：每個檔案都剛好偵測到 <strong>1</strong> 個題號區塊。0 個代表版面跟預期不同，≥2 個代表誤判 兩種情況都要先停下來人工檢查，不要跳過。</li>
+<li>抽查一題個位數題號（如 Q1）、一題兩位數題號（如 Q50），確認題號真的不見了，而且沒有留下半個數字的殘影。</li>
+<li>抽查至少一張有 (A)～(D) 選項的圖，確認選項字母都完整保留。</li>
+<li>抽查一張原本有「【以下空白】」的圖，確認空白已裁掉、內容緊貼底部並留一點呼吸空間。</li>
+<li>整個資料夾掃一次：找找看有沒有圖片底部還留著一整行、跟前後文完全不相關的文字（不是幾個像素的小雜訊） 這種情況不是清理階段能安全處理的，代表切題階段的邊界抓錯了，要回頭用 <code>slice-exam-pdf</code> 重新切那一題，而不是在清理階段硬加規則修。</li>
+</ul>
+
+<h2 id="practice">動手做：換一組資料，自己跑一次全流程</h2>
+<p>看懂範例之後，換你自己動手跑一次。建議照下面兩種難度挑一種：</p>
+
+<h3>基本版：從切題開始（不需要等網路下載）</h3>
+<p>如果你手邊已經有其他學年度或科目的 PDF（例如之前下載過、或同事給的），可以直接拿來練切題＋清理兩個階段，跳過下載步驟，輸出到一個新資料夾，不會動到 <code>module2/</code> 裡已經驗證過的成果。比照步驟二，請 Codex 把試題切成一題一張圖片，輸出到 <code>module2/repo/114-practice</code> 這類新資料夾；切完之後，比照步驟三，請 Codex 對這個資料夾執行清理（記得先乾跑）。</p>
+
+<h3>完整版：從下載開始</h3>
+<p>換一個你自己感興趣的學年度或群類，從步驟一的下載開始，完整跑過三個階段。建議先請 Codex 用「乾跑」模式確認群類名稱有比對到，再正式下載，避免白跑一次網路請求。</p>
+
+<h3>練習時的自我檢查</h3>
+<ul>
+<li>每個階段都做完該階段的「驗收重點」，不要等三個階段都跑完才一次檢查。</li>
+<li>如果卡在某個階段，回頭比對本教學開頭表格裡列出的範例資料（<code>module2/repo/115</code>、<code>module2/repo/math-115b</code>），看看「正確結果」長什麼樣子。</li>
+</ul>
+
+<h2 id="troubleshoot">常見狀況快速對照表</h2>
+<div class="table-wrap"><table>
+<tr><th>狀況</th><th>代表什麼</th><th>該怎麼做</th></tr>
+<tr><td>下載到的 PDF 打開一看，群類或科目跟預期不同</td><td>下載時比對到的群類、科目名稱有誤</td><td>請 Codex 開啟 PDF 肉眼核對，確認無誤才繼續下一步</td></tr>
+<tr><td>共同科目（數學 A/B/C）沒辦法用 <code>download-exam-pdf</code> 下載</td><td>這個 skill 目前只認得「專業科目(一)(二)」的列標籤</td><td>自行取得 PDF，直接從步驟二切題開始</td></tr>
+<tr><td>切完題後檔名裡有「專業」兩字，但其實是數學科</td><td><code>slice-exam-pdf</code> 的輸出檔名固定寫死「專業」，不會因為科目代號換成字母而改變</td><td>請 Codex 改檔名＋同步改 <code>keys.json</code> 的 key，再進清理階段</td></tr>
+<tr><td>Pass 2 乾跑時某張圖出現 0 個或 ≥2 個題號區塊</td><td>版面跟預期範本不同，或門檻誤判</td><td>先停下來人工檢查那張圖，不要直接跳過或硬套用</td></tr>
+<tr><td>清理完後某張圖底部還留一整行不相關的文字</td><td>這是切題邊界的殘影，不是單純的空白或雜訊</td><td>回頭用 <code>slice-exam-pdf</code> 重新切那一題，不要在清理階段加規則硬修</td></tr>
+<tr><td>想把 Pass 2 的 gap 門檻從 14 調小一點（例如 10）</td><td>兩位數題號（如「11.」）本身兩個數字間距就可能到 10px</td><td>門檻維持 14，往下調會把兩位數題號誤判成只清一半，留下殘影</td></tr>
+</table></div>
+
+<h2 id="next">下一步</h2>
+<p>清理乾淨的圖片＋<code>keys.json</code>，就是後續「自主練習小工具」要用的原始素材 下一步可以把 <code>module2/repo/&lt;name&gt;/</code> 這個問題集資料夾，交給 <code>build-quiz-app</code> 這個 skill，產生一個不用架站、雙擊就能打開的學生自我測驗網頁與教師端 CSV 彙整頁面。</p>
+<p>想看已經做好的成果長什麼樣子，可以參考 <a href="../module4/quiz-app-quickstart-tutorial.html">Module 4</a> 對應的 <code>module4/app/</code> 底下用同一套流程產出的測驗頁面。</p>
+
+<footer>教育部智慧雨林產業創生人才育成計畫（南臺科技大學 電子系 楊榮林 教授）</footer>
+</section>
+</div>
+<script>function navTargets(){return[...document.querySelectorAll('h2')]}function gotoSection(i){const targets=navTargets();if(targets[i])targets[i].scrollIntoView({behavior:'smooth',block:'start'});closeMenu()}function toggleMenu(){document.getElementById('sidebar').classList.toggle('open');document.getElementById('backdrop').classList.toggle('show')}function closeMenu(){document.getElementById('sidebar').classList.remove('open');document.getElementById('backdrop').classList.remove('show')}let spy;function buildSpy(){if(spy)spy.disconnect();const targets=navTargets();const btns=[...document.querySelectorAll('.nav .navbtn')];spy=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting){const idx=targets.indexOf(e.target);btns.forEach((b,i)=>b.classList.toggle('active',i===idx))}})},{rootMargin:'0px 0px -75% 0px',threshold:0});targets.forEach(t=>spy.observe(t))}document.addEventListener('DOMContentLoaded',buildSpy);function fallbackCopy(text){const ta=document.createElement('textarea');ta.value=text;ta.style.position='fixed';ta.style.opacity='0';document.body.appendChild(ta);ta.focus();ta.select();try{document.execCommand('copy')}catch(e){}document.body.removeChild(ta)}function copyPromptBlock(btn){const sample=btn.closest('.code-sample');if(!sample)return;const pre=sample.querySelector('pre');if(!pre)return;const text=pre.textContent;const done=()=>{const icon=btn.querySelector('.copy-icon');const prev=icon.textContent;icon.textContent='✓';btn.classList.add('copied');clearTimeout(btn._copyTimer);btn._copyTimer=setTimeout(()=>{icon.textContent=prev;btn.classList.remove('copied')},1500)};if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(text).then(done).catch(()=>{fallbackCopy(text);done()})}else{fallbackCopy(text);done()}}function toggleTheme(){const html=document.documentElement;const goingDark=html.getAttribute('data-theme')==='light';html.setAttribute('data-theme',goingDark?'dark':'light');document.getElementById('themeBtn').textContent=goingDark?'☀️ Light':'🌙 Dark'}</script>
+</body>
+</html>
