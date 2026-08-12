@@ -1,0 +1,4 @@
+interface:
+  display_name: "Embed Workflow Infographic"
+  short_description: "Generate and embed dark workflow infographic slides."
+  default_prompt: "Use $embed-workflow-infographic to add a workflow slide to an HTML tutorial."
