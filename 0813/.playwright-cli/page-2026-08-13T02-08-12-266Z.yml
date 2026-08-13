@@ -1,0 +1,415 @@
+- generic [ref=e1]:
+  - complementary [ref=e2]:
+    - generic [ref=e3]: Windows 11 Vibe Coding 與 AI Agent 環境建置
+    - generic [ref=e4]:
+      - button "English" [ref=e5] [cursor=pointer]
+      - button "☀️ Light" [ref=e6] [cursor=pointer]
+    - generic [ref=e7]:
+      - checkbox "導覽反思投影片" [checked] [ref=e8]
+      - generic [ref=e9]: 導覽反思投影片
+    - link "返回上一層 / Back to parent" [ref=e10] [cursor=pointer]:
+      - /url: ../../index.html
+      - text: 返回上一層
+    - navigation [ref=e11]:
+      - button "學習目標 (Learning Objectives)" [ref=e12] [cursor=pointer]
+      - button "先備條件 (Prerequisites)" [ref=e13] [cursor=pointer]
+      - button "最低電腦需求 (Minimum Computer Requirements)" [ref=e14] [cursor=pointer]
+      - button "安裝的工具 (Toolchain)" [ref=e15] [cursor=pointer]
+      - button "安裝方式一：手動安裝" [ref=e16] [cursor=pointer]
+      - button "安裝方式二：AI Agent Prompt" [ref=e17] [cursor=pointer]
+      - button "安裝方式三：module1-setup-windows.bat" [ref=e18] [cursor=pointer]
+      - button "申請 GitHub 帳號與 GitHub Education" [active] [ref=e19] [cursor=pointer]
+      - button "實作流程 (Hands-on Activities)" [ref=e20] [cursor=pointer]
+  - generic [ref=e21]:
+    - generic [ref=e22]:
+      - heading "Windows 11 Vibe Coding 與 AI Agent 環境建置" [level=1] [ref=e23]
+      - paragraph [ref=e24]: 本模組聚焦在 Windows 11 筆電上的 Vibe Coding 與 AI Agent 工作環境建置。先安裝 ChatGPT 桌面 app，再用一鍵安裝腳本準備開發工具；最後以 Chat、ChatGPT Work 與 Codex 的正確工作介面完成幾個小型驗證任務。
+      - heading "學習目標 (Learning Objectives)" [level=2] [ref=e25]
+      - paragraph [ref=e26]: 完成本模組後，教師應能：
+      - list [ref=e27]:
+        - listitem [ref=e28]: 在自己的 Windows 11 筆電上獨立啟動可運作的 Vibe Coding 與 AI Agent 工作環境。
+        - listitem [ref=e29]: 使用 ChatGPT 桌面 app 的 Chat、ChatGPT Work 與 Codex 工作介面，依任務選擇適合的入口。
+        - listitem [ref=e30]: 使用 VS Code 作為主要開發介面，搭配 Codex CLI 與 Codex 擴充套件進行程式生成、修改與檢查。
+        - listitem [ref=e31]: 使用 uv 與 npm 管理 Python 與 Node.js 的套件及專案環境。
+        - listitem [ref=e32]:
+          - text: 透過 GitHub CLI (
+          - code [ref=e33]: gh
+          - text: ) 以瀏覽器登入 GitHub，完成專案 clone、推送與 GitHub Pages 部署。
+        - listitem [ref=e34]: 依據 checklist 自行驗證環境，並排除常見安裝問題。
+      - heading "先備條件 (Prerequisites)" [level=2] [ref=e35]
+      - table [ref=e37]:
+        - rowgroup [ref=e38]:
+          - row [ref=e39]:
+            - columnheader "項目" [ref=e40]
+            - columnheader "說明" [ref=e41]
+        - rowgroup [ref=e42]:
+          - row [ref=e43]:
+            - cell "個人筆電" [ref=e44]
+            - cell "Windows 11，具系統管理 (安裝軟體) 權限" [ref=e45]
+          - row [ref=e46]:
+            - cell "網路" [ref=e47]
+            - cell "可連線下載安裝套件與存取 AI 服務" [ref=e48]
+          - row [ref=e49]:
+            - cell "ChatGPT 帳號" [ref=e50]
+            - cell "可使用 Codex 的 ChatGPT 帳號；先登入 ChatGPT 桌面 app。實際可用功能依方案、工作區與推出狀況而異，CLI 與 VS Code 擴充套件可使用同一登入帳號。" [ref=e51]
+          - row [ref=e52]:
+            - cell "GitHub 帳號" [ref=e53]
+            - cell "供 GitHub CLI 登入、clone 專案與部署 GitHub Pages 使用" [ref=e54]
+          - row [ref=e55]:
+            - cell "基本操作" [ref=e56]
+            - cell "能開啟終端機 (terminal) 並輸入指令" [ref=e57]
+      - heading "最低電腦需求 (Minimum Computer Requirements)" [level=2] [ref=e58]
+      - paragraph [ref=e59]: 本工作坊會同時開啟 VS Code、Node.js、Python、終端機與瀏覽器登入頁面，建議筆電至少符合下列規格。標示「建議」者為較順暢的體驗門檻。
+      - table [ref=e61]:
+        - rowgroup [ref=e62]:
+          - row [ref=e63]:
+            - columnheader "項目" [ref=e64]
+            - columnheader "最低需求" [ref=e65]
+            - columnheader "建議" [ref=e66]
+        - rowgroup [ref=e67]:
+          - row [ref=e68]:
+            - cell "作業系統" [ref=e69]
+            - cell "Windows 11 (64 位元)，並已安裝 App Installer (winget)" [ref=e70]
+            - cell "Windows 11 且更新至最新版" [ref=e71]
+          - row [ref=e72]:
+            - cell "處理器" [ref=e73]
+            - cell "64 位元 x64 雙核心" [ref=e74]
+            - cell "四核心以上" [ref=e75]
+          - row [ref=e76]:
+            - cell "記憶體 (RAM)" [ref=e77]
+            - cell "8 GB" [ref=e78]
+            - cell "16 GB" [ref=e79]
+          - row [ref=e80]:
+            - cell "可用磁碟空間" [ref=e81]
+            - cell "10 GB" [ref=e82]
+            - cell "20 GB 以上" [ref=e83]
+          - row [ref=e84]:
+            - cell "權限" [ref=e85]
+            - cell "具系統管理員權限 (可安裝軟體、允許 UAC)" [ref=e86]
+            - cell "同左" [ref=e87]
+          - row [ref=e88]:
+            - cell "網路" [ref=e89]
+            - cell "穩定寬頻，可存取 GitHub 與 AI 服務" [ref=e90]
+            - cell "同左" [ref=e91]
+          - row [ref=e92]:
+            - cell "瀏覽器" [ref=e93]
+            - cell "Microsoft Edge 或 Chrome (供登入流程使用)" [ref=e94]
+            - cell "同左" [ref=e95]
+      - blockquote [ref=e96]:
+        - paragraph [ref=e97]: 8 GB 記憶體可完成所有任務，但同時開啟 VS Code、瀏覽器與多個終端機時，16 GB 會明顯較順暢。磁碟空間需求包含工具鏈、專案的 node_modules 與 Python 套件。
+      - figure [ref=e98]:
+        - img "學習者的工作環境：編輯與操作、版本管理、程式執行、套件管理與協作入口，共同完成本機開發、專案協作與網站發佈。" [ref=e99]
+      - heading "安裝的工具 (Toolchain)" [level=2] [ref=e100]
+      - paragraph [ref=e101]: Windows 11 一鍵安裝腳本與課後指南會在筆電上安裝下列工具：
+      - table [ref=e103]:
+        - rowgroup [ref=e104]:
+          - row [ref=e105]:
+            - columnheader "工具" [ref=e106]
+            - columnheader "用途" [ref=e107]
+        - rowgroup [ref=e108]:
+          - row [ref=e109]:
+            - cell "VS Code" [ref=e110]
+            - cell "程式碼編輯器，也是日後操作 AI Agent 的主要視窗" [ref=e111]
+          - row [ref=e112]:
+            - cell "Git" [ref=e113]
+            - cell "版本管理工具，許多 AI 工具會用到" [ref=e114]
+          - row [ref=e115]:
+            - cell "Node.js + npm" [ref=e116]
+            - cell "JavaScript 執行環境，用來啟動 local web server 與安裝 Codex CLI" [ref=e117]
+          - row [ref=e118]:
+            - cell "uv (Python)" [ref=e119]
+            - cell "管理 Python 與套件，安裝／更新／移除都很簡單" [ref=e120]
+          - row [ref=e121]:
+            - cell "ChatGPT 桌面 app" [ref=e122]
+            - cell "Windows 上的 Chat、ChatGPT Work 與 Codex 入口；可開啟專案、查看變更與使用整合終端機。" [ref=e123]
+          - row [ref=e124]:
+            - cell "Codex CLI（終端機工作流程）" [ref=e125]
+            - cell "OpenAI 的 AI Agent 命令列工具；適合需要直接在終端機操作專案的課程練習。先以可使用 Codex 的 ChatGPT 帳號登入，實際功能依帳號與工作區而異。" [ref=e126]
+          - row [ref=e127]:
+            - cell "GitHub CLI (gh)" [ref=e128]
+            - cell "用瀏覽器登入 GitHub，clone 專案、推送與部署 GitHub Pages" [ref=e129]
+          - row [ref=e130]:
+            - cell "VS Code 擴充套件" [ref=e131]
+            - cell "Python、Jupyter、GitLens、ESLint，以及 Codex 編程代理 (openai.chatgpt)" [ref=e132]
+      - figure [ref=e133]:
+        - img "選擇合適的安裝方式：優先一鍵安裝，重新開啟終端機並逐項檢查版本；若受限制或失敗，可手動安裝或由代理協助安裝，最後切回先要求核准。" [ref=e134]
+      - heading "安裝方式一：手動下載與安裝必要工具" [level=2] [ref=e135]
+      - paragraph [ref=e136]:
+        - text: 若一鍵安裝失敗，或教師的筆電受學校 IT 權限限制，可改用手動安裝。建議仍優先使用
+        - code [ref=e137]: winget
+        - text: 指令；若
+        - code [ref=e138]: winget
+        - text: 不可用，再從官方下載頁面安裝。
+      - table [ref=e140]:
+        - rowgroup [ref=e141]:
+          - row [ref=e142]:
+            - columnheader "工具" [ref=e143]
+            - columnheader "官方下載／說明" [ref=e144]
+            - columnheader "建議指令或手動操作" [ref=e145]
+        - rowgroup [ref=e146]:
+          - row [ref=e147]:
+            - cell "App Installer / winget" [ref=e148]
+            - cell [ref=e149]:
+              - link "https://learn.microsoft.com/windows/msix/app-installer/install-update-app-installer" [ref=e150] [cursor=pointer]:
+                - /url: https://learn.microsoft.com/windows/msix/app-installer/install-update-app-installer
+            - cell [ref=e151]:
+              - text: Windows 11 通常已內建。若
+              - code [ref=e152]: winget --version
+              - text: 無法執行，請從 Microsoft Store 安裝或更新 App Installer。
+          - row [ref=e153]:
+            - cell "ChatGPT 桌面 app" [ref=e154]
+            - cell [ref=e155]:
+              - link "OpenAI：ChatGPT desktop app for Windows" [ref=e156] [cursor=pointer]:
+                - /url: https://get.microsoft.com/installer/download/9PLM9XGG6VKS?cid=website_cta_psi
+            - cell [ref=e157]:
+              - code [ref=e158]: winget install --id 9PLM9XGG6VKS --source msstore
+              - text: ，或從 Microsoft Store 安裝。安裝後開啟 app，使用 ChatGPT 帳號登入。
+          - row [ref=e159]:
+            - cell "VS Code" [ref=e160]
+            - cell [ref=e161]:
+              - link "https://code.visualstudio.com/download" [ref=e162] [cursor=pointer]:
+                - /url: https://code.visualstudio.com/download
+            - cell [ref=e163]:
+              - code [ref=e164]: winget install --id Microsoft.VisualStudioCode --source winget --exact
+          - row [ref=e165]:
+            - cell "Git for Windows" [ref=e166]
+            - cell [ref=e167]:
+              - link "https://git-scm.com/downloads/win" [ref=e168] [cursor=pointer]:
+                - /url: https://git-scm.com/downloads/win
+            - cell [ref=e169]:
+              - code [ref=e170]: winget install --id Git.Git --source winget --exact
+          - row [ref=e171]:
+            - cell "Node.js LTS + npm" [ref=e172]
+            - cell [ref=e173]:
+              - link "https://nodejs.org/en/download" [ref=e174] [cursor=pointer]:
+                - /url: https://nodejs.org/en/download
+            - cell [ref=e175]:
+              - code [ref=e176]: winget install --id OpenJS.NodeJS.LTS --source winget --exact
+          - row [ref=e177]:
+            - cell "uv" [ref=e178]
+            - cell [ref=e179]:
+              - link "https://docs.astral.sh/uv/getting-started/installation/" [ref=e180] [cursor=pointer]:
+                - /url: https://docs.astral.sh/uv/getting-started/installation/
+            - cell [ref=e181]:
+              - code [ref=e182]: winget install --id astral-sh.uv --source winget --exact
+          - row [ref=e183]:
+            - cell [ref=e184]:
+              - text: GitHub CLI (
+              - code [ref=e185]: gh
+              - text: )
+            - cell [ref=e186]:
+              - link "https://cli.github.com/" [ref=e187] [cursor=pointer]:
+                - /url: https://cli.github.com/
+            - cell [ref=e188]:
+              - code [ref=e189]: winget install --id GitHub.cli --source winget --exact
+          - row [ref=e190]:
+            - cell "Codex CLI" [ref=e191]
+            - cell [ref=e192]:
+              - link "https://developers.openai.com/codex/cli" [ref=e193] [cursor=pointer]:
+                - /url: https://developers.openai.com/codex/cli
+            - cell [ref=e194]:
+              - text: 安裝 Node.js 後執行
+              - code [ref=e195]: npm install -g "@openai/codex"
+              - text: ，再執行
+              - code [ref=e196]: codex
+              - text: 登入。
+      - paragraph [ref=e197]: VS Code 擴充套件可在 VS Code 左側 Extensions 視窗搜尋安裝，也可在終端機逐行執行：
+      - code [ref=e199]: code --install-extension ms-python.python code --install-extension ms-toolsai.jupyter code --install-extension eamodio.gitlens code --install-extension dbaeumer.vscode-eslint code --install-extension openai.chatgpt
+      - paragraph [ref=e200]: 手動安裝後，同樣需要關閉並重新開啟終端機，再執行版本檢查：
+      - code [ref=e202]: code --version git --version node --version npm --version uv --version gh --version codex --version
+      - heading "安裝方式二：透過 AI Agent Prompt 安裝（ChatGPT Work，完整存取權）" [level=2] [ref=e203]
+      - paragraph [ref=e204]: 除了執行批次檔或手動安裝，也可以直接在 ChatGPT 桌面 app 中改用自然語言，讓 AI Agent 自行檢查筆電上缺少哪些工具、依序安裝並回報結果。
+      - blockquote [ref=e205]:
+        - paragraph [ref=e206]:
+          - text: ⚠️ 完整存取權（Full access）會讓 Agent 不經逐步核准就執行終端機指令，安裝流程結束後請切回
+          - strong [ref=e207]: 先要求核准
+          - text: （Ask for approval）。
+      - paragraph [ref=e208]: 建議操作：
+      - list [ref=e209]:
+        - listitem [ref=e210]:
+          - text: 開啟 ChatGPT 桌面 app，選擇 ChatGPT，再切換到
+          - strong [ref=e211]: Work
+          - text: 。
+        - listitem [ref=e212]:
+          - text: 在工作設定中把存取層級改成
+          - strong [ref=e213]: 完整存取權
+          - text: （Full access）。
+        - listitem [ref=e214]: 貼上下列 prompt 並送出，全程留意輸出內容：
+      - generic [ref=e215]:
+        - generic "AI Agent 安裝 prompt 複製" [ref=e216]:
+          - button "📋 複製" [ref=e217] [cursor=pointer]:
+            - generic [ref=e218]: 📋
+            - generic [ref=e219]: 複製
+        - code [ref=e221]: "我使用的是 Windows 11 筆電，具備系統管理員權限，已安裝 App Installer (winget)。 請幫我檢查並安裝以下開發工具，若已安裝則略過，全部安裝完成後請執行版本檢查指令並回報結果： 1. VS Code（winget id: Microsoft.VisualStudioCode） 2. Git for Windows（winget id: Git.Git） 3. Node.js LTS + npm（winget id: OpenJS.NodeJS.LTS） 4. uv（winget id: astral-sh.uv） 5. GitHub CLI（winget id: GitHub.cli） 6. Codex CLI（先確認 Node.js 已安裝，再執行 npm install -g \"@openai/codex\"） 7. 以下 VS Code 擴充套件： - ms-python.python - ms-toolsai.jupyter - eamodio.gitlens - dbaeumer.vscode-eslint - openai.chatgpt 安裝規則： - 每一項工具在安裝前先檢查是否已存在（例如執行「工具 --version」或「winget list --id ...」），已安裝就跳過，不要重複安裝。 - 使用 winget 安裝時加上 --source winget --exact（VS Code 擴充套件改用 code --install-extension）。 - 全部安裝完成後，開新的終端機視窗，依序執行下列指令並把結果貼給我： code --version git --version node --version npm --version uv --version gh --version codex --version - 若任何一項安裝失敗，請停下來告訴我錯誤訊息，不要略過或用其他方式繞過。 - 不要安裝清單以外的軟體，也不要修改系統設定或使用者帳戶權限。"
+      - paragraph [ref=e222]: Agent 執行完成後，請比對輸出結果與上方「安裝的工具」表格，確認每個指令都能顯示版本號；若有工具檢查失敗，可回到「安裝方式一：手動下載與安裝必要工具」單獨修復。
+      - heading [level=2] [ref=e223]:
+        - text: 安裝方式三：使用
+        - code [ref=e224]: module1-setup-windows.bat
+        - text: 一鍵安裝
+      - paragraph [ref=e225]:
+        - text: 優先使用本模組提供的
+        - link "module1-setup-windows.bat" [ref=e226] [cursor=pointer]:
+          - /url: module1-setup-windows.bat
+        - text: 。這個批次檔會檢查
+        - code [ref=e227]: winget
+        - text: ，再依序安裝 VS Code、Git、Node.js LTS、uv、GitHub CLI、ChatGPT 桌面 app、Codex CLI 與常用 VS Code 擴充套件。腳本可重複執行；已安裝的項目會自動略過。
+      - paragraph [ref=e228]: 建議操作：
+      - list [ref=e229]:
+        - listitem [ref=e230]:
+          - text: 下載
+          - link "module1-setup-windows.bat" [ref=e231] [cursor=pointer]:
+            - /url: module1-setup-windows.bat
+          - text: ，或將檔案放到容易找到的位置，例如
+          - code [ref=e232]: Downloads
+          - text: 。
+        - listitem [ref=e233]: 以滑鼠雙擊執行，或在 PowerShell 執行：
+      - code [ref=e235]: "& \"$HOME\\Downloads\\module1-setup-windows.bat\""
+      - list [ref=e236]:
+        - listitem [ref=e237]: 若使用 Command Prompt，執行：
+      - code [ref=e239]: "\"%USERPROFILE%\\Downloads\\module1-setup-windows.bat\""
+      - list [ref=e240]:
+        - listitem [ref=e241]: 腳本結束後，關閉並重新開啟 PowerShell 或 Command Prompt，讓 PATH 設定生效。
+        - listitem [ref=e242]: 重新執行下列檢查指令，確認主要工具都能被系統找到：
+      - code [ref=e244]: code --version git --version node --version npm --version uv --version gh --version codex --version
+      - paragraph [ref=e245]:
+        - text: 若腳本顯示
+        - code [ref=e246]: winget not found
+        - text: ，請先安裝或更新 Windows 的 App Installer，完成後再重新執行批次檔。
+      - figure [ref=e247]:
+        - img "GitHub Education 課前完成三步驟：建立 GitHub 帳號、申請教育驗證、啟用 Copilot；先完成教育驗證，再進行課程實作。" [ref=e248]
+      - heading "申請 GitHub 帳號與加入 GitHub Education（免費 GitHub Copilot）" [level=2] [ref=e249]
+      - paragraph [ref=e250]: 在校生與大專校院教師都可以免費申請 GitHub 帳號，並透過 GitHub Education（GitHub Global Campus）驗證在學／在職身份後，取得原本需付費的 GitHub Copilot Pro 等工具的教育免費額度。建議在正式上課前，先完成以下三個步驟。
+      - heading "1. 申請 GitHub 帳號" [level=3] [ref=e251]
+      - list [ref=e252]:
+        - listitem [ref=e253]:
+          - text: 開啟瀏覽器前往
+          - link "https://github.com/join" [ref=e254] [cursor=pointer]:
+            - /url: https://github.com/join
+          - text: 。
+        - listitem [ref=e255]: 輸入 Email：建議優先使用學校核發的 edu 信箱（例如 xxx@校名.edu.tw），之後申請 GitHub Education 較容易自動通過驗證；暫時沒有學校信箱也可先用個人信箱註冊，稍後在 GitHub Education 流程中再補驗證。
+        - listitem [ref=e256]: 設定密碼、選擇 Username，完成人機驗證後，至信箱收取驗證信並完成帳號驗證。
+        - listitem [ref=e257]:
+          - text: 登入後建議立即開啟兩步驟驗證 (2FA)，並到
+          - strong [ref=e258]: Settings → Emails
+          - text: 把學校信箱加入帳號 (Add email address)，方便之後驗證使用。
+      - heading "2. 加入 GitHub Education（GitHub Global Campus）" [level=3] [ref=e259]
+      - paragraph [ref=e260]: GitHub Education 依身份分成兩種申請入口：學生使用 Student Developer Pack，教師使用 Teacher／Educator Benefits。審核通過後，帳號會顯示已驗證的教育身份，即可免費使用 GitHub Copilot Pro 等原本付費的功能。
+      - table [ref=e262]:
+        - rowgroup [ref=e263]:
+          - row [ref=e264]:
+            - columnheader "身份" [ref=e265]
+            - columnheader "申請入口" [ref=e266]
+            - columnheader "主要福利" [ref=e267]
+        - rowgroup [ref=e268]:
+          - row [ref=e269]:
+            - cell "在校學生" [ref=e270]
+            - cell [ref=e271]:
+              - link "education.github.com/pack" [ref=e272] [cursor=pointer]:
+                - /url: https://education.github.com/pack
+            - cell "GitHub Copilot Pro 免費、GitHub Pro 帳號功能，以及多項開發工具的教育優惠" [ref=e273]
+          - row [ref=e274]:
+            - cell "大專校院教師" [ref=e275]
+            - cell [ref=e276]:
+              - link "education.github.com/teachers" [ref=e277] [cursor=pointer]:
+                - /url: https://education.github.com/teachers
+            - cell "GitHub Copilot Pro 免費、GitHub Classroom 教學工具，可建立課程與作業 repository" [ref=e278]
+      - paragraph [ref=e279]: 申請流程：
+      - list [ref=e280]:
+        - listitem [ref=e281]: 以剛申請（或既有）的 GitHub 帳號登入。
+        - listitem [ref=e282]:
+          - text: 前往
+          - link "education.github.com" [ref=e283] [cursor=pointer]:
+            - /url: https://education.github.com/
+          - text: ，依身份點選「Get student benefits」或「Get teacher benefits」。
+        - listitem [ref=e284]: 選擇所屬學校；若清單中找不到學校，可手動輸入學校中英文名稱。
+        - listitem [ref=e285]: 選擇驗證方式：使用學校 edu 信箱通常可自動驗證（約數分鐘完成）；沒有 edu 信箱則改用文件驗證，上傳學生證、在學證明、教職員證或聘書等可辨識姓名、學校與日期的清晰照片或掃描檔。
+        - listitem [ref=e286]: 送出後留意 GitHub 註冊信箱的通知信，審核時間依驗證方式不同，由數分鐘到數個工作天不等。
+        - listitem [ref=e287]: 審核通過後回到 education.github.com，確認狀態顯示「已驗證」(Verified)。
+      - blockquote [ref=e288]:
+        - paragraph [ref=e289]: 教師身份審核有時需要人工複核，較學生審核耗時；若超過一週未有回覆，可透過 GitHub Education 的 Support 表單查詢進度。學生若畢業、教師若異動離職，福利到期後需重新驗證才能延續使用。
+      - heading "3. 啟用並確認 GitHub Copilot 免費額度" [level=3] [ref=e290]
+      - list [ref=e291]:
+        - listitem [ref=e292]:
+          - text: 前往
+          - link "github.com/settings/copilot" [ref=e293] [cursor=pointer]:
+            - /url: https://github.com/settings/copilot
+          - text: ，確認方案已顯示為教育免費授權 (Copilot Pro via GitHub Education)。
+        - listitem [ref=e294]: 在 VS Code 安裝 GitHub Copilot 與 GitHub Copilot Chat 擴充套件，並用同一個已驗證的 GitHub 帳號登入：
+      - code [ref=e296]: code --install-extension GitHub.copilot code --install-extension GitHub.copilot-chat
+      - list [ref=e297]:
+        - listitem [ref=e298]: 開啟任一程式檔案，確認 Copilot 能提供程式碼建議；也可在 Copilot Chat 視窗發問，確認能正常回應。
+      - heading "4. 常見問題" [level=3] [ref=e299]
+      - list [ref=e300]:
+        - listitem [ref=e301]:
+          - strong [ref=e302]: 學校信箱不是 .edu 結尾：
+          - text: 仍可申請，改用文件驗證即可，GitHub Education 不限定信箱網域。
+        - listitem [ref=e303]:
+          - strong [ref=e304]: 審核被拒絕或卡住：
+          - text: 確認上傳的文件清楚可辨識姓名、學校與日期；必要時更換其他在學／在職證明文件重新送出。
+        - listitem [ref=e305]:
+          - strong [ref=e306]: 帳號原本已有付費 Copilot 訂閱：
+          - text: GitHub Education 核准後通常可折抵，若有疑問可在 GitHub 帳單頁面確認扣款狀態。
+        - listitem [ref=e307]:
+          - strong [ref=e308]: 畢業或離職之後：
+          - text: GitHub Education 福利會在身份到期後停止，需維持在學／在職狀態，並依 GitHub 提示重新驗證。
+      - figure [ref=e309]:
+        - img "實作流程：設定 ChatGPT、Work 與 Codex，連結 GitHub 並部署網站，最後完成四項驗證任務。" [ref=e310]
+      - heading "實作流程 (Hands-on Activities)" [level=2] [ref=e311]
+      - heading "1. 設定 ChatGPT、Work 與 Codex" [level=3] [ref=e312]
+      - list [ref=e313]:
+        - listitem [ref=e314]: 開啟 ChatGPT 桌面 app 並登入。需要快速問答時選 Chat；要完成研究、文件或可審查的多步驟成果時，先選 ChatGPT，再切換到 Work；要處理課程 project、程式碼、指令與 diff 時，從產品選單選 Codex。
+        - listitem [ref=e315]:
+          - text: 在 Codex 先開啟這次課程唯一的 project 資料夾。傳送第一個任務前，選擇
+          - strong [ref=e316]: 先要求核准
+          - text: （Ask for approval）；不要預設開啟
+          - strong [ref=e317]: 完整存取權
+          - text: （Full access）。完成後檢查核准要求、diff 與輸出檔案。
+        - listitem [ref=e318]:
+          - text: 需要終端機工作流程時，再執行
+          - code [ref=e319]: codex
+          - text: 並以瀏覽器登入可使用 Codex 的 ChatGPT 帳號；同一帳號可同時用於 VS Code 的 Codex 擴充套件。
+        - listitem [ref=e320]: 若後續任務需要操作瀏覽器，讓 AI Agent 依任務需求自行安裝與設定對應工具即可；本模組不把瀏覽器自動化外掛列為預先安裝項目。
+        - listitem [ref=e321]:
+          - text: 執行 guided「Hello, AI Agent」任務 (請 Agent 建立一個
+          - code [ref=e322]: hello.txt
+          - text: )，確認 AI Agent 能接收指令、產生檔案並回報結果。
+      - heading "2. 連結 GitHub 與部署 GitHub Pages" [level=3] [ref=e323]
+      - list [ref=e324]:
+        - listitem [ref=e325]:
+          - text: 執行
+          - code [ref=e326]: gh auth login
+          - text: ，全程以瀏覽器與一次性代碼登入，不需產生 SSH 金鑰或於終端機輸入密碼，並一次設定好 git 認證與提交身分 (user.name / user.email)。
+        - listitem [ref=e327]:
+          - text: 練習
+          - code [ref=e328]: gh repo clone
+          - text: 下載專案，以及用
+          - code [ref=e329]: gh repo create … --push
+          - text: 與 GitHub Pages 把靜態網站發佈成公開網址。
+      - heading "3. 四項驗證任務 (Verification Tasks)" [level=3] [ref=e330]
+      - table [ref=e332]:
+        - rowgroup [ref=e333]:
+          - row [ref=e334]:
+            - columnheader "任務" [ref=e335]
+            - columnheader "內容" [ref=e336]
+            - columnheader "驗證重點" [ref=e337]
+        - rowgroup [ref=e338]:
+          - row [ref=e339]:
+            - cell "Python 驗證" [ref=e340]
+            - cell "以 uv 建立專案並安裝 openpyxl、python-docx，讀取 Excel、整理資料並輸出新的 Excel 檔案" [ref=e341]
+            - cell "套件與檔案處理可運作" [ref=e342]
+          - row [ref=e343]:
+            - cell "Word 驗證" [ref=e344]
+            - cell "讀取 Word 文件內容，並產生一份修改後的 Word 檔案" [ref=e345]
+            - cell "Office 文件處理可運作" [ref=e346]
+          - row [ref=e347]:
+            - cell "JavaScript 驗證" [ref=e348]
+            - cell [ref=e349]:
+              - text: 以
+              - code [ref=e350]: npx http-server
+              - text: 啟動簡單的 local web server，確認 client-side 與 server-side 程式正常執行
+            - cell "Node.js 與 local host 可運作" [ref=e351]
+          - row [ref=e352]:
+            - cell "Codex 驗證" [ref=e353]
+            - cell "請 Codex 建立簡單文字檔、修改範例程式或整理指定資料" [ref=e354]
+            - cell "AI Agent 可讀寫工作區檔案並回報結果" [ref=e355]
+    - contentinfo [ref=e356]: 智慧雨林產業創生人才育成計畫 (南臺科技大學 電子系 楊榮林 教授)

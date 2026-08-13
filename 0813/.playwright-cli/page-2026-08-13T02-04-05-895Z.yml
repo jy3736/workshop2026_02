@@ -1,0 +1,411 @@
+- generic [ref=e1]:
+  - complementary [ref=e2]:
+    - generic [ref=e3]: Windows 11 Vibe Coding and AI Agent Environment Setup
+    - generic [ref=e4]:
+      - button "中文" [active] [ref=e355] [cursor=pointer]
+      - button "☀️ Light" [ref=e6] [cursor=pointer]
+    - generic [ref=e7]:
+      - checkbox "Navigate reflection slides" [checked] [ref=e356]
+      - generic [ref=e9]: Navigate reflection slides
+    - link "返回上一層 / Back to parent" [ref=e10] [cursor=pointer]:
+      - /url: ../../index.html
+      - text: Back to parent
+    - navigation [ref=e11]:
+      - button "Learning Objectives" [ref=e357] [cursor=pointer]
+      - button "Prerequisites" [ref=e358] [cursor=pointer]
+      - button "Minimum Computer Requirements" [ref=e359] [cursor=pointer]
+      - button "Toolchain" [ref=e360] [cursor=pointer]
+      - 'button "Install Method 1: Manual" [ref=e361] [cursor=pointer]'
+      - 'button "Install Method 2: AI Agent Prompt" [ref=e362] [cursor=pointer]'
+      - 'button "Install Method 3: module1-setup-windows.bat" [ref=e363] [cursor=pointer]'
+      - button "GitHub Account and GitHub Education" [ref=e364] [cursor=pointer]
+      - button "Hands-on Activities" [ref=e365] [cursor=pointer]
+  - generic [ref=e21]:
+    - generic [ref=e366]:
+      - heading "Windows 11 Vibe Coding and AI Agent Environment Setup" [level=1] [ref=e367]
+      - paragraph [ref=e368]: This module prepares a Vibe Coding and AI Agent environment on a Windows 11 laptop. Install the ChatGPT desktop app first, then use the setup script for the developer tools. Finally, choose Chat, ChatGPT Work, or Codex for the appropriate verification task.
+      - heading "Learning Objectives" [level=2] [ref=e369]
+      - paragraph [ref=e370]: "After this module, participants can:"
+      - list [ref=e371]:
+        - listitem [ref=e372]: Set up a working Vibe Coding and AI Agent environment on a Windows 11 laptop.
+        - listitem [ref=e373]: Choose Chat, ChatGPT Work, or Codex in the ChatGPT desktop app for the task at hand.
+        - listitem [ref=e374]: Use VS Code with Codex CLI and the Codex extension to create, edit, and review code.
+        - listitem [ref=e375]: Use uv and npm to manage Python and Node.js packages and project environments.
+        - listitem [ref=e376]:
+          - text: Use the GitHub CLI (
+          - code [ref=e377]: gh
+          - text: ) to sign in to GitHub through the browser, then clone, push, and deploy to GitHub Pages.
+        - listitem [ref=e378]: Use the checklist to verify the environment independently and troubleshoot common setup issues.
+      - heading "Prerequisites" [level=2] [ref=e379]
+      - table [ref=e381]:
+        - rowgroup [ref=e382]:
+          - row [ref=e383]:
+            - columnheader "Item" [ref=e384]
+            - columnheader "Description" [ref=e385]
+        - rowgroup [ref=e386]:
+          - row [ref=e387]:
+            - cell "Personal laptop" [ref=e388]
+            - cell "Windows 11, with administrator (software installation) permissions" [ref=e389]
+          - row [ref=e390]:
+            - cell "Network" [ref=e391]
+            - cell "Internet access to download installers and reach AI services" [ref=e392]
+          - row [ref=e393]:
+            - cell "ChatGPT account" [ref=e394]
+            - cell "A ChatGPT account with Codex access; available features vary by plan, workspace, and rollout status. The CLI and VS Code extension can use the same sign-in." [ref=e395]
+          - row [ref=e396]:
+            - cell "GitHub account" [ref=e397]
+            - cell "Used to sign in to the GitHub CLI, clone the project, and deploy GitHub Pages" [ref=e398]
+          - row [ref=e399]:
+            - cell "Basic skills" [ref=e400]
+            - cell "Comfortable opening a terminal and typing commands" [ref=e401]
+      - heading "Minimum Computer Requirements" [level=2] [ref=e402]
+      - paragraph [ref=e403]: This workshop keeps VS Code, Node.js, Python, a terminal, and browser sign-in pages open at the same time, so the laptop should meet at least the specs below. The "Recommended" column marks the threshold for a smoother experience.
+      - table [ref=e405]:
+        - rowgroup [ref=e406]:
+          - row [ref=e407]:
+            - columnheader "Item" [ref=e408]
+            - columnheader "Minimum" [ref=e409]
+            - columnheader "Recommended" [ref=e410]
+        - rowgroup [ref=e411]:
+          - row [ref=e412]:
+            - cell "Operating system" [ref=e413]
+            - cell "Windows 11 (64-bit) with App Installer (winget) installed" [ref=e414]
+            - cell "Windows 11, fully updated" [ref=e415]
+          - row [ref=e416]:
+            - cell "Processor" [ref=e417]
+            - cell "64-bit x64 dual-core" [ref=e418]
+            - cell "Quad-core or better" [ref=e419]
+          - row [ref=e420]:
+            - cell "Memory (RAM)" [ref=e421]
+            - cell "8 GB" [ref=e422]
+            - cell "16 GB" [ref=e423]
+          - row [ref=e424]:
+            - cell "Free disk space" [ref=e425]
+            - cell "10 GB" [ref=e426]
+            - cell "20 GB or more" [ref=e427]
+          - row [ref=e428]:
+            - cell "Permissions" [ref=e429]
+            - cell "Administrator permissions (can install software, allow UAC prompts)" [ref=e430]
+            - cell "Same as minimum" [ref=e431]
+          - row [ref=e432]:
+            - cell "Network" [ref=e433]
+            - cell "Stable broadband with access to GitHub and AI services" [ref=e434]
+            - cell "Same as minimum" [ref=e435]
+          - row [ref=e436]:
+            - cell "Browser" [ref=e437]
+            - cell "Microsoft Edge or Chrome (for sign-in flows)" [ref=e438]
+            - cell "Same as minimum" [ref=e439]
+      - blockquote [ref=e440]:
+        - paragraph [ref=e441]: 8 GB of RAM is enough to complete every task, but 16 GB is noticeably smoother once VS Code, a browser, and several terminals are open at the same time. The disk-space estimate includes the toolchain plus each project's node_modules and Python packages.
+      - figure [ref=e442]:
+        - img "學習者的工作環境：編輯與操作、版本管理、程式執行、套件管理與協作入口，共同完成本機開發、專案協作與網站發佈。" [ref=e443]
+      - heading "Toolchain" [level=2] [ref=e444]
+      - paragraph [ref=e445]: "The Windows 11 setup script and follow-up guide prepare these tools on the laptop:"
+      - table [ref=e447]:
+        - rowgroup [ref=e448]:
+          - row [ref=e449]:
+            - columnheader "Tool" [ref=e450]
+            - columnheader "Purpose" [ref=e451]
+        - rowgroup [ref=e452]:
+          - row [ref=e453]:
+            - cell "VS Code" [ref=e454]
+            - cell "Code editor; also the main window for working with the AI agent later" [ref=e455]
+          - row [ref=e456]:
+            - cell "Git" [ref=e457]
+            - cell "Version control tool used by many AI tools" [ref=e458]
+          - row [ref=e459]:
+            - cell "Node.js + npm" [ref=e460]
+            - cell "JavaScript runtime, used to start a local web server and install Codex CLI" [ref=e461]
+          - row [ref=e462]:
+            - cell "uv (Python)" [ref=e463]
+            - cell "Manages Python and packages; installing, updating, and removing them is simple" [ref=e464]
+          - row [ref=e465]:
+            - cell "ChatGPT desktop app" [ref=e466]
+            - cell "The Windows entry point for Chat, ChatGPT Work, and Codex. It can open projects, show changes, and provide an integrated terminal." [ref=e467]
+          - row [ref=e468]:
+            - cell "Codex CLI (terminal workflow)" [ref=e469]
+            - cell "OpenAI's command-line agent for course exercises that work directly in a project. Sign in with a ChatGPT account that has Codex access." [ref=e470]
+          - row [ref=e471]:
+            - cell "GitHub CLI (gh)" [ref=e472]
+            - cell "Sign in to GitHub through the browser; clone, push, and deploy to GitHub Pages" [ref=e473]
+          - row [ref=e474]:
+            - cell "VS Code extensions" [ref=e475]
+            - cell "Python, Jupyter, GitLens, ESLint, and the Codex coding agent (openai.chatgpt)" [ref=e476]
+      - figure [ref=e477]:
+        - img "選擇合適的安裝方式：優先一鍵安裝，重新開啟終端機並逐項檢查版本；若受限制或失敗，可手動安裝或由代理協助安裝，最後切回先要求核准。" [ref=e478]
+      - 'heading "Install Method 1: Manual Download and Installation" [level=2] [ref=e479]'
+      - paragraph [ref=e480]:
+        - text: If the one-click install fails, or the laptop is restricted by school IT policy, install manually instead. Still try the
+        - code [ref=e481]: winget
+        - text: command first; if
+        - code [ref=e482]: winget
+        - text: isn't available, install from the official download pages.
+      - table [ref=e484]:
+        - rowgroup [ref=e485]:
+          - row [ref=e486]:
+            - columnheader "Tool" [ref=e487]
+            - columnheader "Official Download / Notes" [ref=e488]
+            - columnheader "Recommended Command or Manual Steps" [ref=e489]
+        - rowgroup [ref=e490]:
+          - row [ref=e491]:
+            - cell "App Installer / winget" [ref=e492]
+            - cell [ref=e493]:
+              - link "https://learn.microsoft.com/windows/msix/app-installer/install-update-app-installer" [ref=e494] [cursor=pointer]:
+                - /url: https://learn.microsoft.com/windows/msix/app-installer/install-update-app-installer
+            - cell [ref=e495]:
+              - text: Windows 11 usually includes this. If
+              - code [ref=e496]: winget --version
+              - text: doesn't run, install or update App Installer from the Microsoft Store.
+          - row [ref=e497]:
+            - cell "ChatGPT desktop app" [ref=e498]
+            - cell [ref=e499]:
+              - 'link "OpenAI: ChatGPT desktop app for Windows" [ref=e500] [cursor=pointer]':
+                - /url: https://get.microsoft.com/installer/download/9PLM9XGG6VKS?cid=website_cta_psi
+            - cell [ref=e501]:
+              - text: Run
+              - code [ref=e502]: winget install --id 9PLM9XGG6VKS --source msstore
+              - text: ", or install it from Microsoft Store. Then open the app and sign in."
+          - row [ref=e503]:
+            - cell "VS Code" [ref=e504]
+            - cell [ref=e505]:
+              - link "https://code.visualstudio.com/download" [ref=e506] [cursor=pointer]:
+                - /url: https://code.visualstudio.com/download
+            - cell [ref=e507]:
+              - code [ref=e508]: winget install --id Microsoft.VisualStudioCode --source winget --exact
+          - row [ref=e509]:
+            - cell "Git for Windows" [ref=e510]
+            - cell [ref=e511]:
+              - link "https://git-scm.com/downloads/win" [ref=e512] [cursor=pointer]:
+                - /url: https://git-scm.com/downloads/win
+            - cell [ref=e513]:
+              - code [ref=e514]: winget install --id Git.Git --source winget --exact
+          - row [ref=e515]:
+            - cell "Node.js LTS + npm" [ref=e516]
+            - cell [ref=e517]:
+              - link "https://nodejs.org/en/download" [ref=e518] [cursor=pointer]:
+                - /url: https://nodejs.org/en/download
+            - cell [ref=e519]:
+              - code [ref=e520]: winget install --id OpenJS.NodeJS.LTS --source winget --exact
+          - row [ref=e521]:
+            - cell "uv" [ref=e522]
+            - cell [ref=e523]:
+              - link "https://docs.astral.sh/uv/getting-started/installation/" [ref=e524] [cursor=pointer]:
+                - /url: https://docs.astral.sh/uv/getting-started/installation/
+            - cell [ref=e525]:
+              - code [ref=e526]: winget install --id astral-sh.uv --source winget --exact
+          - row [ref=e527]:
+            - cell [ref=e528]:
+              - text: GitHub CLI (
+              - code [ref=e529]: gh
+              - text: )
+            - cell [ref=e530]:
+              - link "https://cli.github.com/" [ref=e531] [cursor=pointer]:
+                - /url: https://cli.github.com/
+            - cell [ref=e532]:
+              - code [ref=e533]: winget install --id GitHub.cli --source winget --exact
+          - row [ref=e534]:
+            - cell "Codex CLI" [ref=e535]
+            - cell [ref=e536]:
+              - link "https://developers.openai.com/codex/cli" [ref=e537] [cursor=pointer]:
+                - /url: https://developers.openai.com/codex/cli
+            - cell [ref=e538]:
+              - text: After installing Node.js, run
+              - code [ref=e539]: npm install -g "@openai/codex"
+              - text: ", then run"
+              - code [ref=e540]: codex
+              - text: to sign in.
+      - paragraph [ref=e541]: "You can install the VS Code extensions by searching in the Extensions panel, or run these commands one by one in a terminal:"
+      - code [ref=e543]: code --install-extension ms-python.python code --install-extension ms-toolsai.jupyter code --install-extension eamodio.gitlens code --install-extension dbaeumer.vscode-eslint code --install-extension openai.chatgpt
+      - paragraph [ref=e544]: "After a manual install, close and reopen the terminal too, then run the version checks:"
+      - code [ref=e546]: code --version git --version node --version npm --version uv --version gh --version codex --version
+      - 'heading "Install Method 2: Install via an AI Agent Prompt (ChatGPT Work, Full Access)" [level=2] [ref=e547]'
+      - paragraph [ref=e548]: Instead of running the batch file or installing manually, you can also open the ChatGPT desktop app and use a natural-language prompt so the agent checks what is missing on the laptop, installs it, and reports back.
+      - blockquote [ref=e549]:
+        - paragraph [ref=e550]:
+          - text: ⚠️ Full access lets the agent run terminal commands without asking for approval on each step. Switch back to
+          - strong [ref=e551]: Ask for approval
+          - text: once the install is finished.
+      - paragraph [ref=e552]: "Suggested steps:"
+      - list [ref=e553]:
+        - listitem [ref=e554]:
+          - text: Open the ChatGPT desktop app, choose ChatGPT, then switch to
+          - strong [ref=e555]: Work
+          - text: .
+        - listitem [ref=e556]:
+          - text: In the task settings, change the access level to
+          - strong [ref=e557]: Full access
+          - text: .
+        - listitem [ref=e558]: "Paste the prompt below and send it, and watch the output the whole time:"
+      - generic [ref=e559]:
+        - generic "Copy the AI agent install prompt" [ref=e560]:
+          - button "📋 Copy" [ref=e561] [cursor=pointer]:
+            - generic [ref=e562]: 📋
+            - generic [ref=e563]: Copy
+        - code [ref=e565]: "I'm on a Windows 11 laptop with administrator rights, and App Installer (winget) is already installed. Please check and install the following developer tools, skipping anything already installed. After everything is installed, run the version-check commands and report the results back to me: 1. VS Code (winget id: Microsoft.VisualStudioCode) 2. Git for Windows (winget id: Git.Git) 3. Node.js LTS + npm (winget id: OpenJS.NodeJS.LTS) 4. uv (winget id: astral-sh.uv) 5. GitHub CLI (winget id: GitHub.cli) 6. Codex CLI (confirm Node.js is installed first, then run npm install -g \"@openai/codex\") 7. These VS Code extensions: - ms-python.python - ms-toolsai.jupyter - eamodio.gitlens - dbaeumer.vscode-eslint - openai.chatgpt Rules: - Before installing each tool, check whether it already exists (e.g. run \"tool --version\" or \"winget list --id ...\"); skip it if it's already installed, don't reinstall. - When using winget, add --source winget --exact (for VS Code extensions, use code --install-extension instead). - After everything is installed, open a new terminal window, run the following commands in order, and paste the results back to me: code --version git --version node --version npm --version uv --version gh --version codex --version - If any install step fails, stop and tell me the error message; don't skip it or work around it another way. - Don't install anything outside this list, and don't change system settings or user account permissions."
+      - paragraph [ref=e566]: "Once the agent finishes, compare its output against the Toolchain table above to confirm each command prints a version number. If a check fails, go back to \"Install Method 1: Manual Download and Installation\" to fix that tool individually."
+      - 'heading "Install Method 3: One-Click Setup with module1-setup-windows.bat" [level=2] [ref=e567]'
+      - paragraph [ref=e568]:
+        - text: Start with the supplied
+        - link "module1-setup-windows.bat" [ref=e569] [cursor=pointer]:
+          - /url: module1-setup-windows.bat
+        - text: . It checks
+        - code [ref=e570]: winget
+        - text: ", then installs VS Code, Git, Node.js LTS, uv, GitHub CLI, the ChatGPT desktop app, Codex CLI, and common VS Code extensions. The script is safe to run again; installed items are skipped."
+      - paragraph [ref=e571]: "Suggested steps:"
+      - list [ref=e572]:
+        - listitem [ref=e573]:
+          - text: Download
+          - link "module1-setup-windows.bat" [ref=e574] [cursor=pointer]:
+            - /url: module1-setup-windows.bat
+          - text: ", or move the file somewhere easy to find, such as"
+          - code [ref=e575]: Downloads
+          - text: .
+        - listitem [ref=e576]: "Double-click to run it, or run it in PowerShell:"
+      - code [ref=e578]: "& \"$HOME\\Downloads\\module1-setup-windows.bat\""
+      - list [ref=e579]:
+        - listitem [ref=e580]: "If using Command Prompt, run:"
+      - code [ref=e582]: "\"%USERPROFILE%\\Downloads\\module1-setup-windows.bat\""
+      - list [ref=e583]:
+        - listitem [ref=e584]: After the script finishes, close and reopen PowerShell or Command Prompt so the PATH changes take effect.
+        - listitem [ref=e585]: "Run the following checks again to confirm the system can find each tool:"
+      - code [ref=e587]: code --version git --version node --version npm --version uv --version gh --version codex --version
+      - paragraph [ref=e588]:
+        - text: If the script prints
+        - code [ref=e589]: winget not found
+        - text: ", install or update Windows App Installer first, then run the batch file again."
+      - heading "Apply for a GitHub Account and Join GitHub Education (Free GitHub Copilot)" [level=2] [ref=e590]
+      - paragraph [ref=e591]: Both students and college faculty can apply for a free GitHub account, then verify their academic status through GitHub Education (GitHub Global Campus) to unlock the education tier of GitHub Copilot Pro and other normally paid tools at no cost. Complete the three steps below before class starts.
+      - heading "1. Create a GitHub Account" [level=3] [ref=e592]
+      - list [ref=e593]:
+        - listitem [ref=e594]:
+          - text: Open a browser and go to
+          - link "https://github.com/join" [ref=e595] [cursor=pointer]:
+            - /url: https://github.com/join
+          - text: .
+        - listitem [ref=e596]: Enter an email address. Using your school-issued edu email (e.g., xxx@your-school.edu.tw) makes the later GitHub Education verification more likely to auto-approve. If you don't have one yet, sign up with a personal email and verify later during the GitHub Education application.
+        - listitem [ref=e597]: Set a password, choose a username, complete the human-verification puzzle, then check your inbox and confirm the verification email.
+        - listitem [ref=e598]:
+          - text: After signing in, turn on two-factor authentication (2FA), and add your school email under
+          - strong [ref=e599]: Settings → Emails
+          - text: (Add email address) so it's ready for verification.
+      - heading "2. Join GitHub Education (GitHub Global Campus)" [level=3] [ref=e600]
+      - paragraph [ref=e601]: "GitHub Education has two application paths: the Student Developer Pack for students, and Teacher/Educator Benefits for faculty. Once verified, the account shows a confirmed academic status and unlocks GitHub Copilot Pro and other paid features for free."
+      - table [ref=e603]:
+        - rowgroup [ref=e604]:
+          - row [ref=e605]:
+            - columnheader "Role" [ref=e606]
+            - columnheader "Application Page" [ref=e607]
+            - columnheader "Main Benefits" [ref=e608]
+        - rowgroup [ref=e609]:
+          - row [ref=e610]:
+            - cell "Student" [ref=e611]
+            - cell [ref=e612]:
+              - link "education.github.com/pack" [ref=e613] [cursor=pointer]:
+                - /url: https://education.github.com/pack
+            - cell "Free GitHub Copilot Pro, GitHub Pro account features, and discounts on many developer tools" [ref=e614]
+          - row [ref=e615]:
+            - cell "College faculty" [ref=e616]
+            - cell [ref=e617]:
+              - link "education.github.com/teachers" [ref=e618] [cursor=pointer]:
+                - /url: https://education.github.com/teachers
+            - cell "Free GitHub Copilot Pro and GitHub Classroom, for setting up course and assignment repositories" [ref=e619]
+      - paragraph [ref=e620]: "Application steps:"
+      - list [ref=e621]:
+        - listitem [ref=e622]: Sign in with the GitHub account created above (or an existing one).
+        - listitem [ref=e623]:
+          - text: Go to
+          - link "education.github.com" [ref=e624] [cursor=pointer]:
+            - /url: https://education.github.com/
+          - text: and click "Get student benefits" or "Get teacher benefits" depending on your role.
+        - listitem [ref=e625]: Select your school; if it isn't listed, type the school name manually.
+        - listitem [ref=e626]: "Choose a verification method: a school edu email is usually verified automatically within minutes; without one, upload document verification instead — a clear photo or scan of a student ID, enrollment certificate, faculty ID, or employment letter showing your name, school, and date."
+        - listitem [ref=e627]: After submitting, watch the inbox tied to your GitHub account for a status update; review time ranges from a few minutes to several business days depending on the verification method.
+        - listitem [ref=e628]: Once approved, return to education.github.com and confirm the status shows "Verified."
+      - blockquote [ref=e629]:
+        - paragraph [ref=e630]: Faculty verification sometimes needs manual review and can take longer than student verification. If there's no response after a week, check progress through the GitHub Education support form. Benefits expire when a student graduates or a faculty member's employment changes, and re-verification is required to continue.
+      - heading "3. Activate and Confirm Free Copilot Access" [level=3] [ref=e631]
+      - list [ref=e632]:
+        - listitem [ref=e633]:
+          - text: Go to
+          - link "github.com/settings/copilot" [ref=e634] [cursor=pointer]:
+            - /url: https://github.com/settings/copilot
+          - text: and confirm the plan shows the education-tier free license (Copilot Pro via GitHub Education).
+        - listitem [ref=e635]: "Install the GitHub Copilot and GitHub Copilot Chat extensions in VS Code, and sign in with the same verified GitHub account:"
+      - code [ref=e637]: code --install-extension GitHub.copilot code --install-extension GitHub.copilot-chat
+      - list [ref=e638]:
+        - listitem [ref=e639]: Open any code file to confirm Copilot offers suggestions, or ask a question in the Copilot Chat panel to confirm it responds.
+      - heading "4. Common Issues" [level=3] [ref=e640]
+      - list [ref=e641]:
+        - listitem [ref=e642]:
+          - strong [ref=e643]: "School email doesn't end in .edu:"
+          - text: Still fine — use document verification instead. GitHub Education doesn't require a specific email domain.
+        - listitem [ref=e644]:
+          - strong [ref=e645]: "Verification rejected or stuck:"
+          - text: Make sure the uploaded document clearly shows your name, school, and date; try a different proof of enrollment/employment if needed.
+        - listitem [ref=e646]:
+          - strong [ref=e647]: "Already paying for Copilot:"
+          - text: Approval usually credits or replaces the paid subscription; check the GitHub billing page if anything looks off.
+        - listitem [ref=e648]:
+          - strong [ref=e649]: "After graduating or leaving the school:"
+          - text: GitHub Education benefits stop once academic status expires; keep your enrollment/employment current and re-verify as GitHub prompts.
+      - figure [ref=e650]:
+        - img "實作流程：設定 ChatGPT、Work 與 Codex，連結 GitHub 並部署網站，最後完成四項驗證任務。" [ref=e651]
+      - heading "Hands-on Activities" [level=2] [ref=e652]
+      - heading "1. Set up ChatGPT Work and Codex" [level=3] [ref=e653]
+      - list [ref=e654]:
+        - listitem [ref=e655]: Open the ChatGPT desktop app and sign in. Use Chat for quick questions; select ChatGPT, then Work for a multi-step, reviewable outcome; select Codex for a course project, code, commands, and diffs.
+        - listitem [ref=e656]:
+          - text: In Codex, open only the intended course project folder. Before the first task, choose
+          - strong [ref=e657]: Ask for approval
+          - text: ; do not enable
+          - strong [ref=e658]: Full access
+          - text: by default. Review approval requests, diffs, and output files.
+        - listitem [ref=e659]:
+          - text: For a terminal workflow, run
+          - code [ref=e660]: codex
+          - text: and sign in through the browser with the same ChatGPT account. The VS Code Codex extension can use that account too.
+        - listitem [ref=e661]: If a later task needs browser automation, let the AI agent install and configure whatever tools it needs on its own; this module doesn't pre-install any browser automation add-ons.
+        - listitem [ref=e662]:
+          - text: Run the guided "Hello, AI Agent" task (ask the agent to create a
+          - code [ref=e663]: hello.txt
+          - text: file) to confirm the AI agent can receive instructions, produce a file, and report back.
+      - heading "2. Connect GitHub and Deploy GitHub Pages" [level=3] [ref=e664]
+      - list [ref=e665]:
+        - listitem [ref=e666]:
+          - text: Run
+          - code [ref=e667]: gh auth login
+          - text: and sign in entirely through the browser with a one-time code — no SSH keys or passwords typed into the terminal — which also sets up git credentials and your commit identity (user.name / user.email) in one step.
+        - listitem [ref=e668]:
+          - text: Practice cloning a project with
+          - code [ref=e669]: gh repo clone
+          - text: ", and use"
+          - code [ref=e670]: gh repo create … --push
+          - text: together with GitHub Pages to publish a static site to a public URL.
+      - heading "3. Four Verification Tasks" [level=3] [ref=e671]
+      - table [ref=e673]:
+        - rowgroup [ref=e674]:
+          - row [ref=e675]:
+            - columnheader "Task" [ref=e676]
+            - columnheader "Description" [ref=e677]
+            - columnheader "What It Verifies" [ref=e678]
+        - rowgroup [ref=e679]:
+          - row [ref=e680]:
+            - cell "Python check" [ref=e681]
+            - cell "Use uv to create a project, install openpyxl and python-docx, read an Excel file, clean up the data, and write a new Excel file" [ref=e682]
+            - cell "Confirms package installation and file handling work" [ref=e683]
+          - row [ref=e684]:
+            - cell "Word check" [ref=e685]
+            - cell "Read the contents of a Word document and produce a modified Word file" [ref=e686]
+            - cell "Confirms Office document handling works" [ref=e687]
+          - row [ref=e688]:
+            - cell "JavaScript check" [ref=e689]
+            - cell [ref=e690]:
+              - text: Start a simple local web server with
+              - code [ref=e691]: npx http-server
+              - text: to confirm client-side and server-side code run correctly
+            - cell "Confirms Node.js and the local host work" [ref=e692]
+          - row [ref=e693]:
+            - cell "Codex check" [ref=e694]
+            - cell "Ask Codex to create a simple text file, modify a sample script, or organize a specified dataset" [ref=e695]
+            - cell "Confirms the AI agent can read and write workspace files and report results" [ref=e696]
+    - contentinfo [ref=e354]: 智慧雨林產業創生人才育成計畫 (南臺科技大學 電子系 楊榮林 教授)
