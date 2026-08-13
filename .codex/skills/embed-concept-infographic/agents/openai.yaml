@@ -1,0 +1,4 @@
+interface:
+  display_name: "Embed Concept Infographic Slides"
+  short_description: "Generate and embed explanatory concept slides."
+  default_prompt: "Use $embed-concept-infographic to add concept-revealing infographic slides to these HTML or Markdown documents."

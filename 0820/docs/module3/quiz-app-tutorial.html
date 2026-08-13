@@ -9,6 +9,9 @@
 .stage-slide{max-width:var(--measure);margin:1.35em 0 1.8em;padding:0;border:1px solid var(--border);border-radius:12px;overflow:hidden;background:var(--card);box-shadow:var(--shadow)}
 .stage-slide img{display:block;width:100%;height:auto}
 .stage-slide figcaption{padding:.55em .9em;color:var(--muted);font-size:.88rem}
+.concept-infographic{max-width:var(--measure,100%);margin:1.35em 0 1.8em;padding:0;border:1px solid var(--border);border-radius:12px;overflow:hidden;background:var(--card);box-shadow:var(--shadow)}
+.concept-infographic img{display:block;width:100%;height:auto}
+.concept-infographic figcaption{padding:.55em .9em;color:var(--muted);font-size:.88rem}
 </style>
 </head>
 <body>
@@ -163,6 +166,10 @@
 <h2 id="step3">步驟三：設計 config.json 的資料結構</h2>
 <p class="step-badge">交付物：一份你自己設計的設定檔格式</p>
 <p>這一步要決定：怎麼用一份設定檔描述「一份測驗」，還要讓同一套工具之後能疊加好幾份測驗，不用每加一份就重新設計格式。合理的做法是設計一個 <code>assessments</code> 陣列，每一筆對應一份測驗。跟 Codex 討論之後，把 <code>module3/repo/114</code>、<code>module3/repo/math-115a</code> 兩組分析結果，各自對應成一筆設定：</p>
+<figure class="concept-infographic" data-concept-infographic="reusable-settings">
+<img src="../../../assets/quiz-app-tutorial-reusable-settings-concept-dark.png" alt="說明不同問題集各自加入測驗設定清單，再由共用測驗工具產生學生自主作答與教師彙整成績成果，新增測驗不必重做工具的圖解">
+<figcaption>多份測驗共用同一套工具的設定架構</figcaption>
+</figure>
 <div class="code-sample"><div class="code-sample-toolbar"><button class="copy-btn" type="button" onclick="copyPromptBlock(this)"><span class="copy-icon">📋</span><span>複製</span></button></div><pre><code>根據步驟二的分析報告，幫我設計一份 module3/app/config.json 的資料結構：
 用一個 assessments 陣列，每一筆代表一份測驗，讓同一個工具之後可以疊加多份、
 不用重新設計格式。每一筆至少要能描述：測驗名稱（會變成輸出檔名的一部分）、
@@ -207,6 +214,10 @@
 <h2 id="step4">步驟四：打造測驗網頁樣板（quiz.html）</h2>
 <p class="step-badge">交付物：學生作答用的網頁樣板</p>
 <p>這一步要設計、寫出學生實際會打開的那個頁面。核心設計限制是：<strong>最終交付的檔案必須能直接雙擊開啟，不能依賴任何伺服器</strong>；瀏覽器基於安全性，會擋掉 <code>file://</code> 路徑底下用 <code>fetch()</code> 讀外部檔案的行為，所以最終版本不能用 <code>fetch()</code> 讀取 <code>config.json</code> 或圖片，資料必須直接內嵌在 HTML 裡。</p>
+<figure class="concept-infographic" data-concept-infographic="source-delivery">
+<img src="../../../assets/quiz-app-tutorial-source-delivery-concept-dark.png" alt="說明可編輯原始碼方便修改但測試時需要本機伺服器，經過打包內嵌題目與圖片後，成為不需要伺服器與網路、可直接交給學生的雙擊即用成品圖解">
+<figcaption>可編輯原始碼與雙擊即用成品的差異</figcaption>
+</figure>
 
 <h3>請 Codex 設計並寫出樣板</h3>
 <div class="code-sample"><div class="code-sample-toolbar"><button class="copy-btn" type="button" onclick="copyPromptBlock(this)"><span class="copy-icon">📋</span><span>複製</span></button></div><pre><code>幫我設計並寫出 module3/app/quiz.html，這是學生作答用的自我測驗網頁樣板。

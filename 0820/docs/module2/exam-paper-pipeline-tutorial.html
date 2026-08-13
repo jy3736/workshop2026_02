@@ -9,6 +9,9 @@
 .stage-slide{max-width:var(--measure);margin:1.35em 0 1.8em;padding:0;border:1px solid var(--border);border-radius:12px;overflow:hidden;background:var(--card);box-shadow:var(--shadow)}
 .stage-slide img{display:block;width:100%;height:auto}
 .stage-slide figcaption{padding:.55em .9em;color:var(--muted);font-size:.88rem}
+.concept-infographic{max-width:var(--measure,100%);margin:1.35em 0 1.8em;padding:0;border:1px solid var(--border);border-radius:12px;overflow:hidden;background:var(--card);box-shadow:var(--shadow)}
+.concept-infographic img{display:block;width:100%;height:auto}
+.concept-infographic figcaption{padding:.55em .9em;color:var(--muted);font-size:.88rem}
 </style>
 </head>
 <body>
@@ -98,6 +101,10 @@
 
 <h2 id="step2">步驟二：切成單題圖片＋答案 JSON</h2>
 <p>這一步把整份 PDF 切成一題一張的 PNG 圖片，並且對照標準答案 PDF，做出一份「圖片檔名 → 正確答案」的 JSON。</p>
+<figure class="concept-infographic" data-concept-infographic="answer-mapping">
+<img src="../../../assets/exam-paper-pipeline-tutorial-answer-mapping-concept-dark.png" alt="說明試題文件與標準答案經過逐題整理後，產生一題一張圖片與圖片答案對照表，且檔名與答案必須一一對應的圖解">
+<figcaption>切題成果與答案對照的關係圖解</figcaption>
+</figure>
 
 <h3>用一句話請 Codex 做</h3>
 <div class="code-sample"><div class="code-sample-toolbar"><button class="copy-btn" type="button" onclick="copyPromptBlock(this)"><span class="copy-icon">📋</span><span>複製</span></button></div><pre><code>請幫我把 module2/raw/115 底下 115 學年度試題 PDF，每一題切成一張圖片，
@@ -133,6 +140,10 @@ key 要跟圖片檔名完全一樣（含 .png），value 放正確答案字母�
 
 <h2 id="step3">步驟三：清理圖片</h2>
 <p>切出來的圖片下緣常常會多留一小段空白，甚至帶到下一題的一小段殘影；題號（像「50.」「11.」）也還印在題目最前面。這一步做兩件事：</p>
+<figure class="concept-infographic" data-concept-infographic="dry-run-safety">
+<img src="../../../assets/exam-paper-pipeline-tutorial-dry-run-safety-concept-dark.png" alt="說明先偵測題號位置並乾跑顯示結果，每張剛好一個才正式清理，偵測到零個或多個就停止人工檢查，以保留選項避免誤刪內容的安全流程圖解">
+<figcaption>清理前的乾跑安全決策圖解</figcaption>
+</figure>
 <ul>
 <li><strong>Pass 1：</strong>裁掉每張圖下面多餘的空白（包含「【以下空白】」的殘留），但不動真正的內容。</li>
 <li><strong>Pass 2：</strong>把題號（如「50.」「11.」）塗白，但選項 (A)(B)(C)(D) 完全不能動。</li>
