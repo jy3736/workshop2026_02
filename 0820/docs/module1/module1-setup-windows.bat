@@ -1,12 +1,16 @@
 @echo off
 REM ===========================================================================
-REM  AI Agent Workshop (1) - Windows 11 one-command setup (.bat)
+REM  AI Agent Workshop (2) - Windows 11 one-command setup (.bat)
 REM
-REM  Installs and configures the full AI Agent toolchain: VS Code, Git,
-REM  Node.js LTS, uv (Python), GitHub CLI, ChatGPT desktop app, OpenAI Codex
-REM  CLI, and the common VS Code extensions.
+REM  Installs: VS Code, the ChatGPT desktop app, and the VS Code extensions
+REM  used in Module 1 Part 2 (Codex, GitHub Copilot, Python, Markdown, HTML
+REM  live preview, MS Office document preview).
 REM
-REM  Safe to re-run (idempotent): already-installed tools are skipped.
+REM  Does NOT create accounts: signing in to the ChatGPT app (Part 1) and
+REM  registering a GitHub account / applying for GitHub Education (Part 3)
+REM  both require a human in a browser and are covered on the tutorial page.
+REM
+REM  Safe to re-run (idempotent): already-installed items are skipped.
 REM
 REM  How to run:
 REM    - double-click this file, or
@@ -35,56 +39,32 @@ if errorlevel 1 (
   exit /b 1
 )
 
-REM ---- 1. winget packages -------------------------------------------------
-REM  format:  call :install_pkg  <winget-id>  <verify-cmd>  <display-name>
+REM ---- 1. VS Code (winget) -------------------------------------------------
 call :install_pkg "Microsoft.VisualStudioCode" "code" "VS Code"
-call :install_pkg "Git.Git"                    "git"  "Git"
-call :install_pkg "OpenJS.NodeJS.LTS"          "node" "Node.js LTS"
-call :install_pkg "astral-sh.uv"               "uv"   "uv (Python)"
-call :install_pkg "GitHub.cli"                 "gh"   "GitHub CLI"
 
 REM ---- 2. ChatGPT desktop app (Microsoft Store) --------------------------
 call :install_store_pkg "9PLM9XGG6VKS" "ChatGPT desktop app"
 
-REM ---- 3. Make new commands resolvable in this window --------------------
+REM ---- 3. Make 'code' resolvable in this window ---------------------------
 REM  (batch cannot reload the updated PATH on its own)
-REM  Prepend well-known install locations so node/npm/code/uv/gh resolve now.
-set "PATH=%PATH%;%ProgramFiles%\nodejs;%ProgramFiles%\Git\cmd;%LOCALAPPDATA%\Programs\Microsoft VS Code\bin;%USERPROFILE%\.local\bin;%ProgramFiles%\GitHub CLI"
+set "PATH=%PATH%;%LOCALAPPDATA%\Programs\Microsoft VS Code\bin"
 
-REM ---- 4. Codex CLI (via npm) ---------------------------------------------
-echo ----------------------------------------------
-where codex >nul 2>&1
-if not errorlevel 1 (
-  echo [Codex CLI] already installed, skipping.
-  call :mark_ok "Codex CLI" "already installed"
-) else (
-  where npm >nul 2>&1
-  if errorlevel 1 (
-    echo [ERROR] npm not found, skipping Codex CLI. Confirm Node.js installed, then reopen the terminal.
-    call :mark_fail "Codex CLI" "npm not available"
-  ) else (
-    echo [Codex CLI] installing via npm...
-    call npm install -g "@openai/codex"
-    if errorlevel 1 ( call :mark_fail "Codex CLI" "npm install failed" ) else ( call :mark_ok "Codex CLI" "installed" )
-  )
-)
-
-REM ---- 5. VS Code extensions ----------------------------------------------
-REM  Note: openai.chatgpt is the Codex IDE extension, OpenAI's coding agent.
+REM ---- 4. VS Code extensions ------------------------------------------------
 echo ----------------------------------------------
 where code >nul 2>&1
 if errorlevel 1 (
   echo [WARN] 'code' not on PATH yet, skipping extensions. Reopen the terminal and run this script again.
   call :mark_fail "VS Code extensions" "'code' not on PATH yet"
 ) else (
-  call :install_ext "ms-python.python"
-  call :install_ext "ms-toolsai.jupyter"
-  call :install_ext "eamodio.gitlens"
-  call :install_ext "dbaeumer.vscode-eslint"
   call :install_ext "openai.chatgpt"
+  call :install_ext "GitHub.copilot"
+  call :install_ext "ms-python.python"
+  call :install_ext "yzhang.markdown-all-in-one"
+  call :install_ext "ms-vscode.live-server"
+  call :install_ext "cweijan.vscode-office"
 )
 
-REM ---- 6. Summary ---------------------------------------------------------
+REM ---- 5. Summary ---------------------------------------------------------
 echo.
 echo ==============================================
 echo  Summary
@@ -93,7 +73,7 @@ echo   OK:   !OK_COUNT!
 echo   FAIL: !FAIL_COUNT!
 echo.
 if "!FAIL_COUNT!"=="0" (
-  echo All done! Close and reopen the terminal, then run 'codex' to sign in.
+  echo All done! Close and reopen VS Code, then finish Part 1 ^(ChatGPT app sign-in^) and Part 3 ^(GitHub account + Education^) from the tutorial page.
 ) else (
   echo !FAIL_COUNT! item^(s^) incomplete. Usually fixed by reopening the terminal and running this script again.
 )

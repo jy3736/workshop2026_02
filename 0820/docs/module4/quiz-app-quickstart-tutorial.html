@@ -29,40 +29,40 @@
 <div class="wrap">
 <section>
 <h1 id="title">一句話產生自主測驗網頁快速教學</h1>
-<p class="lead">Module 2 教學帶你把考古題 PDF 變成「一題一張乾淨圖片 ＋ 標準答案 JSON」的問題集資料夾。<a href="../module3/quiz-app-tutorial.html">Module 3</a> 接著從零開始，帶你一步一步跟 Codex 一起設計並打造一套等效的工具，弄懂每個環節在做什麼。如果你還沒走完 Module 3、或當時卡在某個步驟沒跟上，這份教學是給你的快速版：請 Codex 套用工作坊講師事先寫好的 <code>build-quiz-app</code> custom skill（位於專案根目錄的 <code>.agents/skills/</code>，不是 Codex 原生內建功能），把完成的問題集轉成不用架站、雙擊就能打開的學生自我測驗網頁，並保留教師端成績彙整頁。你不需要手動讀分析報告或撰寫 <code>config.json</code>。</p>
-<p class="lead">本教學對應 <code>module4/</code> 資料夾。目前其中有兩組問題集共用同一套測驗程式：數學(A)已有可直接打開的成品；114 年度統測專業科目(一)則已備妥問題圖片與答案 JSON，可作為下一份加入測驗清單的資料來源。差別只在教學方式：Module 3 帶你逐步拆解每個步驟，這裡示範以一句清楚的需求請 Codex 協助加入測驗。</p>
+<p class="lead">Module 2 教學帶你把考古題 PDF 變成「一題一張乾淨圖片 ＋ 正確答案」的問題集資料夾。<a href="../module3/quiz-app-tutorial.html">Module 3</a> 接著帶你練習：不套用任何現成工具，自己一句一句跟 Codex 描述想要的學生自我測驗網頁。如果你還沒走完 Module 3、或想跳過「自己描述需求」這個練習，這份教學是給你的快速版：請 Codex 套用工作坊講師事先寫好的 <code>build-quiz-app</code> custom skill（位於專案根目錄的 <code>.agents/skills/</code>，不是 Codex 原生內建功能），一句話把問題集轉成不用架站、雙擊就能打開的學生自我測驗網頁，並額外附上 Module 3 沒有做的教師端成績彙整頁。</p>
+<p class="lead">本教學對應 <code>module4/</code> 資料夾，裡面只有 <code>app/</code> 這個輸出成品；問題集資料本身跟 <a href="../module3/quiz-app-tutorial.html">Module 3</a> 共用同一份，都放在 <code>module3/repo/</code> 底下，不用另外準備一份。目前 <code>module3/repo/</code> 有兩組問題集：數學(A) 已經在 <code>module4/app/</code> 裡有可直接打開的成品；電機與電子群資電類 專業科目(一)(二) 則還沒加入，可作為下一份要加進測驗清單的資料來源。差別只在教學方式：Module 3 讓你練習自己描述需求，這裡示範用一句清楚的需求，直接請 Codex 套用現成工具完成。</p>
 <figure class="workflow-infographic" data-workflow-infographic="true">
   <img src="../../../assets/quiz-app-quickstart-tutorial-workflow-dark.png" alt="一句話生成測驗網頁、雙擊作答並驗收、彙整全班成績的流程">
   <figcaption>快速流程總覽</figcaption>
 </figure>
 
 <div class="table-wrap"><table>
-<tr><th>範例測驗</th><th>問題集資料夾（輸入）</th><th>config.json 的 examLabel</th><th>雙擊即用成品（輸出）</th></tr>
-<tr><td>114 學年度<br>電機與電子群資電類<br>專業科目(一)(二)，共 100 題</td><td><code>module4/repo/114/</code></td><td>由 Codex 新增，且不得與既有名稱重複</td><td>尚未產生；可依本教學加入既有測驗程式</td></tr>
-<tr><td>115 學年度<br>數學(A)<br>共同科目，共 25 題</td><td><code>module4/repo/math-115a/</code></td><td><code>Formative_Assessment_115_MathA</code></td><td><code>module4/app/dist/Formative_Assessment_115_MathA_quiz.html</code><br>（目前已有，約 2.5 MB）</td></tr>
+<tr><th>範例測驗</th><th>問題集資料夾（輸入，跟 Module 3 共用）</th><th>config.json 的 examLabel</th><th>雙擊即用成品（輸出）</th></tr>
+<tr><td>115 學年度<br>電機與電子群資電類<br>專業科目(一)(二)，共 100 題</td><td><code>module3/repo/115/</code></td><td>由 Codex 新增，且不得與既有名稱重複</td><td>尚未產生；可依本教學加入既有測驗程式</td></tr>
+<tr><td>115 學年度<br>數學(A)<br>共同科目，共 25 題</td><td><code>module3/repo/math-115a/</code></td><td><code>Formative_Assessment_115_MathA</code></td><td><code>module4/app/dist/Formative_Assessment_115_MathA_quiz.html</code><br>（目前已有，約 2.5 MB）</td></tr>
 </table></div>
-<p>目前 <code>module4/</code> 沒有額外的原始 PDF。若要再加入第三份測驗，請先依 Module 2 的流程準備好新的問題圖片與答案 JSON，再放入 <code>module4/repo/</code> 下的新資料夾。</p>
+<p>目前 <code>module3/repo/</code> 沒有額外的原始 PDF。若要再加入第三份測驗，請先依 Module 2 的流程準備好新的問題圖片與答案 JSON，再放入 <code>module3/repo/</code> 下的新資料夾（跟 Module 3 共用同一份問題集資料，不用在 <code>module4/</code> 底下另外準備）。</p>
 
 <h2 id="obj">學習目標</h2>
 <p>做完這份教學，你應該能夠：</p>
 <ul>
 <li>不用弄懂 <code>build-quiz-app</code> 內部怎麼運作，只靠<strong>一句</strong>自然語言指令，把 Module 2 產出的問題集資料夾變成雙擊即可開啟的自我測驗網頁。</li>
-<li>知道怎麼把 <code>module4/repo/114</code> 或之後的新問題集加入同一個 <code>app/</code>，並在 Codex 要求確認時選擇保留既有測驗。</li>
+<li>知道怎麼把 <code>module3/repo/115</code> 或之後的新問題集加入同一個 <code>app/</code>，並在 Codex 要求確認時選擇保留既有測驗。</li>
 <li>知道教師端成績彙整頁在哪裡、怎麼用。</li>
 <li>判斷什麼時候「一句話」不夠用，該回頭看 Module 3 的詳細教學。</li>
 </ul>
 
 <h2 id="prereq">先備條件</h2>
 <ul>
-<li>已經完成 <a href="../module2/exam-paper-pipeline-tutorial.html">Module 2：考古題下載、切題與清理實作教學</a>，手上至少有一組「<code>*.png</code> 圖片 ＋ <code>keys.json</code>」的問題集資料夾。本教學沿用 <code>module4/repo/114</code>、<code>module4/repo/math-115a</code> 這兩組已經做好的資料當範例。</li>
+<li>已經完成 <a href="../module2/exam-paper-pipeline-tutorial.html">Module 2：考古題下載、切題與清理實作教學</a>，手上至少有一組「<code>*.png</code> 圖片 ＋ <code>keys.json</code>」的問題集資料夾。本教學沿用 <code>module3/repo/115</code>、<code>module3/repo/math-115a</code> 這兩組已經做好的資料當範例（跟 <a href="../module3/quiz-app-tutorial.html">Module 3</a> 是同一份資料，不用另外準備）。</li>
 <li>已經能開啟並使用 Codex。若還沒設定好工作環境，請先參考 <a href="../module1/windows11-vibe-coding-setup.html">Module 1：Windows 11 環境建置</a>。</li>
 <li>不需要會寫程式、不需要另外安裝任何套件、也不需要開終端機 全程只在 Codex 對話視窗打字就好。</li>
 </ul>
-<blockquote>這份教學刻意省略 Module 3 教的「找路徑、跑分析、寫 config.json、打包、驗收、交付」六個步驟細節。這些步驟依然會在背後被執行，只是全部交給 Codex 一次做完。下方提示語會直接講清楚工具位於 <code>.agents/skills/build-quiz-app/</code>，讓 Codex 能讀取並依說明執行。由於 <code>module4/app/</code> 已有數學(A)測驗，skill 會先要求你確認；請選擇「加入既有 app，不覆蓋」。如果專案裡還沒有 <code>.agents/</code> 資料夾，可以下載 <a href="module4-agents-skills.tar" download>module4-agents-skills.tar</a>，解壓後把 <code>.agents/</code> 資料夾放到專案根目錄（跟 <code>module4/</code> 同一層）。如果想知道每一步實際在做什麼、或想手動調整設定，請見 <a href="../module3/quiz-app-tutorial.html">Module 3</a>。</blockquote>
+<blockquote>這份教學刻意不用 Module 3 教的「自己一句一句描述需求」練習方式，而是直接請 Codex 套用工作坊講師寫好的現成工具，把整件事一次做完 你完全不用自己想該怎麼描述、也不用管背後實際發生了什麼。下方提示語會直接講清楚工具位於 <code>.agents/skills/build-quiz-app/</code>，讓 Codex 能讀取並依說明執行。由於 <code>module4/app/</code> 已有數學(A)測驗，skill 會先要求你確認；請選擇「加入既有 app，不覆蓋」。如果專案裡還沒有 <code>.agents/</code> 資料夾，可以下載 <a href="module4-agents-skills.tar" download>module4-agents-skills.tar</a>，解壓後把 <code>.agents/</code> 資料夾放到專案根目錄（跟 <code>module4/</code> 同一層）。如果想練習「不套用現成工具、自己把需求講清楚」這件事，請見 <a href="../module3/quiz-app-tutorial.html">Module 3</a>。</blockquote>
 
 <h2 id="oneshot">一句話生成測驗網頁</h2>
 <p>把「找路徑、分析資料夾、寫設定、打包」這一整條流程，濃縮成一句話請 Codex 做：</p>
-<div class="code-sample"><div class="code-sample-toolbar"><button class="copy-btn" type="button" onclick="copyPromptBlock(this)"><span class="copy-icon">📋</span><span>複製</span></button></div><pre><code>請對 module4/repo/114 套用本專案內 .agents/skills/build-quiz-app/ 的 skill，
+<div class="code-sample"><div class="code-sample-toolbar"><button class="copy-btn" type="button" onclick="copyPromptBlock(this)"><span class="copy-icon">📋</span><span>複製</span></button></div><pre><code>請對 module3/repo/115 套用本專案內 .agents/skills/build-quiz-app/ 的 skill，
 將它加入既有 module4/app/，不要覆蓋現有的數學(A)測驗。</code></pre></div>
 <p>Codex 會依 skill 的說明分析問題集、在既有 <code>module4/app/config.json</code> 新增一筆設定，並在 <code>module4/app/dist/</code> 產生新測驗。因為目前已經有數學(A)測驗，Codex 應先詢問你是否要加入既有 app；確認選擇加入後，再跳到下面「驗收重點」確認結果。</p>
 
@@ -81,26 +81,26 @@
 </figure>
 
 <h2 id="practice">動手做：加入另一份測驗</h2>
-<p>目前資料夾沒有第三份尚未處理的原始試題。請先依 <a href="../module2/exam-paper-pipeline-tutorial.html">Module 2</a> 準備一組完整問題集：每題一張 PNG 圖片，加上一份題號與正確答案相符的 <code>keys.json</code>。把它放入 <code>module4/repo/&lt;新資料夾名稱&gt;/</code> 後，再用下方提示加入既有測驗程式。</p>
+<p>目前資料夾沒有第三份尚未處理的原始試題。請先依 <a href="../module2/exam-paper-pipeline-tutorial.html">Module 2</a> 準備一組完整問題集：每題一張 PNG 圖片，加上一份題號與正確答案相符的 <code>keys.json</code>。把它放入 <code>module3/repo/&lt;新資料夾名稱&gt;/</code>（跟 Module 3 共用同一份問題集資料）後，再用下方提示加入既有測驗程式。</p>
 <figure class="concept-infographic" data-concept-infographic="add-third-assessment">
   <img src="../../../assets/quiz-app-quickstart-tutorial-add-third-concept-dark.png" alt="說明將新的試題與答案整理成問題集後，新增一筆設定及測驗頁，同時保留既有測驗，只新增不覆蓋既有成果的圖解">
   <figcaption>安全加入新測驗的流程</figcaption>
 </figure>
 
 <h3>一句話疊加進測驗網頁</h3>
-<div class="code-sample"><div class="code-sample-toolbar"><button class="copy-btn" type="button" onclick="copyPromptBlock(this)"><span class="copy-icon">📋</span><span>複製</span></button></div><pre><code>module4/repo/&lt;新資料夾名稱&gt; 已經是一組完整問題集，包含每題圖片與 keys.json。
+<div class="code-sample"><div class="code-sample-toolbar"><button class="copy-btn" type="button" onclick="copyPromptBlock(this)"><span class="copy-icon">📋</span><span>複製</span></button></div><pre><code>module3/repo/&lt;新資料夾名稱&gt; 已經是一組完整問題集，包含每題圖片與 keys.json。
 請套用 .agents/skills/build-quiz-app/，將它新增到既有 module4/app/ 的測驗清單，
 不要覆蓋已完成的測驗。</code></pre></div>
 <p>完成後，<code>module4/app/config.json</code> 應多出一筆 <code>assessments</code> 設定，<code>module4/app/dist/</code> 也會多一個新的測驗檔案；原有的數學(A)測驗與先前加入的測驗都應維持不變。驗收方式跟上面「驗收重點」一樣：雙擊打開、作答、送出。</p>
 
 <h2 id="whenmodule3">什麼時候該回頭看 Module 3</h2>
-<p>大多數情況一句話就夠了；但下面這些狀況，回頭看 <a href="../module3/quiz-app-tutorial.html">Module 3：從問題集資料夾產生自主測驗網頁實作教學</a> 會清楚得多：</p>
+<p>大多數情況，這裡的一句話就夠了；但下面這些狀況，回頭看 <a href="../module3/quiz-app-tutorial.html">Module 3：從問題集資料夾產生自主測驗網頁實作教學</a> 會清楚得多：</p>
 <ul>
-<li>Codex 回報錯誤或警告，需要自己看分析報告或打包過程的錯誤訊息排查問題。</li>
-<li>想手動調整 <code>config.json</code> 裡的欄位（例如 <code>choiceLetters</code>、每次作答預設抽幾題）。</li>
-<li>檔名沒有清楚規律，想知道「退回逐題顯示」實際上是什麼意思、會不會影響作答。</li>
-<li>想搞懂 <code>dist/*.html</code> 跟 <code>quiz.html</code>／<code>config.json</code> 兩種產出的差別，或想在本機測試可編輯原始碼版本。</li>
+<li>還沒練習過怎麼自己跟 Codex 描述需求，想從最精簡的說法練到最完整的說法，累積下次遇到其他專案（沒有現成工具可用）時也能自己開口的能力。</li>
+<li>Codex 用這裡的 skill 做出來的結果不符合預期，想知道除了「把現成工具套用一次」之外，還有沒有別的講法可以達到同樣的效果。</li>
+<li>手上的問題集資料夾格式比較特殊（例如檔名完全沒有規律），想先看看 Module 3 怎麼一步步跟 Codex 討論這類狀況。</li>
 </ul>
+<p>不管走哪一條路，遇到問題時的處理方式都一樣：把你實際看到的狀況描述給 Codex，請它幫你檢查、修好，不用自己猜是哪裡出了問題。</p>
 
 <h2 id="next">下一步</h2>
 <p>之後每多一組問題集資料，重複「Module 2 切題清理 → 一句話疊加進 <code>app/</code>」這個循環就好，<code>app/</code> 引擎本身不需要重建。</p>

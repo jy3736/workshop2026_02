@@ -2,7 +2,7 @@
   "assessments": [
     {
       "examLabel": "Formative_Assessment_115_MathA",
-      "assetsDir": "../repo/math-115a",
+      "assetsDir": "../../module3/repo/math-115a",
       "keysFile": "115keys.json",
       "repoDir": ".",
       "questionCount": 20,
