@@ -192,10 +192,10 @@
 <blockquote><strong>為什麼底層工具是用 Claude Code 開發的，教材卻請你用 Codex 操作：</strong>這份工作坊教的是「怎麼跟 AI Agent 協作、把需求說清楚、迭代出一個靜態網頁小工具」這件事本身，不限定於任何特定產品。<code>.claude/skills/</code> 底下那幾個 custom skill（<code>download-exam-pdf</code>、<code>slice-exam-pdf</code>、<code>clean-exam-question-images</code>、<code>build-quiz-app</code>），是講師當初用 Claude Code 開發出來的；但正式工作坊現場，以及 Module 1 到 Module 4 逐步操作的部分，都是請學員改用 Codex，不是用 Claude Code。這個安排是刻意的：同一套工具、同一條學習路徑，換一個操作時用的 AI Agent（從 Claude Code 換成 Codex）也能順利做出一樣的成果，這正是「核心方法可遷移到不同 AI 工具」最直接的證據，不是一句空話。如果你想反過來驗證，也歡迎自己改用 Claude Code 走一次同一條路徑，看看是不是一樣能做出來；也不限於這兩個工具 任何具備類似能力的 AI Agent（例如 GitHub Copilot Workspace、Spark 等）理論上都應該可行，只是講師目前實際驗證過的是 Claude Code 與 Codex 這兩種。</blockquote>
 
 <h2 id="overview">二、工作坊簡介</h2>
-<p>上一場工作坊，我們練習把教學需求說清楚，並與 AI Agent 協作完成可檢查、可修正的小任務。這一場將把這個能力真正做成一個可用的教學工具：教師帶著自己正在教授的主題、教材、講義或簡報進場，與 AI Agent 協作產生一份多題式選擇題題組（例如 10、20 或 30 題），再以 vibe coding 的方式，把題組與功能需求交給 AI，製作一個可在個人電腦本機開啟的靜態 HTML 自主練習小工具。</p>
+<p>上一場工作坊，我們練習把教學需求說清楚，並與 AI Agent 協作完成可檢查、可修正的小任務。這一場將把這個能力真正做成一個可用的教學工具：學員帶著自己正在教授的主題、教材、講義或簡報進場，與 AI Agent 協作產生一份多題式選擇題題組（例如 10、20 或 30 題），再以 vibe coding 的方式，把題組與功能需求交給 AI，製作一個可在個人電腦本機開啟的靜態 HTML 自主練習小工具。</p>
 <p>選擇題作為起點，是因為規則清楚、容易批閱，對初次嘗試的教師與學生都較友善。AI 可協助教師整理與初步產生題組，但題目是否符合學習目標、答案是否正確、題幹是否清楚、選項是否合理，仍必須由教師檢核這個過程正是在練習把教學專業轉為可以交給 AI 協助處理、但仍由人負責驗收的內容。</p>
 <p>學生開啟網站時只看得到題目與選項，作答期間不會看到答案；完成作答並按下「送出並查看結果」後，網站才根據題組中的答案自動批閱，顯示答對題數、總分與逐題對錯，並可重新作答，反覆練習。學生也能把答錯的題目帶去與 AI 對話，追問為什麼答錯、正確概念是什麼、可能誤解了哪裡，形成「教材 → 題組 → 自主作答 → 自動回饋 → AI 釐清迷思 → 再次練習」的學習循環。</p>
-<p>本場的目標不是做出一套正式考試系統，而是完成一個可實際試用的自主學習原型。教師將親手體驗：只要能把需求說清楚，AI Agent 就能協助把教學想法逐步做成工具，也能在日後持續依自己的教學需要延伸與修改。</p>
+<p>本場的目標不是做出一套正式考試系統，而是完成一個可實際試用的自主學習原型。學員將親手體驗：只要能把需求說清楚，AI Agent 就能協助把教學想法逐步做成工具，也能在日後持續依自己的教學需要延伸與修改。</p>
 
 <h2 id="audience">三、適合參與者</h2>
 <ul>
@@ -227,7 +227,7 @@
 </ul>
 <p>最小可行功能（當次驗收基準）：</p>
 <ul>
-<li>教師可依教材建立一份多題式選擇題題組。</li>
+<li>學員可依教材建立一份多題式選擇題題組。</li>
 <li>小工具可載入題目、選項與答案資料。</li>
 <li>學生作答與送出前不顯示答案、分數或逐題提示。</li>
 <li>送出後顯示答對題數、分數與逐題對錯。</li>
@@ -245,7 +245,7 @@
 <p>若需要在現場前先複習工作坊（一）的環境與設定基礎，可參考：</p>
 <div class="site-grid">
 <a class="site-card" href="codex-app-settings-guide.html"><strong>ChatGPT Work 與 Codex 設定指南</strong><span>先選擇 Chat、ChatGPT Work 或 Codex；使用 Codex 時，先限制工作區並採用先要求核准。</span></a>
-<a class="site-card" href="module1/windows11-vibe-coding-setup.html"><strong>Module 1：Windows 11 環境建置</strong><span>Vibe coding 與 AI Agent 工作環境的一鍵安裝、手動安裝與驗證任務。</span></a>
+<a class="site-card" href="module1/windows11-vibe-coding-setup.html"><strong>Module 1：AI Agent 實作環境建置</strong><span>安裝設定 ChatGPT App、VS Code 擴充套件，並申請 GitHub 帳號與 GitHub Education。</span></a>
 </div>
 <p>本場兩個核心階段從教材到題組、vibe coding 建置自主練習小工具也各自備有逐步操作的實作教學，可作為現場節奏之外的自學參考或會後複習：</p>
 <div class="site-grid">
@@ -320,10 +320,10 @@
 <blockquote><strong>Why the underlying tools were built with Claude Code, yet the materials ask you to use Codex:</strong> This workshop teaches how to collaborate with an AI Agent — stating requirements clearly and iterating your way to a static web tool — not tied to any specific product. The custom skills under <code>.claude/skills/</code> (<code>download-exam-pdf</code>, <code>slice-exam-pdf</code>, <code>clean-exam-question-images</code>, <code>build-quiz-app</code>) were originally built by the instructor using Claude Code; but the live workshop, and the step-by-step Module 1–4 materials, all ask participants to use Codex instead of Claude Code. That's a deliberate choice: the same tools and the same learning path produce the same working result even after swapping the AI Agent used to operate them, from Claude Code to Codex — direct evidence that "the core method transfers across AI tools" isn't just a slogan. If you want to verify it the other way around, you're welcome to redo the same path with Claude Code and see if you land on the same result. It isn't limited to these two tools either: any AI Agent with comparable capabilities (GitHub Copilot Workspace, Spark, etc.) should in principle work too; the instructor has just only concretely verified Claude Code and Codex so far.</blockquote>
 
 <h2 id="overview-en">2. Workshop Overview</h2>
-<p>In the previous workshop, we practiced stating teaching needs clearly and collaborating with an AI Agent on small, checkable, correctable tasks. This session turns that skill into an actual usable teaching tool: teachers bring a topic, teaching material, handout, or slide deck they are currently teaching, collaborate with an AI Agent to produce a multiple-choice question set (for example 10, 20, or 30 questions), and then use vibe coding to hand the question set and feature requirements to the AI to build a static HTML self-practice tool that runs locally on a personal computer.</p>
+<p>In the previous workshop, we practiced stating teaching needs clearly and collaborating with an AI Agent on small, checkable, correctable tasks. This session turns that skill into an actual usable teaching tool: participants bring a topic, teaching material, handout, or slide deck they are currently teaching, collaborate with an AI Agent to produce a multiple-choice question set (for example 10, 20, or 30 questions), and then use vibe coding to hand the question set and feature requirements to the AI to build a static HTML self-practice tool that runs locally on a personal computer.</p>
 <p>Multiple-choice questions are the starting point because the rules are clear and easy to grade, which is friendlier for teachers and students trying this for the first time. AI can help teachers organize and draft an initial question set, but whether the questions match the learning objectives, whether the answers are correct, whether the stems are clear, and whether the options are reasonable must still be checked by the teacher — this process is exactly where teaching expertise turns into content that AI can help process, while a human remains responsible for sign-off.</p>
 <p>When students open the site they see only the questions and options; answers are not shown while answering. After finishing and clicking "Submit and view results," the site auto-grades against the answers in the question set, showing the number correct, the total score, and right/wrong per question, and lets students retry as many times as they like. Students can also bring questions they got wrong to an AI conversation, asking why they got it wrong, what the correct concept is, and where they may have misunderstood — forming a learning loop of "materials → question set → self-practice → automatic feedback → AI clarifies misconceptions → practice again."</p>
-<p>The goal of this session is not to build a formal exam system, but to complete a self-learning prototype that can actually be tried out. Teachers will experience firsthand that, as long as they can state their requirements clearly, an AI Agent can help turn a teaching idea into a tool step by step — and that they can keep extending and modifying it later according to their own teaching needs.</p>
+<p>The goal of this session is not to build a formal exam system, but to complete a self-learning prototype that can actually be tried out. Participants will experience firsthand that, as long as they can state their requirements clearly, an AI Agent can help turn a teaching idea into a tool step by step — and that they can keep extending and modifying it later according to their own teaching needs.</p>
 
 <h2 id="audience-en">3. Who Should Attend</h2>
 <ul>
@@ -355,7 +355,7 @@
 </ul>
 <p>Minimum viable features (this session's acceptance baseline):</p>
 <ul>
-<li>The teacher can build a multiple-choice question set from their materials.</li>
+<li>Participants can build a multiple-choice question set from their materials.</li>
 <li>The tool can load question, option, and answer data.</li>
 <li>Answers, scores, and per-question hints are hidden before and during submission.</li>
 <li>After submission, the tool shows the number correct, the score, and right/wrong per question.</li>
@@ -373,7 +373,7 @@
 <p>To review Workshop (1)'s environment and setup basics beforehand:</p>
 <div class="site-grid">
 <a class="site-card" href="codex-app-settings-guide.html"><strong>ChatGPT Work and Codex Setup Guide</strong><span>Choose Chat, ChatGPT Work, or Codex; for Codex, limit the workspace and use Ask for approval first.</span></a>
-<a class="site-card" href="module1/windows11-vibe-coding-setup.html"><strong>Module 1: Windows 11 Setup</strong><span>One-click setup, manual installation, and verification tasks for the AI Agent environment.</span></a>
+<a class="site-card" href="module1/windows11-vibe-coding-setup.html"><strong>Module 1: AI Agent Hands-on Environment Setup</strong><span>Install and configure the ChatGPT app and VS Code extensions, and apply for a GitHub account and GitHub Education.</span></a>
 </div>
 <p>This session's two core phases — from materials to a question set, and the vibe coding build — also each have a step-by-step hands-on tutorial, useful as self-paced reference outside the live session's pace or for review afterward:</p>
 <div class="site-grid">
