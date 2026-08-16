@@ -10,7 +10,7 @@
 *{box-sizing:border-box}html{scroll-behavior:smooth}body{min-width:0;margin:0;background:var(--bg);color:var(--fg);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang TC","Microsoft JhengHei",Roboto,Helvetica,Arial,sans-serif;font-size:16px;line-height:1.76;transition:background .25s,color .25s}
 .sidebar{position:fixed;inset:0 auto 0 0;width:var(--sidebar-w);overflow-y:auto;z-index:30;display:flex;flex-direction:column;gap:10px;padding:18px 14px;background:var(--card);border-right:1px solid var(--border)}
 .brand{padding:0 6px;font-size:1rem;font-weight:750;line-height:1.35}.toprow{display:flex;flex-wrap:wrap;gap:8px}.btn{cursor:pointer;border:1px solid var(--border);border-radius:8px;padding:6px 12px;background:var(--bg);color:var(--fg);font-weight:650}.btn:hover{border-color:var(--accent)}
-.nav{display:flex;flex-direction:column;gap:4px;margin-top:4px}.navbtn,.navhome{width:100%;cursor:pointer;border:1px solid transparent;border-radius:7px;padding:7px 10px;background:transparent;color:var(--muted);font-size:14px;font-weight:650;text-align:left;text-decoration:none}.navbtn:hover,.navbtn.active,.navhome:hover{border-color:var(--border);background:var(--bg);color:var(--accent)}.navhome{display:block;border-color:var(--border);background:var(--bg);color:var(--fg)}
+.nav{display:flex;flex-direction:column;gap:4px;margin-top:4px}.navbtn,.navhome{width:100%;cursor:pointer;border:1px solid transparent;border-radius:7px;padding:7px 10px;background:transparent;color:var(--muted);font-size:14px;font-weight:650;text-align:left;text-decoration:none}.navbtn:hover,.navbtn.active,.navhome:hover{border-color:var(--border);background:var(--bg);color:var(--accent)}.navsub{padding-left:22px;font-size:13px;font-weight:550}.navhome{display:block;border-color:var(--border);background:var(--bg);color:var(--fg)}
 .menu-toggle{display:none;position:fixed;top:12px;left:12px;z-index:40;cursor:pointer;border:1px solid var(--border);border-radius:8px;padding:6px 12px;background:var(--card);color:var(--fg);font-size:18px;line-height:1}.backdrop{display:none;position:fixed;inset:0;z-index:20;background:rgba(0,0,0,.42)}
 .wrap{width:min(var(--content-max),calc(100vw - var(--sidebar-w)));margin-left:calc(var(--sidebar-w) + (100vw - var(--sidebar-w) - min(var(--content-max),calc(100vw - var(--sidebar-w)))) / 2);padding:var(--pad-y) var(--pad-x) 88px}
 h1{max-width:var(--measure);margin:.2em 0 .35em;font-size:2.15rem;line-height:1.28}h2{margin-top:1.9em;padding-bottom:.25em;border-bottom:2px solid var(--border);font-size:1.48rem;scroll-margin-top:24px}h3{margin-top:1.4em;color:var(--accent);font-size:1.15rem}p,li{max-width:var(--measure);overflow-wrap:break-word}li{margin:.35em 0}ul,ol{padding-left:1.3em}a{color:var(--accent);overflow-wrap:anywhere}
@@ -31,12 +31,23 @@ figure{max-width:100%;margin:1.25em 0 .45em;padding:16px 18px;border:1px solid v
  <button class="navbtn" onclick="gotoSection(1)" type="button"><span class="zh">Windows 11 安裝</span><span class="en">Install on Windows 11</span></button>
  <button class="navbtn" onclick="gotoSection(2)" type="button"><span class="zh">Chat、Work 與 Codex 比較</span><span class="en">Compare Chat, Work, and Codex</span></button>
  <button class="navbtn" onclick="gotoSection(3)" type="button"><span class="zh">Work 深入：常見使用情境</span><span class="en">Work deep dive: common use cases</span></button>
- <button class="navbtn" onclick="gotoSection(4)" type="button"><span class="zh">選擇執行位置</span><span class="en">Choose where work runs</span></button>
- <button class="navbtn" onclick="gotoSection(5)" type="button"><span class="zh">安全設定 Codex</span><span class="en">Configure Codex safely</span></button>
- <button class="navbtn" onclick="gotoSection(6)" type="button"><span class="zh">Codex 深入：vibe coding 建立 Web App</span><span class="en">Codex deep dive: vibe coding a web app</span></button>
- <button class="navbtn" onclick="gotoSection(7)" type="button"><span class="zh">保持參與與審查</span><span class="en">Stay in the loop</span></button>
- <button class="navbtn" onclick="gotoSection(8)" type="button"><span class="zh">課前檢查</span><span class="en">Before you begin</span></button>
- <button class="navbtn" onclick="gotoSection(9)" type="button"><span class="zh">參考來源</span><span class="en">References</span></button>
+ <button class="navbtn navsub" onclick="gotoSection(4)" type="button"><span class="zh">1. 整理成簡報</span><span class="en">1. Into a presentation</span></button>
+ <button class="navbtn navsub" onclick="gotoSection(5)" type="button"><span class="zh">2. 整理成試算表</span><span class="en">2. Into a spreadsheet</span></button>
+ <button class="navbtn navsub" onclick="gotoSection(6)" type="button"><span class="zh">3. 排程重複任務</span><span class="en">3. Schedule tasks</span></button>
+ <button class="navbtn navsub" onclick="gotoSection(7)" type="button"><span class="zh">4. 產出文件報告</span><span class="en">4. Documents &amp; reports</span></button>
+ <button class="navbtn navsub" onclick="gotoSection(8)" type="button"><span class="zh">5. 串接工具流程</span><span class="en">5. Chain tool workflows</span></button>
+ <button class="navbtn navsub" onclick="gotoSection(9)" type="button"><span class="zh">下指令小技巧</span><span class="en">Prompt tips</span></button>
+ <button class="navbtn" onclick="gotoSection(10)" type="button"><span class="zh">選擇執行位置</span><span class="en">Choose where work runs</span></button>
+ <button class="navbtn" onclick="gotoSection(11)" type="button"><span class="zh">安全設定 Codex</span><span class="en">Configure Codex safely</span></button>
+ <button class="navbtn" onclick="gotoSection(12)" type="button"><span class="zh">Codex 深入：vibe coding 建立 Web App</span><span class="en">Codex deep dive: vibe coding a web app</span></button>
+ <button class="navbtn navsub" onclick="gotoSection(13)" type="button"><span class="zh">先準備乾淨資料夾</span><span class="en">Prepare a clean folder</span></button>
+ <button class="navbtn navsub" onclick="gotoSection(14)" type="button"><span class="zh">一句話描述 Web App</span><span class="en">Describe the web app</span></button>
+ <button class="navbtn navsub" onclick="gotoSection(15)" type="button"><span class="zh">建議的來回流程</span><span class="en">Suggested back-and-forth</span></button>
+ <button class="navbtn navsub" onclick="gotoSection(16)" type="button"><span class="zh">另一選項：Codex Sites</span><span class="en">Alternative: Codex Sites</span></button>
+ <button class="navbtn navsub" onclick="gotoSection(17)" type="button"><span class="zh">常見地雷</span><span class="en">Common pitfalls</span></button>
+ <button class="navbtn" onclick="gotoSection(18)" type="button"><span class="zh">保持參與與審查</span><span class="en">Stay in the loop</span></button>
+ <button class="navbtn" onclick="gotoSection(19)" type="button"><span class="zh">課前檢查</span><span class="en">Before you begin</span></button>
+ <button class="navbtn" onclick="gotoSection(20)" type="button"><span class="zh">參考來源</span><span class="en">References</span></button>
  </nav>
 </aside>
 <div class="backdrop" id="backdrop" onclick="toggleMenu()"></div>
@@ -368,10 +379,11 @@ figure{max-width:100%;margin:1.25em 0 .45em;padding:16px 18px;border:1px solid v
 </main>
 <script>
 function currentSection(){return document.querySelector('section.'+document.documentElement.getAttribute('data-lang'))}
-function gotoSection(index){const headings=[...currentSection().querySelectorAll('h2')];if(headings[index])headings[index].scrollIntoView({behavior:'smooth',block:'start'});closeMenu()}
+function navTargets(){const section=currentSection();return section?[...section.querySelectorAll('h2, h3')]:[]}
+function gotoSection(index){const targets=navTargets();if(targets[index])targets[index].scrollIntoView({behavior:'smooth',block:'start'});closeMenu()}
 function toggleMenu(){document.getElementById('sidebar').classList.toggle('open');document.getElementById('backdrop').classList.toggle('show')}
 function closeMenu(){document.getElementById('sidebar').classList.remove('open');document.getElementById('backdrop').classList.remove('show')}
-function buildSpy(){const headings=[...currentSection().querySelectorAll('h2')];const buttons=[...document.querySelectorAll('.navbtn')];const observer=new IntersectionObserver(entries=>{for(const entry of entries){if(entry.isIntersecting){const index=headings.indexOf(entry.target);buttons.forEach((button,i)=>button.classList.toggle('active',i===index))}}},{rootMargin:'0px 0px -75% 0px',threshold:0});headings.forEach(heading=>observer.observe(heading))}
+let spy;function buildSpy(){if(spy)spy.disconnect();const targets=navTargets();const btns=[...document.querySelectorAll('.nav .navbtn')];spy=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting){const idx=targets.indexOf(e.target);btns.forEach((b,i)=>b.classList.toggle('active',i===idx))}})},{rootMargin:'0px 0px -75% 0px',threshold:0});targets.forEach(t=>spy.observe(t))}
 function toggleTheme(){const html=document.documentElement;const dark=html.getAttribute('data-theme')==='light';html.setAttribute('data-theme',dark?'dark':'light');document.getElementById('themeBtn').textContent=dark?'☀️ Light':'🌙 Dark'}
 function toggleLang(){const html=document.documentElement;const english=html.getAttribute('data-lang')==='zh';html.setAttribute('data-lang',english?'en':'zh');html.setAttribute('lang',english?'en':'zh-Hant');document.getElementById('langBtn').textContent=english?'中文':'English';buildSpy()}
 document.addEventListener('DOMContentLoaded',buildSpy)
