@@ -136,14 +136,14 @@
  <nav class="nav">
 <button class="navbtn" onclick="gotoSection(0)" type="button"><span class="zh">課程資訊</span><span class="en">Course Information</span></button>
 <button class="navbtn" onclick="gotoSection(1)" type="button"><span class="zh">一、系列定位與脈絡</span><span class="en">1. Series Positioning and Context</span></button>
-<button class="navbtn" onclick="gotoSection(2)" type="button"><span class="zh">二、工作坊簡介</span><span class="en">2. Workshop Overview</span></button>
+<button class="navbtn" onclick="gotoSection(2)" type="button"><span class="zh">二、實作流程</span><span class="en">2. Hands-on Flow</span></button>
 <button class="navbtn" onclick="gotoSection(3)" type="button"><span class="zh">三、適合參與者</span><span class="en">3. Who Should Attend</span></button>
 <button class="navbtn" onclick="gotoSection(4)" type="button"><span class="zh">四、學習成果</span><span class="en">4. Learning Outcomes</span></button>
-<button class="navbtn" onclick="gotoSection(5)" type="button"><span class="zh">五、工作坊重點與最小可行功能</span><span class="en">5. Focus Points and Minimum Viable Features</span></button>
+<button class="navbtn" onclick="gotoSection(5)" type="button"><span class="zh">五、兩個可重複使用的工作流程</span><span class="en">5. Two Reusable Workflows</span></button>
 <button class="navbtn" onclick="gotoSection(6)" type="button"><span class="zh">六、事前準備</span><span class="en">6. Preparation Checklist</span></button>
-<button class="navbtn" onclick="gotoSection(7)" type="button"><span class="zh">七、使用定位與範圍</span><span class="en">7. Scope, Positioning, and Limitations</span></button>
+<button class="navbtn" onclick="gotoSection(7)" type="button"><span class="zh">七、發布與重複使用</span><span class="en">7. Publishing and Reuse</span></button>
 <button class="navbtn" onclick="gotoSection(8)" type="button"><span class="zh">八、預期帶走的成果</span><span class="en">8. Expected Takeaways</span></button>
-<button class="navbtn" onclick="gotoSection(9)" type="button"><span class="zh">九、銜接工作坊（三）</span><span class="en">9. Bridge to Workshop (3)</span></button>
+<button class="navbtn" onclick="gotoSection(9)" type="button"><span class="zh">九、重點回顧</span><span class="en">9. Key Takeaways</span></button>
  </nav>
 </aside>
 <div class="backdrop" id="backdrop" onclick="toggleMenu()"></div>
@@ -156,124 +156,121 @@
 <div class="table-wrap"><table>
 <thead><tr><th>項目</th><th>內容</th></tr></thead>
 <tbody>
-<tr><td>時間</td><td>13:00-17:30（12:30 開始報到）</td></tr>
+<tr><td>場次</td><td>場次一：08/20（四）13:00-17:30（12:30 開始報到）<br>場次二：08/21（五）13:00-17:30（12:30 開始報到）</td></tr>
 <tr><td>地點</td><td>南臺科技大學 J棟 J301教室</td></tr>
 <tr><td>講師</td><td>南臺科大 電子系 楊榮林 教授</td></tr>
-<tr><td>對象</td><td>想將 AI Agent 應用於教材轉化、學生自主練習或形成性回饋的大專校院教師；不需具備程式背景。</td></tr>
+<tr><td>對象</td><td>想以 AI Agent 建置考科題庫與學生自主練習環境的大專校院教師；不需具備程式背景。</td></tr>
 </tbody>
 </table></div>
-<blockquote>本工作坊可能依報名狀況開設多個梯次，實際日期與報名連結以各梯次正式公告為準。</blockquote>
+<blockquote>兩場次課程內容相同，請依自己報名的場次出席；實際報名狀況與名額以正式公告為準。</blockquote>
 <p>活動流程：</p>
 <div class="table-wrap"><table>
 <thead><tr><th>時間</th><th>內容</th><th>當次產出／驗收點</th></tr></thead>
 <tbody>
 <tr><td>12:30-13:00</td><td>報到</td><td>—</td></tr>
-<tr><td>13:00-13:10</td><td>開場與回顧：回顧工作坊（一）的 AI 協作任務卡，說明本場題庫、介面與評分規則。</td><td>明確的功能清單</td></tr>
-<tr><td>13:10-14:00</td><td>從教材到題組：與 AI Agent 協作，依自己的教材整理題目與答案。</td><td>選擇題題組初稿</td></tr>
-<tr><td>14:00-14:50</td><td>題組檢核調整：檢查題目、選項、答案與練習目標，修正題組。</td><td>檢核後的完整題組</td></tr>
+<tr><td>13:00-13:20</td><td>開場、回顧與環境確認：複習 AI Agent 與一般聊天機器人的差異，確認 ChatGPT Codex 與 VS Code 已可使用，並說明 GitHub Copilot 的替代方式。</td><td>可開始實作的環境</td></tr>
+<tr><td>13:20-14:30</td><td>第一階段：用 AI Agent 下載統測題目 PDF 與答案，切成一題一張圖檔並對應標準答案，建立本機題庫。</td><td>可使用的本機題庫</td></tr>
+<tr><td>14:30-14:50</td><td>第一階段 skill：把下載、切題、整理與驗收流程整理並測試為可獨立使用的 skill。</td><td>題庫建立 skill</td></tr>
 <tr><td>14:50-15:20</td><td>茶敘休息（下午茶）</td><td>—</td></tr>
-<tr><td>15:20-16:40</td><td>vibe coding 實作：把題組與需求交給 AI，建立靜態 HTML 自主練習小工具。</td><td>可作答的初版頁面</td></tr>
-<tr><td>16:40-17:00</td><td>測試、送出、自動批閱與逐題回饋，並加入重新作答功能。</td><td>不先顯示答案的完整流程</td></tr>
-<tr><td>17:00-17:30</td><td>同儕試用、成果交流與賦歸：以非作者角度操作並交流回饋，預告工作坊（三）的延伸方向。</td><td>一份試用回饋、工作坊（三）的準備方向</td></tr>
+<tr><td>15:20-16:30</td><td>第二階段：以切好的題庫設計學生自主練習環境，產生每個練習單元各自獨立、圖檔嵌入其中的靜態 HTML 網頁。</td><td>可直接開啟與發布的練習單元</td></tr>
+<tr><td>16:30-16:50</td><td>第二階段 skill：把練習單元的產生流程整理並測試為可獨立使用的 skill。</td><td>練習單元產生 skill</td></tr>
+<tr><td>16:50-17:30</td><td>重點回顧與交流：整理今天的 AI Agent 協作方法、驗收方式與後續應用情境。</td><td>可遷移的開發流程</td></tr>
 </tbody>
 </table></div>
 
 <h2 id="series-context">一、系列定位與脈絡</h2>
-<p>本場是「AI Agent 教學應用工作坊」系列三場中的第二場，面向非工程背景的大學教師。系列以三場循序漸進的實作，協助教師理解 AI 已從單純的對話與提示詞工具，逐步發展為能協助處理電腦與雲端工作流程的 AI Agent；核心學習方法可遷移到不同 AI 工具：<strong>先說清楚目標、情境、限制與完成標準；再檢查成果、提出修正，並以小步迭代完成工作。</strong></p>
+<p>本場是「AI Agent 教學應用工作坊」系列三場中的第二場，面向非工程背景的大學教師。我們先用很短的時間複習：一般聊天機器人主要回覆對話；AI Agent 則能在明確的工作範圍內，依需求操作檔案、工具與多個步驟來完成任務。本場把這種協作方法用在「建立題庫」與「建立自主練習網頁」兩個真實工作流程。</p>
 <div class="table-wrap"><table>
 <thead><tr><th>階段</th><th>工作坊</th><th>核心問題</th><th>當次成果</th></tr></thead>
 <tbody>
 <tr><td>1. 學會與 AI 協作</td><td>工作坊（一）</td><td>如何把模糊教學想法變成可檢查、可完成的任務？</td><td>AI 協作任務卡、一次教材或截圖分析與修訂紀錄</td></tr>
-<tr><td>2. 做出自主練習小工具</td><td>工作坊（二）〔本場〕</td><td>如何把自己的教材轉為題組與學生可使用的練習小工具？</td><td>選擇題題組、靜態 HTML 自主練習小工具、測試紀錄</td></tr>
-<tr><td>3. 延伸為課堂形成性評量</td><td>工作坊（三）</td><td>如何用最低必要功能，在課堂中快速掌握學生的概念理解？</td><td>學生課堂作答原型、簡易教師 Dashboard、班級答題彙整與初步分析</td></tr>
+<tr><td>2. 將資料轉為練習工具</td><td>工作坊（二）〔本場〕</td><td>如何把公開考題整理成可重複建立的題庫，並製作學生可使用的練習網頁？</td><td>本機題庫、獨立靜態 HTML 練習單元、兩個可重複使用的 skill</td></tr>
+<tr><td>3. 延伸應用</td><td>後續自行發展</td><td>如何將同一套方法套用到其他考科、單元或教學情境？</td><td>依需求擴充的題庫與練習環境</td></tr>
 </tbody>
 </table></div>
-<p>本場承接工作坊（一）建立的 AI 協作方法，把教師的教學內容轉化為學生可在課後自主練習的題組與小工具；完成的題組格式與作答／回饋邏輯，會在工作坊（三）延伸為課堂形成性評量原型。</p>
-<blockquote><strong>為什麼底層工具是用 Claude Code 開發的，教材卻請你用 Codex 操作：</strong>這份工作坊教的是「怎麼跟 AI Agent 協作、把需求說清楚、迭代出一個靜態網頁小工具」這件事本身，不限定於任何特定產品。<code>.claude/skills/</code> 底下那幾個 custom skill（<code>download-exam-pdf</code>、<code>slice-exam-pdf</code>、<code>clean-exam-question-images</code>、<code>build-quiz-app</code>），是講師當初用 Claude Code 開發出來的；但正式工作坊現場，以及 Module 1 到 Module 4 逐步操作的部分，都是請學員改用 Codex，不是用 Claude Code。這個安排是刻意的：同一套工具、同一條學習路徑，換一個操作時用的 AI Agent（從 Claude Code 換成 Codex）也能順利做出一樣的成果，這正是「核心方法可遷移到不同 AI 工具」最直接的證據，不是一句空話。如果你想反過來驗證，也歡迎自己改用 Claude Code 走一次同一條路徑，看看是不是一樣能做出來；也不限於這兩個工具 任何具備類似能力的 AI Agent（例如 GitHub Copilot Workspace、Spark 等）理論上都應該可行，只是講師目前實際驗證過的是 Claude Code 與 Codex 這兩種。</blockquote>
+<p>本場承接工作坊（一）建立的 AI 協作方法：<strong>先說清楚目標、資料來源、限制與完成標準；再檢查成果、提出修正，並把驗證過的流程固化成可重複使用的 skill。</strong>完成後，學員不只帶走一次性的成果，也帶走之後可直接再次執行的工作方法。</p>
 
-<h2 id="overview">二、工作坊簡介</h2>
-<p>上一場工作坊，我們練習把教學需求說清楚，並與 AI Agent 協作完成可檢查、可修正的小任務。這一場將把這個能力真正做成一個可用的教學工具：學員帶著自己正在教授的主題、教材、講義或簡報進場，與 AI Agent 協作產生一份多題式選擇題題組（例如 10、20 或 30 題），再以 vibe coding 的方式，把題組與功能需求交給 AI，製作一個可在個人電腦本機開啟的靜態 HTML 自主練習小工具。</p>
-<p>選擇題作為起點，是因為規則清楚、容易批閱，對初次嘗試的教師與學生都較友善。AI 可協助教師整理與初步產生題組，但題目是否符合學習目標、答案是否正確、題幹是否清楚、選項是否合理，仍必須由教師檢核這個過程正是在練習把教學專業轉為可以交給 AI 協助處理、但仍由人負責驗收的內容。</p>
-<p>學生開啟網站時只看得到題目與選項，作答期間不會看到答案；完成作答並按下「送出並查看結果」後，網站才根據題組中的答案自動批閱，顯示答對題數、總分與逐題對錯，並可重新作答，反覆練習。學生也能把答錯的題目帶去與 AI 對話，追問為什麼答錯、正確概念是什麼、可能誤解了哪裡，形成「教材 → 題組 → 自主作答 → 自動回饋 → AI 釐清迷思 → 再次練習」的學習循環。</p>
-<p>本場的目標不是做出一套正式考試系統，而是完成一個可實際試用的自主學習原型。學員將親手體驗：只要能把需求說清楚，AI Agent 就能協助把教學想法逐步做成工具，也能在日後持續依自己的教學需要延伸與修改。</p>
+<h2 id="overview">二、實作流程</h2>
+<p>第一階段從公開的統測資料開始。學員以 AI Agent 協助前往統測官網，下載所需的題目 PDF 與答案資料；接著把 PDF 切割為「一題一張」的圖檔，並將每題圖檔與正確答案對應，生成可在本機保存與使用的題庫。</p>
+<p>第一階段完成後，隨即把下載、切題、整理與驗收的操作寫成並測試為獨立的「題庫建立 skill」。往後要建立新的考科或年度題庫時，可以直接套用這個 skill，以同樣的規格精準執行，避免每次都從頭探索做法，也避免不必要地消耗時間與 Token。</p>
+<p>第二階段以完成的題庫為基礎，思考如何為學生建立可自主練習的環境。學員會以靜態網頁方式製作練習單元，並將題目圖檔嵌入 HTML；每一個測驗或練習單元都是一個獨立 HTML 檔案，不依賴外部圖庫或額外檔案。這能簡化測試、分享與網站發布。</p>
+<p>第二階段完成後，隨即把產生獨立練習單元的流程整理並測試為另一個獨立的「練習單元產生 skill」。之後只要備妥新的題庫，即可直接執行這個 skill 建立其他練習單元，讓開發步驟可重複、可驗收且更有效率。</p>
 
 <h2 id="audience">三、適合參與者</h2>
 <ul>
 <li>已參與工作坊（一），或能以「目標、情境、限制、完成標準」簡要描述自己的教學需求者。</li>
-<li>想把自己正在教授的主題、教材、講義或簡報，轉化為學生可自主練習的選擇題題組與網頁工具者。</li>
-<li>想讓學生在課後依自己的節奏反覆練習、獲得即時回饋並釐清迷思概念者。</li>
-<li>希望先完成一個小而完整、可在本機使用的教學原型，而非從複雜系統開始者。</li>
+<li>想將公開考題、考古題或既有題目資料，轉化為可管理的本機題庫者。</li>
+<li>想讓學生在課後依自己的節奏使用網頁反覆練習者。</li>
+<li>希望用小而完整、可直接發布的靜態網頁完成教學應用，而非先建立複雜系統者。</li>
 </ul>
 
 <h2 id="outcomes">四、學習成果</h2>
 <p>完成本場後，您將能夠：</p>
 <ol>
-<li>依自己的課程主題或教材，與 AI Agent 協作產生一份多題式選擇題題組，並檢核題目、答案與選項的品質。</li>
-<li>將自我測驗需求拆成題庫資料、畫面、互動規則與驗收條件，並以 vibe coding 的方式與 AI 協作建立、修改一個單頁 HTML 自主練習小工具。</li>
-<li>設計「送出前不顯示答案，送出後才提供分數、逐題對錯與回饋」的基本學習流程。</li>
-<li>說明學生如何以批閱結果為起點，利用 AI 對話釐清答錯原因與未學會的概念。</li>
-<li>以試用與驗收清單檢查網站是否符合原先的教學需求。</li>
+<li>說明 AI Agent 與一般聊天機器人的差異，並確認 ChatGPT Codex、VS Code 與選用的 GitHub 教育資源已可使用。</li>
+<li>以 AI Agent 協助下載統測題目與答案資料，將 PDF 切成逐題圖檔，並建立答案對應的本機題庫。</li>
+<li>在第一階段完成後，將經驗證的題庫建立流程整理並測試成可重複執行的獨立 skill。</li>
+<li>從切好的題庫設計學生自主練習環境，製作圖檔嵌入、可獨立開啟的靜態 HTML 練習單元。</li>
+<li>在第二階段完成後，將練習單元產生流程整理並測試成第二個獨立 skill，以便日後直接套用到其他題庫。</li>
 </ol>
 
-<h2 id="focus-mvp">五、工作坊重點與最小可行功能</h2>
-<p>工作坊重點：</p>
+<h2 id="focus-mvp">五、兩個可重複使用的工作流程</h2>
+<p>工作流程一：從 PDF 建立本機題庫</p>
 <ul>
-<li>從教材、講義或簡報，與 AI Agent 協作整理成可練習的選擇題題組，維持題庫與網頁的清楚分工。</li>
-<li>建立題目與選項畫面，記錄學生作答。</li>
-<li>以 vibe coding 方式完成送出、計分、逐題正誤與正確答案回饋。</li>
-<li>加入重新作答功能，讓學生可反覆練習。</li>
-<li>設計學生利用 AI 釐清答錯原因、補強觀念的使用情境。</li>
-<li>以同儕試用找出操作不清楚或需修正的地方。</li>
+<li>指定目標年度、考科與公開資料來源。</li>
+<li>下載題目 PDF 與答案資料。</li>
+<li>將題目切成逐題圖檔，並清楚命名與保存。</li>
+<li>對應每題正確答案，產出可供練習網頁使用的本機題庫。</li>
+<li>完成後立即把此流程整理並測試為獨立的題庫建立 skill。</li>
 </ul>
-<p>最小可行功能（當次驗收基準）：</p>
+<p>工作流程二：從題庫建立獨立練習單元</p>
 <ul>
-<li>學員可依教材建立一份多題式選擇題題組。</li>
-<li>小工具可載入題目、選項與答案資料。</li>
-<li>學生作答與送出前不顯示答案、分數或逐題提示。</li>
-<li>送出後顯示答對題數、分數與逐題對錯。</li>
-<li>可重新作答，讓學生反覆練習。</li>
-<li>題組資料與網頁程式保持清楚分工，方便日後更換教材或修改題目。</li>
+<li>以題庫資料規劃學生的作答與練習流程。</li>
+<li>產生每一單元各自獨立的靜態 HTML 檔案。</li>
+<li>將該單元需要的題目圖檔嵌入 HTML，不依賴外部圖檔資料夾。</li>
+<li>在本機直接開啟、測試與分享；需要時可直接發布到靜態網站。</li>
+<li>完成後立即把此流程整理並測試為獨立的練習單元產生 skill。</li>
 </ul>
 
 <h2 id="prep">六、事前準備</h2>
 <ul>
 <li>請攜帶筆記型電腦，並確認可使用網頁瀏覽器。</li>
-<li>請準備自己正在教授的教材、講義或簡報片段，作為產生題組的素材；也可先使用講師提供的範例題庫。</li>
-<li>題目、答案與學習目標仍須由教師自行檢核；不使用學生個資、完整成績或其他機敏資料。</li>
-<li>若曾參加工作坊（一），請攜帶或整理當時完成的 AI 協作任務卡與需求草稿。</li>
+<li>請確認已安裝並可登入 ChatGPT，且可使用 Codex。</li>
+<li>請安裝 VS Code；如有需要，可申請 GitHub 與 GitHub Education，使用符合資格的 GitHub Copilot 方案。</li>
+<li>本場以公開的統測題目與答案資料為例；不需上傳學生個資、成績或其他機敏資料。</li>
 </ul>
 <p>若需要在現場前先複習工作坊（一）的環境與設定基礎，可參考：</p>
 <div class="site-grid">
 <a class="site-card" href="codex-app-settings-guide.html"><strong>ChatGPT Work 與 Codex 設定指南</strong><span>先選擇 Chat、ChatGPT Work 或 Codex；使用 Codex 時，先限制工作區並採用先要求核准。</span></a>
 <a class="site-card" href="module1/windows11-vibe-coding-setup.html"><strong>Module 1：AI Agent 實作環境建置</strong><span>安裝設定 ChatGPT App、VS Code 擴充套件，並申請 GitHub 帳號與 GitHub Education。</span></a>
 </div>
-<p>本場兩個核心階段從教材到題組、vibe coding 建置自主練習小工具也各自備有逐步操作的實作教學，可作為現場節奏之外的自學參考或會後複習：</p>
+<p>本場兩個核心階段各自備有逐步實作教學，可作為現場節奏之外的自學參考或會後複習：</p>
 <div class="site-grid">
-<a class="site-card" href="module2/exam-paper-pipeline-tutorial.html"><strong>Module 2：考古題下載、切題與清理實作教學</strong><span>對應「從教材到題組」階段：用工作坊講師寫好的三個 custom skill，把 PDF 考古題轉為一題一張乾淨圖片與標準答案 JSON。</span></a>
-<a class="site-card" href="module3/quiz-app-tutorial.html"><strong>Module 3：從問題集資料夾產生自主測驗網頁實作教學</strong><span>對應「vibe coding 建置」階段：用 build-quiz-app skill，把問題集資料夾變成雙擊即用的學生自測網頁與教師端成績彙整頁。</span></a>
+<a class="site-card" href="module2/exam-paper-pipeline-tutorial.html"><strong>Module 2：考古題下載、切題與清理實作教學</strong><span>用可重複使用的 skill，將 PDF 考古題轉為逐題圖檔與標準答案資料。</span></a>
+<a class="site-card" href="module3/quiz-app-tutorial.html"><strong>Module 3：從問題集資料夾產生自主練習網頁實作教學</strong><span>從準備好的題庫出發，以 AI Agent 建立可直接開啟的學生練習網頁。</span></a>
+<a class="site-card" href="module4/quiz-app-quickstart-tutorial.html"><strong>Module 4：一句話產生自主練習網頁快速教學</strong><span>套用現成 skill，快速把題庫轉為可分享的練習單元。</span></a>
 </div>
 
-<h2 id="scope">七、使用定位與範圍</h2>
-<p>本場產出定位為學生課後的自主練習小工具，<strong>不作為正式成績判定或高風險測驗</strong>。學生是否真實投入練習，仍取決於其學習動機；學生也可能利用 AI 取得答案。因此，本工具的價值在於提供可反覆練習、即時回饋與觀念釐清的學習機會，而不是取代教師對正式評量的設計與判斷。</p>
+<h2 id="scope">七、發布與重複使用</h2>
+<p>本場產出定位為學生課後的自主練習環境，<strong>不作為正式成績判定或高風險測驗</strong>。每個練習單元是獨立 HTML 檔案，題目圖檔已嵌入其中，因此不用另外處理圖庫或複雜的網站依賴；可直接交給學生、放到共用資料夾，或發布到靜態網站。</p>
 <ul>
-<li>先完成小而可驗收的版本，再依使用經驗改進；不在時間有限的現場追求技術複雜度。</li>
-<li>題目、答案、學習目標對應都必須由教師檢核，不可自動採用 AI 產出。</li>
-<li>不在 AI 對話中貼入學生個資或完整成績；素材以教師自身教材、講義或簡報為主。</li>
-<li>若日後需要正式評量、跨班長期使用、個資處理、資料庫、權限或即時追蹤，應另行規劃資料治理、資安、無障礙、維運與校內程序。</li>
+<li>重複使用的核心不是只複製一次成果，而是保留經驗證的 skill，讓新資料可依相同規格重新產生。</li>
+<li>每次下載、切題與答案對應完成後，都應抽查題號、圖檔與答案是否正確。</li>
+<li>每次產生 HTML 後，都應在本機開啟並測試題目顯示與作答流程，再發布給學生。</li>
+<li>若日後需要學生帳號、成績蒐集、個資處理或正式評量，應另行規劃資料治理、資安、無障礙、維運與校內程序。</li>
 </ul>
 
 <h2 id="takeaways">八、預期帶走的成果</h2>
 <ul>
-<li>一份由自身教材發展、結構清楚的選擇題題組。</li>
-<li>一個可在本機開啟的靜態 HTML 自主練習小工具。</li>
-<li>一個送出後才顯示答案、分數與逐題回饋的完整流程。</li>
-<li>一份測試與修正紀錄，可作為後續教學改版的起點。</li>
-<li>一套可延續到其他教材、單元或教學工具的 AI Agent 協作開發流程。</li>
+<li>一套從公開 PDF 題目與答案建立本機題庫的流程與 skill。</li>
+<li>一套從題庫建立學生自主練習單元的流程與 skill。</li>
+<li>一個或多個可直接開啟、圖檔嵌入的獨立靜態 HTML 練習單元。</li>
+<li>一份用於題庫與網頁驗收的檢查重點。</li>
+<li>一套可延續到其他年度、考科、教材或教學工具的 AI Agent 協作開發方法。</li>
 </ul>
 
-<h2 id="next">九、銜接工作坊（三）</h2>
-<p>工作坊（三）「從自主練習到課堂形成性評量」會延續本場的題組格式與學生作答介面，把課後自主練習帶回教室：學生在課堂中透過教師提供的網址載入指定題庫，填寫班級座號或匿名代碼等最小必要識別資料後完成作答；交卷後系統自動批閱並回傳個人結果。教師端會有一個刻意維持最低必要功能的 Dashboard，只在學生登入開始作答與交卷後顯示必要資訊，全班交卷後可查看各題答對率、錯誤率與常見錯誤分布，並可交給 AI 協助整理成簡單的學習分析。</p>
-<p>因此，本場完成的題組資料格式、送出前不顯示答案、送出後自動批閱與逐題回饋等設計，會直接沿用到下一場，請妥善保留當次產出的題庫檔案與小工具程式碼。</p>
+<h2 id="next">九、重點回顧</h2>
+<p>今天的重點不是只完成一次題庫或一個網頁，而是每完成一個工作階段，就立刻把該階段轉化為可被 AI Agent 精準重複執行的獨立 skill。當資料來源或題庫改變時，學員不必再從零摸索，而是能在明確的輸入、輸出與驗收條件下重新建立成果。</p>
 
  </section>
  <section class="en">
@@ -284,124 +281,121 @@
 <div class="table-wrap"><table>
 <thead><tr><th>Item</th><th>Details</th></tr></thead>
 <tbody>
-<tr><td>Time</td><td>13:00-17:30 (check-in starts at 12:30)</td></tr>
+<tr><td>Sessions</td><td>Session 1: Thu 08/20, 13:00-17:30 (check-in starts at 12:30)<br>Session 2: Fri 08/21, 13:00-17:30 (check-in starts at 12:30)</td></tr>
 <tr><td>Venue</td><td>Room J301, Building J, Southern Taiwan University of Science and Technology</td></tr>
 <tr><td>Instructor</td><td>Prof. Rong-Lin Yang, Department of Electronic Engineering, STUST</td></tr>
-<tr><td>Audience</td><td>College faculty who want to apply AI Agents to turn teaching materials into student self-practice tools or formative feedback; no programming background required.</td></tr>
+<tr><td>Audience</td><td>College faculty who want to use AI Agents to build exam question banks and student self-practice environments; no programming background required.</td></tr>
 </tbody>
 </table></div>
-<blockquote>This workshop may run multiple cohorts depending on registration; the actual date and registration link for each cohort follow that cohort's official announcement.</blockquote>
+<blockquote>Both sessions cover identical content; attend whichever session you registered for. Actual registration status and capacity follow the official announcement.</blockquote>
 <p>Agenda:</p>
 <div class="table-wrap"><table>
 <thead><tr><th>Time</th><th>Content</th><th>Session Output / Checkpoint</th></tr></thead>
 <tbody>
 <tr><td>12:30-13:00</td><td>Check-in</td><td>—</td></tr>
-<tr><td>13:00-13:10</td><td>Opening and recap: review the AI collaboration task cards from Workshop (1) and outline this session's question bank, interface, and grading rules.</td><td>A clear feature list</td></tr>
-<tr><td>13:10-14:00</td><td>From materials to a question set: collaborate with an AI Agent to draft questions and answers from your own teaching materials.</td><td>Draft multiple-choice question set</td></tr>
-<tr><td>14:00-14:50</td><td>Review and refine the question set: check questions, options, answers, and learning targets, then revise.</td><td>A reviewed, complete question set</td></tr>
+<tr><td>13:00-13:20</td><td>Opening, recap, and environment check: distinguish AI Agents from ordinary chatbots; confirm ChatGPT Codex and VS Code are ready; explain alternatives to GitHub Copilot.</td><td>A ready-to-use environment</td></tr>
+<tr><td>13:20-14:30</td><td>Stage 1: use an AI Agent to download an examination PDF and answer key, split it into one image per question, map the answers, and build a local question bank.</td><td>A usable local question bank</td></tr>
+<tr><td>14:30-14:50</td><td>Stage 1 skill: package and test the download, splitting, organization, and verification workflow as an independently reusable skill.</td><td>A question-bank pipeline skill</td></tr>
 <tr><td>14:50-15:20</td><td>Tea break</td><td>—</td></tr>
-<tr><td>15:20-16:40</td><td>Vibe coding build: hand the question set and feature requirements to the AI to build a static HTML self-practice tool.</td><td>A first working, answerable page</td></tr>
-<tr><td>16:40-17:00</td><td>Test submission, auto-grading, and per-question feedback; add a retry feature.</td><td>A complete flow that withholds answers until submission</td></tr>
-<tr><td>17:00-17:30</td><td>Peer try-out, sharing, and wrap-up: try each other's tools as a non-author, exchange feedback, and preview the direction for Workshop (3).</td><td>Try-out feedback and prep notes for Workshop (3)</td></tr>
+<tr><td>15:20-16:30</td><td>Stage 2: design a self-practice environment from the prepared question bank and create standalone static HTML practice units with embedded images.</td><td>Practice units ready to open and publish</td></tr>
+<tr><td>16:30-16:50</td><td>Stage 2 skill: package and test the practice-unit generation workflow as another independently reusable skill.</td><td>A practice-unit generator skill</td></tr>
+<tr><td>16:50-17:30</td><td>Review and discussion: consolidate the day’s AI Agent collaboration methods, verification steps, and future applications.</td><td>A transferable development workflow</td></tr>
 </tbody>
 </table></div>
 
 <h2 id="series-context-en">1. Series Positioning and Context</h2>
-<p>This is the second of three workshops in the "AI Agent Teaching Applications Workshop" series, designed for university faculty without an engineering background. Across three progressive, hands-on sessions, the series helps teachers see AI moving beyond a simple chat or prompting tool into an AI Agent that can help operate computer and cloud workflows. The core method transfers across tools: <strong>state the goal, context, constraints, and completion criteria clearly; check the results; then revise in small iterations.</strong></p>
+<p>This is the second of three workshops in the “AI Agent Teaching Applications Workshop” series, designed for university faculty without an engineering background. We begin with a short review: an ordinary chatbot mainly responds in conversation, while an AI Agent can use files, tools, and a sequence of steps within a defined scope to complete a task. This session applies that collaborative approach to two real workflows: building a question bank and building a self-practice web page.</p>
 <div class="table-wrap"><table>
 <thead><tr><th>Stage</th><th>Workshop</th><th>Core Question</th><th>Session Output</th></tr></thead>
 <tbody>
 <tr><td>1. Learn to collaborate with AI</td><td>Workshop (1)</td><td>How do you turn a vague teaching idea into a checkable, completable task?</td><td>An AI collaboration task card and a traceable material/screenshot analysis and revision record</td></tr>
-<tr><td>2. Build a self-practice tool</td><td>Workshop (2) [this session]</td><td>How do you turn your own materials into a question set and a practice tool students can use?</td><td>A multiple-choice question set, a static HTML self-practice tool, and testing notes</td></tr>
-<tr><td>3. Extend to classroom formative assessment</td><td>Workshop (3)</td><td>How do you use the minimum necessary features to quickly gauge student understanding in class?</td><td>A classroom answering prototype, a simple teacher dashboard, and a class-wide summary with preliminary analysis</td></tr>
+<tr><td>2. Turn data into a practice tool</td><td>Workshop (2) [this session]</td><td>How do you turn public examination materials into a reusable question bank and a practice page for students?</td><td>A local question bank, standalone static HTML practice units, and two reusable skills</td></tr>
+<tr><td>3. Extend the method</td><td>Independent follow-up work</td><td>How can the same method be applied to other subjects, units, or teaching contexts?</td><td>Question banks and practice environments expanded as needed</td></tr>
 </tbody>
 </table></div>
-<p>This session builds on the AI collaboration method from Workshop (1), turning a teacher's teaching content into a question set and tool that students can practice with after class. The question-set format and the submit/feedback logic completed here carry forward directly into the classroom formative-assessment prototype in Workshop (3).</p>
-<blockquote><strong>Why the underlying tools were built with Claude Code, yet the materials ask you to use Codex:</strong> This workshop teaches how to collaborate with an AI Agent — stating requirements clearly and iterating your way to a static web tool — not tied to any specific product. The custom skills under <code>.claude/skills/</code> (<code>download-exam-pdf</code>, <code>slice-exam-pdf</code>, <code>clean-exam-question-images</code>, <code>build-quiz-app</code>) were originally built by the instructor using Claude Code; but the live workshop, and the step-by-step Module 1–4 materials, all ask participants to use Codex instead of Claude Code. That's a deliberate choice: the same tools and the same learning path produce the same working result even after swapping the AI Agent used to operate them, from Claude Code to Codex — direct evidence that "the core method transfers across AI tools" isn't just a slogan. If you want to verify it the other way around, you're welcome to redo the same path with Claude Code and see if you land on the same result. It isn't limited to these two tools either: any AI Agent with comparable capabilities (GitHub Copilot Workspace, Spark, etc.) should in principle work too; the instructor has just only concretely verified Claude Code and Codex so far.</blockquote>
+<p>This session builds on the AI collaboration method from Workshop (1): <strong>state the goal, source data, constraints, and completion criteria clearly; check the result; then turn the verified workflow into a reusable skill.</strong> Participants take away not only one-time outputs, but also a repeatable way of working.</p>
 
-<h2 id="overview-en">2. Workshop Overview</h2>
-<p>In the previous workshop, we practiced stating teaching needs clearly and collaborating with an AI Agent on small, checkable, correctable tasks. This session turns that skill into an actual usable teaching tool: participants bring a topic, teaching material, handout, or slide deck they are currently teaching, collaborate with an AI Agent to produce a multiple-choice question set (for example 10, 20, or 30 questions), and then use vibe coding to hand the question set and feature requirements to the AI to build a static HTML self-practice tool that runs locally on a personal computer.</p>
-<p>Multiple-choice questions are the starting point because the rules are clear and easy to grade, which is friendlier for teachers and students trying this for the first time. AI can help teachers organize and draft an initial question set, but whether the questions match the learning objectives, whether the answers are correct, whether the stems are clear, and whether the options are reasonable must still be checked by the teacher — this process is exactly where teaching expertise turns into content that AI can help process, while a human remains responsible for sign-off.</p>
-<p>When students open the site they see only the questions and options; answers are not shown while answering. After finishing and clicking "Submit and view results," the site auto-grades against the answers in the question set, showing the number correct, the total score, and right/wrong per question, and lets students retry as many times as they like. Students can also bring questions they got wrong to an AI conversation, asking why they got it wrong, what the correct concept is, and where they may have misunderstood — forming a learning loop of "materials → question set → self-practice → automatic feedback → AI clarifies misconceptions → practice again."</p>
-<p>The goal of this session is not to build a formal exam system, but to complete a self-learning prototype that can actually be tried out. Participants will experience firsthand that, as long as they can state their requirements clearly, an AI Agent can help turn a teaching idea into a tool step by step — and that they can keep extending and modifying it later according to their own teaching needs.</p>
+<h2 id="overview-en">2. Hands-on Flow</h2>
+<p>Stage 1 begins with public examination materials. Participants use an AI Agent to help download the required examination PDF and answer materials from the official site. They then split the PDF into one image per question and map each image to its correct answer, producing a question bank that can be stored and used locally.</p>
+<p>Immediately after Stage 1, participants package and test the download, splitting, organization, and verification steps as an independent “question-bank pipeline skill.” Later, when building a question bank for another subject or year, they can apply that skill to execute the same specification precisely, without rediscovering the approach or unnecessarily spending time and tokens.</p>
+<p>Stage 2 starts from the completed question bank and asks how to create a self-practice environment for students. Participants use a static-web-page approach and embed the question images in the HTML. Each test or practice unit is a self-contained HTML file that does not depend on an external image library or other files. This makes testing, sharing, and publishing much simpler.</p>
+<p>Immediately after Stage 2, participants package and test the practice-unit generation workflow as a second independent “practice-unit generator skill.” Once a new question bank is prepared, that skill can directly create further practice units, keeping development repeatable, verifiable, and efficient.</p>
 
 <h2 id="audience-en">3. Who Should Attend</h2>
 <ul>
-<li>Faculty who attended Workshop (1), or who can briefly describe their teaching needs using "goal, context, constraints, completion criteria."</li>
-<li>Faculty who want to turn a topic, material, handout, or slide deck they are teaching into a multiple-choice question set and web tool students can practice with on their own.</li>
-<li>Faculty who want students to practice at their own pace after class, get immediate feedback, and clear up misconceptions.</li>
-<li>Faculty who prefer to first finish a small, complete, locally usable teaching prototype rather than starting with a complex system.</li>
+<li>Faculty who attended Workshop (1), or who can briefly describe a task using “goal, context, constraints, and completion criteria.”</li>
+<li>Faculty who want to turn public examination questions, past papers, or existing question materials into a manageable local question bank.</li>
+<li>Faculty who want students to use a web page to practice repeatedly at their own pace after class.</li>
+<li>Faculty who prefer a small, complete, directly publishable static web solution before attempting a complex system.</li>
 </ul>
 
 <h2 id="outcomes-en">4. Learning Outcomes</h2>
 <p>After completing this session, you will be able to:</p>
 <ol>
-<li>Collaborate with an AI Agent to produce a multiple-choice question set from your own course topic or materials, and check the quality of the questions, answers, and options.</li>
-<li>Break a self-testing requirement into question-bank data, screens, interaction rules, and acceptance criteria, and use vibe coding to build and modify a single-page HTML self-practice tool with AI.</li>
-<li>Design a basic learning flow that hides answers before submission and only provides a score, per-question results, and feedback after submission.</li>
-<li>Explain how students can use their graded results as a starting point to talk with AI to clarify why they got a question wrong and what they have not yet learned.</li>
-<li>Use a try-out and acceptance checklist to verify the site matches the original teaching requirements.</li>
+<li>Explain the difference between an AI Agent and an ordinary chatbot, and confirm that ChatGPT Codex, VS Code, and optional GitHub education resources are ready to use.</li>
+<li>Use an AI Agent to download examination questions and answer materials, split a PDF into per-question images, and build a local question bank with answer mappings.</li>
+<li>Immediately after Stage 1, package and test the verified question-bank workflow as an independently reusable skill.</li>
+<li>Design a student self-practice environment from a prepared question bank and create standalone static HTML practice units with embedded images.</li>
+<li>Immediately after Stage 2, package and test the practice-unit generation workflow as a second independent skill for direct reuse with other question banks.</li>
 </ol>
 
-<h2 id="focus-mvp-en">5. Focus Points and Minimum Viable Features</h2>
-<p>Workshop focus points:</p>
+<h2 id="focus-mvp-en">5. Two Reusable Workflows</h2>
+<p>Workflow 1: build a local question bank from a PDF</p>
 <ul>
-<li>Collaborate with an AI Agent to organize teaching materials, handouts, or slide decks into a practicable question set, keeping the question bank and the web page cleanly separated.</li>
-<li>Build the question and option screen, and record student answers.</li>
-<li>Use vibe coding to complete submission, scoring, per-question correctness, and correct-answer feedback.</li>
-<li>Add a retry feature so students can practice repeatedly.</li>
-<li>Design a usage scenario where students use AI to clarify wrong answers and reinforce concepts.</li>
-<li>Use peer try-outs to find unclear or broken parts of the flow.</li>
+<li>Specify the target year, subject, and public source.</li>
+<li>Download the examination PDF and answer materials.</li>
+<li>Split the examination into per-question images, with clear names and storage.</li>
+<li>Map the correct answer to each question and produce a local question bank for the practice page.</li>
+<li>Immediately package and test this workflow as an independent question-bank pipeline skill.</li>
 </ul>
-<p>Minimum viable features (this session's acceptance baseline):</p>
+<p>Workflow 2: build standalone practice units from a question bank</p>
 <ul>
-<li>Participants can build a multiple-choice question set from their materials.</li>
-<li>The tool can load question, option, and answer data.</li>
-<li>Answers, scores, and per-question hints are hidden before and during submission.</li>
-<li>After submission, the tool shows the number correct, the score, and right/wrong per question.</li>
-<li>Students can retry to practice repeatedly.</li>
-<li>Question-set data and the web page code stay cleanly separated, making it easy to swap in different materials or edit questions later.</li>
+<li>Plan the student practice flow using the question-bank data.</li>
+<li>Create one standalone static HTML file for each unit.</li>
+<li>Embed the unit’s required question images in its HTML, without relying on an external image folder.</li>
+<li>Open, test, and share it locally; publish it to a static website when needed.</li>
+<li>Immediately package and test this workflow as an independent practice-unit generator skill.</li>
 </ul>
 
 <h2 id="prep-en">6. Preparation Checklist</h2>
 <ul>
 <li>Bring a laptop and confirm you can use a web browser.</li>
-<li>Prepare a teaching material, handout, or slide excerpt you are currently teaching as source material for the question set; you may also start from the sample question bank the instructor provides.</li>
-<li>Questions, answers, and learning objectives must still be checked by the teacher; do not use student personal data, full grades, or other sensitive data.</li>
-<li>If you attended Workshop (1), bring or organize the AI collaboration task card and requirement draft you completed then.</li>
+<li>Confirm that ChatGPT is installed and signed in, with Codex available.</li>
+<li>Install VS Code. If useful, apply for a GitHub account and GitHub Education to use an eligible GitHub Copilot plan.</li>
+<li>This workshop uses public examination questions and answer materials as examples; do not upload student personal data, grades, or other sensitive information.</li>
 </ul>
-<p>To review Workshop (1)'s environment and setup basics beforehand:</p>
+<p>To review the environment and setup basics beforehand:</p>
 <div class="site-grid">
 <a class="site-card" href="codex-app-settings-guide.html"><strong>ChatGPT Work and Codex Setup Guide</strong><span>Choose Chat, ChatGPT Work, or Codex; for Codex, limit the workspace and use Ask for approval first.</span></a>
 <a class="site-card" href="module1/windows11-vibe-coding-setup.html"><strong>Module 1: AI Agent Hands-on Environment Setup</strong><span>Install and configure the ChatGPT app and VS Code extensions, and apply for a GitHub account and GitHub Education.</span></a>
 </div>
-<p>This session's two core phases — from materials to a question set, and the vibe coding build — also each have a step-by-step hands-on tutorial, useful as self-paced reference outside the live session's pace or for review afterward:</p>
+<p>Each core stage has a step-by-step hands-on tutorial that can be used as self-paced reference during or after the workshop:</p>
 <div class="site-grid">
-<a class="site-card" href="module2/exam-paper-pipeline-tutorial.html"><strong>Module 2: Exam Paper Download, Slice &amp; Cleanup Tutorial</strong><span>Covers the "from materials to a question set" phase: three chained custom skills written for this workshop turn a PDF exam paper into clean per-question images and an answer-key JSON.</span></a>
-<a class="site-card" href="module3/quiz-app-tutorial.html"><strong>Module 3: Quiz App Generation Tutorial</strong><span>Covers the "vibe coding build" phase: the build-quiz-app skill turns a problem-set folder into a double-click student quiz page and a teacher CSV-aggregator page.</span></a>
+<a class="site-card" href="module2/exam-paper-pipeline-tutorial.html"><strong>Module 2: Exam Paper Download, Slice &amp; Cleanup Tutorial</strong><span>Use reusable skills to turn a PDF examination paper into per-question images and answer data.</span></a>
+<a class="site-card" href="module3/quiz-app-tutorial.html"><strong>Module 3: Self-Practice Web Page Tutorial</strong><span>Start with a prepared question bank and use an AI Agent to build a student practice page that opens directly.</span></a>
+<a class="site-card" href="module4/quiz-app-quickstart-tutorial.html"><strong>Module 4: One-Sentence Self-Practice Page Quickstart</strong><span>Apply a ready-made skill to quickly turn a question bank into shareable practice units.</span></a>
 </div>
 
-<h2 id="scope-en">7. Scope, Positioning, and Limitations</h2>
-<p>This session's output is positioned as an after-class self-practice tool for students, <strong>not as formal grading or a high-stakes test</strong>. Whether students genuinely engage with practice still depends on their motivation, and students may also use AI to get the answers directly. The tool's value therefore lies in offering an opportunity for repeated practice, immediate feedback, and concept clarification — it does not replace a teacher's design and judgment for formal assessment.</p>
+<h2 id="scope-en">7. Publishing and Reuse</h2>
+<p>This session’s output is intended as an after-class self-practice environment for students, <strong>not as formal grading or a high-stakes test</strong>. Each practice unit is an independent HTML file with its question images embedded, so there is no separate image library or complex website dependency to manage. It can be given directly to students, placed in a shared folder, or published on a static website.</p>
 <ul>
-<li>Finish a small, checkable version first, then improve it based on real usage; do not chase technical complexity within the limited session time.</li>
-<li>Questions, answers, and the mapping to learning objectives must all be checked by the teacher — AI output cannot be adopted automatically.</li>
-<li>Do not paste student personal data or full grades into AI conversations; source material should mainly be the teacher's own materials, handouts, or slides.</li>
-<li>If formal assessment, long-term cross-class use, personal-data handling, databases, permissions, or real-time tracking are needed later, plan data governance, security, accessibility, operations, and institutional procedures separately.</li>
+<li>The key to reuse is not simply copying an output once, but keeping the verified skill so new data can be regenerated to the same specification.</li>
+<li>After each download, split, and answer-mapping run, spot-check question numbers, images, and answers for correctness.</li>
+<li>After each HTML page is generated, open it locally and test the question display and answer flow before sharing it with students.</li>
+<li>If student accounts, score collection, personal-data handling, or formal assessment are needed later, plan data governance, security, accessibility, operations, and institutional procedures separately.</li>
 </ul>
 
 <h2 id="takeaways-en">8. Expected Takeaways</h2>
 <ul>
-<li>A well-structured multiple-choice question set developed from your own materials.</li>
-<li>A static HTML self-practice tool that runs locally.</li>
-<li>A complete flow that only reveals answers, scores, and per-question feedback after submission.</li>
-<li>A testing and revision log that can serve as a starting point for future iterations.</li>
-<li>An AI Agent collaboration workflow you can reuse for other materials, units, or teaching tools.</li>
+<li>A workflow and skill for building a local question bank from public examination PDFs and answer materials.</li>
+<li>A workflow and skill for building student practice units from a question bank.</li>
+<li>One or more standalone static HTML practice units with embedded question images.</li>
+<li>A set of checks for verifying the question bank and web pages.</li>
+<li>An AI Agent collaboration method that can be extended to other years, subjects, materials, or teaching tools.</li>
 </ul>
 
-<h2 id="next-en">9. Bridge to Workshop (3)</h2>
-<p>Workshop (3), "From Self-Practice to Classroom Formative Assessment," continues this session's question-set format and student answering interface, bringing after-class self-practice back into the classroom: students load an assigned question bank via a URL the teacher provides during class, enter minimal necessary identifying information such as a class seat number or an anonymous code, and complete the answers; the system auto-grades on submission and returns individual results. Teachers get a dashboard that deliberately keeps to the minimum necessary features, surfacing information only when students log in to start and after they submit; once the whole class has submitted, teachers can view per-question accuracy, error rates, and common-mistake patterns, and hand that to AI for a simple learning analysis.</p>
-<p>The question-set data format, the "no answers before submission," and the "auto-grade and give per-question feedback after submission" design completed in this session carry forward directly into the next one — please keep the question-bank files and tool code you produce today.</p>
+<h2 id="next-en">9. Key Takeaways</h2>
+<p>The point today is not only to complete one question bank or one web page. Each completed stage is immediately turned into its own skill that an AI Agent can execute precisely and repeatedly. When the source material or question bank changes, participants do not have to explore from scratch; they can rebuild the output against clear inputs, outputs, and acceptance criteria.</p>
 
  </section>
  <footer>教育部智慧雨林產業創生人才育成計畫 (南臺科技大學 電子系 楊榮林 教授)</footer>
