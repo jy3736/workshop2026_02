@@ -6,6 +6,7 @@
 <title>AI Agent 實作環境建置</title>
 <style>:root{color-scheme:dark;--bg:#f4f1ea;--fg:#1f2328;--muted:#687180;--card:#ebe7df;--border:#d6d0c5;--accent:#2563eb;--th-bg:#ded8cc;--shadow:0 1px 3px rgba(44,38,28,.09);--sidebar-w:284px;--content-max:1040px;--content-pad-x:44px;--content-pad-y:42px;--measure:100%}[data-theme="dark"]{--bg:#101217;--fg:#e7eaf0;--muted:#a5aebd;--card:#181c24;--border:#2a3140;--accent:#7bb2ff;--th-bg:#202632;--shadow:0 1px 3px rgba(0,0,0,.42)}html{scroll-behavior:smooth}*{box-sizing:border-box}body{min-width:0;margin:0;background:var(--bg);color:var(--fg);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang TC","Microsoft JhengHei",Roboto,Helvetica,Arial,sans-serif;font-size:16px;line-height:1.76;letter-spacing:0;transition:background .25s,color .25s}.wrap{width:min(var(--content-max),calc(100vw - var(--sidebar-w)));margin-left:calc(var(--sidebar-w) + (100vw - var(--sidebar-w) - min(var(--content-max),calc(100vw - var(--sidebar-w)))) / 2);padding:var(--content-pad-y) var(--content-pad-x) 88px}.sidebar{position:fixed;top:0;left:0;width:var(--sidebar-w);height:100vh;overflow-y:auto;background:var(--card);border-right:1px solid var(--border);display:flex;flex-direction:column;gap:10px;padding:18px 14px;z-index:30}.brand{font-weight:700;font-size:1rem;line-height:1.35;padding:0 6px}.toprow{display:flex;flex-wrap:wrap;align-items:center;gap:8px}.navmode{display:flex;align-items:flex-start;gap:8px;margin:0 6px;color:var(--muted);font-size:13px;font-weight:650;line-height:1.35}.navmode input{width:16px;height:16px;margin:1px 0 0;accent-color:var(--accent)}.nav{display:flex;flex-direction:column;gap:4px;margin-top:6px}.navbtn,.navhome{cursor:pointer;border:1px solid transparent;background:transparent;color:var(--muted);border-radius:7px;padding:7px 10px;font-size:14px;font-weight:650;text-align:left;width:100%;white-space:normal;text-decoration:none}.navbtn:hover,.navbtn.active,.navhome:hover{color:var(--accent);border-color:var(--border);background:var(--bg)}.navhome{display:block;border-color:var(--border);background:var(--bg);color:var(--fg)}.btn{cursor:pointer;border:1px solid var(--border);background:var(--bg);color:var(--fg);border-radius:8px;padding:6px 12px;font-size:13px;font-weight:650}.btn:hover{border-color:var(--accent)}.menu-toggle{display:none;position:fixed;top:12px;left:12px;z-index:40;cursor:pointer;border:1px solid var(--border);background:var(--card);color:var(--fg);border-radius:8px;padding:6px 12px;font-size:18px;line-height:1}.backdrop{display:none;position:fixed;inset:0;background:rgba(0,0,0,.42);z-index:20}h1{max-width:var(--measure);font-size:2.15rem;line-height:1.28;margin:.2em 0 .35em}h2{font-size:1.48rem;margin-top:1.85em;padding-bottom:.25em;border-bottom:2px solid var(--border);scroll-margin-top:24px}h3{font-size:1.18rem;margin-top:1.55em;color:var(--accent)}h4{font-size:1.04rem;margin-top:1.25em;margin-bottom:.35em;color:var(--fg)}ul,ol{padding-left:1.3em}li{margin:.35em 0}p,li,blockquote{max-width:var(--measure);overflow-wrap:break-word}.table-wrap{width:100%;overflow-x:auto;-webkit-overflow-scrolling:touch}table{width:100%;border-collapse:collapse;margin:1em 0;font-size:.94rem;box-shadow:var(--shadow);border-radius:8px;overflow:hidden}th,td{text-align:left;padding:10px 14px;border:1px solid var(--border);vertical-align:top}th{background:var(--th-bg);font-weight:750}td:first-child,th:first-child{white-space:nowrap}tbody tr:nth-child(even) td{background:var(--card)}figure{max-width:100%;margin:1.1em 0 1.35em;padding:10px;background:var(--card);border:1px solid var(--border);border-radius:8px;box-shadow:var(--shadow)}figure img{display:block;width:100%;height:auto;border-radius:6px}blockquote{margin:1.1em 0;padding:12px 16px;border-left:4px solid var(--accent);background:var(--card);color:var(--fg)}pre{font-family:inherit;overflow:auto;white-space:pre-wrap;word-break:break-word;overflow-wrap:anywhere;padding:12px 14px;background:var(--card);border:1px solid var(--border);border-radius:8px}code{font-family:"SFMono-Regular",Consolas,"Liberation Mono",monospace;font-size:.92em;color:var(--fg);background:var(--card);border:1px solid var(--border);border-radius:6px;padding:.08em .35em}pre code{border:0;padding:0;background:transparent}.nav code{border:0;background:transparent;color:inherit;padding:0}.code-sample{max-width:var(--measure);margin:1em 0 1.2em}.code-sample-toolbar{display:flex;gap:8px;margin:0 0 8px}.copy-btn{cursor:pointer;border:1px solid var(--border);background:var(--bg);color:var(--fg);border-radius:6px;padding:5px 10px;font-size:12px;font-weight:650;display:flex;align-items:center;gap:5px;margin-left:auto}.copy-btn:hover{border-color:var(--accent)}.copy-btn.copied{border-color:var(--accent);color:var(--accent)}.code-sample pre{margin:0}.site-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:12px;margin:1.2em 0}.site-card{display:flex;flex-direction:column;gap:6px;min-height:142px;padding:14px 16px;border:1px solid var(--border);border-radius:8px;background:var(--card);box-shadow:var(--shadow);text-decoration:none;color:var(--fg)}.site-card:hover{border-color:var(--accent)}.site-card strong{font-size:1.03rem;color:var(--fg)}.site-card span{color:var(--muted)}.download-list{display:grid;gap:8px;max-width:var(--measure);padding-left:0;list-style:none}.download-list a{display:block;padding:10px 12px;border:1px solid var(--border);border-radius:8px;background:var(--card);text-decoration:none}.download-list small{display:block;color:var(--muted)}table{max-width:100%}pre{max-width:var(--measure)}a{color:var(--accent);overflow-wrap:anywhere}[data-lang="zh"] .en,[data-lang="en"] .zh{display:none}footer{margin-top:3em;color:var(--muted);font-size:.85rem;border-top:1px solid var(--border);padding-top:1em}@media (min-width:1440px){:root{--sidebar-w:304px;--content-max:1080px;--content-pad-x:54px;--content-pad-y:48px}}@media (max-width:1100px){:root{--sidebar-w:230px;--content-max:840px;--content-pad-x:28px;--content-pad-y:32px}.sidebar{padding:16px 10px}.brand{font-size:.95rem}.navbtn,.navhome{font-size:13px;padding:7px 8px}}@media (max-width:860px){:root{--sidebar-w:min(82vw,320px);--content-pad-x:18px;--content-pad-y:0px;--measure:100%}.sidebar{transform:translateX(-100%);transition:transform .25s}.sidebar.open{transform:none}.wrap{width:100%;margin-left:0;padding:72px var(--content-pad-x) 80px}.menu-toggle{display:block}.backdrop.show{display:block}h1{font-size:1.75rem}h2{font-size:1.26rem}h3{font-size:1.08rem}p,li,blockquote{max-width:100%}.site-grid{grid-template-columns:1fr}}@media (max-width:520px){:root{--sidebar-w:min(88vw,300px);--content-pad-x:14px}.wrap{padding-top:68px}.menu-toggle{top:10px;left:10px;padding:7px 11px}.sidebar{padding:14px 10px}.toprow{gap:6px}.btn{padding:6px 10px;font-size:12px}.navmode{font-size:12px}.navbtn,.navhome{font-size:13px}h1{font-size:1.55rem}h2{font-size:1.18rem}th,td{padding:8px 10px}}</style>
 <style>@media (max-width:520px){.table-wrap table{min-width:760px}}</style>
+<style>.concept-infographic{max-width:var(--measure,100%);margin:1.35em 0 1.8em;padding:0;overflow:hidden}.concept-infographic img{border-radius:0}.concept-infographic figcaption{padding:.55em .9em;color:var(--muted);font-size:.88rem}</style>
 </head>
 <body>
 <button class="menu-toggle" id="menuToggle" onclick="toggleMenu()" type="button">☰</button>
@@ -121,6 +122,10 @@
 </blockquote>
 <h2 id="three-parts-overview">三個部分總覽 (Overview of the Three Parts)</h2>
 <p>本模組要完成的三件事彼此獨立，可以照自己的步調依序完成：</p>
+<figure class="concept-infographic" data-concept-infographic="three-parts">
+  <img src="../../../assets/windows11-vibe-coding-setup-three-parts-concept-dark.png" alt="環境建置的三個部分：安裝桌面助理、準備程式編輯器、建立帳號與教育驗證，最後一起驗收。">
+  <figcaption>環境建置的三個獨立部分與總驗收</figcaption>
+</figure>
 <div class="table-wrap"><table>
 <thead>
 <tr>
@@ -162,11 +167,19 @@
 </tbody>
 </table></div>
 <p>登入後，依任務性質選擇正確的工作介面：</p>
+<figure class="concept-infographic" data-concept-infographic="interface-choice">
+  <img src="../../../assets/windows11-vibe-coding-setup-interface-choice-concept-dark.png" alt="依工作內容選擇介面：快速問答、多步任務，或專案與程式。">
+  <figcaption>先看工作內容，再選擇適合的介面</figcaption>
+</figure>
 <ul>
 <li>需要快速問答時選 <strong>Chat</strong>。</li>
 <li>要完成研究、文件或需要審查的多步驟成果時，先選 ChatGPT，再切換到 <strong>Work</strong>。</li>
 <li>要處理課程 project、程式碼、指令與 diff 時，從產品選單選 <strong>Codex</strong>。</li>
 </ul>
+<figure class="concept-infographic" data-concept-infographic="approval-loop">
+  <img src="../../../assets/windows11-vibe-coding-setup-approval-loop-concept-dark.png" alt="第一次與助理合作的逐步核准流程：提出任務、查看預計動作、同意後執行、確認變更與結果。">
+  <figcaption>第一次合作時的逐步核准流程</figcaption>
+</figure>
 <blockquote>
 <p>⚠️ 在 Codex 送出第一個任務前，先選<strong>先要求核准</strong>（Ask for approval），不要一開始就打開<strong>完整存取權</strong>（Full access），這樣才能在每一步都看清楚 Agent 打算做什麼、產生了哪些變更，再決定要不要放行。</p>
 </blockquote>
@@ -292,6 +305,10 @@ code --install-extension cweijan.vscode-office
 <p><strong>驗收：</strong>GitHub Education 核准後，在 VS Code 的 Copilot 圖示或帳號狀態確認方案已顯示為教育版／免費；能正常使用 Copilot Chat 詢問或修改程式碼。</p>
 <h2 id="part-3-github-account">第三部分：申請 GitHub 帳號與 GitHub Education</h2>
 <p>GitHub 帳號是後續課程管理專案、儲存檔案的基礎；GitHub Education 則能讓教師身分取得 Copilot 等工具的教育版權益。</p>
+<figure class="concept-infographic" data-concept-infographic="education-path">
+  <img src="../../../assets/windows11-vibe-coding-setup-education-path-concept-dark.png" alt="帳號與教育驗證的準備路徑：建立個人帳號、準備身分資料、送出教育驗證，取得教育權益。">
+  <figcaption>帳號與教育驗證的準備路徑</figcaption>
+</figure>
 <div class="table-wrap"><table>
 <thead>
 <tr>
