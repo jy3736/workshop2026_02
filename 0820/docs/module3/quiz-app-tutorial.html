@@ -72,6 +72,10 @@
 
 <h2 id="overview">整體設計總覽</h2>
 <p>先講結論，用一句話說清楚整份教學在做什麼：<strong>「我手上有一份題目跟正確答案，麻煩幫我做成一個學生可以自己打開作答、寫完馬上看到分數的網頁。」</strong>不用先弄懂任何技術名詞，就跟你平常請人幫忙做事一樣 把「我想要什麼」講清楚，剩下怎麼做，全部交給 Codex。</p>
+<figure class="concept-infographic" data-concept-infographic="three-step-workflow">
+  <img src="../../../assets/quiz-app-tutorial-three-step-workflow-concept-dark.png" alt="把題目資料變成可自我練習網頁的三步流程：說清楚成品、親自試用、換新題目驗證。">
+  <figcaption>從題目資料到自我測驗網頁的三步流程</figcaption>
+</figure>
 <p>整份教學只有三件事，順序做完就好：</p>
 <ol>
 <li><strong>把你想要的成品講清楚：</strong>用平常說話的方式，跟 Codex 描述學生要看到什麼畫面、要能做什麼事。</li>
@@ -83,6 +87,10 @@
 <h2 id="ask">跟 Codex 說清楚你要什麼</h2>
 <p class="step-badge">全程只靠打字對話，不用寫程式</p>
 <p>這一步只做一件事：跟 Codex 描述你想要的學生自我測驗網頁。下面示範三種說法，從最精簡到最完整，都是一般人聽得懂的話，沒有任何程式或技術名詞。不管挑哪一種當開場白，Codex 都做得出堪用的成品；說得越完整，通常第一次做出來就越貼近你心裡想要的樣子，但即使只用最短的版本，你也隨時可以在做完之後，再用一般的話請 Codex 補調整。</p>
+<figure class="concept-infographic" data-concept-infographic="requirement-ladder">
+  <img src="../../../assets/quiz-app-tutorial-requirement-ladder-concept-dark.png" alt="說明需求由核心目的、學生操作到完整使用情境逐步具體化的三個層次。">
+  <figcaption>把需求講清楚的三個層次</figcaption>
+</figure>
 
 <h3>版本一：最精簡的說法</h3>
 <p>只講最核心的需求，其他細節交給 Codex 自己判斷：</p>
@@ -138,6 +146,10 @@
 
 <h2 id="practice">動手做：換一組新題目再做一次</h2>
 <p><code>module3/</code> 目前只有 <code>repo/115</code>、<code>repo/math-115a</code> 這兩組資料，沒有預先準備第三組。這個空白正好是驗證「請 Codex 做出來的東西是不是真的能重複使用」最直接的方式：找一組全新的題目資料，看看能不能不用重新講一次完整需求，就直接把新題目加進同一個工具裡。如果可以，代表這次的做法是通用的；如果每換一組資料都要從頭再講一次、甚至舊的測驗因此壞掉，代表哪個環節還需要跟 Codex 討論清楚。</p>
+<figure class="concept-infographic" data-concept-infographic="reuse-cycle">
+  <img src="../../../assets/quiz-app-tutorial-reuse-cycle-concept-dark.png" alt="換新題目時的循環：準備題目與答案、加入同一個工具、實際作答、確認舊測驗不受影響。">
+  <figcaption>換新題目也能重複使用的驗證循環</figcaption>
+</figure>
 
 <h3>第一步：準備一組新的題目資料夾</h3>
 <p>資料來源不重要，挑一種你方便的方式就好：拿你自己手邊已經有的任何一份考古題 PDF；或回到 <a href="../module2/exam-paper-pipeline-tutorial.html">Module 2</a>，換一個你感興趣的學年度或科目，照「下載 → 切題 → 清理」完整流程重新走一次。做完之後，你會得到一組新的「題目圖片 ＋ 正確答案」資料夾，存到 <code>module3/repo/&lt;新資料夾名稱&gt;/</code>（跟現有的 <code>115</code>、<code>math-115a</code> 平級）。</p>

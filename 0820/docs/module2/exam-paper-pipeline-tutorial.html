@@ -93,6 +93,10 @@
 
 <h2 id="step1">步驟一：下載試題與標準答案 PDF</h2>
 <p>這一步的產出，是接下來切題階段要用的原始 PDF。<strong>如果你手上已經有 PDF 了（例如老師自己保存的考古題），可以直接跳到步驟二。</strong></p>
+<figure class="concept-infographic" data-concept-infographic="start-path">
+<img src="../../../assets/exam-paper-pipeline-tutorial-start-path-concept-dark.png" alt="說明手上是否已有試題檔案，分別從下載或切題開始，最後都完成題目圖片與答案表的流程圖解">
+<figcaption>依手上資料選擇起點的流程圖解</figcaption>
+</figure>
 <blockquote><strong>目前的能力邊界：</strong><code>download-exam-pdf</code> 這個工具目前只認得成績單頁面上「專業科目(一)」「專業科目(二)」這兩個列標籤，抓不到「數學(A)/(B)/(C)」這類共同科目 這正是範例資料裡數學(B)直接跳過這一步、從切題開始的原因。如果你要練習的是共同科目，請自行到網站上手動下載 PDF，再從步驟二開始。</blockquote>
 
 <h3>用一句話請 Codex 做</h3>
@@ -181,6 +185,10 @@ key 要跟圖片檔名完全一樣（含 .png），value 放正確答案字母�
 
 <h2 id="practice">動手做：換一組資料，自己跑一次全流程</h2>
 <p>看懂範例之後，換你自己動手跑一次。建議照下面兩種難度挑一種：</p>
+<figure class="concept-infographic" data-concept-infographic="practice-path">
+<img src="../../../assets/exam-paper-pipeline-tutorial-practice-path-concept-dark.png" alt="比較基本版與完整版練習：已有試題檔案時從切題開始，想從頭練習時先下載，兩者都需逐階段驗收並輸出到新的練習資料夾">
+<figcaption>兩種練習路徑的選擇圖解</figcaption>
+</figure>
 
 <h3>基本版：從切題開始（不需要等網路下載）</h3>
 <p>如果你手邊已經有其他學年度或科目的 PDF（例如之前下載過、或同事給的），可以直接拿來練切題＋清理兩個階段，跳過下載步驟，輸出到一個新資料夾，不會動到 <code>module2/</code> 裡已經驗證過的成果。比照步驟二，請 Codex 把試題切成一題一張圖片，輸出到 <code>module2/repo/114-practice</code> 這類新資料夾；切完之後，比照步驟三，請 Codex 對這個資料夾執行清理（記得先乾跑）。</p>

@@ -20,8 +20,9 @@
 <button class="navbtn" onclick="gotoSection(3)" type="button"><span class="zh">三個部分總覽 (Overview)</span><span class="en">Overview of the Three Parts</span></button>
 <button class="navbtn" onclick="gotoSection(4)" type="button"><span class="zh">第一部分：ChatGPT App</span><span class="en">Part 1: ChatGPT App</span></button>
 <button class="navbtn" onclick="gotoSection(5)" type="button"><span class="zh">第二部分：VS Code 與擴充套件</span><span class="en">Part 2: VS Code and Extensions</span></button>
-<button class="navbtn" onclick="gotoSection(6)" type="button"><span class="zh">第三部分：GitHub 帳號與 Education</span><span class="en">Part 3: GitHub Account and Education</span></button>
-<button class="navbtn" onclick="gotoSection(7)" type="button"><span class="zh">實作與驗收 (Hands-on Activities)</span><span class="en">Hands-on Activities</span></button></nav>
+<button class="navbtn" onclick="gotoSection(6)" type="button"><span class="zh">替代方案：更多 AI Agent 選擇</span><span class="en">Alternatives: More AI Agent Options</span></button>
+<button class="navbtn" onclick="gotoSection(7)" type="button"><span class="zh">第三部分：GitHub 帳號與 Education</span><span class="en">Part 3: GitHub Account and Education</span></button>
+<button class="navbtn" onclick="gotoSection(8)" type="button"><span class="zh">實作與驗收 (Hands-on Activities)</span><span class="en">Hands-on Activities</span></button></nav>
 </aside>
 <div class="backdrop" id="backdrop" onclick="toggleMenu()"></div>
 <div class="wrap">
@@ -246,6 +247,49 @@ code --install-extension cweijan.vscode-office
 <p>⚠️ 擴充套件 ID 會隨 Marketplace 更新而變動，正式開課前請先在 Extensions 視窗搜尋名稱確認 ID 仍然正確，尤其是 Office 文件預覽這款較小眾的套件。</p>
 </blockquote>
 <p><strong>驗收：</strong>開啟 Extensions 視窗確認上述套件都已安裝並啟用；再分別開啟一個 <code>.py</code>、<code>.md</code>、<code>.html</code>，以及一份 <code>.docx</code> 或 <code>.xlsx</code> 檔案，確認語法標示或預覽畫面正常顯示。</p>
+<h2 id="part-alt-ai-agent-options">替代方案：更多免費 AI Agent 選擇</h2>
+<p>除了第一部分的 ChatGPT App／Codex，這裡再列出兩種同樣免費、額度通常足以應付工作坊規模任務的 AI Agent 選擇，提供給想要更多彈性的學員：Google Antigravity，以及透過第三部分 GitHub Education 解鎖的 GitHub Copilot 教育版。</p>
+<h3 id="alt-google-antigravity">Google Antigravity</h3>
+<p>Google Antigravity 跟 ChatGPT App／Codex 一樣，能接收指令、讀寫程式碼、執行任務，核心模型為 Gemini 3.1 Pro／Flash。特別列出它的原因，是目前為公開預覽階段，個人 Google（Gmail）帳號的免費使用額度相當寬鬆，不需要信用卡。它同時內建一套類似 VS Code 的編輯器，所以選擇這個替代方案時，也可以略過第一、二部分（分別安裝 ChatGPT 桌面 app 與 VS Code），安裝完成後直接進行第三部分（申請 GitHub 帳號）。</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>工具</th>
+<th>官方下載／說明</th>
+<th>建議指令或操作</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Google Antigravity</td>
+<td><a href="https://antigravity.google/download" target="_blank" rel="noopener noreferrer">Google：Antigravity 下載頁面</a></td>
+<td>至下載頁面取得 Windows 安裝檔並執行安裝；或在 PowerShell 執行 <code>irm https://antigravity.google/cli/install.ps1 | iex</code> 安裝 CLI。安裝後開啟 Antigravity，使用個人 Google 帳號登入。</td>
+</tr>
+</tbody>
+</table></div>
+<blockquote>
+<p>⚠️ Antigravity 對「終端機執行指令」與「Agent 變更內容」都有可調整的審核層級（Terminal Execution Policy 的 Off／Auto／Turbo，以及 Artifact 的 Review 政策）。第一次使用建議選擇需要人工確認的設定，確認 Agent 打算執行的指令與變更內容後再放行，熟悉後再依信任程度放寬。</p>
+</blockquote>
+<p><strong>驗收：</strong>開啟 Antigravity，確認能以個人 Google 帳號成功登入；在需要人工確認的設定下，比照 Hello, AI Agent 任務請 Agent 建立一個 <code>hello.txt</code>，確認 Agent 能接收指令、產生檔案並回報結果。</p>
+<h3 id="alt-github-copilot-education">GitHub Copilot（透過 GitHub Education）</h3>
+<p>第二部分已經安裝的 GitHub Copilot 擴充套件，預設是付費方案；只要在第三部分成功通過 GitHub Education 教師身分驗證，Copilot 就會自動轉為教育版方案，額度更寬鬆且免費，不需要另外安裝或設定新的擴充套件。</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>工具</th>
+<th>官方下載／說明</th>
+<th>建議指令或操作</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>GitHub Copilot（教育版）</td>
+<td><a href="https://github.com/education/teachers" target="_blank" rel="noopener noreferrer">github.com/education/teachers</a>（同第三部分的申請頁面）</td>
+<td>先完成第三部分的 GitHub Education 教師驗證；核准後在 VS Code 用已安裝的 GitHub Copilot 擴充套件登入通過驗證的 GitHub 帳號，方案會自動套用為教育版。</td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>驗收：</strong>GitHub Education 核准後，在 VS Code 的 Copilot 圖示或帳號狀態確認方案已顯示為教育版／免費；能正常使用 Copilot Chat 詢問或修改程式碼。</p>
 <h2 id="part-3-github-account">第三部分：申請 GitHub 帳號與 GitHub Education</h2>
 <p>GitHub 帳號是後續課程管理專案、儲存檔案的基礎；GitHub Education 則能讓教師身分取得 Copilot 等工具的教育版權益。</p>
 <div class="table-wrap"><table>
@@ -299,6 +343,16 @@ code --install-extension cweijan.vscode-office
 <td>GitHub 帳號檢查</td>
 <td>登入 github.com；查看 GitHub Education 申請狀態</td>
 <td>帳號可正常登入；Education 申請已送出或已核准</td>
+</tr>
+<tr>
+<td>Google Antigravity 檢查（替代方案，可選）</td>
+<td>開啟 Antigravity，以個人 Google 帳號登入；在需要人工確認的設定下跑一次 Hello, AI Agent 任務</td>
+<td>能以個人 Google 帳號登入；Agent 能建立檔案並回報結果</td>
+</tr>
+<tr>
+<td>GitHub Copilot 教育版檢查（替代方案，可選）</td>
+<td>GitHub Education 核准後，在 VS Code 用已安裝的 Copilot 擴充套件登入該帳號</td>
+<td>Copilot 方案顯示為教育版／免費；Copilot Chat 能正常使用</td>
 </tr>
 </tbody>
 </table></div></section>
@@ -523,6 +577,49 @@ code --install-extension cweijan.vscode-office
 <p>⚠️ Extension IDs change as the Marketplace is updated. Before the live session, search each name in the Extensions panel to confirm the ID is still correct — especially the Office document preview extension, which is the least mainstream of the set.</p>
 </blockquote>
 <p><strong>Check:</strong> open the Extensions panel and confirm the extensions above are installed and enabled; then open a sample <code>.py</code>, <code>.md</code>, <code>.html</code>, and a <code>.docx</code> or <code>.xlsx</code> file, and confirm syntax highlighting or the preview renders correctly.</p>
+<h2 id="part-alt-ai-agent-options">Alternatives: More Free AI Agent Options</h2>
+<p>Beyond the ChatGPT app/Codex from Part 1, here are two more AI agent options worth knowing about — both free, with quotas that are typically more than enough for workshop-scale tasks — for anyone who wants more flexibility: Google Antigravity, and the education-tier GitHub Copilot unlocked via Part 3's GitHub Education.</p>
+<h3 id="alt-google-antigravity">Google Antigravity</h3>
+<p>Like the ChatGPT app/Codex, Google Antigravity can take instructions, read and write code, and run tasks, powered by Gemini 3.1 Pro/Flash. It's called out here because, during its current public preview, the free usage quota on a personal Google (Gmail) account is generous, with no credit card required. It also bundles a VS Code-like editor, so choosing this alternative lets you skip Parts 1 and 2 (installing the ChatGPT desktop app and VS Code separately) and go straight to Part 3 (GitHub account) once it's installed.</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>Tool</th>
+<th>Official Download / Notes</th>
+<th>Recommended Command or Steps</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Google Antigravity</td>
+<td><a href="https://antigravity.google/download" target="_blank" rel="noopener noreferrer">Google: Antigravity download page</a></td>
+<td>Download the Windows installer from the download page and run it; or install the CLI via PowerShell with <code>irm https://antigravity.google/cli/install.ps1 | iex</code>. Then open Antigravity and sign in with a personal Google account.</td>
+</tr>
+</tbody>
+</table></div>
+<blockquote>
+<p>⚠️ Antigravity has adjustable approval levels for both terminal commands and agent-made changes (a Terminal Execution Policy of Off/Auto/Turbo, plus an Artifact Review policy). The first time you use it, pick a setting that requires manual confirmation so you can review what the agent intends to run or change before approving it — then loosen the settings once you trust its behavior.</p>
+</blockquote>
+<p><strong>Check:</strong> open Antigravity and confirm you can sign in with a personal Google account; under a setting that requires manual confirmation, run the equivalent "Hello, AI Agent" task (ask the agent to create a <code>hello.txt</code> file) and confirm the agent can receive instructions, produce a file, and report back.</p>
+<h3 id="alt-github-copilot-education">GitHub Copilot (via GitHub Education)</h3>
+<p>The GitHub Copilot extension installed in Part 2 defaults to a paid plan; once your GitHub Education faculty verification in Part 3 is approved, Copilot automatically switches to the education tier — a more generous, free plan — with no extra extension to install or configure.</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>Tool</th>
+<th>Official Download / Notes</th>
+<th>Recommended Command or Steps</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>GitHub Copilot (education tier)</td>
+<td><a href="https://github.com/education/teachers" target="_blank" rel="noopener noreferrer">github.com/education/teachers</a> (same application page as Part 3)</td>
+<td>Complete the GitHub Education faculty verification in Part 3 first; once approved, sign in to the already-installed GitHub Copilot extension in VS Code with the verified GitHub account — the plan switches to the education tier automatically.</td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>Check:</strong> once GitHub Education is approved, confirm the Copilot icon/account status in VS Code shows the education/free tier, and that Copilot Chat works normally for asking about or editing code.</p>
 <h2 id="part-3-github-account">Part 3: Apply for a GitHub Account and GitHub Education</h2>
 <p>A GitHub account is the foundation for managing projects and files in later modules; GitHub Education lets a verified teacher unlock education-tier benefits for tools like Copilot.</p>
 <div class="table-wrap"><table>
@@ -576,6 +673,16 @@ code --install-extension cweijan.vscode-office
 <td>GitHub account check</td>
 <td>Sign in at github.com; check the GitHub Education application status</td>
 <td>The account signs in normally; the Education application is submitted or approved</td>
+</tr>
+<tr>
+<td>Google Antigravity check (alternative, optional)</td>
+<td>Open Antigravity and sign in with a personal Google account; run the Hello, AI Agent task once under a setting that requires manual confirmation</td>
+<td>Signs in successfully with a personal Google account; the agent can create a file and report back</td>
+</tr>
+<tr>
+<td>GitHub Copilot education-tier check (alternative, optional)</td>
+<td>Once GitHub Education is approved, sign in to the already-installed Copilot extension in VS Code with that account</td>
+<td>Copilot shows the education/free tier; Copilot Chat works normally</td>
 </tr>
 </tbody>
 </table></div></section>
