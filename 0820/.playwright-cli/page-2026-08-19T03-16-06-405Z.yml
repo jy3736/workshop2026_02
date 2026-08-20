@@ -1,0 +1,193 @@
+- generic [active] [ref=e1]:
+  - complementary [ref=e2]:
+    - generic [ref=e3]:
+      - text: AI Agent 教學應用工作坊 (二)
+      - generic [ref=e4]: 從教材到自主練習小工具
+    - generic [ref=e5]:
+      - button "English" [ref=e6] [cursor=pointer]
+      - button "☀️ Light" [ref=e7] [cursor=pointer]
+    - link "返回上一層 / Back to parent" [ref=e8] [cursor=pointer]:
+      - /url: ../index.html
+      - text: 返回上一層
+    - navigation [ref=e9]:
+      - button "課程資訊" [ref=e10] [cursor=pointer]
+      - button "一、系列定位與脈絡" [ref=e11] [cursor=pointer]
+      - button "二、實作流程" [ref=e12] [cursor=pointer]
+      - button "三、適合參與者" [ref=e13] [cursor=pointer]
+      - button "四、學習成果" [ref=e14] [cursor=pointer]
+      - button "五、兩個可重複使用的工作流程" [ref=e15] [cursor=pointer]
+      - button "六、事前準備" [ref=e16] [cursor=pointer]
+      - button "七、發布與重複使用" [ref=e17] [cursor=pointer]
+      - button "八、預期帶走的成果" [ref=e18] [cursor=pointer]
+      - button "九、重點回顧" [ref=e19] [cursor=pointer]
+  - generic [ref=e20]:
+    - generic [ref=e21]:
+      - heading "AI Agent 教學應用工作坊 (二)：從教材到自主練習小工具" [level=1] [ref=e22]
+      - paragraph [ref=e23]: 智慧雨林產業創生人才育成計畫｜本頁為工作坊（二）的課程講義，內容整理自籌備文件；實際場次以正式公告為準。
+      - heading "課程資訊" [level=2] [ref=e24]
+      - table [ref=e26]:
+        - rowgroup [ref=e27]:
+          - row [ref=e28]:
+            - columnheader "項目" [ref=e29]
+            - columnheader "內容" [ref=e30]
+        - rowgroup [ref=e31]:
+          - row [ref=e32]:
+            - cell "場次" [ref=e33]
+            - cell "場次一：08/20（四）13:00-17:30（12:30 開始報到） 場次二：08/21（五）13:00-17:30（12:30 開始報到）" [ref=e34]: 場次一：08/20（四）13:00-17:30（12:30 開始報到）場次二：08/21（五）13:00-17:30（12:30 開始報到）
+          - row [ref=e35]:
+            - cell "地點" [ref=e36]
+            - cell "南臺科技大學 J棟 J301教室" [ref=e37]
+          - row [ref=e38]:
+            - cell "講師" [ref=e39]
+            - cell "南臺科大 電子系 楊榮林 教授" [ref=e40]
+          - row [ref=e41]:
+            - cell "對象" [ref=e42]
+            - cell "想以 AI Agent 建置考科題庫與學生自主練習環境的大專校院教師；不需具備程式背景。" [ref=e43]
+      - blockquote [ref=e44]: 兩場次課程內容相同，請依自己報名的場次出席；實際報名狀況與名額以正式公告為準。
+      - paragraph [ref=e45]: 活動流程：
+      - table [ref=e47]:
+        - rowgroup [ref=e48]:
+          - row [ref=e49]:
+            - columnheader "時間" [ref=e50]
+            - columnheader "內容" [ref=e51]
+            - columnheader "當次產出／驗收點" [ref=e52]
+        - rowgroup [ref=e53]:
+          - row [ref=e54]:
+            - cell "12:30-13:00" [ref=e55]
+            - cell "報到" [ref=e56]
+            - cell "—" [ref=e57]
+          - row [ref=e58]:
+            - cell "13:00-13:20" [ref=e59]
+            - cell "開場、回顧與環境確認：複習 AI Agent 與一般聊天機器人的差異，確認 ChatGPT Codex 與 VS Code 已可使用，並說明 GitHub Education 與 GitHub Copilot 的選用方式。" [ref=e60]
+            - cell "可開始實作的環境" [ref=e61]
+          - row [ref=e62]:
+            - cell "13:20-14:50" [ref=e63]
+            - cell "第一階段：用 AI Agent 下載統測題目 PDF 與答案，切成一題一張圖檔並對應標準答案，建立本機題庫。" [ref=e64]
+            - cell "可使用的本機題庫" [ref=e65]
+          - row [ref=e66]:
+            - cell "14:50-15:20" [ref=e67]
+            - cell "茶敘休息（下午茶）" [ref=e68]
+            - cell "—" [ref=e69]
+          - row [ref=e70]:
+            - cell "15:20-16:50" [ref=e71]
+            - cell "第二階段：以切好的題庫設計學生自主練習環境，產生每個練習單元各自獨立、圖檔嵌入其中的靜態 HTML 網頁。" [ref=e72]
+            - cell "可直接開啟與發布的練習單元" [ref=e73]
+          - row [ref=e74]:
+            - cell "16:50-17:15" [ref=e75]
+            - cell "把兩個流程整理為可重複執行的 skill，讓後續題庫與練習單元能精準重建。" [ref=e76]
+            - cell "兩個可重複使用的 skill" [ref=e77]
+          - row [ref=e78]:
+            - cell "17:15-17:30" [ref=e79]
+            - cell "重點回顧與交流：整理今天的 AI Agent 協作方法、驗收方式與後續應用情境。" [ref=e80]
+            - cell "可遷移的開發流程" [ref=e81]
+      - heading "一、系列定位與脈絡" [level=2] [ref=e82]
+      - paragraph [ref=e83]: 本場是「AI Agent 教學應用工作坊」系列三場中的第二場，面向非工程背景的大學教師。我們先用很短的時間複習：一般聊天機器人主要回覆對話；AI Agent 則能在明確的工作範圍內，依需求操作檔案、工具與多個步驟來完成任務。本場把這種協作方法用在「建立題庫」與「建立自主練習網頁」兩個真實工作流程。
+      - table [ref=e85]:
+        - rowgroup [ref=e86]:
+          - row [ref=e87]:
+            - columnheader "階段" [ref=e88]
+            - columnheader "工作坊" [ref=e89]
+            - columnheader "核心問題" [ref=e90]
+            - columnheader "當次成果" [ref=e91]
+        - rowgroup [ref=e92]:
+          - row [ref=e93]:
+            - cell "1. 學會與 AI 協作" [ref=e94]
+            - cell "工作坊（一）" [ref=e95]
+            - cell "如何把模糊教學想法變成可檢查、可完成的任務？" [ref=e96]
+            - cell "AI 協作任務卡、一次教材或截圖分析與修訂紀錄" [ref=e97]
+          - row [ref=e98]:
+            - cell "2. 將資料轉為練習工具" [ref=e99]
+            - cell "工作坊（二）〔本場〕" [ref=e100]
+            - cell "如何把公開考題整理成可重複建立的題庫，並製作學生可使用的練習網頁？" [ref=e101]
+            - cell "本機題庫、獨立靜態 HTML 練習單元、兩個可重複使用的 skill" [ref=e102]
+          - row [ref=e103]:
+            - cell "3. 延伸應用" [ref=e104]
+            - cell "後續自行發展" [ref=e105]
+            - cell "如何將同一套方法套用到其他考科、單元或教學情境？" [ref=e106]
+            - cell "依需求擴充的題庫與練習環境" [ref=e107]
+      - paragraph [ref=e108]:
+        - text: 本場承接工作坊（一）建立的 AI 協作方法：
+        - strong [ref=e109]: 先說清楚目標、資料來源、限制與完成標準；再檢查成果、提出修正，並把驗證過的流程固化成可重複使用的 skill。
+        - text: 完成後，學員不只帶走一次性的成果，也帶走之後可直接再次執行的工作方法。
+      - heading "二、實作流程" [level=2] [ref=e110]
+      - paragraph [ref=e111]: 第一階段從公開的統測資料開始。學員以 AI Agent 協助前往統測官網，下載所需的題目 PDF 與答案資料；接著把 PDF 切割為「一題一張」的圖檔，並將每題圖檔與正確答案對應，生成可在本機保存與使用的題庫。
+      - paragraph [ref=e112]: 完成一次流程後，我們會把下載、切題、整理與驗收的操作寫成 skill。往後要建立新的考科或年度題庫時，可以直接套用 skill，以同樣的規格精準執行，避免每次都從頭探索做法，也避免不必要地消耗時間與 Token。
+      - paragraph [ref=e113]: 第二階段以完成的題庫為基礎，思考如何為學生建立可自主練習的環境。學員會以靜態網頁方式製作練習單元，並將題目圖檔嵌入 HTML；每一個測驗或練習單元都是一個獨立 HTML 檔案，不依賴外部圖庫或額外檔案。這能簡化測試、分享與網站發布。
+      - paragraph [ref=e114]: 同樣地，產生獨立練習單元的流程也會整理為 skill。之後只要備妥新的題庫，即可直接執行這個 skill 建立其他練習單元，讓開發步驟可重複、可驗收且更有效率。
+      - heading "三、適合參與者" [level=2] [ref=e115]
+      - list [ref=e116]:
+        - listitem [ref=e117]: 已參與工作坊（一），或能以「目標、情境、限制、完成標準」簡要描述自己的教學需求者。
+        - listitem [ref=e118]: 想將公開考題、考古題或既有題目資料，轉化為可管理的本機題庫者。
+        - listitem [ref=e119]: 想讓學生在課後依自己的節奏使用網頁反覆練習者。
+        - listitem [ref=e120]: 希望用小而完整、可直接發布的靜態網頁完成教學應用，而非先建立複雜系統者。
+      - heading "四、學習成果" [level=2] [ref=e121]
+      - paragraph [ref=e122]: 完成本場後，您將能夠：
+      - list [ref=e123]:
+        - listitem [ref=e124]: 說明 AI Agent 與一般聊天機器人的差異，並確認 ChatGPT Codex、VS Code 與選用的 GitHub 教育資源已可使用。
+        - listitem [ref=e125]: 以 AI Agent 協助下載統測題目與答案資料，將 PDF 切成逐題圖檔，並建立答案對應的本機題庫。
+        - listitem [ref=e126]: 把經驗證的題庫建立流程整理成可重複執行的 skill。
+        - listitem [ref=e127]: 從切好的題庫設計學生自主練習環境，製作圖檔嵌入、可獨立開啟的靜態 HTML 練習單元。
+        - listitem [ref=e128]: 把練習單元產生流程整理成第二個 skill，以便日後直接套用到其他題庫。
+      - heading "五、兩個可重複使用的工作流程" [level=2] [ref=e129]
+      - paragraph [ref=e130]: 工作流程一：從 PDF 建立本機題庫
+      - list [ref=e131]:
+        - listitem [ref=e132]: 指定目標年度、考科與公開資料來源。
+        - listitem [ref=e133]: 下載題目 PDF 與答案資料。
+        - listitem [ref=e134]: 將題目切成逐題圖檔，並清楚命名與保存。
+        - listitem [ref=e135]: 對應每題正確答案，產出可供練習網頁使用的本機題庫。
+      - paragraph [ref=e136]: 工作流程二：從題庫建立獨立練習單元
+      - list [ref=e137]:
+        - listitem [ref=e138]: 以題庫資料規劃學生的作答與練習流程。
+        - listitem [ref=e139]: 產生每一單元各自獨立的靜態 HTML 檔案。
+        - listitem [ref=e140]: 將該單元需要的題目圖檔嵌入 HTML，不依賴外部圖檔資料夾。
+        - listitem [ref=e141]: 在本機直接開啟、測試與分享；需要時可直接發布到靜態網站。
+      - heading "六、事前準備" [level=2] [ref=e142]
+      - list [ref=e143]:
+        - listitem [ref=e144]: 請攜帶筆記型電腦，並確認可使用網頁瀏覽器。
+        - listitem [ref=e145]: 請確認已安裝並可登入 ChatGPT，且可使用 Codex。
+        - listitem [ref=e146]: 請安裝 VS Code；如有需要，可申請 GitHub 與 GitHub Education，使用符合資格的 GitHub Copilot 方案。
+        - listitem [ref=e147]: 本場以公開的統測題目與答案資料為例；不需上傳學生個資、成績或其他機敏資料。
+      - paragraph [ref=e148]: 若需要在現場前先複習工作坊（一）的環境與設定基礎，可參考：
+      - generic [ref=e149]:
+        - link "ChatGPT Work 與 Codex 設定指南 先選擇 Chat、ChatGPT Work 或 Codex；使用 Codex 時，先限制工作區並採用先要求核准。" [ref=e150] [cursor=pointer]:
+          - /url: codex-app-settings-guide.html
+          - strong [ref=e151]: ChatGPT Work 與 Codex 設定指南
+          - generic [ref=e152]: 先選擇 Chat、ChatGPT Work 或 Codex；使用 Codex 時，先限制工作區並採用先要求核准。
+        - link "Module 1：AI Agent 實作環境建置 安裝設定 ChatGPT App、VS Code 擴充套件，並申請 GitHub 帳號與 GitHub Education。" [ref=e153] [cursor=pointer]:
+          - /url: module1/windows11-vibe-coding-setup.html
+          - strong [ref=e154]: Module 1：AI Agent 實作環境建置
+          - generic [ref=e155]: 安裝設定 ChatGPT App、VS Code 擴充套件，並申請 GitHub 帳號與 GitHub Education。
+      - paragraph [ref=e156]: 本場兩個核心階段各自備有逐步實作教學，可作為現場節奏之外的自學參考或會後複習：
+      - generic [ref=e157]:
+        - link "Module 2：考古題下載、切題與清理實作教學 用可重複使用的 skill，將 PDF 考古題轉為逐題圖檔與標準答案資料。" [ref=e158] [cursor=pointer]:
+          - /url: module2/exam-paper-pipeline-tutorial.html
+          - strong [ref=e159]: Module 2：考古題下載、切題與清理實作教學
+          - generic [ref=e160]: 用可重複使用的 skill，將 PDF 考古題轉為逐題圖檔與標準答案資料。
+        - link "Module 3：從問題集資料夾產生自主練習網頁實作教學 從準備好的題庫出發，以 AI Agent 建立可直接開啟的學生練習網頁。" [ref=e161] [cursor=pointer]:
+          - /url: module3/quiz-app-tutorial.html
+          - strong [ref=e162]: Module 3：從問題集資料夾產生自主練習網頁實作教學
+          - generic [ref=e163]: 從準備好的題庫出發，以 AI Agent 建立可直接開啟的學生練習網頁。
+        - link "Module 4：一句話產生自主練習網頁快速教學 套用現成 skill，快速把題庫轉為可分享的練習單元。" [ref=e164] [cursor=pointer]:
+          - /url: module4/quiz-app-quickstart-tutorial.html
+          - strong [ref=e165]: Module 4：一句話產生自主練習網頁快速教學
+          - generic [ref=e166]: 套用現成 skill，快速把題庫轉為可分享的練習單元。
+      - heading "七、發布與重複使用" [level=2] [ref=e167]
+      - paragraph [ref=e168]:
+        - text: 本場產出定位為學生課後的自主練習環境，
+        - strong [ref=e169]: 不作為正式成績判定或高風險測驗
+        - text: 。每個練習單元是獨立 HTML 檔案，題目圖檔已嵌入其中，因此不用另外處理圖庫或複雜的網站依賴；可直接交給學生、放到共用資料夾，或發布到靜態網站。
+      - list [ref=e170]:
+        - listitem [ref=e171]: 重複使用的核心不是只複製一次成果，而是保留經驗證的 skill，讓新資料可依相同規格重新產生。
+        - listitem [ref=e172]: 每次下載、切題與答案對應完成後，都應抽查題號、圖檔與答案是否正確。
+        - listitem [ref=e173]: 每次產生 HTML 後，都應在本機開啟並測試題目顯示與作答流程，再發布給學生。
+        - listitem [ref=e174]: 若日後需要學生帳號、成績蒐集、個資處理或正式評量，應另行規劃資料治理、資安、無障礙、維運與校內程序。
+      - heading "八、預期帶走的成果" [level=2] [ref=e175]
+      - list [ref=e176]:
+        - listitem [ref=e177]: 一套從公開 PDF 題目與答案建立本機題庫的流程與 skill。
+        - listitem [ref=e178]: 一套從題庫建立學生自主練習單元的流程與 skill。
+        - listitem [ref=e179]: 一個或多個可直接開啟、圖檔嵌入的獨立靜態 HTML 練習單元。
+        - listitem [ref=e180]: 一份用於題庫與網頁驗收的檢查重點。
+        - listitem [ref=e181]: 一套可延續到其他年度、考科、教材或教學工具的 AI Agent 協作開發方法。
+      - heading "九、重點回顧" [level=2] [ref=e182]
+      - paragraph [ref=e183]: 今天的重點不是只完成一次題庫或一個網頁，而是把「下載與切題」以及「題庫轉練習單元」這兩種工作方式，轉化為可被 AI Agent 精準重複執行的 skill。當資料來源或題庫改變時，學員不必再從零摸索，而是能在明確的輸入、輸出與驗收條件下重新建立成果。
+    - contentinfo [ref=e184]: 教育部智慧雨林產業創生人才育成計畫 (南臺科技大學 電子系 楊榮林 教授)
