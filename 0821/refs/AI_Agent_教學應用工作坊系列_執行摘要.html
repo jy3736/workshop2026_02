@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>AI Agent 教學應用工作坊系列｜執行摘要</title>
+  <style>
+    :root { --ink:#17212b; --muted:#536273; --navy:#124e78; --sky:#dff1fb; --gold:#f4bb3a; --paper:#fffdf7; }
+    * { box-sizing:border-box; } body { margin:0; color:var(--ink); background:#eef5f8; font-family:"Noto Sans TC","PingFang TC",sans-serif; line-height:1.75; }
+    main { max-width:1000px; margin:0 auto; padding:46px 24px 64px; }
+    header { padding:38px 42px; color:white; background:linear-gradient(135deg,#124e78,#217ba7); border-radius:22px; box-shadow:0 12px 28px #18334226; }
+    h1 { margin:0; font-size:clamp(1.8rem,4vw,2.8rem); line-height:1.3; } .subtitle { margin:10px 0 0; font-size:1.1rem; } .date { margin-top:18px; font-size:.95rem; opacity:.92; }
+    section { margin-top:24px; padding:28px 30px; background:var(--paper); border-radius:18px; box-shadow:0 4px 18px #18334212; }
+    h2 { margin:0 0 12px; color:var(--navy); font-size:1.42rem; } h3 { color:var(--navy); margin:18px 0 6px; } p { margin:8px 0; } ul { margin:8px 0; padding-left:1.3em; }
+    .path { display:grid; gap:14px; grid-template-columns:repeat(3,1fr); margin-top:16px; } .card { padding:18px; border-radius:14px; background:var(--sky); border-top:5px solid var(--gold); } .card strong { display:block; color:var(--navy); font-size:1.08rem; }
+    .flow { margin:16px 0 0; padding:15px 18px; border-radius:12px; background:#f6f1df; font-weight:700; color:#685317; }
+    .note { border-left:5px solid var(--gold); padding-left:16px; color:var(--muted); }
+    @media (max-width:720px) { main { padding:24px 16px 42px; } header,section { padding:24px 22px; } .path { grid-template-columns:1fr; } }
+  </style>
+</head>
+<body>
+  <main>
+    <header>
+      <h1>AI Agent 教學應用工作坊系列</h1>
+      <p class="subtitle">從 AI 協作，到自主練習，再到課堂形成性評量</p>
+      <p class="date">執行摘要｜更新日期 2026 年 7 月 30 日</p>
+    </header>
+
+    <section>
+      <h2>系列定位</h2>
+      <p>本系列面向非工程背景教師。重點不是培養程式設計師，也不是直接交付一套成熟系統；而是讓教師親手看見 AI Agent 能協助把教學需求轉為可檢查、可修正、可實作的工具雛形。</p>
+      <p>教師帶走的是可遷移的方法：說清楚目標、情境、限制與完成標準；檢查 AI 產出；再以小步迭代修正。題目品質、教學判斷與成果驗收仍由教師負責。</p>
+    </section>
+
+    <section>
+      <h2>場次形式與地點</h2>
+      <p>三場皆於南臺科技大學 J棟 J301教室進行，由南臺科大電子系楊榮林教授授課；每場 12:30 開始報到，13:00 至 17:30 為現場活動主體（14:50-15:20 茶敘休息），尾聲用於成果展示、交流與賦歸。現場活動約 5 小時，淨教學與實作約 4 小時。系列可能依報名狀況開設多個梯次，各梯次日期與報名連結／QR Code 以正式公告或 DM 為準。</p>
+      <div class="path">
+        <div class="card"><strong>工作坊（一）</strong>13:00-17:30・AI Agent 工作環境建立與使用</div>
+        <div class="card"><strong>工作坊（二）</strong>13:00-17:30・從教材到自主練習小工具</div>
+        <div class="card"><strong>工作坊（三）</strong>13:00-17:30・從自主練習到課堂形成性評量</div>
+      </div>
+    </section>
+
+    <section>
+      <h2>三場漸進路徑</h2>
+      <div class="path">
+        <div class="card"><strong>工作坊（一）</strong>建立 AI Agent 協作能力。教師練習把教材、需求或截圖轉成可完成的小任務，並檢查與修正成果。</div>
+        <div class="card"><strong>工作坊（二）</strong>從教材產生選擇題題組，再用 vibe coding 做出學生可自主作答、自動獲得回饋的靜態 HTML 自主練習小工具。</div>
+        <div class="card"><strong>工作坊（三）</strong>把同一套作答介面帶進教室，完成交卷後可供教師查看與分析的簡易形成性評量原型。</div>
+      </div>
+    </section>
+
+    <section>
+      <h2>工作坊（二）：從教材到自主練習小工具</h2>
+      <p>教師以自己的教學主題、教材、講義或簡報為起點，和 AI Agent 協作產生一份多題式選擇題題組，例如 10、20 或 30 題。題組包含題目、選項與答案；教師必須檢核題目是否符合學習目標、答案是否正確，以及選項是否合理。</p>
+      <p>接著，教師把題組與功能需求交給 AI，以 vibe coding 製作靜態 HTML 自主練習小工具。學生只看得到題目與選項；交卷後，系統才自動顯示分數、答對題數與逐題對錯。</p>
+      <div class="flow">教材 → 題組 → 自主作答 → 自動回饋 → AI 釐清迷思 → 再次練習</div>
+      <p class="note">本場是課後自主練習小工具，不作為正式成績判定。學生可能善用 AI 學習，也可能直接取得答案；其價值在於提供練習、回饋與觀念釐清的機會。</p>
+    </section>
+
+    <section>
+      <h2>工作坊（三）：從自主練習到課堂形成性評量</h2>
+      <p>第三場延續第二場的題組與學生作答介面，帶入課堂情境。學生登入並開始作答，交卷後系統自動批閱；教師端在學生登入與交卷後取得必要資訊，包括開始或交卷狀態、作答時間、分數與逐題結果。</p>
+      <p>Dashboard 採最低必要功能：不追蹤學生作答中的即時行為，不建置複雜監控、即時同步、帳號權限、長期資料庫或大型部署。教師在全班交卷後可查看各題答對、答錯與錯誤率，再以最小必要或去識別化的統計結果，請 AI 協助整理初步學習分析與補強方向。</p>
+      <div class="flow">學生作答 → 自動批閱 → 教師查看 → 班級分析 → 教學調整</div>
+    </section>
+
+    <section>
+      <h2>預期成果與後續價值</h2>
+      <ul>
+        <li>一套可重用的 AI 協作任務格式與驗收方式。</li>
+        <li>一份由教師自身教材發展的選擇題題組。</li>
+        <li>一個送出後才提供回饋的靜態 HTML 自主練習小工具。</li>
+        <li>一個交卷後可供教師查看必要結果的簡易課堂原型。</li>
+        <li>一份全班答題分布與 AI 協助整理的初步學習分析。</li>
+      </ul>
+      <p>這些成果是教師未來持續與 AI Agent 對話、修改並擴展教學工具的起點。若需正式評量、個資處理、長期保存或即時追蹤，應另行規劃資料治理、資安、無障礙與校內程序。</p>
+    </section>
+  </main>
+</body>
+</html>

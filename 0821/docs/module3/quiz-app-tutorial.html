@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="zh-Hant" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>從問題集資料夾產生自主測驗網頁實作教學（Module 3）</title>
+<style>:root{color-scheme:dark;--bg:#f4f1ea;--fg:#1f2328;--muted:#687180;--card:#ebe7df;--border:#d6d0c5;--accent:#2563eb;--th-bg:#ded8cc;--shadow:0 1px 3px rgba(44,38,28,.09);--sidebar-w:284px;--content-max:1040px;--content-pad-x:44px;--content-pad-y:42px;--measure:100%}[data-theme="dark"]{--bg:#101217;--fg:#e7eaf0;--muted:#a5aebd;--card:#181c24;--border:#2a3140;--accent:#7bb2ff;--th-bg:#202632;--shadow:0 1px 3px rgba(0,0,0,.42)}html{scroll-behavior:smooth}*{box-sizing:border-box}body{min-width:0;margin:0;background:var(--bg);color:var(--fg);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang TC","Microsoft JhengHei",Roboto,Helvetica,Arial,sans-serif;font-size:16px;line-height:1.76;letter-spacing:0;transition:background .25s,color .25s}.wrap{width:min(var(--content-max),calc(100vw - var(--sidebar-w)));margin-left:calc(var(--sidebar-w) + (100vw - var(--sidebar-w) - min(var(--content-max),calc(100vw - var(--sidebar-w)))) / 2);padding:var(--content-pad-y) var(--content-pad-x) 88px}.sidebar{position:fixed;top:0;left:0;width:var(--sidebar-w);height:100vh;overflow-y:auto;background:var(--card);border-right:1px solid var(--border);display:flex;flex-direction:column;gap:10px;padding:18px 14px;z-index:30}.brand{font-weight:700;font-size:1rem;line-height:1.35;padding:0 6px}.toprow{display:flex;flex-wrap:wrap;align-items:center;gap:8px}.nav{display:flex;flex-direction:column;gap:4px;margin-top:6px}.navbtn,.navhome{cursor:pointer;border:1px solid transparent;background:transparent;color:var(--muted);border-radius:7px;padding:7px 10px;font-size:14px;font-weight:650;text-align:left;width:100%;white-space:normal;text-decoration:none}.navbtn:hover,.navbtn.active,.navhome:hover{color:var(--accent);border-color:var(--border);background:var(--bg)}.navsub{padding-left:22px;font-size:13px;font-weight:550}.navhome{display:block;border-color:var(--border);background:var(--bg);color:var(--fg)}.btn{cursor:pointer;border:1px solid var(--border);background:var(--bg);color:var(--fg);border-radius:8px;padding:6px 12px;font-size:13px;font-weight:650}.btn:hover{border-color:var(--accent)}.menu-toggle{display:none;position:fixed;top:12px;left:12px;z-index:40;cursor:pointer;border:1px solid var(--border);background:var(--card);color:var(--fg);border-radius:8px;padding:6px 12px;font-size:18px;line-height:1}.backdrop{display:none;position:fixed;inset:0;background:rgba(0,0,0,.42);z-index:20}h1{max-width:var(--measure);font-size:2.1rem;line-height:1.28;margin:.2em 0 .35em}h2{font-size:1.44rem;margin-top:1.85em;padding-bottom:.25em;border-bottom:2px solid var(--border);scroll-margin-top:24px}h3{font-size:1.14rem;margin-top:1.5em;color:var(--accent)}h4{font-size:1.02rem;margin-top:1.2em;margin-bottom:.35em;color:var(--fg)}ul,ol{padding-left:1.3em}li{margin:.35em 0}p,li,blockquote{max-width:var(--measure);overflow-wrap:break-word}.table-wrap{width:100%;overflow-x:auto;-webkit-overflow-scrolling:touch}table{width:100%;border-collapse:collapse;margin:1em 0;font-size:.93rem;box-shadow:var(--shadow);border-radius:8px;overflow:hidden}th,td{text-align:left;padding:10px 14px;border:1px solid var(--border);vertical-align:top}th{background:var(--th-bg);font-weight:750}tbody tr:nth-child(even) td{background:var(--card)}blockquote{margin:1.1em 0;padding:12px 16px;border-left:4px solid var(--accent);background:var(--card);color:var(--fg)}pre{font-family:inherit;overflow:auto;white-space:pre-wrap;word-break:break-word;overflow-wrap:anywhere;padding:12px 14px;background:var(--card);border:1px solid var(--border);border-radius:8px}code{font-family:"SFMono-Regular",Consolas,"Liberation Mono",monospace;font-size:.92em;color:var(--fg);background:var(--card);border:1px solid var(--border);border-radius:6px;padding:.08em .35em;overflow-wrap:anywhere;word-break:break-word}pre code{border:0;padding:0;background:transparent}.nav code{border:0;background:transparent;color:inherit;padding:0}.code-sample{max-width:var(--measure);margin:1em 0 1.2em}.code-sample-toolbar{display:flex;gap:8px;margin:0 0 8px}.copy-btn{cursor:pointer;border:1px solid var(--border);background:var(--bg);color:var(--fg);border-radius:6px;padding:5px 10px;font-size:12px;font-weight:650;display:flex;align-items:center;gap:5px;margin-left:auto}.copy-btn:hover{border-color:var(--accent)}.copy-btn.copied{border-color:var(--accent);color:var(--accent)}.code-sample pre{margin:0}.step-badge{display:inline-block;font-size:.78rem;font-weight:750;color:var(--accent);border:1px solid var(--accent);border-radius:999px;padding:2px 10px;margin-bottom:.4em}table{max-width:100%}pre{max-width:var(--measure)}a{color:var(--accent);overflow-wrap:anywhere}footer{margin-top:3em;color:var(--muted);font-size:.85rem;border-top:1px solid var(--border);padding-top:1em}@media (min-width:1440px){:root{--sidebar-w:304px;--content-max:1080px;--content-pad-x:54px;--content-pad-y:48px}}@media (max-width:1100px){:root{--sidebar-w:230px;--content-max:840px;--content-pad-x:28px;--content-pad-y:32px}.sidebar{padding:16px 10px}.brand{font-size:.95rem}.navbtn,.navhome{font-size:13px;padding:7px 8px}}@media (max-width:860px){:root{--sidebar-w:min(82vw,320px);--content-pad-x:18px;--content-pad-y:0px;--measure:100%}.sidebar{transform:translateX(-100%);transition:transform .25s}.sidebar.open{transform:none}.wrap{width:100%;margin-left:0;padding:72px var(--content-pad-x) 80px}.menu-toggle{display:block}.backdrop.show{display:block}h1{font-size:1.7rem}h2{font-size:1.26rem}h3{font-size:1.05rem}p,li,blockquote{max-width:100%}}@media (max-width:520px){:root{--sidebar-w:min(88vw,300px);--content-pad-x:14px}.wrap{padding-top:68px}.menu-toggle{top:10px;left:10px;padding:7px 11px}.sidebar{padding:14px 10px}.toprow{gap:6px}.btn{padding:6px 10px;font-size:12px}.navbtn,.navhome{font-size:13px}h1{font-size:1.5rem}h2{font-size:1.18rem}th,td{padding:8px 10px}}</style>
+<style>
+.stage-slide{max-width:var(--measure);margin:1.35em 0 1.8em;padding:0;border:1px solid var(--border);border-radius:12px;overflow:hidden;background:var(--card);box-shadow:var(--shadow)}
+.stage-slide img{display:block;width:100%;height:auto}
+.stage-slide figcaption{padding:.55em .9em;color:var(--muted);font-size:.88rem}
+.concept-infographic{max-width:var(--measure,100%);margin:1.35em 0 1.8em;padding:0;border:1px solid var(--border);border-radius:12px;overflow:hidden;background:var(--card);box-shadow:var(--shadow)}
+.concept-infographic img{display:block;width:100%;height:auto}
+.concept-infographic figcaption{padding:.55em .9em;color:var(--muted);font-size:.88rem}
+</style>
+</head>
+<body>
+<button class="menu-toggle" id="menuToggle" onclick="toggleMenu()" type="button">☰</button>
+<aside class="sidebar" id="sidebar">
+ <div class="brand">從問題集資料夾產生自主測驗網頁實作教學</div>
+ <div class="toprow"><button class="btn" id="themeBtn" onclick="toggleTheme()" type="button">☀️ Light</button></div>
+ <a class="navhome return-control" href="../../index.html" aria-label="返回上一層">返回上一層</a>
+ <nav class="nav">
+<button class="navbtn" onclick="gotoSection(0)" type="button">學習目標</button>
+<button class="navbtn" onclick="gotoSection(1)" type="button">先備條件</button>
+<button class="navbtn" onclick="gotoSection(2)" type="button">整體設計總覽</button>
+<button class="navbtn" onclick="gotoSection(3)" type="button">跟 Codex 說清楚你要什麼</button>
+<button class="navbtn navsub" onclick="gotoSection(4)" type="button">版本一：最精簡</button>
+<button class="navbtn navsub" onclick="gotoSection(5)" type="button">版本二：多補充</button>
+<button class="navbtn navsub" onclick="gotoSection(6)" type="button">版本三：更完整</button>
+<button class="navbtn" onclick="gotoSection(7)" type="button">打開來試用看看</button>
+<button class="navbtn" onclick="gotoSection(8)" type="button">動手做：換一組新題目</button>
+<button class="navbtn navsub" onclick="gotoSection(9)" type="button">第一步：準備新資料夾</button>
+<button class="navbtn navsub" onclick="gotoSection(10)" type="button">第二步：請 Codex 加入</button>
+<button class="navbtn" onclick="gotoSection(11)" type="button">常見狀況怎麼辦</button>
+<button class="navbtn" onclick="gotoSection(12)" type="button">下一步</button>
+ </nav>
+</aside>
+<div class="backdrop" id="backdrop" onclick="toggleMenu()"></div>
+<div class="wrap">
+<section>
+<h1 id="title">從問題集資料夾產生自主測驗網頁實作教學</h1>
+<p class="lead">Module 2 教學帶你把考古題 PDF 變成「一題一張乾淨圖片 ＋ 正確答案」的問題集資料夾。這份教學接著往下一步走：不用學任何程式或技術名詞，只靠打字跟 Codex 對話，把這種問題集資料夾變成一個雙擊就能打開的學生自我測驗網頁。</p>
+<p class="lead">工作坊講師其實已經事先準備好一個現成的小幫手，一句話就能請 Codex 用它把這整件事快速做完 那是 <a href="../module4/quiz-app-quickstart-tutorial.html">Module 4</a> 教的捷徑。這份教學刻意<strong>不用那個現成的小幫手</strong>，而是從只有「問題集資料夾」這個起點出發，你自己一句一句跟 Codex 描述你想要什麼、看它做出來的東西對不對，再決定要不要調整 目的是讓你熟悉「怎麼跟 AI Agent 講清楚需求」這件事本身，而不是只會套用別人寫好的東西。等你做完這份教學，會發現自己（跟 Codex）做出來的東西，其實跟 Module 4 一句話生成的成品是同一件事；那時候再回頭比較，你會更清楚兩種做法各自的味道。</p>
+<p class="lead">本教學對應 <code>module3/</code> 資料夾，裡面目前<strong>只有</strong>兩組問題集資料夾（題目圖片 ＋ 正確答案），沒有任何預先做好的成品 這是刻意維持的乾淨起點：這份教學的重點是你（跟 Codex）從這兩組資料夾出發，用自己的話講清楚需求，沒有現成範例可以照抄，過程比結果更重要。如果你的專案裡還沒有這兩組資料夾，可以下載 <a href="module3-repo.tar" download>module3-repo.tar</a>，解壓後把 <code>repo/</code> 資料夾放進 <code>module3/</code>。</p>
+
+<div class="table-wrap"><table>
+<tr><th>範例測驗</th><th>題目資料夾在哪裡</th><th>雙擊即用成品大概多大</th></tr>
+<tr><td>115 學年度<br>電機與電子群資電類<br>專業科目(一)(二)，共 100 題</td><td><code>module3/repo/115/</code></td><td>約 15 MB</td></tr>
+<tr><td>115 學年度<br>數學(A)<br>共同科目，共 25 題</td><td><code>module3/repo/math-115a/</code></td><td>約 2.6 MB</td></tr>
+</table></div>
+<p>這兩份問題集資料夾，其實就是 Module 2 教學做出來的東西 只是換了一組資料，重跑一次「下載／切題／清理」流程而已。<code>module3/</code> 底下沒有留原始 PDF、也沒有第三組待處理的資料 「動手做」單元會告訴你怎麼自己準備一組全新資料，驗證你請 Codex 做出來的東西是不是真的能重複拿來用，不用每換一組資料就重新講一次需求。</p>
+
+<h2 id="obj">學習目標</h2>
+<p>做完這份教學，你應該能夠：</p>
+<ul>
+<li>只用一般人聽得懂的話，跟 Codex 說清楚你想要一個什麼樣的測驗網頁，不用先學任何程式或技術名詞。</li>
+<li>知道怎麼實際打開、試用 Codex 幫你做出來的網頁，親自確認它真的堪用，而不是「Codex 說做完了」就直接相信。</li>
+<li>遇到看不懂或不順的地方，知道怎麼把自己實際看到的狀況講清楚，請 Codex 幫你排除，而不是自己動手去改任何檔案。</li>
+<li>換一組全新的題目資料，也能請 Codex 用同樣的方式再做一次，並確認原本做好的測驗不會受影響。</li>
+<li>理解這樣「自己一句一句跟 Codex 討論做出來」的東西，跟 <a href="../module4/quiz-app-quickstart-tutorial.html">Module 4</a> 教的「套用現成小幫手一句話生成」，其實做出來的成品是類似的，差別只在於做的過程。</li>
+</ul>
+
+<h2 id="prereq">先備條件</h2>
+<ul>
+<li>已經完成 <a href="../module2/exam-paper-pipeline-tutorial.html">Module 2：考古題下載、切題與清理實作教學</a>，手上至少有一組「題目圖片 ＋ 正確答案」的問題集資料夾。本教學直接沿用 <code>module3/repo/115</code>、<code>module3/repo/math-115a</code> 這兩組已經做好的資料當範例，你也可以換成自己練習做出來的資料夾。</li>
+<li>已經能開啟並使用 Codex。若還沒設定好工作環境，請先參考 <a href="../module1/windows11-vibe-coding-setup.html">Module 1：AI Agent 實作環境建置</a>。</li>
+<li><strong>不需要會寫程式、不需要另外安裝任何軟體或套件、也不需要開啟終端機打指令</strong> 全程只要打字跟 Codex 用一般的話對話，加上用滑鼠雙擊檔案來試用成果就好。</li>
+<li>這一整套流程都是離線的、不需要網路連線（Module 2 的下載階段才需要網路）。</li>
+</ul>
+<blockquote><strong>關於 Module 4 教的那個現成小幫手：</strong>工作坊講師已經事先幫大家準備好一個包好的工具，一句話就能請 Codex 用它把整件事快速做完，那是 <a href="../module4/quiz-app-quickstart-tutorial.html">Module 4</a> 的內容。這份教學刻意不用那個現成工具，全程只描述「我想要一個做到 X 的網頁」這種需求，讓 Codex 從問題集資料夾本身出發幫你想清楚、動手做 目的是練習怎麼把需求講清楚，不是抄捷徑。</blockquote>
+
+<h2 id="overview">整體設計總覽</h2>
+<p>先講結論，用一句話說清楚整份教學在做什麼：<strong>「我手上有一份題目跟正確答案，麻煩幫我做成一個學生可以自己打開作答、寫完馬上看到分數的網頁。」</strong>不用先弄懂任何技術名詞，就跟你平常請人幫忙做事一樣 把「我想要什麼」講清楚，剩下怎麼做，全部交給 Codex。</p>
+<figure class="concept-infographic" data-concept-infographic="three-step-workflow">
+  <img src="../../../assets/quiz-app-tutorial-three-step-workflow-concept-dark.png" alt="把題目資料變成可自我練習網頁的三步流程：說清楚成品、親自試用、換新題目驗證。">
+  <figcaption>從題目資料到自我測驗網頁的三步流程</figcaption>
+</figure>
+<p>整份教學只有三件事，順序做完就好：</p>
+<ol>
+<li><strong>把你想要的成品講清楚：</strong>用平常說話的方式，跟 Codex 描述學生要看到什麼畫面、要能做什麼事。</li>
+<li><strong>自己打開來試用一次：</strong>不是「Codex 說做完了」就代表真的沒問題，一定要自己實際打開、作答一次看看，有問題就直接告訴 Codex。</li>
+<li><strong>換一組新題目再試一次：</strong>驗證這個做法真的能重複使用，不是只對這一組資料剛好有效。</li>
+</ol>
+<p>這整件事只要跟 Codex 一起做過一次，以後每多一份新的題目（例如換一個班級、換一份考題），只要照第一步的方式再講一次需求，並提醒 Codex 加進同一個工具裡就好，不用從頭再來一次。</p>
+
+<h2 id="ask">跟 Codex 說清楚你要什麼</h2>
+<p class="step-badge">全程只靠打字對話，不用寫程式</p>
+<p>這一步只做一件事：跟 Codex 描述你想要的學生自我測驗網頁。下面示範三種說法，從最精簡到最完整，都是一般人聽得懂的話，沒有任何程式或技術名詞。不管挑哪一種當開場白，Codex 都做得出堪用的成品；說得越完整，通常第一次做出來就越貼近你心裡想要的樣子，但即使只用最短的版本，你也隨時可以在做完之後，再用一般的話請 Codex 補調整。</p>
+<figure class="concept-infographic" data-concept-infographic="requirement-ladder">
+  <img src="../../../assets/quiz-app-tutorial-requirement-ladder-concept-dark.png" alt="說明需求由核心目的、學生操作到完整使用情境逐步具體化的三個層次。">
+  <figcaption>把需求講清楚的三個層次</figcaption>
+</figure>
+
+<h3>版本一：最精簡的說法</h3>
+<p>只講最核心的需求，其他細節交給 Codex 自己判斷：</p>
+<div class="code-sample"><div class="code-sample-toolbar"><button class="copy-btn" type="button" onclick="copyPromptBlock(this)"><span class="copy-icon">📋</span><span>複製</span></button></div><pre><code>我這裡有一個資料夾 module3/repo/115，裡面是題目圖片和正確答案。
+
+麻煩幫我做一個網頁，讓學生可以自己打開來做練習題，寫完可以看到分數。
+
+這個網頁要能直接雙擊打開就能用，不需要架設網站、也不需要連網路。</code></pre></div>
+
+<h3>版本二：多補充幾個要求</h3>
+<p>在版本一的基礎上，多講清楚一點學生實際操作時會遇到的畫面：</p>
+<div class="code-sample"><div class="code-sample-toolbar"><button class="copy-btn" type="button" onclick="copyPromptBlock(this)"><span class="copy-icon">📋</span><span>複製</span></button></div><pre><code>我這裡有一個資料夾 module3/repo/115，裡面是一張一張的題目圖片，還有
+一份記錄正確答案的資料。
+
+麻煩幫我做一個網頁，讓學生可以自己打開來練習作答：
+- 學生可以自己選擇這次要練習幾題，不用每次都寫完全部的題目。
+- 一題一題顯示題目圖片，讓學生選 (A)(B)(C)(D) 等選項作答。
+- 全部作答完、按下送出後，馬上顯示這次考了幾分、每一題答對還是答錯。
+
+這個網頁要能直接雙擊打開就能用，不需要架設網站、也不需要連網路，任何
+一台電腦都能直接使用。</code></pre></div>
+
+<h3>版本三：講得更完整</h3>
+<p>把學生從打開網頁到看到結果的每一步都講清楚，做出來的成品會最貼近實際需求：</p>
+<div class="code-sample"><div class="code-sample-toolbar"><button class="copy-btn" type="button" onclick="copyPromptBlock(this)"><span class="copy-icon">📋</span><span>複製</span></button></div><pre><code>我這裡有一個資料夾，裡面是一張一張的題目圖片，還有一份記錄每一題正確
+答案的資料，資料夾路徑是 module3/repo/115。
+
+麻煩幫我做一個網頁，讓學生可以自己打開來練習作答，具體是：
+- 學生打開網頁後，先輸入自己的姓名，再選擇這次要練習幾題（從 1 題到
+  全部題目都可以選）。
+- 系統隨機抽出這麼多題，一題一題顯示題目圖片，讓學生選 (A)(B)(C)(D)
+  等選項作答；如果某一題的正確答案不只一個選項，也要能正確處理。
+- 全部作答完、按下送出之後，馬上顯示這次考了幾分、每一題答對還是答錯。
+- 提供一個按鈕，讓學生可以把這次作答的詳細結果存成一個檔案、能直接用
+  Excel 打開，檔名裡要帶學生的姓名跟作答的日期時間，方便留一份紀錄。
+
+最重要的一點：完成的網頁必須是「雙擊就能打開」的單一個檔案，不需要
+連網路、不需要架設任何伺服器，任何一台電腦都能直接使用。
+
+做完之後，麻煩把成品放到一個新的資料夾裡，不要跟原本的題目圖片資料夾
+混在一起，並且告訴我成品檔案確切存在哪裡、要怎麼打開來試用。</code></pre></div>
+<p>把這三段話當成起點就好，實際打字給 Codex 的時候，可以照自己的說法調整，不用一字不漏照抄；重點是把「學生要看到什麼、要能做什麼」講清楚，其他都交給 Codex 判斷。</p>
+
+<h2 id="tryit">打開來試用看看</h2>
+<p class="step-badge">不要只信任「Codex 說做完了」</p>
+<ul>
+<li>確認資料夾裡真的多了一個新的網頁檔案。</li>
+<li>直接對著這個檔案點兩下（雙擊）打開，不用另外開瀏覽器輸入網址，看看畫面有沒有正常出現。</li>
+<li>自己當一次「假學生」：輸入一個姓名、選少一點的題數（例如 5 題）、實際作答，按下送出，確認會出現分數，而且每一題的對錯看起來合理。</li>
+<li>如果請 Codex 加了下載結果的功能，試著按按看，確認真的會存出一個檔案，並且能直接用 Excel 打開來看。</li>
+</ul>
+<blockquote>如果哪一項卡住、畫面看起來怪怪的，或是出現你看不懂的訊息 直接把你實際看到的狀況，原原本本描述給 Codex 聽，請它幫你檢查、修好，不用自己動手改任何東西，也不用猜是哪裡出了問題。</blockquote>
+
+<h2 id="practice">動手做：換一組新題目再做一次</h2>
+<p><code>module3/</code> 目前只有 <code>repo/115</code>、<code>repo/math-115a</code> 這兩組資料，沒有預先準備第三組。這個空白正好是驗證「請 Codex 做出來的東西是不是真的能重複使用」最直接的方式：找一組全新的題目資料，看看能不能不用重新講一次完整需求，就直接把新題目加進同一個工具裡。如果可以，代表這次的做法是通用的；如果每換一組資料都要從頭再講一次、甚至舊的測驗因此壞掉，代表哪個環節還需要跟 Codex 討論清楚。</p>
+<figure class="concept-infographic" data-concept-infographic="reuse-cycle">
+  <img src="../../../assets/quiz-app-tutorial-reuse-cycle-concept-dark.png" alt="換新題目時的循環：準備題目與答案、加入同一個工具、實際作答、確認舊測驗不受影響。">
+  <figcaption>換新題目也能重複使用的驗證循環</figcaption>
+</figure>
+
+<h3>第一步：準備一組新的題目資料夾</h3>
+<p>資料來源不重要，挑一種你方便的方式就好：拿你自己手邊已經有的任何一份考古題 PDF；或回到 <a href="../module2/exam-paper-pipeline-tutorial.html">Module 2</a>，換一個你感興趣的學年度或科目，照「下載 → 切題 → 清理」完整流程重新走一次。做完之後，你會得到一組新的「題目圖片 ＋ 正確答案」資料夾，存到 <code>module3/repo/&lt;新資料夾名稱&gt;/</code>（跟現有的 <code>115</code>、<code>math-115a</code> 平級）。</p>
+
+<h3>第二步：跟 Codex 說一聲，請它加進同一個工具</h3>
+<div class="code-sample"><div class="code-sample-toolbar"><button class="copy-btn" type="button" onclick="copyPromptBlock(this)"><span class="copy-icon">📋</span><span>複製</span></button></div><pre><code>我有一組新的題目資料夾，路徑是 module3/repo/&lt;新資料夾名稱&gt;，內容跟
+之前那兩組一樣是「題目圖片 + 正確答案」。
+
+麻煩比照之前做的方式，幫我做出一樣的雙擊即用測驗網頁，加進同一個
+工具裡就好，不用整套重新做一次，也不要影響到已經做好的那幾份測驗。</code></pre></div>
+<p>做完之後，照上面「打開來試用看看」的方式重新測一次：確認新題目的測驗能正常運作，而且原本已經做好的測驗完全不受影響 這正好證明「加新題目不用重新設計」這件事真的成立。</p>
+
+<h2 id="troubleshoot">常見狀況怎麼辦</h2>
+<p>下面這些狀況，都不需要你自己動手排查，只要把觀察到的現象照著描述給 Codex，請它幫你檢查、修好就好：</p>
+<div class="table-wrap"><table>
+<tr><th>你看到的狀況</th><th>可以怎麼跟 Codex 說</th></tr>
+<tr><td>網頁打開後，題目數量看起來比題目資料夾裡實際的題數少</td><td>「我這組題目資料夾裡應該有 100 題，但這個網頁作答時最多只能抽到比較少題，可以幫我確認是不是有題目的圖片對不起來嗎？」</td></tr>
+<tr><td>直接雙擊成品檔案，畫面完全空白或沒有反應</td><td>「我剛剛雙擊打開這個檔案，畫面是空白的／完全沒反應，可以幫我看看是哪裡出了問題嗎？」</td></tr>
+<tr><td>加了一組新題目之後，原本已經做好的測驗打不開或不見了</td><td>「我請你加入一組新題目，結果原本那份測驗現在打不開了，可以幫我確認、把它修好嗎？」</td></tr>
+<tr><td>不確定成品到底存在電腦的哪裡</td><td>直接問 Codex：「你剛剛做出來的網頁，實際存在哪一個資料夾、檔名叫什麼？」</td></tr>
+</table></div>
+
+<h2 id="next">下一步</h2>
+<p>之後想再加更多測驗，只要重複「Module 2 切題清理 → 跟 Codex 說一聲加進同一個工具 → 打開來試用」這個循環就好。</p>
+<p>做到這裡，你應該會發現自己（跟 Codex）一句一句討論做出來的東西，跟 <a href="../module4/quiz-app-quickstart-tutorial.html">Module 4：一句話產生自主測驗網頁快速教學</a> 裡用現成小幫手一句話生成的成品，其實是同一件事，只是這一份教學讓你多練習了一次「怎麼把需求講清楚」。之後如果只是想快速拿到成品、不想每次都重新講一次細節，可以直接改用 Module 4 的捷徑。</p>
+<p>正式交給學生前，記得成品是雙擊即用、不需要伺服器、不需要網路的單一個檔案。</p>
+<p>如果問題集內容是有版權疑慮的考古題（例如技專校院入學測驗中心的試題），交付雙擊即用的網頁之前，記得再次確認自己有沒有合法散布這些內容的權利。</p>
+
+<footer>教育部智慧雨林產業創生人才育成計畫（南臺科技大學 電子系 楊榮林 教授）</footer>
+</section>
+</div>
+<script>function navTargets(){return[...document.querySelectorAll('h2, h3')]}function gotoSection(i){const targets=navTargets();if(targets[i])targets[i].scrollIntoView({behavior:'smooth',block:'start'});closeMenu()}function toggleMenu(){document.getElementById('sidebar').classList.toggle('open');document.getElementById('backdrop').classList.toggle('show')}function closeMenu(){document.getElementById('sidebar').classList.remove('open');document.getElementById('backdrop').classList.remove('show')}let spy;function buildSpy(){if(spy)spy.disconnect();const targets=navTargets();const btns=[...document.querySelectorAll('.nav .navbtn')];spy=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting){const idx=targets.indexOf(e.target);btns.forEach((b,i)=>b.classList.toggle('active',i===idx))}})},{rootMargin:'0px 0px -75% 0px',threshold:0});targets.forEach(t=>spy.observe(t))}document.addEventListener('DOMContentLoaded',buildSpy);function fallbackCopy(text){const ta=document.createElement('textarea');ta.value=text;ta.style.position='fixed';ta.style.opacity='0';document.body.appendChild(ta);ta.focus();ta.select();try{document.execCommand('copy')}catch(e){}document.body.removeChild(ta)}function copyPromptBlock(btn){const sample=btn.closest('.code-sample');if(!sample)return;const pre=sample.querySelector('pre');if(!pre)return;const text=pre.textContent;const done=()=>{const icon=btn.querySelector('.copy-icon');const prev=icon.textContent;icon.textContent='✓';btn.classList.add('copied');clearTimeout(btn._copyTimer);btn._copyTimer=setTimeout(()=>{icon.textContent=prev;btn.classList.remove('copied')},1500)};if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(text).then(done).catch(()=>{fallbackCopy(text);done()})}else{fallbackCopy(text);done()}}function toggleTheme(){const html=document.documentElement;const goingDark=html.getAttribute('data-theme')==='light';html.setAttribute('data-theme',goingDark?'dark':'light');document.getElementById('themeBtn').textContent=goingDark?'☀️ Light':'🌙 Dark'}</script>
+</body>
+</html>

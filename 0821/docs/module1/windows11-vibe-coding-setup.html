@@ -1,0 +1,710 @@
+<!DOCTYPE html>
+<html lang="zh-Hant" data-theme="dark" data-lang="zh">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI Agent 實作環境建置</title>
+<style>:root{color-scheme:dark;--bg:#f4f1ea;--fg:#1f2328;--muted:#687180;--card:#ebe7df;--border:#d6d0c5;--accent:#2563eb;--th-bg:#ded8cc;--shadow:0 1px 3px rgba(44,38,28,.09);--sidebar-w:284px;--content-max:1040px;--content-pad-x:44px;--content-pad-y:42px;--measure:100%}[data-theme="dark"]{--bg:#101217;--fg:#e7eaf0;--muted:#a5aebd;--card:#181c24;--border:#2a3140;--accent:#7bb2ff;--th-bg:#202632;--shadow:0 1px 3px rgba(0,0,0,.42)}html{scroll-behavior:smooth}*{box-sizing:border-box}body{min-width:0;margin:0;background:var(--bg);color:var(--fg);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang TC","Microsoft JhengHei",Roboto,Helvetica,Arial,sans-serif;font-size:16px;line-height:1.76;letter-spacing:0;transition:background .25s,color .25s}.wrap{width:min(var(--content-max),calc(100vw - var(--sidebar-w)));margin-left:calc(var(--sidebar-w) + (100vw - var(--sidebar-w) - min(var(--content-max),calc(100vw - var(--sidebar-w)))) / 2);padding:var(--content-pad-y) var(--content-pad-x) 88px}.sidebar{position:fixed;top:0;left:0;width:var(--sidebar-w);height:100vh;overflow-y:auto;background:var(--card);border-right:1px solid var(--border);display:flex;flex-direction:column;gap:10px;padding:18px 14px;z-index:30}.brand{font-weight:700;font-size:1rem;line-height:1.35;padding:0 6px}.toprow{display:flex;flex-wrap:wrap;align-items:center;gap:8px}.navmode{display:flex;align-items:flex-start;gap:8px;margin:0 6px;color:var(--muted);font-size:13px;font-weight:650;line-height:1.35}.navmode input{width:16px;height:16px;margin:1px 0 0;accent-color:var(--accent)}.nav{display:flex;flex-direction:column;gap:4px;margin-top:6px}.navbtn,.navhome{cursor:pointer;border:1px solid transparent;background:transparent;color:var(--muted);border-radius:7px;padding:7px 10px;font-size:14px;font-weight:650;text-align:left;width:100%;white-space:normal;text-decoration:none}.navbtn:hover,.navbtn.active,.navhome:hover{color:var(--accent);border-color:var(--border);background:var(--bg)}.navhome{display:block;border-color:var(--border);background:var(--bg);color:var(--fg)}.btn{cursor:pointer;border:1px solid var(--border);background:var(--bg);color:var(--fg);border-radius:8px;padding:6px 12px;font-size:13px;font-weight:650}.btn:hover{border-color:var(--accent)}.menu-toggle{display:none;position:fixed;top:12px;left:12px;z-index:40;cursor:pointer;border:1px solid var(--border);background:var(--card);color:var(--fg);border-radius:8px;padding:6px 12px;font-size:18px;line-height:1}.backdrop{display:none;position:fixed;inset:0;background:rgba(0,0,0,.42);z-index:20}h1{max-width:var(--measure);font-size:2.15rem;line-height:1.28;margin:.2em 0 .35em}h2{font-size:1.48rem;margin-top:1.85em;padding-bottom:.25em;border-bottom:2px solid var(--border);scroll-margin-top:24px}h3{font-size:1.18rem;margin-top:1.55em;color:var(--accent)}h4{font-size:1.04rem;margin-top:1.25em;margin-bottom:.35em;color:var(--fg)}ul,ol{padding-left:1.3em}li{margin:.35em 0}p,li,blockquote{max-width:var(--measure);overflow-wrap:break-word}.table-wrap{width:100%;overflow-x:auto;-webkit-overflow-scrolling:touch}table{width:100%;border-collapse:collapse;margin:1em 0;font-size:.94rem;box-shadow:var(--shadow);border-radius:8px;overflow:hidden}th,td{text-align:left;padding:10px 14px;border:1px solid var(--border);vertical-align:top}th{background:var(--th-bg);font-weight:750}td:first-child,th:first-child{white-space:nowrap}tbody tr:nth-child(even) td{background:var(--card)}figure{max-width:100%;margin:1.1em 0 1.35em;padding:10px;background:var(--card);border:1px solid var(--border);border-radius:8px;box-shadow:var(--shadow)}figure img{display:block;width:100%;height:auto;border-radius:6px}blockquote{margin:1.1em 0;padding:12px 16px;border-left:4px solid var(--accent);background:var(--card);color:var(--fg)}pre{font-family:inherit;overflow:auto;white-space:pre-wrap;word-break:break-word;overflow-wrap:anywhere;padding:12px 14px;background:var(--card);border:1px solid var(--border);border-radius:8px}code{font-family:"SFMono-Regular",Consolas,"Liberation Mono",monospace;font-size:.92em;color:var(--fg);background:var(--card);border:1px solid var(--border);border-radius:6px;padding:.08em .35em}pre code{border:0;padding:0;background:transparent}.nav code{border:0;background:transparent;color:inherit;padding:0}.code-sample{max-width:var(--measure);margin:1em 0 1.2em}.code-sample-toolbar{display:flex;gap:8px;margin:0 0 8px}.copy-btn{cursor:pointer;border:1px solid var(--border);background:var(--bg);color:var(--fg);border-radius:6px;padding:5px 10px;font-size:12px;font-weight:650;display:flex;align-items:center;gap:5px;margin-left:auto}.copy-btn:hover{border-color:var(--accent)}.copy-btn.copied{border-color:var(--accent);color:var(--accent)}.code-sample pre{margin:0}.site-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:12px;margin:1.2em 0}.site-card{display:flex;flex-direction:column;gap:6px;min-height:142px;padding:14px 16px;border:1px solid var(--border);border-radius:8px;background:var(--card);box-shadow:var(--shadow);text-decoration:none;color:var(--fg)}.site-card:hover{border-color:var(--accent)}.site-card strong{font-size:1.03rem;color:var(--fg)}.site-card span{color:var(--muted)}.download-list{display:grid;gap:8px;max-width:var(--measure);padding-left:0;list-style:none}.download-list a{display:block;padding:10px 12px;border:1px solid var(--border);border-radius:8px;background:var(--card);text-decoration:none}.download-list small{display:block;color:var(--muted)}table{max-width:100%}pre{max-width:var(--measure)}a{color:var(--accent);overflow-wrap:anywhere}[data-lang="zh"] .en,[data-lang="en"] .zh{display:none}footer{margin-top:3em;color:var(--muted);font-size:.85rem;border-top:1px solid var(--border);padding-top:1em}@media (min-width:1440px){:root{--sidebar-w:304px;--content-max:1080px;--content-pad-x:54px;--content-pad-y:48px}}@media (max-width:1100px){:root{--sidebar-w:230px;--content-max:840px;--content-pad-x:28px;--content-pad-y:32px}.sidebar{padding:16px 10px}.brand{font-size:.95rem}.navbtn,.navhome{font-size:13px;padding:7px 8px}}@media (max-width:860px){:root{--sidebar-w:min(82vw,320px);--content-pad-x:18px;--content-pad-y:0px;--measure:100%}.sidebar{transform:translateX(-100%);transition:transform .25s}.sidebar.open{transform:none}.wrap{width:100%;margin-left:0;padding:72px var(--content-pad-x) 80px}.menu-toggle{display:block}.backdrop.show{display:block}h1{font-size:1.75rem}h2{font-size:1.26rem}h3{font-size:1.08rem}p,li,blockquote{max-width:100%}.site-grid{grid-template-columns:1fr}}@media (max-width:520px){:root{--sidebar-w:min(88vw,300px);--content-pad-x:14px}.wrap{padding-top:68px}.menu-toggle{top:10px;left:10px;padding:7px 11px}.sidebar{padding:14px 10px}.toprow{gap:6px}.btn{padding:6px 10px;font-size:12px}.navmode{font-size:12px}.navbtn,.navhome{font-size:13px}h1{font-size:1.55rem}h2{font-size:1.18rem}th,td{padding:8px 10px}}</style>
+<style>@media (max-width:520px){.table-wrap table{min-width:760px}}</style>
+<style>.concept-infographic{max-width:var(--measure,100%);margin:1.35em 0 1.8em;padding:0;overflow:hidden}.concept-infographic img{border-radius:0}.concept-infographic figcaption{padding:.55em .9em;color:var(--muted);font-size:.88rem}</style>
+</head>
+<body>
+<button class="menu-toggle" id="menuToggle" onclick="toggleMenu()" type="button">☰</button>
+<aside class="sidebar" id="sidebar">
+  <div class="brand"><span class="zh">AI Agent 實作環境建置</span><span class="en">AI Agent Hands-on Environment Setup</span></div>
+  <div class="toprow"><button class="btn" id="langBtn" onclick="toggleLang()" type="button">English</button><button class="btn" id="themeBtn" onclick="toggleTheme()" type="button">☀️ Light</button></div>
+  <label class="navmode"><input id="slideNavMode" onchange="buildSpy()" type="checkbox"><span><span class="zh">導覽反思投影片</span><span class="en">Navigate reflection slides</span></span></label>
+  <a class="navhome return-control" href="../../index.html" aria-label="返回上一層 / Back to parent"><span class="zh">返回上一層</span><span class="en">Back to parent</span></a>
+  <nav class="nav"><button class="navbtn" onclick="gotoSection(0)" type="button"><span class="zh">學習目標 (Learning Objectives)</span><span class="en">Learning Objectives</span></button>
+<button class="navbtn" onclick="gotoSection(1)" type="button"><span class="zh">先備條件 (Prerequisites)</span><span class="en">Prerequisites</span></button>
+<button class="navbtn" onclick="gotoSection(2)" type="button"><span class="zh">最低電腦需求 (Minimum Computer Requirements)</span><span class="en">Minimum Computer Requirements</span></button>
+<button class="navbtn" onclick="gotoSection(3)" type="button"><span class="zh">三個部分總覽 (Overview)</span><span class="en">Overview of the Three Parts</span></button>
+<button class="navbtn" onclick="gotoSection(4)" type="button"><span class="zh">第一部分：ChatGPT App</span><span class="en">Part 1: ChatGPT App</span></button>
+<button class="navbtn" onclick="gotoSection(5)" type="button"><span class="zh">第二部分：VS Code 與擴充套件</span><span class="en">Part 2: VS Code and Extensions</span></button>
+<button class="navbtn" onclick="gotoSection(6)" type="button"><span class="zh">替代方案：更多 AI Agent 選擇</span><span class="en">Alternatives: More AI Agent Options</span></button>
+<button class="navbtn" onclick="gotoSection(7)" type="button"><span class="zh">第三部分：GitHub 帳號與 Education</span><span class="en">Part 3: GitHub Account and Education</span></button>
+<button class="navbtn" onclick="gotoSection(8)" type="button"><span class="zh">實作與驗收 (Hands-on Activities)</span><span class="en">Hands-on Activities</span></button></nav>
+</aside>
+<div class="backdrop" id="backdrop" onclick="toggleMenu()"></div>
+<div class="wrap">
+  <section class="zh"><h1 id="ai-agent-hands-on-environment-setup">AI Agent 實作環境建置</h1>
+<p>本模組聚焦在 Windows 11 筆電上，把「跟 AI Agent 協作」所需的三個部分準備好：先安裝並設定 ChatGPT 桌面 app（Chat、ChatGPT Work、Codex 三種工作介面）；再把 VS Code 裝好對應的擴充套件；最後申請個人 GitHub 帳號並送出 GitHub Education 驗證。三個部分彼此獨立，可以照自己的步調完成，最後再一起驗收。</p>
+<h2 id="learning-objectives">學習目標 (Learning Objectives)</h2>
+<p>完成本模組後，學員應能：</p>
+<ul>
+<li>安裝並登入 ChatGPT 桌面 app，依任務性質選擇 Chat、ChatGPT Work 或 Codex 三種工作介面。</li>
+<li>在 VS Code 安裝 Codex 與 GitHub Copilot 兩個 AI Agent 擴充套件，讓 AI 能直接在編輯器裡協助讀寫、審查程式碼。</li>
+<li>在 VS Code 安裝並使用 Python、JavaScript、Markdown、HTML 的語法標示，以及 MS Office 文件（docx/xlsx/pptx）的直接預覽，不用切換到其他應用程式就能檢視教材。</li>
+<li>申請個人 GitHub 帳號，並送出 GitHub Education（教師／Global Campus）驗證申請。</li>
+<li>依 checklist 自行驗證三個部分是否設定完成，並排除常見問題。</li>
+</ul>
+<h2 id="prerequisites">先備條件 (Prerequisites)</h2>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>項目</th>
+<th>說明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>個人筆電</td>
+<td>Windows 11，具系統管理員（安裝軟體）權限</td>
+</tr>
+<tr>
+<td>網路</td>
+<td>可連線下載安裝套件、註冊帳號與存取 AI 服務</td>
+</tr>
+<tr>
+<td>ChatGPT 帳號</td>
+<td>可使用 Codex 的 ChatGPT 帳號；若還沒有，可在官網或桌面 app 首次啟動時建立</td>
+</tr>
+<tr>
+<td>Email 信箱</td>
+<td>建議使用學校網域信箱，註冊 GitHub 帳號與申請 GitHub Education 時會用到，有助於加快教師身分驗證</td>
+</tr>
+<tr>
+<td>基本操作</td>
+<td>能開啟並操作瀏覽器，下載並執行安裝檔</td>
+</tr>
+</tbody>
+</table></div>
+<h2 id="minimum-computer-requirements">最低電腦需求 (Minimum Computer Requirements)</h2>
+<p>本模組只需同時開啟 VS Code、ChatGPT 桌面 app 與瀏覽器，需求比完整開發工具鏈輕。標示「建議」者為較順暢的體驗門檻。</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>項目</th>
+<th>最低需求</th>
+<th>建議</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>作業系統</td>
+<td>Windows 11 (64 位元)</td>
+<td>Windows 11 且更新至最新版</td>
+</tr>
+<tr>
+<td>處理器</td>
+<td>64 位元 x64 雙核心</td>
+<td>四核心以上</td>
+</tr>
+<tr>
+<td>記憶體 (RAM)</td>
+<td>8 GB</td>
+<td>16 GB</td>
+</tr>
+<tr>
+<td>可用磁碟空間</td>
+<td>5 GB</td>
+<td>10 GB 以上</td>
+</tr>
+<tr>
+<td>權限</td>
+<td>具系統管理員權限 (可安裝軟體、允許 UAC)</td>
+<td>同左</td>
+</tr>
+<tr>
+<td>網路</td>
+<td>穩定寬頻，可存取 GitHub 與 AI 服務</td>
+<td>同左</td>
+</tr>
+<tr>
+<td>瀏覽器</td>
+<td>Microsoft Edge 或 Chrome</td>
+<td>同左</td>
+</tr>
+</tbody>
+</table></div>
+<blockquote>
+<p>8 GB 記憶體可完成本模組所有任務，但 VS Code、瀏覽器與 ChatGPT 桌面 app 一起開啟時，16 GB 會比較順暢。</p>
+</blockquote>
+<h2 id="three-parts-overview">三個部分總覽 (Overview of the Three Parts)</h2>
+<p>本模組要完成的三件事彼此獨立，可以照自己的步調依序完成：</p>
+<figure class="concept-infographic" data-concept-infographic="three-parts">
+  <img src="../../../assets/windows11-vibe-coding-setup-three-parts-concept-dark.png" alt="環境建置的三個部分：安裝桌面助理、準備程式編輯器、建立帳號與教育驗證，最後一起驗收。">
+  <figcaption>環境建置的三個獨立部分與總驗收</figcaption>
+</figure>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>部分</th>
+<th>涵蓋內容</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>第一部分：ChatGPT App</td>
+<td>安裝 ChatGPT 桌面 app，登入後熟悉 Chat、ChatGPT Work、Codex 三種工作介面的差異與切換時機</td>
+</tr>
+<tr>
+<td>第二部分：VS Code + 擴充套件</td>
+<td>安裝 VS Code，加裝 Codex 與 GitHub Copilot 兩個 AI Agent 擴充套件，以及 Python／Markdown／HTML 語法標示與 MS Office 文件預覽套件</td>
+</tr>
+<tr>
+<td>第三部分：GitHub 帳號 + GitHub Education</td>
+<td>註冊個人 GitHub 帳號，送出 GitHub Education（教師）驗證申請，取得後續課程與工具的教育版權益</td>
+</tr>
+</tbody>
+</table></div>
+<h2 id="part-1-chatgpt-app">第一部分：安裝與設定 ChatGPT App (Chat / Work / Codex)</h2>
+<p>ChatGPT 桌面 app 是 Windows 上進入 Chat、ChatGPT Work 與 Codex 三種工作介面的共同入口。</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>工具</th>
+<th>官方下載／說明</th>
+<th>建議指令或操作</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>ChatGPT 桌面 app</td>
+<td><a href="https://get.microsoft.com/installer/download/9PLM9XGG6VKS?cid=website_cta_psi" target="_blank" rel="noopener noreferrer">OpenAI：ChatGPT desktop app for Windows</a></td>
+<td><code>winget install --id 9PLM9XGG6VKS --source msstore</code>，或從 Microsoft Store 安裝。安裝後開啟 app，使用 ChatGPT 帳號登入。</td>
+</tr>
+</tbody>
+</table></div>
+<p>登入後，依任務性質選擇正確的工作介面：</p>
+<figure class="concept-infographic" data-concept-infographic="interface-choice">
+  <img src="../../../assets/windows11-vibe-coding-setup-interface-choice-concept-dark.png" alt="依工作內容選擇介面：快速問答、多步任務，或專案與程式。">
+  <figcaption>先看工作內容，再選擇適合的介面</figcaption>
+</figure>
+<ul>
+<li>需要快速問答時選 <strong>Chat</strong>。</li>
+<li>要完成研究、文件或需要審查的多步驟成果時，先選 ChatGPT，再切換到 <strong>Work</strong>。</li>
+<li>要處理課程 project、程式碼、指令與 diff 時，從產品選單選 <strong>Codex</strong>。</li>
+</ul>
+<figure class="concept-infographic" data-concept-infographic="approval-loop">
+  <img src="../../../assets/windows11-vibe-coding-setup-approval-loop-concept-dark.png" alt="第一次與助理合作的逐步核准流程：提出任務、查看預計動作、同意後執行、確認變更與結果。">
+  <figcaption>第一次合作時的逐步核准流程</figcaption>
+</figure>
+<blockquote>
+<p>⚠️ 在 Codex 送出第一個任務前，先選<strong>先要求核准</strong>（Ask for approval），不要一開始就打開<strong>完整存取權</strong>（Full access），這樣才能在每一步都看清楚 Agent 打算做什麼、產生了哪些變更，再決定要不要放行。</p>
+</blockquote>
+<p><strong>驗收：</strong>執行 guided「Hello, AI Agent」任務（請 Codex 在專案資料夾建立一個 <code>hello.txt</code>），確認 AI Agent 能接收指令、產生檔案並回報結果。</p>
+<h2 id="part-2-vscode-extensions">第二部分：VS Code 與擴充套件</h2>
+<p>VS Code 是之後操作 AI Agent 的主要工作視窗，搭配下列擴充套件，就能在同一個視窗裡完成程式協作與教材檢視。</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>工具</th>
+<th>官方下載／說明</th>
+<th>建議指令或操作</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>VS Code</td>
+<td><a href="https://code.visualstudio.com/download" target="_blank" rel="noopener noreferrer">https://code.visualstudio.com/download</a></td>
+<td><code>winget install --id Microsoft.VisualStudioCode --source winget --exact</code></td>
+</tr>
+</tbody>
+</table></div>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>用途</th>
+<th>擴充套件</th>
+<th>Marketplace ID</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Codex 編程代理</td>
+<td>Codex（OpenAI 的程式協作擴充套件，與桌面 app 共用登入）</td>
+<td><code>openai.chatgpt</code></td>
+</tr>
+<tr>
+<td>GitHub Copilot</td>
+<td>程式碼自動完成與 Copilot Chat</td>
+<td><code>GitHub.copilot</code></td>
+</tr>
+<tr>
+<td>Python 語法標示</td>
+<td>Python（Microsoft 官方擴充套件）</td>
+<td><code>ms-python.python</code></td>
+</tr>
+<tr>
+<td>JavaScript／TypeScript 語法標示</td>
+<td>VS Code 內建，不需另外安裝</td>
+<td>—</td>
+</tr>
+<tr>
+<td>Markdown 語法標示與預覽</td>
+<td>Markdown All in One</td>
+<td><code>yzhang.markdown-all-in-one</code></td>
+</tr>
+<tr>
+<td>HTML 即時預覽</td>
+<td>Live Preview（Microsoft 官方擴充套件）</td>
+<td><code>ms-vscode.live-server</code></td>
+</tr>
+<tr>
+<td>MS Office 文件預覽（docx/xlsx/pptx）</td>
+<td>Office Viewer</td>
+<td><code>cweijan.vscode-office</code></td>
+</tr>
+</tbody>
+</table></div>
+<p>可在 VS Code 左側 Extensions 視窗搜尋安裝，也可在終端機逐行執行：</p>
+<pre><code class="language-powershell">code --install-extension openai.chatgpt
+code --install-extension GitHub.copilot
+code --install-extension ms-python.python
+code --install-extension yzhang.markdown-all-in-one
+code --install-extension ms-vscode.live-server
+code --install-extension cweijan.vscode-office
+</code></pre>
+<blockquote>
+<p>⚠️ 擴充套件 ID 會隨 Marketplace 更新而變動，正式開課前請先在 Extensions 視窗搜尋名稱確認 ID 仍然正確，尤其是 Office 文件預覽這款較小眾的套件。</p>
+</blockquote>
+<p><strong>驗收：</strong>開啟 Extensions 視窗確認上述套件都已安裝並啟用；再分別開啟一個 <code>.py</code>、<code>.md</code>、<code>.html</code>，以及一份 <code>.docx</code> 或 <code>.xlsx</code> 檔案，確認語法標示或預覽畫面正常顯示。</p>
+<h2 id="part-alt-ai-agent-options">替代方案：更多免費 AI Agent 選擇</h2>
+<p>除了第一部分的 ChatGPT App／Codex，這裡再列出兩種同樣免費、額度通常足以應付工作坊規模任務的 AI Agent 選擇，提供給想要更多彈性的學員：Google Antigravity，以及透過第三部分 GitHub Education 解鎖的 GitHub Copilot 教育版。</p>
+<h3 id="alt-google-antigravity">Google Antigravity</h3>
+<p>Google Antigravity 跟 ChatGPT App／Codex 一樣，能接收指令、讀寫程式碼、執行任務，核心模型為 Gemini 3.1 Pro／Flash。特別列出它的原因，是目前為公開預覽階段，個人 Google（Gmail）帳號的免費使用額度相當寬鬆，不需要信用卡。它同時內建一套類似 VS Code 的編輯器，所以選擇這個替代方案時，也可以略過第一、二部分（分別安裝 ChatGPT 桌面 app 與 VS Code），安裝完成後直接進行第三部分（申請 GitHub 帳號）。</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>工具</th>
+<th>官方下載／說明</th>
+<th>建議指令或操作</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Google Antigravity</td>
+<td><a href="https://antigravity.google/download" target="_blank" rel="noopener noreferrer">Google：Antigravity 下載頁面</a></td>
+<td>至下載頁面取得 Windows 安裝檔並執行安裝；或在 PowerShell 執行 <code>irm https://antigravity.google/cli/install.ps1 | iex</code> 安裝 CLI。安裝後開啟 Antigravity，使用個人 Google 帳號登入。</td>
+</tr>
+</tbody>
+</table></div>
+<blockquote>
+<p>⚠️ Antigravity 對「終端機執行指令」與「Agent 變更內容」都有可調整的審核層級（Terminal Execution Policy 的 Off／Auto／Turbo，以及 Artifact 的 Review 政策）。第一次使用建議選擇需要人工確認的設定，確認 Agent 打算執行的指令與變更內容後再放行，熟悉後再依信任程度放寬。</p>
+</blockquote>
+<p><strong>驗收：</strong>開啟 Antigravity，確認能以個人 Google 帳號成功登入；在需要人工確認的設定下，比照 Hello, AI Agent 任務請 Agent 建立一個 <code>hello.txt</code>，確認 Agent 能接收指令、產生檔案並回報結果。</p>
+<h3 id="alt-github-copilot-education">GitHub Copilot（透過 GitHub Education）</h3>
+<p>第二部分已經安裝的 GitHub Copilot 擴充套件，預設是付費方案；只要在第三部分成功通過 GitHub Education 教師身分驗證，Copilot 就會自動轉為教育版方案，額度更寬鬆且免費，不需要另外安裝或設定新的擴充套件。</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>工具</th>
+<th>官方下載／說明</th>
+<th>建議指令或操作</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>GitHub Copilot（教育版）</td>
+<td><a href="https://github.com/education/teachers" target="_blank" rel="noopener noreferrer">github.com/education/teachers</a>（同第三部分的申請頁面）</td>
+<td>先完成第三部分的 GitHub Education 教師驗證；核准後在 VS Code 用已安裝的 GitHub Copilot 擴充套件登入通過驗證的 GitHub 帳號，方案會自動套用為教育版。</td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>驗收：</strong>GitHub Education 核准後，在 VS Code 的 Copilot 圖示或帳號狀態確認方案已顯示為教育版／免費；能正常使用 Copilot Chat 詢問或修改程式碼。</p>
+<h2 id="part-3-github-account">第三部分：申請 GitHub 帳號與 GitHub Education</h2>
+<p>GitHub 帳號是後續課程管理專案、儲存檔案的基礎；GitHub Education 則能讓教師身分取得 Copilot 等工具的教育版權益。</p>
+<figure class="concept-infographic" data-concept-infographic="education-path">
+  <img src="../../../assets/windows11-vibe-coding-setup-education-path-concept-dark.png" alt="帳號與教育驗證的準備路徑：建立個人帳號、準備身分資料、送出教育驗證，取得教育權益。">
+  <figcaption>帳號與教育驗證的準備路徑</figcaption>
+</figure>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>步驟</th>
+<th>說明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>註冊 GitHub 帳號</td>
+<td>前往 <a href="https://github.com/signup" target="_blank" rel="noopener noreferrer">github.com/signup</a> 完成註冊；建議使用學校網域信箱，方便之後的教師身分驗證與通知</td>
+</tr>
+<tr>
+<td>申請 GitHub Education（教師）</td>
+<td>登入後前往 <a href="https://github.com/education/teachers" target="_blank" rel="noopener noreferrer">github.com/education/teachers</a>，依指示提供任教證明（學校信箱驗證、教職證明文件或課程頁面連結）</td>
+</tr>
+<tr>
+<td>等待審核</td>
+<td>審核通常需要數個工作天；審核期間仍可正常使用 GitHub 帳號本身的功能，教育版權益要核准後才會生效</td>
+</tr>
+</tbody>
+</table></div>
+<blockquote>
+<p>學校信箱不是必要條件，但用學校網域信箱註冊，通常能加快 GitHub Education 的自動驗證流程。</p>
+</blockquote>
+<p><strong>驗收：</strong>確認已登入 <a href="https://github.com" target="_blank" rel="noopener noreferrer">github.com</a>；確認 GitHub Education 申請已送出（畫面顯示「Application submitted」，或已顯示核准後的權益頁面）。</p>
+<h2 id="hands-on-activities">實作與驗收 (Hands-on Activities)</h2>
+<p>三個部分都設定完成後，用下面的 checklist 做一次總驗收。</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>任務</th>
+<th>內容</th>
+<th>驗證重點</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>ChatGPT App 檢查</td>
+<td>開啟 app，依序切換 Chat、ChatGPT Work、Codex 三種介面；在 Codex 用「先要求核准」跑一次 Hello, AI Agent 任務</td>
+<td>三種工作介面都能正常開啟並登入；Codex 能建立檔案並回報結果</td>
+</tr>
+<tr>
+<td>VS Code 擴充套件檢查</td>
+<td>開啟 Extensions 視窗確認套件已啟用；分別開啟 .py / .md / .html / .docx（或 .xlsx）樣本檔案</td>
+<td>語法標示與文件預覽都正常顯示，不需另外開啟 Word/Excel</td>
+</tr>
+<tr>
+<td>GitHub 帳號檢查</td>
+<td>登入 github.com；查看 GitHub Education 申請狀態</td>
+<td>帳號可正常登入；Education 申請已送出或已核准</td>
+</tr>
+<tr>
+<td>Google Antigravity 檢查（替代方案，可選）</td>
+<td>開啟 Antigravity，以個人 Google 帳號登入；在需要人工確認的設定下跑一次 Hello, AI Agent 任務</td>
+<td>能以個人 Google 帳號登入；Agent 能建立檔案並回報結果</td>
+</tr>
+<tr>
+<td>GitHub Copilot 教育版檢查（替代方案，可選）</td>
+<td>GitHub Education 核准後，在 VS Code 用已安裝的 Copilot 擴充套件登入該帳號</td>
+<td>Copilot 方案顯示為教育版／免費；Copilot Chat 能正常使用</td>
+</tr>
+</tbody>
+</table></div></section>
+  <section class="en"><h1 id="ai-agent-hands-on-environment-setup-en">AI Agent Hands-on Environment Setup</h1>
+<p>This module prepares three things you need to work with an AI agent on a Windows 11 laptop: install and configure the ChatGPT desktop app (Chat, ChatGPT Work, and Codex); install VS Code with the matching extensions; and register a personal GitHub account and submit a GitHub Education application. The three parts are independent — work through them at your own pace, then check off all three at the end.</p>
+<h2 id="learning-objectives">Learning Objectives</h2>
+<p>After this module, participants can:</p>
+<ul>
+<li>Install and sign in to the ChatGPT desktop app, and choose Chat, ChatGPT Work, or Codex for the task at hand.</li>
+<li>Install the Codex and GitHub Copilot extensions in VS Code so the AI agent can read, write, and review code directly in the editor.</li>
+<li>Install and use syntax highlighting for Python, JavaScript, Markdown, and HTML in VS Code, plus direct previews for MS Office files (docx/xlsx/pptx), without switching to another app to view course material.</li>
+<li>Register a personal GitHub account and submit a GitHub Education (teacher / Global Campus) verification application.</li>
+<li>Use the checklist to verify all three parts are set up and troubleshoot common issues.</li>
+</ul>
+<h2 id="prerequisites">Prerequisites</h2>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>Item</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Personal laptop</td>
+<td>Windows 11, with administrator (software installation) permissions</td>
+</tr>
+<tr>
+<td>Network</td>
+<td>Internet access to download installers, register accounts, and reach AI services</td>
+</tr>
+<tr>
+<td>ChatGPT account</td>
+<td>A ChatGPT account with Codex access; if you don't have one, create it on the website or the first time you launch the desktop app</td>
+</tr>
+<tr>
+<td>Email address</td>
+<td>A school-domain email is recommended — used to register a GitHub account and apply for GitHub Education, and it speeds up faculty verification</td>
+</tr>
+<tr>
+<td>Basic skills</td>
+<td>Comfortable opening a browser, and downloading and running an installer</td>
+</tr>
+</tbody>
+</table></div>
+<h2 id="minimum-computer-requirements">Minimum Computer Requirements</h2>
+<p>This module only needs VS Code, the ChatGPT desktop app, and a browser open at the same time, so the requirements are lighter than a full developer toolchain. The "Recommended" column marks the threshold for a smoother experience.</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>Item</th>
+<th>Minimum</th>
+<th>Recommended</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Operating system</td>
+<td>Windows 11 (64-bit)</td>
+<td>Windows 11, fully updated</td>
+</tr>
+<tr>
+<td>Processor</td>
+<td>64-bit x64 dual-core</td>
+<td>Quad-core or better</td>
+</tr>
+<tr>
+<td>Memory (RAM)</td>
+<td>8 GB</td>
+<td>16 GB</td>
+</tr>
+<tr>
+<td>Free disk space</td>
+<td>5 GB</td>
+<td>10 GB or more</td>
+</tr>
+<tr>
+<td>Permissions</td>
+<td>Administrator permissions (can install software, allow UAC prompts)</td>
+<td>Same as minimum</td>
+</tr>
+<tr>
+<td>Network</td>
+<td>Stable broadband with access to GitHub and AI services</td>
+<td>Same as minimum</td>
+</tr>
+<tr>
+<td>Browser</td>
+<td>Microsoft Edge or Chrome</td>
+<td>Same as minimum</td>
+</tr>
+</tbody>
+</table></div>
+<blockquote>
+<p>8 GB of RAM is enough to complete every task in this module, but 16 GB is noticeably smoother once VS Code, a browser, and the ChatGPT desktop app are all open together.</p>
+</blockquote>
+<h2 id="three-parts-overview">Overview of the Three Parts</h2>
+<p>The three things this module covers are independent of each other — work through them in whatever order suits you:</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>Part</th>
+<th>Covers</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Part 1: ChatGPT App</td>
+<td>Install the ChatGPT desktop app; after signing in, get comfortable switching between Chat, ChatGPT Work, and Codex</td>
+</tr>
+<tr>
+<td>Part 2: VS Code + Extensions</td>
+<td>Install VS Code, add the Codex and GitHub Copilot AI-agent extensions, plus Python/Markdown/HTML syntax highlighting and an MS Office document preview extension</td>
+</tr>
+<tr>
+<td>Part 3: GitHub Account + GitHub Education</td>
+<td>Register a personal GitHub account and submit a GitHub Education (teacher) verification application to unlock education-tier benefits for later modules</td>
+</tr>
+</tbody>
+</table></div>
+<h2 id="part-1-chatgpt-app">Part 1: Install and Configure the ChatGPT App (Chat / Work / Codex)</h2>
+<p>The ChatGPT desktop app is the shared entry point on Windows for Chat, ChatGPT Work, and Codex.</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>Tool</th>
+<th>Official Download / Notes</th>
+<th>Recommended Command or Steps</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>ChatGPT desktop app</td>
+<td><a href="https://get.microsoft.com/installer/download/9PLM9XGG6VKS?cid=website_cta_psi" target="_blank" rel="noopener noreferrer">OpenAI: ChatGPT desktop app for Windows</a></td>
+<td>Run <code>winget install --id 9PLM9XGG6VKS --source msstore</code>, or install it from the Microsoft Store. Then open the app and sign in with your ChatGPT account.</td>
+</tr>
+</tbody>
+</table></div>
+<p>After signing in, pick the right interface for the task:</p>
+<ul>
+<li>Use <strong>Chat</strong> for quick questions.</li>
+<li>Select ChatGPT, then <strong>Work</strong>, for research, documents, or a multi-step, reviewable outcome.</li>
+<li>Select <strong>Codex</strong> from the product menu for a course project, code, commands, and diffs.</li>
+</ul>
+<blockquote>
+<p>⚠️ Before sending the first task in Codex, choose <strong>Ask for approval</strong>; don't enable <strong>Full access</strong> by default. That way you can review what the agent intends to do and what it changed at every step, before deciding whether to approve it.</p>
+</blockquote>
+<p><strong>Check:</strong> run the guided "Hello, AI Agent" task (ask Codex to create a <code>hello.txt</code> file in the project folder) to confirm the AI agent can receive instructions, produce a file, and report back.</p>
+<h2 id="part-2-vscode-extensions">Part 2: VS Code and Extensions</h2>
+<p>VS Code is the main window for working with the AI agent later. With the extensions below, you can handle both code collaboration and course-material review in the same window.</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>Tool</th>
+<th>Official Download / Notes</th>
+<th>Recommended Command or Steps</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>VS Code</td>
+<td><a href="https://code.visualstudio.com/download" target="_blank" rel="noopener noreferrer">https://code.visualstudio.com/download</a></td>
+<td><code>winget install --id Microsoft.VisualStudioCode --source winget --exact</code></td>
+</tr>
+</tbody>
+</table></div>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>Purpose</th>
+<th>Extension</th>
+<th>Marketplace ID</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Codex coding agent</td>
+<td>Codex (OpenAI's coding-agent extension; shares sign-in with the desktop app)</td>
+<td><code>openai.chatgpt</code></td>
+</tr>
+<tr>
+<td>GitHub Copilot</td>
+<td>Code completion and Copilot Chat</td>
+<td><code>GitHub.copilot</code></td>
+</tr>
+<tr>
+<td>Python syntax highlighting</td>
+<td>Python (official Microsoft extension)</td>
+<td><code>ms-python.python</code></td>
+</tr>
+<tr>
+<td>JavaScript / TypeScript syntax highlighting</td>
+<td>Built into VS Code, no extra install needed</td>
+<td>—</td>
+</tr>
+<tr>
+<td>Markdown syntax highlighting and preview</td>
+<td>Markdown All in One</td>
+<td><code>yzhang.markdown-all-in-one</code></td>
+</tr>
+<tr>
+<td>HTML live preview</td>
+<td>Live Preview (official Microsoft extension)</td>
+<td><code>ms-vscode.live-server</code></td>
+</tr>
+<tr>
+<td>MS Office document preview (docx/xlsx/pptx)</td>
+<td>Office Viewer</td>
+<td><code>cweijan.vscode-office</code></td>
+</tr>
+</tbody>
+</table></div>
+<p>Install these by searching in the VS Code Extensions panel, or run them one by one in a terminal:</p>
+<pre><code class="language-powershell">code --install-extension openai.chatgpt
+code --install-extension GitHub.copilot
+code --install-extension ms-python.python
+code --install-extension yzhang.markdown-all-in-one
+code --install-extension ms-vscode.live-server
+code --install-extension cweijan.vscode-office
+</code></pre>
+<blockquote>
+<p>⚠️ Extension IDs change as the Marketplace is updated. Before the live session, search each name in the Extensions panel to confirm the ID is still correct — especially the Office document preview extension, which is the least mainstream of the set.</p>
+</blockquote>
+<p><strong>Check:</strong> open the Extensions panel and confirm the extensions above are installed and enabled; then open a sample <code>.py</code>, <code>.md</code>, <code>.html</code>, and a <code>.docx</code> or <code>.xlsx</code> file, and confirm syntax highlighting or the preview renders correctly.</p>
+<h2 id="part-alt-ai-agent-options">Alternatives: More Free AI Agent Options</h2>
+<p>Beyond the ChatGPT app/Codex from Part 1, here are two more AI agent options worth knowing about — both free, with quotas that are typically more than enough for workshop-scale tasks — for anyone who wants more flexibility: Google Antigravity, and the education-tier GitHub Copilot unlocked via Part 3's GitHub Education.</p>
+<h3 id="alt-google-antigravity">Google Antigravity</h3>
+<p>Like the ChatGPT app/Codex, Google Antigravity can take instructions, read and write code, and run tasks, powered by Gemini 3.1 Pro/Flash. It's called out here because, during its current public preview, the free usage quota on a personal Google (Gmail) account is generous, with no credit card required. It also bundles a VS Code-like editor, so choosing this alternative lets you skip Parts 1 and 2 (installing the ChatGPT desktop app and VS Code separately) and go straight to Part 3 (GitHub account) once it's installed.</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>Tool</th>
+<th>Official Download / Notes</th>
+<th>Recommended Command or Steps</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Google Antigravity</td>
+<td><a href="https://antigravity.google/download" target="_blank" rel="noopener noreferrer">Google: Antigravity download page</a></td>
+<td>Download the Windows installer from the download page and run it; or install the CLI via PowerShell with <code>irm https://antigravity.google/cli/install.ps1 | iex</code>. Then open Antigravity and sign in with a personal Google account.</td>
+</tr>
+</tbody>
+</table></div>
+<blockquote>
+<p>⚠️ Antigravity has adjustable approval levels for both terminal commands and agent-made changes (a Terminal Execution Policy of Off/Auto/Turbo, plus an Artifact Review policy). The first time you use it, pick a setting that requires manual confirmation so you can review what the agent intends to run or change before approving it — then loosen the settings once you trust its behavior.</p>
+</blockquote>
+<p><strong>Check:</strong> open Antigravity and confirm you can sign in with a personal Google account; under a setting that requires manual confirmation, run the equivalent "Hello, AI Agent" task (ask the agent to create a <code>hello.txt</code> file) and confirm the agent can receive instructions, produce a file, and report back.</p>
+<h3 id="alt-github-copilot-education">GitHub Copilot (via GitHub Education)</h3>
+<p>The GitHub Copilot extension installed in Part 2 defaults to a paid plan; once your GitHub Education faculty verification in Part 3 is approved, Copilot automatically switches to the education tier — a more generous, free plan — with no extra extension to install or configure.</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>Tool</th>
+<th>Official Download / Notes</th>
+<th>Recommended Command or Steps</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>GitHub Copilot (education tier)</td>
+<td><a href="https://github.com/education/teachers" target="_blank" rel="noopener noreferrer">github.com/education/teachers</a> (same application page as Part 3)</td>
+<td>Complete the GitHub Education faculty verification in Part 3 first; once approved, sign in to the already-installed GitHub Copilot extension in VS Code with the verified GitHub account — the plan switches to the education tier automatically.</td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>Check:</strong> once GitHub Education is approved, confirm the Copilot icon/account status in VS Code shows the education/free tier, and that Copilot Chat works normally for asking about or editing code.</p>
+<h2 id="part-3-github-account">Part 3: Apply for a GitHub Account and GitHub Education</h2>
+<p>A GitHub account is the foundation for managing projects and files in later modules; GitHub Education lets a verified teacher unlock education-tier benefits for tools like Copilot.</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>Step</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Register a GitHub account</td>
+<td>Go to <a href="https://github.com/signup" target="_blank" rel="noopener noreferrer">github.com/signup</a> and complete registration; a school-domain email is recommended to speed up later faculty verification and notifications</td>
+</tr>
+<tr>
+<td>Apply for GitHub Education (teacher)</td>
+<td>After signing in, go to <a href="https://github.com/education/teachers" target="_blank" rel="noopener noreferrer">github.com/education/teachers</a> and follow the prompts to provide proof of teaching (school email verification, a faculty ID document, or a link to your course page)</td>
+</tr>
+<tr>
+<td>Wait for review</td>
+<td>Review usually takes a few business days; you can keep using the GitHub account itself while you wait, but the education-tier benefits only apply once approved</td>
+</tr>
+</tbody>
+</table></div>
+<blockquote>
+<p>A school-domain email isn't required, but registering with one usually speeds up GitHub Education's automatic verification.</p>
+</blockquote>
+<p><strong>Check:</strong> confirm you're signed in at <a href="https://github.com" target="_blank" rel="noopener noreferrer">github.com</a>; confirm the GitHub Education application has been submitted (the page shows "Application submitted", or already shows the approved benefits page).</p>
+<h2 id="hands-on-activities">Hands-on Activities</h2>
+<p>Once all three parts are set up, run through the checklist below for a final check.</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>Task</th>
+<th>Description</th>
+<th>What It Verifies</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>ChatGPT App check</td>
+<td>Open the app and switch between Chat, ChatGPT Work, and Codex in turn; in Codex, run the Hello, AI Agent task once with Ask for approval selected</td>
+<td>All three interfaces open and sign in correctly; Codex can create a file and report back</td>
+</tr>
+<tr>
+<td>VS Code extensions check</td>
+<td>Open the Extensions panel to confirm the extensions are enabled; open sample .py / .md / .html / .docx (or .xlsx) files in turn</td>
+<td>Syntax highlighting and document previews render correctly without opening Word/Excel</td>
+</tr>
+<tr>
+<td>GitHub account check</td>
+<td>Sign in at github.com; check the GitHub Education application status</td>
+<td>The account signs in normally; the Education application is submitted or approved</td>
+</tr>
+<tr>
+<td>Google Antigravity check (alternative, optional)</td>
+<td>Open Antigravity and sign in with a personal Google account; run the Hello, AI Agent task once under a setting that requires manual confirmation</td>
+<td>Signs in successfully with a personal Google account; the agent can create a file and report back</td>
+</tr>
+<tr>
+<td>GitHub Copilot education-tier check (alternative, optional)</td>
+<td>Once GitHub Education is approved, sign in to the already-installed Copilot extension in VS Code with that account</td>
+<td>Copilot shows the education/free tier; Copilot Chat works normally</td>
+</tr>
+</tbody>
+</table></div></section>
+  <footer>智慧雨林產業創生人才育成計畫 (南臺科技大學 電子系 楊榮林 教授)</footer>
+</div>
+<script>function currentSection(){const lang=document.documentElement.getAttribute('data-lang');return document.querySelector('section.'+lang)}function navUsesSlides(){const box=document.getElementById('slideNavMode');return !!(box&&box.checked)}function targetForHead(head){if(!navUsesSlides())return head;const prev=head.previousElementSibling;if(prev&&(prev.classList.contains('full-screen-image')||prev.querySelector('img')))return prev;return head}function navTargets(){const section=currentSection();if(!section)return[];return[...section.querySelectorAll('h2')].map(targetForHead)}function gotoSection(i){const targets=navTargets();if(targets[i])targets[i].scrollIntoView({behavior:'smooth',block:'start'});closeMenu()}function toggleMenu(){document.getElementById('sidebar').classList.toggle('open');document.getElementById('backdrop').classList.toggle('show')}function closeMenu(){document.getElementById('sidebar').classList.remove('open');document.getElementById('backdrop').classList.remove('show')}let spy;function buildSpy(){if(spy)spy.disconnect();const targets=navTargets();const btns=[...document.querySelectorAll('.nav .navbtn')];spy=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting){const idx=targets.indexOf(e.target);btns.forEach((b,i)=>b.classList.toggle('active',i===idx))}})},{rootMargin:'0px 0px -75% 0px',threshold:0});targets.forEach(t=>spy.observe(t))}document.addEventListener('DOMContentLoaded',buildSpy);function fallbackCopy(text){const ta=document.createElement('textarea');ta.value=text;ta.style.position='fixed';ta.style.opacity='0';document.body.appendChild(ta);ta.focus();ta.select();try{document.execCommand('copy')}catch(e){}document.body.removeChild(ta)}function copyPromptBlock(btn){const sample=btn.closest('.code-sample');if(!sample)return;const pre=sample.querySelector('pre');if(!pre)return;const text=pre.textContent;const done=()=>{const icon=btn.querySelector('.copy-icon');const prev=icon.textContent;icon.textContent='✓';btn.classList.add('copied');clearTimeout(btn._copyTimer);btn._copyTimer=setTimeout(()=>{icon.textContent=prev;btn.classList.remove('copied')},1500)};if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(text).then(done).catch(()=>{fallbackCopy(text);done()})}else{fallbackCopy(text);done()}}function toggleTheme(){const html=document.documentElement;const goingDark=html.getAttribute('data-theme')==='light';html.setAttribute('data-theme',goingDark?'dark':'light');document.getElementById('themeBtn').textContent=goingDark?'☀️ Light':'🌙 Dark'}function toggleLang(){const html=document.documentElement;const goingEn=html.getAttribute('data-lang')==='zh';html.setAttribute('data-lang',goingEn?'en':'zh');html.setAttribute('lang',goingEn?'en':'zh-Hant');document.getElementById('langBtn').textContent=goingEn?'中文':'English';buildSpy()}</script>
+</body>
+</html>

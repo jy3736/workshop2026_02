@@ -1,0 +1,14 @@
+- generic [ref=e2]:
+  - heading "Formative_Assessment_115_MathA" [level=1] [ref=e3]
+  - generic [ref=e4]:
+    - paragraph [ref=e5]: 題庫共 25 題，作答前不會顯示答案，送出後才會公布逐題對錯與正確答案。
+    - generic [ref=e6]:
+      - generic [ref=e7]:
+        - generic [ref=e8]: 姓名 / 學號
+        - textbox "姓名 / 學號" [ref=e9]:
+          - /placeholder: 請輸入姓名或學號
+      - generic [ref=e10]:
+        - generic [ref=e11]: 本次練習題數
+        - spinbutton "本次練習題數" [ref=e12]: "20"
+        - generic [ref=e13]: 可作答範圍：1 ~ 25 題
+      - button "開始作答" [ref=e15] [cursor=pointer]

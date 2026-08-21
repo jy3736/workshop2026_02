@@ -1,0 +1,47 @@
+大家好，歡迎收聽 Module 1「AI Agent 實作環境建置」。這一集聚焦在 Windows 11 筆電上，把跟 AI Agent 協作所需的三個部分準備好：第一，安裝並設定 ChatGPT 桌面 app，認識 Chat、ChatGPT Work 和 Codex 三種工作介面；第二，安裝 VS Code 與對應的擴充套件；第三，申請個人 GitHub 帳號並送出 GitHub Education 的教師或 Global Campus 驗證申請。
+
+這三個部分彼此獨立。你可以依自己的步調完成，最後再一起驗收。完成後，你應該能依任務選擇 Chat、ChatGPT Work 或 Codex；在 VS Code 裡安裝 Codex 和 GitHub Copilot，讓 AI Agent 協助讀寫與審查程式碼；使用 Python、JavaScript、Markdown、HTML 的語法標示，以及 docx、xlsx、pptx 等 MS Office 文件的直接預覽；完成 GitHub 帳號與 GitHub Education 申請；並能依 checklist 檢查設定、排除常見問題。
+
+開始前，先確認幾個先備條件。你需要一臺具系統管理員權限的 Windows 11 個人筆電，因為要安裝軟體。你也需要可下載安裝套件、註冊帳號並存取 AI 服務的網路。請準備可使用 Codex 的 ChatGPT 帳號；如果還沒有，可以在官網或桌面 app 第一次啟動時建立。還需要 Email 信箱，建議使用學校網域信箱，因為註冊 GitHub 與申請 GitHub Education 時會用到，也有助於加快教師身分驗證。基本操作方面，只要能開啟瀏覽器、下載並執行安裝檔即可。
+
+這個模組只需要同時開啟 VS Code、ChatGPT 桌面 app 與瀏覽器，所以需求比完整開發工具鏈輕。最低需求是 64 位元的 Windows 11、64 位元 x64 雙核心處理器、8 GB 記憶體、5 GB 可用磁碟空間，以及可以安裝軟體和允許 UAC 的系統管理員權限。網路要能穩定存取 GitHub 和 AI 服務，瀏覽器可用 Microsoft Edge 或 Chrome。若想要更順暢，建議使用已更新至最新版的 Windows 11、四核心以上處理器、16 GB 記憶體和 10 GB 以上可用空間。8 GB 記憶體能完成所有任務，但當 VS Code、瀏覽器與 ChatGPT 桌面 app 一起開啟時，16 GB 會比較順暢。
+
+現在進入第一部分：安裝與設定 ChatGPT App。ChatGPT 桌面 app 是 Windows 上進入 Chat、ChatGPT Work 與 Codex 三種工作介面的共同入口。你可以從 Microsoft Store 安裝，也可以執行這個指令：winget install --id 9PLM9XGG6VKS --source msstore。安裝後開啟 app，使用 ChatGPT 帳號登入。
+
+登入後，要依任務性質選擇正確的工作介面。需要快速問答時，選 Chat。要完成研究、文件，或需要審查的多步驟成果時，先選 ChatGPT，再切換到 Work。要處理課程 project、程式碼、指令和 diff 時，從產品選單選 Codex。
+
+有一個安全習慣特別重要。在 Codex 送出第一個任務前，先選「先要求核准」，也就是 Ask for approval；不要一開始就開啟「完整存取權」，也就是 Full access。這樣你可以在每一步看清楚 Agent 打算做什麼、產生哪些變更，再決定是否放行。這一部分的驗收，是執行 guided「Hello, AI Agent」任務：請 Codex 在專案資料夾建立 hello.txt，確認 AI Agent 能接收指令、產生檔案並回報結果。
+
+第二部分是 VS Code 與擴充套件。VS Code 是後續操作 AI Agent 的主要工作視窗；搭配擴充套件，就能在同一個視窗完成程式協作與教材檢視。可以從官方下載頁面安裝，或執行：winget install --id Microsoft.VisualStudioCode --source winget --exact。
+
+接著安裝六個擴充套件。第一個是 Codex，這是 OpenAI 的程式協作擴充套件，會與桌面 app 共用登入，Marketplace ID 是 openai.chatgpt。第二個是 GitHub Copilot，用於程式碼自動完成與 Copilot Chat，ID 是 GitHub.copilot。第三個是 Microsoft 官方的 Python 擴充套件，ID 是 ms-python.python。JavaScript 和 TypeScript 的語法標示是 VS Code 內建功能，不需另外安裝。Markdown 使用 Markdown All in One，ID 是 yzhang.markdown-all-in-one。HTML 即時預覽使用 Microsoft 官方的 Live Preview，ID 是 ms-vscode.live-server。MS Office 文件預覽使用 Office Viewer，能直接預覽 docx、xlsx、pptx，ID 是 cweijan.vscode-office。
+
+你可以在 VS Code 左側的 Extensions 視窗搜尋安裝，也可以在終端機逐行執行下列指令：code --install-extension openai.chatgpt；code --install-extension GitHub.copilot；code --install-extension ms-python.python；code --install-extension yzhang.markdown-all-in-one；code --install-extension ms-vscode.live-server；以及 code --install-extension cweijan.vscode-office。
+
+請記住，擴充套件 ID 會隨 Marketplace 更新而變動。正式開課前，請在 Extensions 視窗搜尋名稱，確認 ID 仍然正確；尤其 Office 文件預覽是較小眾的套件，更要先確認。這部分的驗收是：開啟 Extensions 視窗，確認上述套件已安裝並啟用；再分別開啟 .py、.md、.html，以及一份 .docx 或 .xlsx 檔案，確認語法標示或預覽畫面正常顯示。
+
+接下來介紹兩種可選的免費 AI Agent 替代方案，提供想要更多彈性的學員。第一種是 Google Antigravity，第二種是透過 GitHub Education 解鎖的 GitHub Copilot 教育版。兩者通常都有足以應付工作坊規模任務的免費額度。
+
+先說 Google Antigravity。它和 ChatGPT App 的 Codex 一樣，可以接收指令、讀寫程式碼、執行任務，核心模型是 Gemini 3.1 Pro 或 Flash。它目前是公開預覽階段，個人 Google，也就是 Gmail，帳號的免費使用額度相當寬鬆，不需要信用卡。Antigravity 也內建一套類似 VS Code 的編輯器。因此，如果選擇它作為替代方案，可以略過第一、二部分，也就是分別安裝 ChatGPT 桌面 app 與 VS Code，完成安裝後直接進行第三部分的 GitHub 帳號申請。
+
+你可以到 Antigravity 下載頁取得 Windows 安裝檔並執行安裝；或者在 PowerShell 執行 irm https://antigravity.google/cli/install.ps1 | iex 安裝 CLI。安裝後開啟 Antigravity，使用個人 Google 帳號登入。Antigravity 對終端機執行指令和 Agent 變更內容都有可調整的審核層級：Terminal Execution Policy 有 Off、Auto、Turbo，另外也有 Artifact 的 Review 政策。第一次使用時，建議選需要人工確認的設定，先確認 Agent 要執行的指令與變更內容再放行；熟悉後，再依信任程度放寬。
+
+Antigravity 的驗收方式與前面相同：確認能用個人 Google 帳號登入；在需要人工確認的設定下，請 Agent 執行相同的 Hello, AI Agent 任務，建立 hello.txt，確認它能接收指令、產生檔案並回報結果。
+
+另一個替代方案是 GitHub Copilot 教育版。第二部分已安裝的 GitHub Copilot 擴充套件，預設是付費方案；只要第三部分的 GitHub Education 教師身分驗證核准，Copilot 就會自動轉為教育版方案，額度更寬鬆而且免費，不需要另裝或另設新的擴充套件。核准後，在 VS Code 用已安裝的 GitHub Copilot 擴充套件登入通過驗證的 GitHub 帳號，方案會自動套用。驗收時，確認 Copilot 圖示或帳號狀態顯示教育版或免費，並確認 Copilot Chat 能正常詢問或修改程式碼。
+
+第三部分是申請 GitHub 帳號與 GitHub Education。GitHub 帳號是後續課程管理 project 和儲存檔案的基礎；GitHub Education 則讓具教師身分的使用者取得 Copilot 等工具的教育版權益。先到 github.com/signup 完成 GitHub 帳號註冊，建議使用學校網域信箱，方便後續教師身分驗證與接收通知。登入後，到 github.com/education/teachers，依指示提供任教證明，例如學校信箱驗證、教職證明文件或課程頁面連結。
+
+審核通常需要數個工作天。等待期間，GitHub 帳號本身仍可正常使用；教育版權益則要等核准後才生效。學校信箱不是必要條件，但使用學校網域信箱註冊，通常能加快 GitHub Education 的自動驗證流程。這部分的驗收是：確認已登入 github.com，並確認 GitHub Education 申請已送出，畫面顯示 Application submitted；或已顯示核准後的權益頁面。
+
+最後，完成設定後請用 checklist 做總驗收。第一項是 ChatGPT App 檢查：開啟 app，依序切換 Chat、ChatGPT Work、Codex 三種介面；在 Codex 使用「先要求核准」跑一次 Hello, AI Agent。驗證重點是三種介面都能正常開啟並登入，Codex 能建立檔案並回報結果。
+
+第二項是 VS Code 擴充套件檢查：開啟 Extensions 視窗確認套件已啟用，再開啟 .py、.md、.html、.docx 或 .xlsx 樣本檔案。驗證重點是語法標示與文件預覽都正常顯示，不需另外開啟 Word 或 Excel。
+
+第三項是 GitHub 帳號檢查：登入 github.com，查看 GitHub Education 申請狀態。驗證重點是帳號可正常登入，Education 申請已送出或已核准。
+
+第四項是可選的 Google Antigravity 檢查：開啟 Antigravity，用個人 Google 帳號登入；在需要人工確認的設定下跑一次 Hello, AI Agent。驗證重點是能登入，而且 Agent 能建立檔案並回報結果。
+
+第五項是可選的 GitHub Copilot 教育版檢查：GitHub Education 核准後，在 VS Code 用已安裝的 Copilot 擴充套件登入該帳號。驗證重點是 Copilot 方案顯示教育版或免費，Copilot Chat 能正常使用。
+
+完成這些檢查後，Module 1 的 AI Agent 實作環境建置就完成了。謝謝收聽。
