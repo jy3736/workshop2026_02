@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="zh-Hant" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>工作坊（二）現場實作引導：從考古題下載到專案 skill</title>
+<style>
+:root{color-scheme:dark;--bg:#080b12;--fg:#eef3f8;--muted:#a7b1c2;--card:#101722;--border:#243244;--accent:#39d7c6;--accent2:#f5b84b;--prompt:#0b1320;--success:#a9f3d6;--sidebar:290px;--max:1120px} [data-theme="light"]{color-scheme:light;--bg:#f7f8fb;--fg:#171a20;--muted:#596273;--card:#fff;--border:#d9dee8;--accent:#0f766e;--accent2:#b45309;--prompt:#f4f7fa;--success:#096a4c}
+*{box-sizing:border-box} html{scroll-behavior:smooth} body{margin:0;background:radial-gradient(circle at top right,rgba(57,215,198,.14),transparent 32%),var(--bg);color:var(--fg);font:16px/1.75 -apple-system,BlinkMacSystemFont,"Segoe UI","PingFang TC","Microsoft JhengHei",sans-serif}.sidebar{position:fixed;inset:0 auto 0 0;width:var(--sidebar);z-index:3;overflow:auto;padding:20px 14px;background:color-mix(in srgb,var(--card) 93%,transparent);border-right:1px solid var(--border);backdrop-filter:blur(12px)}.brand{padding:0 6px;font-size:1rem;font-weight:800;line-height:1.4}.brand small{display:block;margin-top:5px;color:var(--muted);font-weight:600}.toprow{display:flex;gap:8px;margin:14px 6px}.btn,.nav a{border:1px solid var(--border);border-radius:8px;background:var(--bg);color:var(--fg);cursor:pointer;font:inherit;text-decoration:none}.btn{padding:6px 11px;font-size:13px;font-weight:700}.btn:hover,.nav a:hover{border-color:var(--accent);color:var(--accent)}.nav{display:grid;gap:6px;margin-top:10px}.nav a{display:block;padding:8px 10px;border-color:transparent;background:transparent;color:var(--muted);font-size:14px;font-weight:700}.nav a:first-child{border-color:var(--border);background:var(--bg);color:var(--fg)}.wrap{width:min(var(--max),calc(100vw - var(--sidebar)));margin-left:calc(var(--sidebar) + (100vw - var(--sidebar) - min(var(--max),calc(100vw - var(--sidebar)) )) / 2);padding:44px 48px 88px}h1{margin:.1em 0 .28em;font-size:clamp(2rem,3.2vw,2.65rem);line-height:1.25}h2{margin:2.2em 0 .7em;padding-bottom:.28em;border-bottom:1px solid var(--border);font-size:1.48rem;scroll-margin-top:24px}h3{margin:1.5em 0 .45em;color:var(--accent);font-size:1.15rem}p,li{max-width:100%;overflow-wrap:break-word}ul,ol{padding-left:1.3em}li{margin:.35em 0}.lede{color:var(--muted);font-size:1.08rem}.callout{margin:1.15em 0;padding:14px 17px;border-left:4px solid var(--accent2);border-radius:0 8px 8px 0;background:color-mix(in srgb,var(--card) 91%,var(--accent2) 9%)}.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(245px,1fr));gap:12px;margin:1.15em 0}.card{padding:15px 17px;border:1px solid var(--border);border-radius:10px;background:var(--card);box-shadow:0 14px 36px rgba(0,0,0,.12)}.card strong{display:block;margin-bottom:4px}.card p{margin:.3em 0 0;color:var(--muted)}.timeline{counter-reset:stage;list-style:none;padding:0;display:grid;gap:10px}.timeline li{position:relative;margin:0;padding:12px 15px 12px 55px;border:1px solid var(--border);border-radius:9px;background:var(--card)}.timeline li::before{counter-increment:stage;content:counter(stage);position:absolute;left:14px;top:14px;display:grid;place-items:center;width:27px;height:27px;border-radius:50%;background:var(--accent);color:#06221f;font-weight:900}.timeline small{display:block;color:var(--muted)}.prompt{position:relative;margin:1em 0;padding:46px 17px 15px;border:1px solid color-mix(in srgb,var(--accent) 45%,var(--border));border-radius:10px;background:var(--prompt);box-shadow:0 12px 32px rgba(0,0,0,.14)}.prompt .label{position:absolute;top:13px;left:17px;color:var(--accent);font-size:.84rem;font-weight:800;letter-spacing:.04em}.copy{position:absolute;top:10px;right:11px;padding:5px 10px;border:1px solid var(--border);border-radius:7px;background:var(--card);color:var(--fg);cursor:pointer;font:inherit;font-size:13px;font-weight:700}.copy:hover{border-color:var(--accent);color:var(--accent)}pre{margin:0;white-space:pre-wrap;word-break:break-word;font:14px/1.7 ui-monospace,SFMono-Regular,Menlo,Consolas,monospace}.observe{margin:1em 0;padding:13px 15px;border:1px solid color-mix(in srgb,var(--accent) 40%,var(--border));border-radius:8px;background:color-mix(in srgb,var(--card) 92%,var(--accent) 8%)}.observe strong{color:var(--success)}.table-wrap{overflow:auto}.checklist{width:100%;border-collapse:collapse;margin:1em 0}.checklist th,.checklist td{padding:10px 12px;border:1px solid var(--border);vertical-align:top;text-align:left}.checklist th{background:color-mix(in srgb,var(--card) 82%,var(--accent) 18%)}.deferred{padding:16px 18px;border:1px dashed var(--border);border-radius:9px;color:var(--muted)}footer{margin-top:3em;padding-top:1em;border-top:1px solid var(--border);color:var(--muted);font-size:.88rem}.menu{display:none}
+@media(max-width:860px){.sidebar{transform:translateX(-100%);transition:transform .2s}.sidebar.open{transform:none}.wrap{width:100%;margin:0;padding:72px 18px 70px}.menu{display:block;position:fixed;z-index:4;top:12px;left:12px;padding:7px 11px;border:1px solid var(--border);border-radius:8px;background:var(--card);color:var(--fg);font-size:18px;cursor:pointer}h1{font-size:1.8rem}} @media(max-width:520px){.wrap{padding-left:14px;padding-right:14px}.sidebar{width:min(88vw,320px)}.grid{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<button class="menu" id="menu" type="button" aria-label="開啟選單">☰</button>
+<aside class="sidebar" id="sidebar">
+  <div class="brand">AI Agent 教學應用工作坊（二）<small>現場實作引導｜從考古題下載到專案 skill</small></div>
+  <div class="toprow"><button class="btn" id="theme" type="button">☀️ 淺色</button></div>
+  <nav class="nav">
+    <a href="../index.html">← 返回本場講義</a>
+    <a href="#position">使用方式</a>
+    <a href="#opening">開場與準備</a>
+    <a href="#exercise-1">練習一：先自然地說</a>
+    <a href="#exercise-2">練習二：補上規格</a>
+    <a href="#exercise-3">練習三：建立 skill</a>
+    <a href="#exercise-4">練習四：切題與建檔</a>
+    <a href="#exercise-5">練習五：檢查與精修</a>
+    <a href="#exercise-6">練習六：第二個 skill</a>
+    <a href="#exercise-7">練習七：第一版練習網頁</a>
+    <a href="#exercise-8">練習八：完整規格</a>
+    <a href="#exercise-9">練習九：網頁 skill</a>
+    <a href="#exercise-10">練習十：部署與分享</a>
+    <a href="#exercise-11">選做：本機測驗產生 APP</a>
+  </nav>
+</aside>
+<main class="wrap">
+  <h1>現場實作引導：從考古題下載到專案 skill</h1>
+  <p class="lede">本頁是工作坊當天的簡潔版操作講義。請跟著講師的節奏完成每一步；每個提示詞都可直接複製貼上到 Codex。</p>
+
+  <section id="position">
+    <h2>先說清楚：現場版與完整教材的角色不同</h2>
+    <div class="grid">
+      <div class="card"><strong>今天的現場版</strong><p>只完成關鍵操作、觀察結果、調整提示詞，並把已驗證的流程整理成可重複使用的 project-local skill。</p></div>
+      <div class="card"><strong>既有四個完整模組</strong><p>保留給課前預習、課後複習與自主練習。內容更完整，也需要較多時間逐步閱讀與操作。</p></div>
+    </div>
+    <div class="callout"><strong>今天的目標：</strong>不是一次把所有教材做完，而是親自經歷一次「先用口語提出需求 → 觀察結果 → 補上必要規格 → 把確認過的流程存成 skill」的 AI Agent 協作循環。</div>
+  </section>
+
+  <section id="opening">
+    <h2>開場與準備</h2>
+    <ol class="timeline">
+      <li><strong>簡介 AI Agent 的發展</strong><small>以 Codex、Claude Code 與 Gemini 等工具為例，說明除了對話外，AI Agent 也能在指定的工作區內處理檔案、使用工具並回報結果。</small></li>
+      <li><strong>準備 GitHub 帳號</strong><small>請尚未申請的學員先完成申請；稍後若要把教材發布到網路，會更方便。</small></li>
+      <li><strong>回顧 Codex 專案</strong><small>確認知道如何建立專案、知道目前專案資料夾的位置，並讓 Codex 的工作範圍只限於這個專案。</small></li>
+    </ol>
+    <div class="observe">工作坊（一）已涵蓋工具安裝與基本設定；今天假設環境已可使用，先花幾分鐘讓每位學員確定自己正在正確的專案資料夾中。</div>
+  </section>
+
+  <section id="exercise-1">
+    <h2>練習一：先用自然語言提出需求</h2>
+    <p>第一輪刻意不規定資料夾結構。目的是觀察：同一個需求，只要細節沒有說清楚，不同人的 Agent 可能會把檔案放在不同位置，或用不同方式命名。</p>
+    <h3>請複製這段提示詞</h3>
+    <div class="prompt"><span class="label">PROMPT 01｜先完成一件事</span><button class="copy" type="button">複製</button><pre>幫我在目前的專案裡，從大考中心下載 115 學年度四技二專統一入學測驗電機與電子群資電類的專業科目（一）與專業科目（二）歷屆試題及答案，並放到這個專案資料夾裡。完成後告訴我下載的檔案位置，並列出檔名讓我檢查。</pre></div>
+    <div class="observe"><ul><li>Agent 把檔案放在哪一個資料夾？</li><li>題目與答案是否都有下載？</li><li>不同學員的資料夾名稱、檔名與位置是否一致？</li></ul>
+      不要急著判定哪一位做錯。這正是要看見的差異：需求有完成，但檔案結構尚未被共同定義。</div>
+  </section>
+
+  <section id="exercise-2">
+    <h2>練習二：補上必要規格，讓結果可管理</h2>
+    <p>現在把「放在專案裡」改成可驗收的資料夾規格。之後即使下載多個年份，也能在同一個位置找到所有原始資料。</p>
+    <h3>請複製這段提示詞</h3>
+    <div class="prompt"><span class="label">PROMPT 02｜補上位置與年份規則</span><button class="copy" type="button">複製</button><pre>請在目前專案下載 114 學年度四技二專統一入學測驗電機與電子群資電類的專業科目（一）與專業科目（二）試題及答案。
+
+請把每一個年份的原始下載資料放在專案根目錄的 raw 資料夾下：
+- 114 年的資料放在 raw/114/
+- 115 年的資料放在 raw/115/
+
+每個年份資料夾中都要保留該年度的題目與答案。若目前已下載的 115 年資料不在 raw/115/，請整理到該位置，但不要刪除任何檔案。完成後列出 raw/114/ 與 raw/115/ 的檔案，讓我檢查。</pre></div>
+    <div class="observe"><ul><li>是否出現 <code>raw/114/</code> 與 <code>raw/115/</code>？</li><li>每個年份下是否都能找到題目與答案？</li><li>Agent 是否有先說明找不到資料、需要確認來源，或需要你的授權？</li></ul>
+      這次不是「講得越長越好」，而是補上真正會影響成果的規格：存放位置、年份層級、保留哪些檔案與完成後的檢查方式。</div>
+  </section>
+
+  <section id="exercise-3">
+    <h2>練習三：把驗證過的流程存成 project-local skill</h2>
+    <p>每次都重新說明下載、整理與檢查規則並不必要。當流程已經驗證符合需求，就讓 Agent 幫我們把它保存成只屬於目前專案的 skill。</p>
+    <h3>請複製這段提示詞</h3>
+    <div class="prompt"><span class="label">PROMPT 03｜把流程變成可重複使用的 skill</span><button class="copy" type="button">複製</button><pre>請根據我們剛剛已確認的考古題下載與整理流程，在這個專案建立一個 project-local skill，名稱為 download-exam-pdf。
+
+這個 skill 的預設行為是：把下載的原始題目與答案依年份放在 raw/&lt;year&gt;/。
+
+使用時我應該可以指定：
+1. 單一年份，或起訖年份範圍。
+2. 考試類群，例如電機與電子群資電類。
+3. 下載專業科目（一）、專業科目（二），或兩者都下載。
+4. 原始資料的存放根目錄；若未指定，就使用目前專案的 raw/。
+
+請在 skill 說明中寫清楚需要輸入的資訊、預設行為、檔案結構與完成後的檢查方式。建立後，告訴我 skill 的位置，並給我一個最簡短的使用範例。</pre></div>
+    <div class="observe"><ul><li>skill 是否建立在目前專案，而不是使用者帳號的全域設定中？</li><li>說明是否包含年份、類群、科目與儲存位置四種可調整項目？</li><li>預設輸出是否明確是 <code>raw/&lt;year&gt;/</code>？</li></ul>
+      skill 不是魔法指令；它是把「已經確認能用的工作方法」寫成下次可直接套用的說明。先驗證流程，再儲存流程，才能減少重複說明。</div>
+  </section>
+
+  <section id="exercise-4">
+    <h2>練習四：把試卷切成可用的題庫資料</h2>
+    <p>現在使用已下載的原始資料，將每一題轉成一張圖檔，並把答案整理成一個簡單的 JSON 資料庫。圖檔名稱就是題目的 key，JSON 以同一個 key 對應正確答案。這個步驟的輸出不再放在 <code>raw/</code>，而是固定放在 <code>repo/&lt;year&gt;/</code>。</p>
+    <h3>請複製這段提示詞</h3>
+    <div class="prompt"><span class="label">PROMPT 04｜從原始試卷建立題庫</span><button class="copy" type="button">複製</button><pre>請使用目前專案 raw/114/ 中的統測試題與答案，建立可供後續測驗使用的題庫資料。
+
+請完成以下工作：
+1. 將專業科目（一）與專業科目（二）的每一題切成一張獨立圖檔。
+2. 為每一張圖檔建立穩定、不重複的檔名；檔名要能作為題目的 key。
+3. 讀取答案資料，建立一個 keys.json，讓每一個圖檔 key 都能對應到正確答案。
+4. 將完成的題庫放在 repo/114/；原始下載檔仍保留在 raw/114/，不要混在一起。
+
+完成後列出 repo/114/ 的資料夾結構、題目圖檔數量，以及 keys.json 中的題數，讓我檢查兩者是否一致。</pre></div>
+    <div class="observe"><ul><li>每張圖檔是否只代表一題？</li><li>圖檔名稱與 <code>keys.json</code> 的 key 是否可一一對應？</li><li>圖檔數量與答案資料的題數是否相同？</li></ul>
+      這裡把「看得到的題目」與「機器可讀取的答案」拆開保存。圖檔 key 是兩者之間的連接點，後續才能隨機挑選題目並正確判定答案。</div>
+  </section>
+
+  <section id="exercise-5">
+    <h2>練習五：檢查與精修題目圖檔</h2>
+    <p>切題完成不表示題庫已可使用。先挑幾題實際打開檢查，再請 Agent 針對常見問題逐一修正。不同試卷、不同工具或不同學員的結果可能不同，因此這是必須保留的人工驗收步驟。</p>
+    <div class="grid">
+      <div class="card"><strong>題目邊界不乾淨</strong><p>圖檔可能多切到上一題或下一題的一部分內容。</p></div>
+      <div class="card"><strong>共用圖表遺失</strong><p>題組共用的圖或表若只留在第一題，後續題目會缺少作答資訊。</p></div>
+      <div class="card"><strong>保留舊題號</strong><p>舊試卷題號會干擾日後重新編排或隨機出卷，應從圖檔中移除。</p></div>
+    </div>
+    <h3>請複製這段提示詞</h3>
+    <div class="prompt"><span class="label">PROMPT 05｜檢查、修正與清理</span><button class="copy" type="button">複製</button><pre>請檢查 repo/114/ 中已切好的題目圖檔與 keys.json，找出並修正下列問題：
+
+1. 每一張圖檔只保留該題的題幹、需要的圖表與選項；不要留下上一題或下一題的內容。
+2. 若多題共用同一張圖或表，請讓每一題都保留作答所需的那張圖或表，不要只有第一題看得到。
+3. 請移除圖檔中原始試卷的題號；保留題幹、圖表與選項即可。圖檔檔名與 keys.json 的 key 不要改掉。
+
+修正後，請隨機列出幾個已檢查的題目，說明你修正了什麼；並再次確認圖檔數量與 keys.json 的題數一致。</pre></div>
+    <div class="observe"><ul><li>抽看同一題組的每一題，是否都保有必要的共用圖表？</li><li>圖檔內是否只剩題目本身、圖表與選項，而沒有舊題號或相鄰題目？</li><li>清理後是否仍能以原圖檔 key 找到對應答案？</li></ul>
+      這一步的產出不是「切好的圖片」，而是可獨立使用的題目。日後不論重新選題、混合年份或建立練習網頁，每一題都必須自己站得住腳。</div>
+  </section>
+
+  <section id="exercise-6">
+    <h2>練習六：建立第二個 project-local skill，讓流程可組合</h2>
+    <p>下載與切題清理是兩件不同的工作。現在把第二件事存成獨立 skill；它不限定統測來源，只要提供題目與答案的原始檔，就能整理成同樣的題庫格式。</p>
+    <h3>請複製這段提示詞</h3>
+    <div class="prompt"><span class="label">PROMPT 06｜建立切題與清理 skill</span><button class="copy" type="button">複製</button><pre>請根據我們剛剛已確認的切題、答案對應、檢查與清理流程，在這個專案建立第二個 project-local skill，名稱為 prepare-question-bank。
+
+這個 skill 的工作是：從一個已存在的原始試題與答案資料夾，建立可用的題庫；預設輸出位置為 repo/&lt;year&gt;/。
+
+使用時我應該可以指定：
+1. 原始試題與答案所在的資料夾。
+2. 年份或題庫名稱。
+3. 輸出的題庫根目錄；若未指定，就使用目前專案的 repo/。
+
+skill 說明必須包含：逐題切圖、以圖檔名稱對應 keys.json、共用圖表的處理、移除舊題號、人工抽查與圖檔數量／答案數量的檢查。它不能假設原始資料一定來自統測，也要能用於學測或書商提供的試卷。建立後告訴我 skill 的位置，並給我一個最簡短的使用範例。</pre></div>
+    <h3>為什麼要分成兩個 skill？</h3>
+    <div class="table-wrap"><table class="checklist"><thead><tr><th>skill</th><th>專責工作</th><th>可重複使用的情境</th></tr></thead><tbody>
+      <tr><td><code>download-exam-pdf</code></td><td>找到、下載並按年份整理公開試題與答案。</td><td>下載統測不同年份或不同類群的資料。</td></tr>
+      <tr><td><code>prepare-question-bank</code></td><td>把已存在的試題與答案切題、清理並建立 JSON 對應。</td><td>統測、學測、書商試卷，或任何已放進專案的題目來源。</td></tr>
+    </tbody></table></div>
+    <div class="callout"><strong>重點：</strong>如果合成一個大 skill，換成學測或書商資料時，可能得重新建一套流程。拆成兩個 skill 後，只要替換前段的資料來源，後段的切題與清理 skill 仍可直接重用；需要完整流程時，Agent 也能依序串成「下載 → 切題清理」的 pipeline。</div>
+    <h3>用一段測試提示詞看見 pipeline</h3>
+    <div class="prompt"><span class="label">PROMPT 07｜讓 Agent 串接已建立的 skill</span><button class="copy" type="button">複製</button><pre>請使用目前專案已建立的 skill，先下載 115 學年度電機與電子群資電類的專業科目（一）與專業科目（二）試題與答案到 raw/115/，再把這些原始資料整理成 repo/115/ 的題庫。完成後分別報告下載階段與題庫整理階段的結果，並讓我檢查每個資料夾的位置與檔案數量。</pre></div>
+    <div class="observe">這不是把兩個 skill 硬綁在一起，而是讓 Agent 在需要完整流程時依序調用。下一次若資料已經在本機，就可以直接使用第二個 skill，不必重新下載。</div>
+  </section>
+
+  <section id="exercise-7">
+    <h2>練習七：先做出第一版靜態練習網頁</h2>
+    <p>題庫已經在 <code>repo/&lt;year&gt;/</code>，現在請 Agent 用它產生學生可直接開啟的靜態練習網頁。第一版先聚焦在最小可行成果：隨機出題、學生作答、立即批改，以及顯示每題對錯。</p>
+    <h3>請複製這段提示詞</h3>
+    <div class="prompt"><span class="label">PROMPT 08｜第一版靜態練習網頁</span><button class="copy" type="button">複製</button><pre>請使用目前專案 repo/114/ 中已整理好的題目圖檔與 keys.json，建立一個給學生使用的簡易靜態練習網頁。
+
+每次開始練習時，請從題庫隨機抽出 10 題，顯示題目並讓學生選擇答案。學生送出後，請立即批改，顯示答對幾題、答錯幾題，以及每一題是答對還是答錯。
+
+請把網頁放在目前專案的 app/ 資料夾，並告訴我完成後要開啟哪一個 HTML 檔案。這是第一版，先做出可直接開啟、可實際作答與批改的成果即可。</pre></div>
+    <div class="observe"><ul><li>雙擊 HTML 檔案後，是否不需要啟動伺服器就能開始練習？</li><li>重新開始後，抽出的題目是否可能改變？</li><li>送出後是否同時看得到總分與每一題的對錯？</li></ul>第一版的價值是快速看見一個可操作的成果，而不是一開始就要求所有功能都完整。</div>
+  </section>
+
+  <section id="exercise-8">
+    <h2>練習八：補上完整規格，做成可攜式練習單元</h2>
+    <p>第二輪把「能用」提升為「可分享」。將本次需要的題目、答案與程式全部包進單一 HTML 檔，檔案被複製或部署後便不會因為相對路徑或遺漏資料夾而失效。</p>
+    <h3>請複製這段提示詞</h3>
+    <div class="prompt"><span class="label">PROMPT 09｜單一 HTML 的完整練習單元</span><button class="copy" type="button">複製</button><pre>請以 repo/114/ 的題庫為來源，建立一個完整的學生自主練習單元，輸出為 app/practice-114.html。
+
+請遵守下列規格：
+1. 這是一個單一、可直接開啟的靜態 HTML 檔。此次練習所需的題目圖檔、答案資料、CSS 與 JavaScript 都要包在這個檔案裡；不能依賴外部檔案、相對路徑或網路連線。
+2. 起始畫面讓學生選擇本次練習題數，至少提供 10 題與 20 題兩個選項。
+3. 每次開始時，從題庫隨機、不重複地抽出指定題數，讓學生逐題作答。
+4. 送出後立即顯示總答對題數、總答錯題數，以及每一題的作答答案、正確答案與對錯狀態。
+5. 學生可以直接重新開始另一回練習。
+6. 學生可以下載一份自包含的 HTML 複習紀錄；紀錄中要有本次出現的題目、正確答案、學生答案與每題對錯，日後可離線開啟複習。
+
+完成後請實際開啟 app/practice-114.html，測試一次 10 題練習、送出批改、重新開始與下載複習紀錄，然後回報測試結果。</pre></div>
+    <div class="observe"><ul><li>將 <code>practice-114.html</code> 單獨複製到其他資料夾後，是否仍能正常顯示題目與批改？</li><li>同一回合中是否沒有重複題目？</li><li>下載的複習紀錄是否包含本次題目、學生答案、正確答案與對錯？</li></ul>「所有資料都包在一個 HTML」不是唯一的網頁架構，但很適合不需要伺服器的課堂練習單元。</div>
+  </section>
+
+  <section id="exercise-9">
+    <h2>練習九：把練習網頁流程存成第三個 skill</h2>
+    <p>當「題庫資料夾 → 單一 HTML 練習網頁」已確認可用，就把這段流程也保存下來。未來只要換一個年份或換一個題庫，仍能套用同一個產生流程。</p>
+    <h3>請複製這段提示詞</h3>
+    <div class="prompt"><span class="label">PROMPT 10｜建立靜態練習網頁 skill</span><button class="copy" type="button">複製</button><pre>請根據我們剛剛已確認的題庫到練習網頁流程，在這個專案建立第三個 project-local skill，名稱為 build-static-practice-page。
+
+這個 skill 的工作是：讀取一個 repo/&lt;year&gt;/ 題庫，產生單一、可直接開啟的靜態 HTML 練習網頁。預設輸出資料夾為 app/。
+
+使用時我應該可以指定：
+1. 題庫資料夾或年份。
+2. 輸出 HTML 檔名與位置。
+3. 可選的練習題數，例如 10 題或 20 題。
+
+skill 說明必須包含：隨機且不重複出題、立即批改、逐題結果、重新練習、把本次結果下載成自包含 HTML 複習紀錄，以及完成後應實際開啟測試。建立後告訴我 skill 的位置，並給我一個最簡短的使用範例。</pre></div>
+    <div class="callout"><strong>現在的三段 pipeline：</strong><code>download-exam-pdf</code> 負責取得資料，<code>prepare-question-bank</code> 負責整理可用題庫，<code>build-static-practice-page</code> 負責把題庫變成學生可使用的練習單元。每一段都能單獨重用，也能在需要時依序串接。</div>
+  </section>
+
+  <section id="exercise-10">
+    <h2>練習十：部署與分享</h2>
+    <p>靜態 HTML 檔可先在電腦上直接開啟；若要讓學生透過網址使用，則可部署到 GitHub Pages。若帳號已開通 ChatGPT Sites，也可以請 Codex 建立並部署一個 Site。使用 GitHub Pages 時，請直接說清楚完整網址結構：<code>{account}.github.io/{repository}/{root}/{exam-name}</code>。</p>
+    <h3>選項 A：部署到 GitHub Pages</h3>
+    <div class="prompt"><span class="label">PROMPT 11A｜GitHub Pages 部署範本</span><button class="copy" type="button">複製</button><pre>請將目前專案的 app/practice-114.html 部署到我的 GitHub Pages。
+
+https://abc123.github.io/2026fall/digi101/formative01/</pre></div>
+    <h3>選項 B：部署到 ChatGPT Sites</h3>
+    <div class="prompt"><span class="label">PROMPT 11B｜ChatGPT Sites 部署範本</span><button class="copy" type="button">複製</button><pre>@Sites 請將目前專案的 app/practice-114.html 部署到我的 ChatGPT Site。</pre></div>
+    <div class="observe"><ul><li>網址開啟後，題目圖檔是否仍正常顯示？</li><li>練習、批改、重新開始與下載複習紀錄是否都實際可用？</li><li>分享範圍是否符合預期，不要誤把只供課堂使用的內容公開給不該看到的人？</li></ul>ChatGPT Sites 的可用性與發佈控制會受帳號方案、工作區與管理員設定影響；若無法使用，GitHub Pages 是這類單一靜態 HTML 練習單元的直接替代方案。相關說明見 <a href="https://help.openai.com/en/articles/20001339" target="_blank" rel="noopener">OpenAI：Creating and managing ChatGPT Sites</a>。</div>
+  </section>
+
+  <section id="exercise-11">
+    <h2>選做：用模組化 skill 建立可重複執行的本機測驗產生 APP</h2>
+    <p>若時間足夠，最後會使用講師準備好的 skill 套件，建立一個之後不必再依賴 AI 的本機 Python APP。它不是只產生一份靜態測驗頁面，而是一個可反覆加入新題庫、再產生新測驗頁面的工具。</p>
+    <div class="grid">
+      <div class="card"><strong>先下載 skill 套件</strong><p>從本場講義下載 <a href="module4/module4-agents-skills.tar" download>module4-agents-skills.tar</a>，解壓縮後放進目前專案的 <code>.agents/skills/</code>。</p></div>
+      <div class="card"><strong>套件中的四個 skill</strong><p><code>download-exam-pdf</code>、<code>slice-exam-pdf</code>、<code>clean-exam-question-images</code> 與 <code>build-quiz-app</code>。</p></div>
+    </div>
+    <h3>請複製這段提示詞</h3>
+    <div class="prompt"><span class="label">PROMPT 12｜用 build-quiz-app 建立本機產生器</span><button class="copy" type="button">複製</button><pre>請使用目前專案的 $build-quiz-app skill，參考 repo/114/ 的題庫，建立一個可重複產生靜態測驗頁面的本機 Python APP，放在 ./app/。再套用 repo/114/ 題庫生成一份靜態測驗頁面，放在 ./app/dist/。</pre></div>
+    <div class="callout"><strong>這個 APP 的工作方式：</strong>第一次由 AI Agent 協助建立 APP；之後加入新的、已切割好的題庫時，只要調整 <code>app/config.json</code>，再執行 <code>python3 app/build_bundle.py</code>，即可由本機 Python 直接產生新的靜態測驗 HTML。</div>
+    <div class="observe"><ul><li><code>app/config.json</code> 是否列出題庫設定？</li><li>是否能執行 <code>build_bundle.py</code> 並在 <code>app/dist/</code> 看到新測驗頁面？</li><li>新增另一個題庫設定後，是否不需要再次要求 AI 便能重新產生測驗頁面？</li></ul>重複性的產生工作改由本機 APP 處理，可以維持輸出格式的一致性，也避免每次重新請 AI 生成而消耗不必要的 token。</div>
+  </section>
+
+  <footer>教育部智慧雨林產業創生人才育成計畫（南臺科技大學 電子系 楊榮林 教授）</footer>
+</main>
+<script>
+const sidebar=document.getElementById('sidebar');
+document.getElementById('menu').addEventListener('click',()=>sidebar.classList.toggle('open'));
+document.querySelectorAll('.nav a').forEach(a=>a.addEventListener('click',()=>sidebar.classList.remove('open')));
+document.getElementById('theme').addEventListener('click',()=>{const h=document.documentElement;const dark=h.dataset.theme!=='dark';h.dataset.theme=dark?'dark':'light';document.getElementById('theme').textContent=dark?'☀️ 淺色':'🌙 深色'});
+document.querySelectorAll('.copy').forEach(button=>button.addEventListener('click',async()=>{const text=button.parentElement.querySelector('pre').textContent;try{await navigator.clipboard.writeText(text);button.textContent='已複製'}catch{button.textContent='請手動複製'}setTimeout(()=>button.textContent='複製',1600)}));
+</script>
+</body>
+</html>
