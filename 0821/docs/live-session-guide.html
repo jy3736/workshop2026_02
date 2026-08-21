@@ -176,34 +176,25 @@ skill 說明必須包含：逐題切圖、以圖檔名稱對應 keys.json、共�
     <h2>練習八：補上完整規格，做成可攜式練習單元</h2>
     <p>第二輪把「能用」提升為「可分享」。將本次需要的題目、答案與程式全部包進單一 HTML 檔，檔案被複製或部署後便不會因為相對路徑或遺漏資料夾而失效。</p>
     <h3>請複製這段提示詞</h3>
-    <div class="prompt"><span class="label">PROMPT 09｜單一 HTML 的完整練習單元</span><button class="copy" type="button">複製</button><pre>請以 repo/114/ 的題庫為來源，建立一個完整的學生自主練習單元，輸出為 app/practice-114.html。
+    <div class="prompt"><span class="label">PROMPT 09｜單一 HTML 的完整練習單元</span><button class="copy" type="button">複製</button><pre>請以 repo/114/ 的題庫建立完整的學生自主練習單元，輸出為 dist/practice-114.html。
 
-請遵守下列規格：
-1. 這是一個單一、可直接開啟的靜態 HTML 檔。此次練習所需的題目圖檔、答案資料、CSS 與 JavaScript 都要包在這個檔案裡；不能依賴外部檔案、相對路徑或網路連線。
-2. 起始畫面讓學生選擇本次練習題數，至少提供 10 題與 20 題兩個選項。
-3. 每次開始時，從題庫隨機、不重複地抽出指定題數，讓學生逐題作答。
-4. 送出後立即顯示總答對題數、總答錯題數，以及每一題的作答答案、正確答案與對錯狀態。
-5. 學生可以直接重新開始另一回練習。
-6. 學生可以下載一份自包含的 HTML 複習紀錄；紀錄中要有本次出現的題目、正確答案、學生答案與每題對錯，日後可離線開啟複習。
+請將題目圖檔、答案與網頁程式全部包進單一、可直接開啟的靜態 HTML；不可依賴外部檔案、相對路徑或網路連線。
 
-完成後請實際開啟 app/practice-114.html，測試一次 10 題練習、送出批改、重新開始與下載複習紀錄，然後回報測試結果。</pre></div>
-    <div class="observe"><ul><li>將 <code>practice-114.html</code> 單獨複製到其他資料夾後，是否仍能正常顯示題目與批改？</li><li>同一回合中是否沒有重複題目？</li><li>下載的複習紀錄是否包含本次題目、學生答案、正確答案與對錯？</li></ul>「所有資料都包在一個 HTML」不是唯一的網頁架構，但很適合不需要伺服器的課堂練習單元。</div>
+起始畫面讓學生選擇練習題數；每回合從題庫隨機且不重複地抽題作答。送出後顯示答對與答錯總數，以及每題的學生答案、正確答案與對錯。提供重新開始功能，並讓學生下載一份自包含的 HTML 複習紀錄，內含本次題目、學生答案、正確答案與每題對錯，可離線開啟複習。</pre></div>
+    <div class="observe"><ul><li>將 <code>dist/practice-114.html</code> 單獨複製到其他資料夾後，是否仍能正常顯示題目與批改？</li><li>同一回合中是否沒有重複題目？</li><li>下載的複習紀錄是否包含本次題目、學生答案、正確答案與對錯？</li></ul>「所有資料都包在一個 HTML」不是唯一的網頁架構，但很適合不需要伺服器的課堂練習單元。</div>
   </section>
 
   <section id="exercise-9">
     <h2>練習九：把練習網頁流程存成第三個 skill</h2>
     <p>當「題庫資料夾 → 單一 HTML 練習網頁」已確認可用，就把這段流程也保存下來。未來只要換一個年份或換一個題庫，仍能套用同一個產生流程。</p>
     <h3>請複製這段提示詞</h3>
-    <div class="prompt"><span class="label">PROMPT 10｜建立靜態練習網頁 skill</span><button class="copy" type="button">複製</button><pre>請根據我們剛剛已確認的題庫到練習網頁流程，在這個專案建立第三個 project-local skill，名稱為 build-static-practice-page。
+    <div class="prompt"><span class="label">PROMPT 10｜建立靜態練習網頁 skill</span><button class="copy" type="button">複製</button><pre>請根據已確認的題庫到練習網頁流程，在目前專案建立第三個 project-local skill，名稱為 build-static-practice-page。
 
-這個 skill 的工作是：讀取一個 repo/&lt;year&gt;/ 題庫，產生單一、可直接開啟的靜態 HTML 練習網頁。預設輸出資料夾為 app/。
+此 skill 讀取 repo/&lt;year&gt;/ 題庫，產生單一、可直接開啟的靜態 HTML 練習網頁，預設輸出至 ./dist/。
 
-使用時我應該可以指定：
-1. 題庫資料夾或年份。
-2. 輸出 HTML 檔名與位置。
-3. 可選的練習題數，例如 10 題或 20 題。
-
-skill 說明必須包含：隨機且不重複出題、立即批改、逐題結果、重新練習、把本次結果下載成自包含 HTML 複習紀錄，以及完成後應實際開啟測試。建立後告訴我 skill 的位置，並給我一個最簡短的使用範例。</pre></div>
+使用時可指定：
+1. 題庫來源，例如 repo/114/。
+2. 輸出位置，預設為 ./dist/。</pre></div>
     <div class="callout"><strong>現在的三段 pipeline：</strong><code>download-exam-pdf</code> 負責取得資料，<code>prepare-question-bank</code> 負責整理可用題庫，<code>build-static-practice-page</code> 負責把題庫變成學生可使用的練習單元。每一段都能單獨重用，也能在需要時依序串接。</div>
   </section>
 
